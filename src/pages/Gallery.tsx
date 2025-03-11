@@ -128,7 +128,7 @@ const Gallery = () => {
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={events[0].id} className="mb-8">
-            <TabsList className="mb-8 flex flex-wrap h-auto">
+            <TabsList className="mb-8 flex flex-wrap items-center justify-center gap-4">
               {events.map((event) => (
                 <TabsTrigger key={event.id} value={event.id} className="mb-2">
                   {event.name}

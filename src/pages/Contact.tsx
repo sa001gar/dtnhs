@@ -22,7 +22,7 @@ const Contact = () => {
       <PageHeader
         title="Contact Us"
         description="Get in touch with us for any queries or information."
-        pattern="noise"
+        pattern="grid"
       />
 
       <div className="container py-8 md:py-12">
