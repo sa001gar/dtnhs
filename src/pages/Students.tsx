@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/shared/PageHeader";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, Calendar, Award, Clock, Users, FileText } from "lucide-react";
 import { Link } from "react-router-dom";

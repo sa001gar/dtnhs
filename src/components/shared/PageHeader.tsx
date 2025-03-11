@@ -5,6 +5,7 @@ import AnimatedSection from "../ui/AnimatedSection";
 
 interface PageHeaderProps {
   title: string;
+  description?: string;
   subtitle?: string;
   backgroundImage?: string;
   className?: string;
@@ -14,6 +15,7 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
+  description,
   backgroundImage,
   className,
   children,
@@ -51,6 +53,17 @@ const PageHeader: React.FC<PageHeaderProps> = ({
               backgroundImage ? "text-white/80" : "text-muted-foreground"
             )}>
               {subtitle}
+            </p>
+          </AnimatedSection>
+        )}
+
+        {description && (
+          <AnimatedSection animation="fade-in-up" delay={100}>
+            <p className={cn(
+              "mx-auto mt-4 max-w-3xl text-lg",
+              backgroundImage ? "text-white/80" : "text-muted-foreground"
+            )}>
+              {description}
             </p>
           </AnimatedSection>
         )}
