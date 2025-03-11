@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "../ui/AnimatedSection";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/Card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const newsItems = [
   {
@@ -50,7 +50,7 @@ const NewsSection: React.FC = () => {
               animation="fade-in-up" 
               delay={index * 100}
             >
-              <Card hoverEffect>
+              <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                 <CardHeader>
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Calendar className="mr-2 h-4 w-4" />
