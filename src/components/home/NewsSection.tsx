@@ -63,7 +63,7 @@ const NewsSection: React.FC = () => {
                 </CardContent>
                 <CardFooter>
                   <Button asChild variant="ghost" className="group -ml-3 h-8 p-0 text-school-primary">
-                    <Link to={item.link} className="flex items-center">
+                    <Link to={item.link} className="flex items-center px-4 py-3 space-x-1 transition-transform">  
                       Read more
                       <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>

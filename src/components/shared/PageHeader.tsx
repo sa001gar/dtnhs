@@ -46,7 +46,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className="absolute inset-0 bg-school-primary/60 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-school-primary/20 backdrop-blur-sm"></div>
         </div>
       )}
 

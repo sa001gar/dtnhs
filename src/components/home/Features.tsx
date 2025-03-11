@@ -19,7 +19,7 @@ const Feature: React.FC<FeatureProps> = ({ title, description, icon, link, index
     <AnimatedSection
       animation="fade-in-up"
       delay={index * 100}
-      className="flex flex-col rounded-xl border border-border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+      className="flex flex-col rounded-xl border border-border glass p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
     >
       <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-school-primary/10 text-school-primary">
         {icon}
@@ -28,7 +28,7 @@ const Feature: React.FC<FeatureProps> = ({ title, description, icon, link, index
       <p className="flex-1 text-muted-foreground">{description}</p>
       <div className="mt-4">
         <Button asChild variant="ghost" className="group p-0 text-school-primary">
-          <Link to={link} className="flex items-center">
+          <Link to={link} className="flex items-center px-4 py-2 space-x-1 transition-transform">
             Learn more
             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
