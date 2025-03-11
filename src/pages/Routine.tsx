@@ -1,8 +1,11 @@
 
 import React from "react";
+import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const Routine = () => {
   const routines = {
@@ -47,93 +50,102 @@ const Routine = () => {
   };
 
   return (
-    <div className="container py-8 md:py-12">
+    <Layout>
       <PageHeader
         title="Class Routines"
         description="View the weekly class schedules for different grades."
+        pattern="grid"
       />
 
-      <div className="mt-8">
-        <Tabs defaultValue="primary">
-          <TabsList className="mb-4">
-            <TabsTrigger value="primary">Primary Classes</TabsTrigger>
-            <TabsTrigger value="secondary">Secondary Classes</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="primary">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Monday</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {routines.primary.monday.map((period, index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
-                        <span className="font-medium">{period.time}</span>
-                        <span>{period.subject}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+      <div className="container py-8 md:py-12">
+        <div className="mb-6">
+          <Breadcrumb />
+        </div>
+        
+        <div className="mt-8">
+          <AnimatedSection animation="fade-in-up">
+            <Tabs defaultValue="primary">
+              <TabsList className="mb-4">
+                <TabsTrigger value="primary">Primary Classes</TabsTrigger>
+                <TabsTrigger value="secondary">Secondary Classes</TabsTrigger>
+              </TabsList>
               
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tuesday</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {routines.primary.tuesday.map((period, index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
-                        <span className="font-medium">{period.time}</span>
-                        <span>{period.subject}</span>
+              <TabsContent value="primary">
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Monday</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {routines.primary.monday.map((period, index) => (
+                          <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                            <span className="font-medium">{period.time}</span>
+                            <span>{period.subject}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="secondary">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Monday</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {routines.secondary.monday.map((period, index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
-                        <span className="font-medium">{period.time}</span>
-                        <span>{period.subject}</span>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Tuesday</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {routines.primary.tuesday.map((period, index) => (
+                          <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                            <span className="font-medium">{period.time}</span>
+                            <span>{period.subject}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
               
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tuesday</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {routines.secondary.tuesday.map((period, index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
-                        <span className="font-medium">{period.time}</span>
-                        <span>{period.subject}</span>
+              <TabsContent value="secondary">
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Monday</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {routines.secondary.monday.map((period, index) => (
+                          <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                            <span className="font-medium">{period.time}</span>
+                            <span>{period.subject}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Tuesday</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {routines.secondary.tuesday.map((period, index) => (
+                          <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                            <span className="font-medium">{period.time}</span>
+                            <span>{period.subject}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </AnimatedSection>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
