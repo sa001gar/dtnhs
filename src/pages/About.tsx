@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/shared/PageHeader";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 const About: React.FC = () => {
   return (
@@ -16,11 +17,16 @@ const About: React.FC = () => {
           title="About Our School"
           subtitle="Learn about our history, mission, and vision for the future."
           backgroundImage="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
+          pattern="noise"
         />
         
         <section className="py-16">
           <div className="container px-4">
             <div className="mx-auto max-w-6xl">
+              <div className="mb-6">
+                <Breadcrumb />
+              </div>
+              
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
                 <div className="lg:col-span-2">
                   <AnimatedSection animation="fade-in-up">
@@ -74,7 +80,7 @@ const About: React.FC = () => {
                 
                 <div>
                   <AnimatedSection animation="fade-in-up">
-                    <Card>
+                    <Card className="card-hover">
                       <CardContent className="p-6">
                         <h3 className="text-xl font-semibold text-school-primary">School Information</h3>
                         <div className="mt-4 space-y-4">
@@ -112,7 +118,7 @@ const About: React.FC = () => {
                   </AnimatedSection>
                   
                   <AnimatedSection animation="fade-in-up" className="mt-6">
-                    <Card>
+                    <Card className="card-hover">
                       <CardContent className="p-6">
                         <h3 className="text-xl font-semibold text-school-primary">School Leadership</h3>
                         <div className="mt-4 space-y-4">
@@ -134,7 +140,7 @@ const About: React.FC = () => {
                   </AnimatedSection>
                   
                   <AnimatedSection animation="fade-in-up" className="mt-6">
-                    <Card>
+                    <Card className="card-hover">
                       <CardContent className="p-6">
                         <h3 className="text-xl font-semibold text-school-primary">Awards & Recognition</h3>
                         <div className="mt-4 space-y-2">
@@ -151,7 +157,7 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        <section className="bg-school-light py-16">
+        <section className="bg-muted py-16">
           <div className="container px-4">
             <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Core Values</h2>
@@ -162,7 +168,7 @@ const About: React.FC = () => {
             
             <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               <AnimatedSection animation="fade-in-up" delay={100}>
-                <Card className="text-center" hoverEffect>
+                <Card className="text-center card-hover">
                   <CardContent className="p-6">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
@@ -176,7 +182,7 @@ const About: React.FC = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="fade-in-up" delay={200}>
-                <Card className="text-center" hoverEffect>
+                <Card className="text-center card-hover">
                   <CardContent className="p-6">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
@@ -190,7 +196,7 @@ const About: React.FC = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="fade-in-up" delay={300}>
-                <Card className="text-center" hoverEffect>
+                <Card className="text-center card-hover">
                   <CardContent className="p-6">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
@@ -204,7 +210,7 @@ const About: React.FC = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="fade-in-up" delay={400}>
-                <Card className="text-center" hoverEffect>
+                <Card className="text-center card-hover">
                   <CardContent className="p-6">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">

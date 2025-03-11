@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,7 +55,7 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "bg-white/80 backdrop-blur-lg shadow-sm"
+          ? "bg-background/80 backdrop-blur-lg shadow-sm border-b border-border"
           : "bg-transparent"
       )}
     >
@@ -70,8 +71,8 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1">
+          <ul className="flex items-center gap-1 mr-2">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <NavLink
@@ -90,26 +91,30 @@ const Navbar: React.FC = () => {
               </li>
             ))}
           </ul>
+          <ThemeToggle />
         </nav>
 
-        {/* Mobile Navigation Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </Button>
+        {/* Mobile Navigation Button and Theme Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </Button>
+        </div>
 
         {/* Mobile Navigation Menu */}
         <div
           className={cn(
-            "fixed inset-x-0 top-16 z-50 h-[calc(100vh-4rem)] transform overflow-y-auto bg-white p-4 transition-transform duration-300 ease-in-out md:hidden",
+            "fixed inset-x-0 top-16 z-50 h-[calc(100vh-4rem)] transform overflow-y-auto bg-background p-4 transition-transform duration-300 ease-in-out md:hidden border-t border-border",
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >

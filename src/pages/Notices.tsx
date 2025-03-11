@@ -1,8 +1,11 @@
 
 import React from "react";
+import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const Notices = () => {
   const notices = [
@@ -39,29 +42,38 @@ const Notices = () => {
   ];
 
   return (
-    <div className="container py-8 md:py-12">
+    <Layout>
       <PageHeader
         title="Notices & Announcements"
         description="Stay updated with the latest announcements, events, and important information."
+        pattern="stripes"
       />
 
-      <div className="space-y-6 mt-8">
-        {notices.map((notice) => (
-          <Card key={notice.id} className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <div className="flex items-center text-sm text-muted-foreground mb-2">
-                <Calendar className="mr-2 h-4 w-4" />
-                {notice.date}
-              </div>
-              <CardTitle>{notice.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>{notice.content}</p>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="container py-8 md:py-12">
+        <div className="mb-6">
+          <Breadcrumb />
+        </div>
+        
+        <div className="space-y-6 mt-8">
+          {notices.map((notice, index) => (
+            <AnimatedSection key={notice.id} animation="fade-in-up" delay={index * 100}>
+              <Card className="card-hover">
+                <CardHeader>
+                  <div className="flex items-center text-sm text-muted-foreground mb-2">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {notice.date}
+                  </div>
+                  <CardTitle>{notice.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>{notice.content}</p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

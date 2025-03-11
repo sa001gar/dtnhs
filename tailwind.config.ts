@@ -30,11 +30,20 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				school: {
-					primary: '#0F4C81',    // Deep blue
-					secondary: '#F2C94C',  // Gold accent
-					accent: '#4ECDC4',     // Teal accent
-					light: '#F8F9FA',      // Light gray
-					dark: '#2D3748',       // Dark gray
+					primary: {
+						DEFAULT: 'hsl(var(--school-primary))',
+						foreground: 'hsl(var(--school-primary-foreground))'
+					},
+					secondary: {
+						DEFAULT: 'hsl(var(--school-secondary))',
+						foreground: 'hsl(var(--school-secondary-foreground))'
+					},
+					accent: {
+						DEFAULT: 'hsl(var(--school-accent))',
+						foreground: 'hsl(var(--school-accent-foreground))'
+					},
+					light: 'hsl(var(--school-light))',
+					dark: 'hsl(var(--school-dark))',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -112,6 +121,14 @@ export default {
 				'blur-in': {
 					'0%': { opacity: '0', filter: 'blur(8px)' },
 					'100%': { opacity: '1', filter: 'blur(0)' }
+				},
+				'zoom-in': {
+					'0%': { transform: 'scale(0.95)' },
+					'100%': { transform: 'scale(1)' }
+				},
+				'zoom-out': {
+					'0%': { transform: 'scale(1.05)' },
+					'100%': { transform: 'scale(1)' }
 				}
 			},
 			animation: {
@@ -122,11 +139,19 @@ export default {
 				'slide-in-right': 'slide-in-right 0.5s ease-out',
 				'slide-in-left': 'slide-in-left 0.5s ease-out',
 				'scale-in': 'scale-in 0.5s ease-out',
-				'blur-in': 'blur-in 0.6s ease-out'
+				'blur-in': 'blur-in 0.6s ease-out',
+				'zoom-in': 'zoom-in 0.3s ease-out',
+				'zoom-out': 'zoom-out 0.3s ease-out'
 			},
 			transitionTimingFunction: {
 				'spring': 'cubic-bezier(0.22, 1, 0.36, 1)',
 				'soft': 'cubic-bezier(0.4, 0, 0.2, 1)'
+			},
+			backgroundImage: {
+				'dots-pattern': 'radial-gradient(currentColor 1px, transparent 1px)',
+				'grid-pattern': 'linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px)',
+				'noise-pattern': 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
+				'stripes-pattern': 'linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent)'
 			}
 		}
 	},

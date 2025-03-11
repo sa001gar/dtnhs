@@ -1,7 +1,10 @@
 
 import React from "react";
+import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const Academics = () => {
   const programs = [
@@ -32,26 +35,35 @@ const Academics = () => {
   ];
 
   return (
-    <div className="container py-8 md:py-12">
+    <Layout>
       <PageHeader
         title="Academic Programs"
         description="Our comprehensive academic programs are designed to provide quality education at all levels."
+        pattern="grid"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        {programs.map((program) => (
-          <Card key={program.id} className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <CardTitle>{program.title}</CardTitle>
-              <p className="text-school-primary font-medium">{program.grades}</p>
-            </CardHeader>
-            <CardContent>
-              <p>{program.description}</p>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="container py-8 md:py-12">
+        <div className="mb-6">
+          <Breadcrumb />
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          {programs.map((program, index) => (
+            <AnimatedSection key={program.id} animation="fade-in-up" delay={index * 100}>
+              <Card className="card-hover">
+                <CardHeader>
+                  <CardTitle>{program.title}</CardTitle>
+                  <p className="text-school-primary font-medium">{program.grades}</p>
+                </CardHeader>
+                <CardContent>
+                  <p>{program.description}</p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

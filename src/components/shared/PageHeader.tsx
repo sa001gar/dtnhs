@@ -2,14 +2,17 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import AnimatedSection from "../ui/AnimatedSection";
+import { Breadcrumb } from "./Breadcrumb";
 
 interface PageHeaderProps {
   title: string;
   description?: string;
   subtitle?: string;
   backgroundImage?: string;
+  pattern?: "dots" | "grid" | "noise" | "stripes" | "none";
   className?: string;
   children?: React.ReactNode;
+  showBreadcrumbs?: boolean;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
@@ -17,13 +20,24 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   subtitle,
   description,
   backgroundImage,
+  pattern = "none",
   className,
   children,
+  showBreadcrumbs = true,
 }) => {
+  const patternClasses = {
+    dots: "bg-dots",
+    grid: "bg-grid",
+    noise: "bg-noise",
+    stripes: "bg-stripes",
+    none: "",
+  };
+
   return (
     <div
       className={cn(
         "relative flex min-h-[240px] w-full items-center justify-center overflow-hidden py-16 md:min-h-[320px]",
+        patternClasses[pattern],
         className
       )}
     >
@@ -37,6 +51,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       )}
 
       <div className="container relative z-10 px-4 text-center">
+        {showBreadcrumbs && (
+          <AnimatedSection animation="fade-in-up" className="mb-8">
+            <Breadcrumb className="justify-center" />
+          </AnimatedSection>
+        )}
+        
         <AnimatedSection animation="fade-in-up">
           <h1 className={cn(
             "text-3xl font-bold tracking-tighter md:text-5xl",
