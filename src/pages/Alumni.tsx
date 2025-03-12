@@ -167,7 +167,7 @@ const Alumni = () => {
                         href="#" 
                         className="inline-flex items-center mt-4 text-school-primary hover:underline"
                       >
-                        <LinkedIn className="w-4 h-4 mr-1" />
+                        <Linkedin className="w-4 h-4 mr-1" />
                         <span>Connect</span>
                       </a>
                     </CardContent>
