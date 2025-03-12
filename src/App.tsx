@@ -16,6 +16,10 @@ import Notices from "./pages/Notices";
 import Routine from "./pages/Routine";
 import Results from "./pages/Results";
 import Contact from "./pages/Contact";
+import Alumni from "./pages/Alumni";
+import Blog from "./pages/Blog";
+import Forum from "./pages/Forum";
+import Chatbot from "./components/chatbot/Chatbot";
 
 const queryClient = new QueryClient();
 
@@ -37,9 +41,13 @@ const App = () => (
             <Route path="/routine" element={<Routine />} />
             <Route path="/results" element={<Results />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/alumni" element={<Alumni />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/forum" element={<Forum />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Chatbot />
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
