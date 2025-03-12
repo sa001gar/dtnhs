@@ -1,3 +1,4 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -7,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const Results = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -14,7 +16,7 @@ const Results = () => {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 1500);
 
     window.scrollTo(0, 0);
 
@@ -42,7 +44,10 @@ const Results = () => {
     return (
       <Layout>
         <div className="flex h-[70vh] items-center justify-center">
-          <Loader2 className="h-10 w-10 animate-spin text-school-primary" />
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-10 w-10 animate-spin text-school-primary" />
+            <p className="text-muted-foreground animate-pulse">Loading results...</p>
+          </div>
         </div>
       </Layout>
     );
@@ -53,6 +58,8 @@ const Results = () => {
       <PageHeader
         title="Examination Results"
         description="View the examination results for different classes and terms."
+        pattern="grid"
+        backgroundImage="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdWx0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1400&q=60"
       />
 
       <div className="container py-8 md:py-12">
@@ -60,19 +67,14 @@ const Results = () => {
           <Breadcrumb />
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mt-8"
-        >
-          <Card className="glass">
+        <AnimatedSection animation="fade-in-up" className="mt-8">
+          <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
             <CardHeader>
-              <CardTitle>Class 10 Results - Academic Year 2023</CardTitle>
+              <CardTitle className="text-center sm:text-left">Class 10 Results - Academic Year 2023</CardTitle>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="midterm">
-                <TabsList className="mb-4">
+                <TabsList className="mb-4 w-full justify-start">
                   <TabsTrigger value="midterm">Mid-Term Examination</TabsTrigger>
                   <TabsTrigger value="final">Final Examination</TabsTrigger>
                 </TabsList>
@@ -94,15 +96,15 @@ const Results = () => {
                       </TableHeader>
                       <TableBody>
                         {examResults.midterm.map((student) => (
-                          <TableRow key={student.id}>
-                            <TableCell>{student.roll}</TableCell>
+                          <TableRow key={student.id} className="hover:bg-accent/50 transition-colors">
+                            <TableCell className="font-medium">{student.roll}</TableCell>
                             <TableCell>{student.name}</TableCell>
                             <TableCell>{student.english}</TableCell>
                             <TableCell>{student.math}</TableCell>
                             <TableCell>{student.science}</TableCell>
                             <TableCell>{student.social}</TableCell>
-                            <TableCell>{student.total}</TableCell>
-                            <TableCell>{student.percentage}</TableCell>
+                            <TableCell className="font-semibold">{student.total}</TableCell>
+                            <TableCell className="font-semibold">{student.percentage}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -127,15 +129,15 @@ const Results = () => {
                       </TableHeader>
                       <TableBody>
                         {examResults.final.map((student) => (
-                          <TableRow key={student.id}>
-                            <TableCell>{student.roll}</TableCell>
+                          <TableRow key={student.id} className="hover:bg-accent/50 transition-colors">
+                            <TableCell className="font-medium">{student.roll}</TableCell>
                             <TableCell>{student.name}</TableCell>
                             <TableCell>{student.english}</TableCell>
                             <TableCell>{student.math}</TableCell>
                             <TableCell>{student.science}</TableCell>
                             <TableCell>{student.social}</TableCell>
-                            <TableCell>{student.total}</TableCell>
-                            <TableCell>{student.percentage}</TableCell>
+                            <TableCell className="font-semibold">{student.total}</TableCell>
+                            <TableCell className="font-semibold">{student.percentage}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -145,7 +147,7 @@ const Results = () => {
               </Tabs>
             </CardContent>
           </Card>
-        </motion.div>
+        </AnimatedSection>
       </div>
     </Layout>
   );
