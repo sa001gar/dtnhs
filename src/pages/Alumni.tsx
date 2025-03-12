@@ -5,9 +5,11 @@ import { GalleryModal } from "@/components/gallery/GalleryModal";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon } from "lucide-react";
-import { Linkedin } from "lucide-react";
+import { Briefcase, MapPin, Linkedin } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const Alumni = () => {
   const [isLoading, setIsLoading] = useState(true);
