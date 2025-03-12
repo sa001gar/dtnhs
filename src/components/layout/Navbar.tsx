@@ -1,11 +1,17 @@
 
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, Book, GraduationCap, Users, User, Image, Bell, Calendar, Award, Phone, MessageSquare, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,16 +19,27 @@ const Navbar: React.FC = () => {
   const isMobile = useIsMobile();
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Students", path: "/students" },
-    { name: "Teachers", path: "/teachers" },
-    { name: "Academics", path: "/academics" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Notices", path: "/notices" },
-    { name: "Routine", path: "/routine" },
-    { name: "Results", path: "/results" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "/", icon: <span className="hidden md:inline"></span> },
+    { name: "About", path: "/about", icon: <span className="hidden md:inline"></span> },
+    { 
+      name: "Academics", 
+      path: "/academics", 
+      icon: <Book className="h-4 w-4 mr-1" />, 
+      hasDropdown: true,
+      dropdownItems: [
+        { name: "Programs", path: "/academics" },
+        { name: "Teachers", path: "/teachers" },
+        { name: "Routine", path: "/routine" },
+        { name: "Results", path: "/results" }
+      ]
+    },
+    { name: "Students", path: "/students", icon: <User className="h-4 w-4 mr-1" /> },
+    { name: "Alumni", path: "/alumni", icon: <GraduationCap className="h-4 w-4 mr-1" /> },
+    { name: "Gallery", path: "/gallery", icon: <Image className="h-4 w-4 mr-1" /> },
+    { name: "Notices", path: "/notices", icon: <Bell className="h-4 w-4 mr-1" /> },
+    { name: "Blog", path: "/blog", icon: <FileText className="h-4 w-4 mr-1" /> },
+    { name: "Forum", path: "/forum", icon: <MessageSquare className="h-4 w-4 mr-1" /> },
+    { name: "Contact", path: "/contact", icon: <Phone className="h-4 w-4 mr-1" /> },
   ];
 
   useEffect(() => {
@@ -75,19 +92,54 @@ const Navbar: React.FC = () => {
           <ul className="flex items-center gap-1 mr-2">
             {navLinks.map((link) => (
               <li key={link.path}>
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) =>
-                    cn(
-                      "px-3 py-2 text-sm font-medium transition-all duration-200",
-                      isActive
-                        ? "text-school-primary"
-                        : "text-muted-foreground hover:text-foreground"
-                    )
-                  }
-                >
-                  {link.name}
-                </NavLink>
+                {link.hasDropdown ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className={cn(
+                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
+                        "text-muted-foreground hover:text-foreground"
+                      )}>
+                        {link.icon}
+                        {link.name}
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="center" className="bg-background/90 backdrop-blur-md">
+                      {link.dropdownItems?.map((item) => (
+                        <DropdownMenuItem key={item.path} asChild>
+                          <NavLink
+                            to={item.path}
+                            className={({ isActive }) =>
+                              cn(
+                                "w-full px-2 py-1 text-sm transition-all duration-200",
+                                isActive
+                                  ? "text-school-primary"
+                                  : "text-muted-foreground hover:text-foreground"
+                              )
+                            }
+                          >
+                            {item.name}
+                          </NavLink>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) =>
+                      cn(
+                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
+                        isActive
+                          ? "text-school-primary"
+                          : "text-muted-foreground hover:text-foreground"
+                      )
+                    }
+                  >
+                    {link.icon}
+                    {link.name}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
@@ -122,20 +174,52 @@ const Navbar: React.FC = () => {
             <ul className="space-y-2 py-4">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) =>
-                      cn(
-                        "block rounded-lg px-4 py-3 text-base font-medium transition-all duration-200",
-                        isActive
-                          ? "bg-school-primary/10 text-school-primary"
-                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                      )
-                    }
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </NavLink>
+                  {link.hasDropdown ? (
+                    <div className="space-y-2">
+                      <div className="rounded-lg px-4 py-3 text-base font-medium text-muted-foreground">
+                        <div className="flex items-center">
+                          {link.icon}
+                          {link.name}
+                        </div>
+                      </div>
+                      <ul className="ml-6 space-y-2 border-l border-border pl-4">
+                        {link.dropdownItems?.map((item) => (
+                          <li key={item.path}>
+                            <NavLink
+                              to={item.path}
+                              className={({ isActive }) =>
+                                cn(
+                                  "block rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200",
+                                  isActive
+                                    ? "bg-school-primary/10 text-school-primary"
+                                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                )
+                              }
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {item.name}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) =>
+                        cn(
+                          "block rounded-lg px-4 py-3 text-base font-medium transition-all duration-200 flex items-center",
+                          isActive
+                            ? "bg-school-primary/10 text-school-primary"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        )
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.icon}
+                      {link.name}
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>

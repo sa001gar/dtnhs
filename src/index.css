@@ -97,6 +97,10 @@
     @apply bg-school-primary/20;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -149,7 +153,7 @@
 
   /* Glass effect */
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm dark:bg-black/40 dark:border-white/10;
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 dark:bg-black/30 dark:border-white/10;
   }
 
   /* Pattern backgrounds */

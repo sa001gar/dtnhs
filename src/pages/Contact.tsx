@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -23,6 +22,8 @@ const Contact = () => {
         title="Contact Us"
         description="Get in touch with us for any queries or information."
         pattern="grid"
+        backgroundImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920"
+        className="bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm"
       />
 
       <div className="container py-8 md:py-12">
@@ -32,7 +33,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           <AnimatedSection animation="fade-in-up">
-            <Card>
+            <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
               </CardHeader>
@@ -67,7 +68,7 @@ const Contact = () => {
 
           <div className="space-y-6">
             <AnimatedSection animation="fade-in-up" delay={100}>
-              <Card>
+              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
                 <CardHeader>
                   <CardTitle>Contact Information</CardTitle>
                 </CardHeader>
@@ -111,7 +112,7 @@ const Contact = () => {
             </AnimatedSection>
             
             <AnimatedSection animation="fade-in-up" delay={200}>
-              <Card>
+              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
                 <CardHeader>
                   <CardTitle>Location Map</CardTitle>
                 </CardHeader>
