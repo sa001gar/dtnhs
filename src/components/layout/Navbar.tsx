@@ -1,7 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown, Book, GraduationCap, Users, User, Image, Bell, Calendar, Award, Phone, MessageSquare, FileText } from "lucide-react";
+import { 
+  Menu, X, ChevronDown, Book, GraduationCap, 
+  Users, User, Image, Bell, Calendar, 
+  Award, Phone, MessageSquare, FileText 
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -13,19 +16,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isMobile = useIsMobile();
 
   const navLinks = [
-    { name: "Home", path: "/", icon: <span className="hidden md:inline"></span> },
-    { name: "About", path: "/about", icon: <span className="hidden md:inline"></span> },
     { 
-      name: "Academics", 
-      path: "/academics", 
-      icon: <Book className="h-4 w-4 mr-1" />, 
+      name: "Home", 
+      path: "/" 
+    },
+    {
+      name: "About",
+      path: "/about",
+      icon: <Book className="h-4 w-4 mr-1" />,
+    },
+    {
+      name: "Academics",
       hasDropdown: true,
+      icon: <GraduationCap className="h-4 w-4 mr-1" />,
       dropdownItems: [
         { name: "Programs", path: "/academics" },
         { name: "Teachers", path: "/teachers" },
@@ -33,13 +42,31 @@ const Navbar: React.FC = () => {
         { name: "Results", path: "/results" }
       ]
     },
-    { name: "Students", path: "/students", icon: <User className="h-4 w-4 mr-1" /> },
-    { name: "Alumni", path: "/alumni", icon: <GraduationCap className="h-4 w-4 mr-1" /> },
-    { name: "Gallery", path: "/gallery", icon: <Image className="h-4 w-4 mr-1" /> },
-    { name: "Notices", path: "/notices", icon: <Bell className="h-4 w-4 mr-1" /> },
-    { name: "Blog", path: "/blog", icon: <FileText className="h-4 w-4 mr-1" /> },
-    { name: "Forum", path: "/forum", icon: <MessageSquare className="h-4 w-4 mr-1" /> },
-    { name: "Contact", path: "/contact", icon: <Phone className="h-4 w-4 mr-1" /> },
+    {
+      name: "Student Life",
+      hasDropdown: true,
+      icon: <Users className="h-4 w-4 mr-1" />,
+      dropdownItems: [
+        { name: "Students", path: "/students" },
+        { name: "Alumni", path: "/alumni" },
+        { name: "Gallery", path: "/gallery" },
+      ]
+    },
+    {
+      name: "Resources",
+      hasDropdown: true,
+      icon: <FileText className="h-4 w-4 mr-1" />,
+      dropdownItems: [
+        { name: "Notices", path: "/notices" },
+        { name: "Blog", path: "/blog" },
+        { name: "Forum", path: "/forum" },
+      ]
+    },
+    { 
+      name: "Contact", 
+      path: "/contact",
+      icon: <Phone className="h-4 w-4 mr-1" />
+    },
   ];
 
   useEffect(() => {
@@ -55,7 +82,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when navigating or resizing
   useEffect(() => {
     const handleResize = () => {
       if (!isMobile && isMenuOpen) {
@@ -87,7 +113,6 @@ const Navbar: React.FC = () => {
           </NavLink>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
           <ul className="flex items-center gap-1 mr-2">
             {navLinks.map((link) => (
@@ -146,7 +171,6 @@ const Navbar: React.FC = () => {
           <ThemeToggle />
         </nav>
 
-        {/* Mobile Navigation Button and Theme Toggle */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <Button
@@ -163,7 +187,6 @@ const Navbar: React.FC = () => {
           </Button>
         </div>
 
-        {/* Mobile Navigation Menu */}
         <div
           className={cn(
             "fixed inset-x-0 top-16 z-50 h-[calc(100vh-4rem)] transform overflow-y-auto bg-background p-4 transition-transform duration-300 ease-in-out md:hidden border-t border-border",
