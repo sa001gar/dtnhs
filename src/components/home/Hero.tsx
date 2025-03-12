@@ -2,18 +2,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, CalendarDays, GraduationCap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background/80 py-16 md:py-24">
-      <div className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')] bg-cover bg-center bg-no-repeat opacity-5"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80" 
+          alt="School Building" 
+          className="w-full h-full object-cover opacity-20 dark:opacity-10"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm" />
+      </div>
       
-      <div className="container relative z-10 px-4">
+      <div className="container relative z-10 px-4 py-16 md:py-24">
         <div className="mx-auto max-w-5xl text-center">
           <AnimatedSection animation="fade-in-up">
-            <h1 className="text-4xl font-bold tracking-tighter text-school-primary sm:text-5xl md:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tighter text-school-primary sm:text-5xl md:text-6xl lg:text-7xl">
               Durgapur Tarak Nath High School
             </h1>
           </AnimatedSection>
@@ -38,34 +45,6 @@ const Hero: React.FC = () => {
             </div>
           </AnimatedSection>
         </div>
-        
-        <AnimatedSection animation="fade-in-up" delay={300} className="mt-16">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="glass rounded-xl border border-border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-white/5 dark:backdrop-blur-md dark:border-white/10">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-school-primary/10 text-school-primary">
-                <GraduationCap className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Academic Excellence</h3>
-              <p className="text-muted-foreground">Consistently achieving outstanding results with a focus on holistic development.</p>
-            </div>
-            
-            <div className="glass rounded-xl border border-border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-white/5 dark:backdrop-blur-md dark:border-white/10">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-school-primary/10 text-school-primary">
-                <CalendarDays className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Modern Facilities</h3>
-              <p className="text-muted-foreground">State-of-the-art infrastructure designed to enhance the learning experience.</p>
-            </div>
-            
-            <div className="glass rounded-xl border border-border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-white/5 dark:backdrop-blur-md dark:border-white/10">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-school-primary/10 text-school-primary">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Dedicated Faculty</h3>
-              <p className="text-muted-foreground">Experienced teachers committed to bringing out the best in every student.</p>
-            </div>
-          </div>
-        </AnimatedSection>
       </div>
     </section>
   );

@@ -1,18 +1,19 @@
-
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
-import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import { GalleryModal } from "@/components/gallery/GalleryModal";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Linkedin, MapPin, Briefcase, Calendar } from "lucide-react";
+import { Briefcase, MapPin, Linkedin } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 const Alumni = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [galleryModalOpen, setGalleryModalOpen] = useState(false);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -146,7 +147,7 @@ const Alumni = () => {
                       </Avatar>
                       <CardTitle className="text-xl">{person.name}</CardTitle>
                       <div className="flex items-center justify-center mt-1 text-muted-foreground">
-                        <Calendar className="w-4 h-4 mr-1" />
+                        <CalendarIcon className="w-4 h-4 mr-1" />
                         <span>Batch of {person.batch}</span>
                       </div>
                     </CardHeader>
@@ -189,7 +190,7 @@ const Alumni = () => {
                       </Avatar>
                       <CardTitle className="text-lg">{person.name}</CardTitle>
                       <div className="flex items-center justify-center mt-1 text-sm text-muted-foreground">
-                        <Calendar className="w-3 h-3 mr-1" />
+                        <CalendarIcon className="w-3 h-3 mr-1" />
                         <span>Batch of {person.batch}</span>
                       </div>
                     </CardHeader>
