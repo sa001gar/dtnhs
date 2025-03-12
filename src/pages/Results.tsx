@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -6,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
@@ -43,11 +41,12 @@ const Results = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="flex h-[70vh] items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <Loader2 className="h-10 w-10 animate-spin text-school-primary" />
-            <p className="text-muted-foreground animate-pulse">Loading results...</p>
+        <div className="min-h-[70vh] flex flex-col items-center justify-center">
+          <div className="relative">
+            <Loader2 className="w-12 h-12 animate-spin text-school-primary" />
+            <div className="absolute inset-0 blur-lg bg-school-primary/20 rounded-full" />
           </div>
+          <p className="mt-4 text-muted-foreground animate-pulse">Loading results...</p>
         </div>
       </Layout>
     );
@@ -59,7 +58,7 @@ const Results = () => {
         title="Examination Results"
         description="View the examination results for different classes and terms."
         pattern="grid"
-        backgroundImage="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdWx0c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1400&q=60"
+        backgroundImage="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=1400&q=60"
       />
 
       <div className="container py-8 md:py-12">
@@ -67,13 +66,13 @@ const Results = () => {
           <Breadcrumb />
         </div>
 
-        <AnimatedSection animation="fade-in-up" className="mt-8">
+        <AnimatedSection animation="fade-in-up">
           <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
             <CardHeader>
               <CardTitle className="text-center sm:text-left">Class 10 Results - Academic Year 2023</CardTitle>
             </CardHeader>
             <CardContent>
-              <Tabs defaultValue="midterm">
+              <Tabs defaultValue="midterm" className="w-full">
                 <TabsList className="mb-4 w-full justify-start">
                   <TabsTrigger value="midterm">Mid-Term Examination</TabsTrigger>
                   <TabsTrigger value="final">Final Examination</TabsTrigger>
