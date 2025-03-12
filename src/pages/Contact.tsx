@@ -23,6 +23,7 @@ const Contact = () => {
         title="Contact Us"
         description="Get in touch with us for any queries or information."
         pattern="grid"
+        backgroundImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80"
       />
 
       <div className="container py-8 md:py-12">

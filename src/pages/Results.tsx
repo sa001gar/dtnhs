@@ -1,11 +1,26 @@
-
 import React from "react";
+import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Breadcrumb } from "@/components/shared/Breadcrumb";
 
 const Results = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    window.scrollTo(0, 0);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const examResults = {
     midterm: [
       { id: 1, name: "John Smith", class: "10A", roll: "1001", english: 85, math: 92, science: 88, social: 78, total: 343, percentage: "85.75%" },
@@ -23,95 +38,116 @@ const Results = () => {
     ]
   };
 
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="flex h-[70vh] items-center justify-center">
+          <Loader2 className="h-10 w-10 animate-spin text-school-primary" />
+        </div>
+      </Layout>
+    );
+  }
+
   return (
-    <div className="container py-8 md:py-12">
+    <Layout>
       <PageHeader
         title="Examination Results"
         description="View the examination results for different classes and terms."
       />
 
-      <div className="mt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Class 10 Results - Academic Year 2023</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="midterm">
-              <TabsList className="mb-4">
-                <TabsTrigger value="midterm">Mid-Term Examination</TabsTrigger>
-                <TabsTrigger value="final">Final Examination</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="midterm">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Roll No.</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>English</TableHead>
-                        <TableHead>Mathematics</TableHead>
-                        <TableHead>Science</TableHead>
-                        <TableHead>Social Studies</TableHead>
-                        <TableHead>Total</TableHead>
-                        <TableHead>Percentage</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {examResults.midterm.map((student) => (
-                        <TableRow key={student.id}>
-                          <TableCell>{student.roll}</TableCell>
-                          <TableCell>{student.name}</TableCell>
-                          <TableCell>{student.english}</TableCell>
-                          <TableCell>{student.math}</TableCell>
-                          <TableCell>{student.science}</TableCell>
-                          <TableCell>{student.social}</TableCell>
-                          <TableCell>{student.total}</TableCell>
-                          <TableCell>{student.percentage}</TableCell>
+      <div className="container py-8 md:py-12">
+        <div className="mb-6">
+          <Breadcrumb />
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mt-8"
+        >
+          <Card className="glass">
+            <CardHeader>
+              <CardTitle>Class 10 Results - Academic Year 2023</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="midterm">
+                <TabsList className="mb-4">
+                  <TabsTrigger value="midterm">Mid-Term Examination</TabsTrigger>
+                  <TabsTrigger value="final">Final Examination</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="midterm">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Roll No.</TableHead>
+                          <TableHead>Name</TableHead>
+                          <TableHead>English</TableHead>
+                          <TableHead>Mathematics</TableHead>
+                          <TableHead>Science</TableHead>
+                          <TableHead>Social Studies</TableHead>
+                          <TableHead>Total</TableHead>
+                          <TableHead>Percentage</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="final">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Roll No.</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>English</TableHead>
-                        <TableHead>Mathematics</TableHead>
-                        <TableHead>Science</TableHead>
-                        <TableHead>Social Studies</TableHead>
-                        <TableHead>Total</TableHead>
-                        <TableHead>Percentage</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {examResults.final.map((student) => (
-                        <TableRow key={student.id}>
-                          <TableCell>{student.roll}</TableCell>
-                          <TableCell>{student.name}</TableCell>
-                          <TableCell>{student.english}</TableCell>
-                          <TableCell>{student.math}</TableCell>
-                          <TableCell>{student.science}</TableCell>
-                          <TableCell>{student.social}</TableCell>
-                          <TableCell>{student.total}</TableCell>
-                          <TableCell>{student.percentage}</TableCell>
+                      </TableHeader>
+                      <TableBody>
+                        {examResults.midterm.map((student) => (
+                          <TableRow key={student.id}>
+                            <TableCell>{student.roll}</TableCell>
+                            <TableCell>{student.name}</TableCell>
+                            <TableCell>{student.english}</TableCell>
+                            <TableCell>{student.math}</TableCell>
+                            <TableCell>{student.science}</TableCell>
+                            <TableCell>{student.social}</TableCell>
+                            <TableCell>{student.total}</TableCell>
+                            <TableCell>{student.percentage}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="final">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Roll No.</TableHead>
+                          <TableHead>Name</TableHead>
+                          <TableHead>English</TableHead>
+                          <TableHead>Mathematics</TableHead>
+                          <TableHead>Science</TableHead>
+                          <TableHead>Social Studies</TableHead>
+                          <TableHead>Total</TableHead>
+                          <TableHead>Percentage</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
+                      </TableHeader>
+                      <TableBody>
+                        {examResults.final.map((student) => (
+                          <TableRow key={student.id}>
+                            <TableCell>{student.roll}</TableCell>
+                            <TableCell>{student.name}</TableCell>
+                            <TableCell>{student.english}</TableCell>
+                            <TableCell>{student.math}</TableCell>
+                            <TableCell>{student.science}</TableCell>
+                            <TableCell>{student.social}</TableCell>
+                            <TableCell>{student.total}</TableCell>
+                            <TableCell>{student.percentage}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
