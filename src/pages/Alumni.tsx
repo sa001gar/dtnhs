@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { LinkedIn, MapPin, Briefcase, Calendar } from "lucide-react";
+import { Linkedin, MapPin, Briefcase, Calendar } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
 
 const Alumni = () => {
