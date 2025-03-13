@@ -1,13 +1,29 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/shared/PageHeader";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import PageLoader from "@/components/shared/PageLoader";
 
 const About: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

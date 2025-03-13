@@ -21,22 +21,24 @@ const AboutSchool = () => {
                       className="w-full h-full object-cover rounded-xl shadow-lg"
                     />
                   </div>
-                  <div className="col-span-6 md:col-span-5">
-                    <img 
-                      src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" 
-                      alt="School Library" 
-                      className="w-full h-full object-cover rounded-xl shadow-lg mb-4"
-                    />
-                    <img 
-                      src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
-                      alt="School Playground" 
-                      className="w-full h-full object-cover rounded-xl shadow-lg"
-                    />
+                  <div className="col-span-12 md:col-span-5">
+                    <div className="grid grid-cols-1 gap-4">
+                      <img 
+                        src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" 
+                        alt="School Library" 
+                        className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
+                      />
+                      <img 
+                        src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
+                        alt="School Playground" 
+                        className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
               
-              <div className="lg:w-1/2">
+              <div className="lg:w-1/2 mt-8 lg:mt-0">
                 <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl mb-6">Our Story Since 1965</h2>
                 
                 <div className="space-y-4 text-muted-foreground">

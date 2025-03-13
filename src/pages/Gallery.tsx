@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { GalleryModal } from "@/components/gallery/GalleryModal";
@@ -7,8 +6,10 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon } from "lucide-react";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Gallery = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<{
     src: string;
     alt: string;
@@ -16,6 +17,15 @@ const Gallery = () => {
     date: string;
     event: string;
   } | null>(null);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Gallery organized by events
   const events = [
@@ -112,6 +122,10 @@ const Gallery = () => {
       ]
     }
   ];
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <Layout>
