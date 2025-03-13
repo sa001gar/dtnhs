@@ -10,7 +10,7 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80" 
+          src="/images/home/dtnhs.jpg" 
           alt="School Building" 
           className="w-full h-full object-cover opacity-20 dark:opacity-10"
         />
@@ -27,7 +27,7 @@ const Hero = () => {
           
           <AnimatedSection animation="fade-in-up" delay={100}>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-muted-foreground md:text-xl">
-              Nurturing minds, building character, and creating a brighter future through quality education since 1965.
+              Nurturing minds, building character, and creating a brighter future through quality education since 1941.
             </p>
           </AnimatedSection>
           

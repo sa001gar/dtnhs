@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold">Durgapur Tarak Nath High School</h3>
             <p className="mt-4 text-sm text-muted-foreground">
-              Providing quality education and shaping the future of our students since 1965.
+              Providing quality education and shaping the future of our students since 1941.
             </p>
             <div className="mt-6 flex space-x-4">
               <a href="#" className="text-muted-foreground transition-colors hover:text-school-primary">
@@ -100,17 +100,17 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 text-school-primary" />
                 <span className="text-sm text-muted-foreground">
-                  City Center, Durgapur - 713216, West Bengal, India
+                  Station Road, Durgapur, West Bengal, India - 713201
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-school-primary" />
-                <span className="text-sm text-muted-foreground">+91 343 2545678</span>
+                <span className="text-sm text-muted-foreground">+91 0343-2555176</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-school-primary" />
                 <a href="mailto:contact@dtnhs.edu.in" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  contact@dtnhs.edu.in
+                  contact@dtnhs.in
                 </a>
               </li>
             </ul>

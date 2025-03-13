@@ -18,8 +18,8 @@ const useChatApi = () => {
   const getResponse = async (message: string): Promise<string> => {
     try {
       // Replace with your actual API key and endpoint
-      const VITE_GEMINI_API_KEY="AIzaSyC3pNfBx5m7x5W5l-9-vYWAlKb4Yjz0i1k";
-      const API_KEY = VITE_GEMINI_API_KEY;
+      
+      const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
       const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
       
       // School-specific context for the AI

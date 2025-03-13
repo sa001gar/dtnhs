@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,48 +14,94 @@ const AboutSchool = () => {
               <div className="lg:w-1/2">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-span-7">
-                    <img 
-                      src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80" 
-                      alt="Historical School Building" 
-                      className="w-full h-full object-cover rounded-xl shadow-lg"
+                    <img
+                      src="/images/home/dtnhs.jpg"
+                      alt="Historical School Building"
+                      className="hidden md:block w-full h-full object-cover rounded-xl shadow-lg"
+                    />
+                    <img
+                      src="/images/home/dtnhs_child.jfif"
+                      alt="Historical School Building"
+                      className="block md:hidden w-full h-full object-cover rounded-xl shadow-lg"
                     />
                   </div>
                   <div className="col-span-12 md:col-span-5">
                     <div className="grid grid-cols-1 gap-4">
-                      <img 
-                        src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" 
-                        alt="School Library" 
+                      <img
+                        src="/images/home/dtnhs_front.jfif"
+                        alt="School Library"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
-                      <img 
-                        src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
-                        alt="School Playground" 
+                      <img
+                        src="/images/home/classroom.png"
+                        alt="School Playground"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
                     </div>
                   </div>
+                  <div className="col-span-12 md:col-span-5">
+                    <div className="grid grid-cols-1 gap-4">
+                      <img
+                        src="/images/home/dtnhs_child.jfif"
+                        alt="School Playground"
+                        className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
+                      />
+                      <img
+                        src="images/home/dtnhs_sports.jpg"
+                        alt="School Library"
+                        className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-span-12 md:col-span-7">
+                    <img
+                      src="/images/home/2024-09-13.jpg"
+                      alt="Historical School Building"
+                      className="hidden md:block w-full h-full object-cover rounded-xl shadow-lg"
+                    />
+                    <img
+                      src="/images/home/2024-09-13.jpg"
+                      alt="Historical School Building"
+                      className="block md:hidden w-full h-full object-cover rounded-xl shadow-lg"
+                    />
+                  </div>
+
+
                 </div>
               </div>
-              
+
               <div className="lg:w-1/2 mt-8 lg:mt-0">
-                <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl mb-6">Our Story Since 1965</h2>
-                
+                <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl mb-6">
+                  Our Story Since 1941
+                </h2>
+
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    Established in 1965, Durgapur Tarak Nath High School has been a cornerstone of educational excellence in the region for over five decades. Founded by visionary educator Mr. Tarak Nath Roy, the school began with just 5 classrooms and 120 students.
+                    Established in 1941, Durgapur Tarak Nath High School has
+                    been a pillar of education in the region for over eight
+                    decades. With a strong commitment to academic excellence and
+                    holistic development, the school started its journey with a
+                    modest beginning and has since evolved into a renowned
+                    institution.
                   </p>
                   <p>
-                    Through the years, we've grown into a premier educational institution with state-of-the-art facilities while maintaining our core values of academic excellence, character development, and social responsibility.
+                    Over the years, we have expanded our facilities and
+                    curriculum to meet the changing educational needs while
+                    staying true to our core values of knowledge, discipline,
+                    and social responsibility.
                   </p>
                   <p>
-                    Today, our school stands as a testament to our founder's vision, having educated thousands of students who have gone on to excel in various fields across the globe.
+                    Today, our school continues to uphold its legacy, nurturing
+                    generations of students who have excelled in various fields,
+                    making meaningful contributions to society.
                   </p>
                 </div>
-                
+
                 <div className="mt-8">
                   <Button asChild className="group">
                     <Link to="/about" className="flex items-center">
-                      Explore Our Full History 
+                      Explore Our Full History
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
