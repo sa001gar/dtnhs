@@ -29,71 +29,39 @@ const Teachers = () => {
   }, []);
 
   const teachers = [
-    {
-      id: 1,
-      name: "Dr. Sarah Johnson",
-      subject: "Mathematics",
-      qualification: "Ph.D in Applied Mathematics",
-      experience: "15 years",
-      email: "sarah.johnson@school.edu"
-    },
-    {
-      id: 2,
-      name: "Prof. Michael Brown",
-      subject: "Science",
-      qualification: "M.Sc in Physics",
-      experience: "12 years",
-      email: "michael.brown@school.edu"
-    },
-    {
-      id: 3,
-      name: "Mrs. Emily Davis",
-      subject: "English Literature",
-      qualification: "M.A in English",
-      experience: "10 years",
-      email: "emily.davis@school.edu"
-    },
-    {
-      id: 4,
-      name: "Mr. Robert Wilson",
-      subject: "History",
-      qualification: "M.A in History",
-      experience: "8 years",
-      email: "robert.wilson@school.edu"
-    },
-    {
-      id: 5,
-      name: "Dr. James Anderson",
-      subject: "Physics",
-      qualification: "Ph.D in Physics",
-      experience: "14 years",
-      email: "james.anderson@school.edu"
-    },
-    {
-      id: 6,
-      name: "Ms. Linda Garcia",
-      subject: "Chemistry",
-      qualification: "M.Sc in Chemistry",
-      experience: "9 years",
-      email: "linda.garcia@school.edu"
-    },
-    {
-      id: 7,
-      name: "Dr. Richard Lee",
-      subject: "Biology",
-      qualification: "Ph.D in Molecular Biology",
-      experience: "11 years",
-      email: "richard.lee@school.edu"
-    },
-    {
-      id: 8,
-      name: "Prof. Jennifer Taylor",
-      subject: "Computer Science",
-      qualification: "M.Sc in Computer Science",
-      experience: "13 years",
-      email: "jennifer.taylor@school.edu"
-    }
-  ];
+    { id: 1, name: "Sandip Pan", subject: "Physics", qualification: "M.Sc in Physics, B.Ed", experience: "15 years", email: "sandip.pan@dtnhs.in" },
+    { id: 2, name: "Partha Mondal", subject: "Physics", qualification: "M.Sc in Physics, B.Ed", experience: "12 years", email: "partha.mondal@dtnhs.in" },
+    { id: 3, name: "Samim Akhter Khan", subject: "Physics", qualification: "M.Sc in Physics, B.Ed", experience: "10 years", email: "samim.khan@dtnhs.in" },
+    { id: 4, name: "Parimal Pramanik", subject: "Chemistry", qualification: "M.Sc in Chemistry, B.Ed", experience: "14 years", email: "parimal.pramanik@dtnhs.in" },
+    { id: 5, name: "Jayanta Banerjee", subject: "Mathematics", qualification: "M.Sc in Mathematics, B.Ed", experience: "18 years", email: "jayanta.banerjee@dtnhs.in" },
+    { id: 6, name: "Chinmoy Chatterjee", subject: "Mathematics", qualification: "M.Sc in Mathematics, B.Ed", experience: "16 years", email: "chinmoy.chatterjee@dtnhs.in" },
+    { id: 7, name: "Debabrata Mondal", subject: "Mathematics", qualification: "M.Sc in Mathematics, B.Ed", experience: "13 years", email: "debabrata.mondal@dtnhs.in" },
+    { id: 8, name: "Kajal Bhattacharjee", subject: "Mathematics", qualification: "M.Sc in Mathematics, B.Ed", experience: "11 years", email: "kajal.bhattacharjee@dtnhs.in" },
+    { id: 9, name: "Chandan Gon", subject: "Mathematics", qualification: "M.Sc in Mathematics, B.Ed", experience: "9 years", email: "chandan.gon@dtnhs.in" },
+    { id: 10, name: "Manik Chandra Mondal", subject: "Biology", qualification: "M.Sc in Biology, B.Ed", experience: "17 years", email: "manik.mondal@dtnhs.in" },
+    { id: 11, name: "Dipak Chatterjee", subject: "Biology", qualification: "M.Sc in Biology, B.Ed", experience: "14 years", email: "dipak.chatterjee@dtnhs.in" },
+    { id: 12, name: "Manisha Mukherjee", subject: "Biology", qualification: "M.Sc in Biology, B.Ed", experience: "12 years", email: "manisha.mukherjee@dtnhs.in" },
+    { id: 13, name: "Moumita Kundu", subject: "Biology", qualification: "M.Sc in Biology, B.Ed", experience: "10 years", email: "moumita.kundu@dtnhs.in" },
+    { id: 14, name: "Sujata Goswami", subject: "Geography", qualification: "M.A in Geography, B.Ed", experience: "15 years", email: "sujata.goswami@dtnhs.in" },
+    { id: 15, name: "Sima Bag", subject: "Geography", qualification: "M.A in Geography, B.Ed", experience: "12 years", email: "sima.bag@dtnhs.in" },
+    { id: 16, name: "Sonali Chakraborty", subject: "Geography", qualification: "M.A in Geography, B.Ed", experience: "10 years", email: "sonali.chakraborty@dtnhs.in" },
+    { id: 17, name: "Pijush Kanti Biswas", subject: "History", qualification: "M.A in History, B.Ed", experience: "14 years", email: "pijush.biswas@dtnhs.in" },
+    { id: 18, name: "Soma Sikdar", subject: "History", qualification: "M.A in History, B.Ed", experience: "12 years", email: "soma.sikdar@dtnhs.in" },
+    { id: 19, name: "Saswati Ray", subject: "English", qualification: "M.A in English, B.Ed", experience: "16 years", email: "saswati.ray@dtnhs.in" },
+    { id: 20, name: "Jibica Saha", subject: "English", qualification: "M.A in English, B.Ed", experience: "13 years", email: "jibica.saha@dtnhs.in" },
+    { id: 21, name: "Piyali Roy", subject: "English", qualification: "M.A in English, B.Ed", experience: "11 years", email: "piyali.roy@dtnhs.in" },
+    { id: 22, name: "Moumi Dutta", subject: "English", qualification: "M.A in English, B.Ed", experience: "9 years", email: "moumi.dutta@dtnhs.in" },
+    { id: 23, name: "Debabrata Ray", subject: "Bengali", qualification: "M.A in Bengali, B.Ed", experience: "18 years", email: "debabrata.ray@dtnhs.in" },
+    { id: 24, name: "Forhad Alam", subject: "Bengali", qualification: "M.A in Bengali, B.Ed", experience: "16 years", email: "forhad.alam@dtnhs.in" },
+    { id: 25, name: "Prosun Mitra", subject: "Bengali", qualification: "M.A in Bengali, B.Ed", experience: "14 years", email: "prosun.mitra@dtnhs.in" },
+    { id: 26, name: "Debabrata Das", subject: "Commerce", qualification: "M.Com, B.Ed", experience: "12 years", email: "debabrata.das@dtnhs.in" },
+    { id: 27, name: "Sutapa Mazumder", subject: "Commerce", qualification: "M.Com, B.Ed", experience: "10 years", email: "sutapa.mazumder@dtnhs.in" },
+    { id: 28, name: "Biplab Rajbanshi", subject: "Philosophy", qualification: "M.A in Philosophy, B.Ed", experience: "15 years", email: "biplab.rajbanshi@dtnhs.in" },
+    { id: 29, name: "Sukumar Das", subject: "Political Science", qualification: "M.A in Political Science, B.Ed", experience: "12 years", email: "sukumar.das@dtnhs.in" },
+    { id: 30, name: "Ishita Pal", subject: "Computer Application", qualification: "M.Sc in Computer Science", experience: "10 years", email: "ishita.pal@dtnhs.in" },
+    { id: 31, name: "Maya Roy", subject: "Work Education", qualification: "B.Ed in Work Education", experience: "10 years", email: "maya.roy@dtnhs.in" },
+    { id: 32, name: "Sanat Kumar Mondal", subject: "Physical Education", qualification: "B.P.Ed", experience: "12 years", email: "sanat.mondal@dtnhs.in" }
+];
 
   // Get unique subjects for the filter
   const subjects = ["all", ...new Set(teachers.map(teacher => teacher.subject))];

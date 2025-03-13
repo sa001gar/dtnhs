@@ -1,186 +1,79 @@
+"use client"
 
-import React, { useState, useEffect } from "react";
-import Layout from "@/components/layout/Layout";
-import PageHeader from "@/components/shared/PageHeader";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Breadcrumb } from "@/components/shared/Breadcrumb";
-import AnimatedSection from "@/components/ui/AnimatedSection";
-import PageLoader from "@/components/shared/PageLoader";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
-import { Filter } from "lucide-react";
+import { useState, useEffect } from "react"
+import Layout from "@/components/layout/Layout"
+import PageHeader from "@/components/shared/PageHeader"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Breadcrumb } from "@/components/shared/Breadcrumb"
+import AnimatedSection from "@/components/ui/AnimatedSection"
+import PageLoader from "@/components/shared/PageLoader"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+import {routineData} from "@/data/routines.ts"
 
 const Routine = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedClass, setSelectedClass] = useState("5");
-  const [selectedSection, setSelectedSection] = useState("A");
-  
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedClass, setSelectedClass] = useState("5")
+  const [selectedSection, setSelectedSection] = useState("A")
+  const [sectionOptions, setSectionOptions] = useState(["A", "B", "C"])
+  const [sectionLabel, setSectionLabel] = useState("Section")
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    
-    window.scrollTo(0, 0);
-    return () => clearTimeout(timer);
-  }, []);
+      setIsLoading(false)
+    }, 1000)
+
+    // Update section options based on selected class
+    let newSectionOptions = ["A", "B", "C"]
+    let newSectionLabel = "Section"
+
+    if (["9", "10"].includes(selectedClass)) {
+      newSectionOptions = ["A", "B"]
+      newSectionLabel = "Section"
+    } else if (["11", "12"].includes(selectedClass)) {
+      newSectionOptions = ["Science", "Commerce", "Arts"]
+      newSectionLabel = "Stream"
+    }
+
+    setSectionOptions(newSectionOptions)
+    setSectionLabel(newSectionLabel)
+
+    // Reset to first option if current selection is invalid
+    if (!newSectionOptions.includes(selectedSection)) {
+      setSelectedSection(newSectionOptions[0])
+    }
+
+    window.scrollTo(0, 0)
+    return () => clearTimeout(timer)
+  }, [selectedClass, selectedSection])
 
   // All available class options
-  const classOptions = ["5", "6", "7", "8", "9", "10", "11", "12"];
-  const sectionOptions = ["A", "B", "C"];
+  const classOptions = ["5", "6", "7", "8", "9", "10", "11", "12"]
 
   // Routine data organized by class, section, and day
-  const routineData = {
-    primary: {
-      "5": {
-        "A": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "English" },
-            { time: "8:45 - 9:30", subject: "Mathematics" },
-            { time: "9:30 - 10:15", subject: "Science" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Social Studies" },
-            { time: "11:15 - 12:00", subject: "Arts & Crafts" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "Mathematics" },
-            { time: "8:45 - 9:30", subject: "English" },
-            { time: "9:30 - 10:15", subject: "Physical Education" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Science" },
-            { time: "11:15 - 12:00", subject: "Music" }
-          ]
-        },
-        "B": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "Science" },
-            { time: "8:45 - 9:30", subject: "English" },
-            { time: "9:30 - 10:15", subject: "Mathematics" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Arts & Crafts" },
-            { time: "11:15 - 12:00", subject: "Social Studies" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "English" },
-            { time: "8:45 - 9:30", subject: "Science" },
-            { time: "9:30 - 10:15", subject: "Music" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Mathematics" },
-            { time: "11:15 - 12:00", subject: "Physical Education" }
-          ]
-        },
-        "C": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "Mathematics" },
-            { time: "8:45 - 9:30", subject: "Social Studies" },
-            { time: "9:30 - 10:15", subject: "English" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Science" },
-            { time: "11:15 - 12:00", subject: "Physical Education" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "Arts & Crafts" },
-            { time: "8:45 - 9:30", subject: "Mathematics" },
-            { time: "9:30 - 10:15", subject: "English" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Social Studies" },
-            { time: "11:15 - 12:00", subject: "Science" }
-          ]
-        }
-      },
-      // More class data can be added here
-    },
-    secondary: {
-      "9": {
-        "A": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "Physics" },
-            { time: "8:45 - 9:30", subject: "Chemistry" },
-            { time: "9:30 - 10:15", subject: "Mathematics" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "English" },
-            { time: "11:15 - 12:00", subject: "Computer Science" },
-            { time: "12:00 - 12:45", subject: "Physical Education" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "Biology" },
-            { time: "8:45 - 9:30", subject: "Mathematics" },
-            { time: "9:30 - 10:15", subject: "History" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Geography" },
-            { time: "11:15 - 12:00", subject: "English" },
-            { time: "12:00 - 12:45", subject: "Arts" }
-          ]
-        },
-        "B": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "Chemistry" },
-            { time: "8:45 - 9:30", subject: "Physics" },
-            { time: "9:30 - 10:15", subject: "English" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Mathematics" },
-            { time: "11:15 - 12:00", subject: "Physical Education" },
-            { time: "12:00 - 12:45", subject: "Computer Science" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "Mathematics" },
-            { time: "8:45 - 9:30", subject: "Biology" },
-            { time: "9:30 - 10:15", subject: "Geography" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "History" },
-            { time: "11:15 - 12:00", subject: "Arts" },
-            { time: "12:00 - 12:45", subject: "English" }
-          ]
-        },
-        "C": {
-          monday: [
-            { time: "8:00 - 8:45", subject: "English" },
-            { time: "8:45 - 9:30", subject: "Mathematics" },
-            { time: "9:30 - 10:15", subject: "Physics" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Chemistry" },
-            { time: "11:15 - 12:00", subject: "Computer Science" },
-            { time: "12:00 - 12:45", subject: "Arts" }
-          ],
-          tuesday: [
-            { time: "8:00 - 8:45", subject: "History" },
-            { time: "8:45 - 9:30", subject: "Geography" },
-            { time: "9:30 - 10:15", subject: "English" },
-            { time: "10:15 - 10:30", subject: "Break" },
-            { time: "10:30 - 11:15", subject: "Biology" },
-            { time: "11:15 - 12:00", subject: "Mathematics" },
-            { time: "12:00 - 12:45", subject: "Physical Education" }
-          ]
-        }
-      },
-      // More class data can be added here
-    }
-  };
+  // const routineData = 
+    
 
   // Helper function to determine if a class is primary or secondary
   const getLevel = (classNum) => {
-    return parseInt(classNum) <= 8 ? "primary" : "secondary";
-  };
+    return Number.parseInt(classNum) <= 8 ? "primary" : "secondary"
+  }
 
   // Get routine for the selected class and section
   const getRoutine = (level, classNum, section, day) => {
     try {
-      return routineData[level][classNum][section][day] || [];
+      return routineData[level][classNum][section][day] || []
     } catch (error) {
-      console.log("No routine found for this selection");
-      return [];
+      console.log("No routine found for this selection")
+      return []
     }
-  };
+  }
 
-  const level = getLevel(selectedClass);
+  const level = getLevel(selectedClass)
 
   if (isLoading) {
-    return <PageLoader />;
+    return <PageLoader />
   }
 
   return (
@@ -195,7 +88,7 @@ const Routine = () => {
         <div className="mb-6">
           <Breadcrumb />
         </div>
-        
+
         <div className="mt-8">
           <AnimatedSection animation="fade-in-up">
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -208,7 +101,7 @@ const Routine = () => {
                     <SelectValue placeholder="Select Class" />
                   </SelectTrigger>
                   <SelectContent>
-                    {classOptions.map(classNum => (
+                    {classOptions.map((classNum) => (
                       <SelectItem key={classNum} value={classNum}>
                         Class {classNum}
                       </SelectItem>
@@ -216,125 +109,208 @@ const Routine = () => {
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div className="w-full sm:w-1/2 md:w-1/4">
                 <label htmlFor="section-select" className="block text-sm font-medium mb-2">
-                  Select Section
+                  {sectionLabel}
                 </label>
                 <Select value={selectedSection} onValueChange={setSelectedSection}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Section" />
+                    <SelectValue placeholder={`Select ${sectionLabel}`} />
                   </SelectTrigger>
                   <SelectContent>
-                    {sectionOptions.map(section => (
+                    {sectionOptions.map((section) => (
                       <SelectItem key={section} value={section}>
-                        Section {section}
+                        {["11", "12"].includes(selectedClass) ? section : `Section ${section}`}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
             </div>
-            
-            <Tabs defaultValue="monday" className="w-full">
-              <TabsList className="mb-4 w-full flex flex-wrap justify-start overflow-x-auto">
-                <TabsTrigger value="monday" className="flex-shrink-0">Monday</TabsTrigger>
-                <TabsTrigger value="tuesday" className="flex-shrink-0">Tuesday</TabsTrigger>
-                <TabsTrigger value="wednesday" className="flex-shrink-0">Wednesday</TabsTrigger>
-                <TabsTrigger value="thursday" className="flex-shrink-0">Thursday</TabsTrigger>
-                <TabsTrigger value="friday" className="flex-shrink-0">Friday</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="monday">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Monday</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      {getRoutine(level, selectedClass, selectedSection, "monday").map((period, index) => (
-                        <div key={index} className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0">
-                          <span className="font-medium">{period.time}</span>
-                          <span className="mt-1 sm:mt-0">{period.subject}</span>
-                        </div>
-                      ))}
-                      {getRoutine(level, selectedClass, selectedSection, "monday").length === 0 && (
-                        <div className="py-4 text-center text-muted-foreground">
-                          No routine found for this selection
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="tuesday">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Tuesday</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      {getRoutine(level, selectedClass, selectedSection, "tuesday").map((period, index) => (
-                        <div key={index} className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0">
-                          <span className="font-medium">{period.time}</span>
-                          <span className="mt-1 sm:mt-0">{period.subject}</span>
-                        </div>
-                      ))}
-                      {getRoutine(level, selectedClass, selectedSection, "tuesday").length === 0 && (
-                        <div className="py-4 text-center text-muted-foreground">
-                          No routine found for this selection
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="wednesday">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Wednesday</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="py-4 text-center text-muted-foreground">
-                      No routine found for this selection
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="thursday">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Thursday</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="py-4 text-center text-muted-foreground">
-                      No routine found for this selection
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              <TabsContent value="friday">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Friday</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="py-4 text-center text-muted-foreground">
-                      No routine found for this selection
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+
+            <div className="overflow-x-auto">
+              <Tabs defaultValue="monday" className="w-full">
+                <div className="mb-4 w-full h-auto  overflow-x-auto pb-2">
+                  <TabsList className="flex flex-nowrap min-w-max">
+                    <TabsTrigger value="monday">Monday</TabsTrigger>
+                    <TabsTrigger value="tuesday">Tuesday</TabsTrigger>
+                    <TabsTrigger value="wednesday">Wednesday</TabsTrigger>
+                    <TabsTrigger value="thursday">Thursday</TabsTrigger>
+                    <TabsTrigger value="friday">Friday</TabsTrigger>
+                  </TabsList>
+                </div>
+
+                <TabsContent value="monday">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg sm:text-xl">
+                        Class {selectedClass} -
+                        {["11", "12"].includes(selectedClass) ? selectedSection : `Section ${selectedSection}`} - Monday
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {getRoutine(level, selectedClass, selectedSection, "monday").map((period, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="w-full sm:w-1/4 font-medium">{period.time}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0">{period.subject}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0 text-muted-foreground">
+                              {period.teacher && period.teacher}
+                            </div>
+                          </div>
+                        ))}
+                        {getRoutine(level, selectedClass, selectedSection, "monday").length === 0 && (
+                          <div className="py-4 text-center text-muted-foreground">
+                            No routine found for this selection
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="tuesday">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg sm:text-xl">
+                        Class {selectedClass} -
+                        {["11", "12"].includes(selectedClass) ? selectedSection : `Section ${selectedSection}`} -
+                        Tuesday
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {getRoutine(level, selectedClass, selectedSection, "tuesday").map((period, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="w-full sm:w-1/4 font-medium">{period.time}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0">{period.subject}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0 text-muted-foreground">
+                              {period.teacher && period.teacher}
+                            </div>
+                          </div>
+                        ))}
+                        {getRoutine(level, selectedClass, selectedSection, "tuesday").length === 0 && (
+                          <div className="py-4 text-center text-muted-foreground">
+                            No routine found for this selection
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="wednesday">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg sm:text-xl">
+                        Class {selectedClass} -
+                        {["11", "12"].includes(selectedClass) ? selectedSection : `Section ${selectedSection}`} -
+                        Wednesday
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {getRoutine(level, selectedClass, selectedSection, "wednesday").map((period, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="w-full sm:w-1/4 font-medium">{period.time}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0">{period.subject}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0 text-muted-foreground">
+                              {period.teacher && period.teacher}
+                            </div>
+                          </div>
+                        ))}
+                        {getRoutine(level, selectedClass, selectedSection, "wednesday").length === 0 && (
+                          <div className="py-4 text-center text-muted-foreground">
+                            No routine found for this selection
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="thursday">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg sm:text-xl">
+                        Class {selectedClass} -
+                        {["11", "12"].includes(selectedClass) ? selectedSection : `Section ${selectedSection}`} -
+                        Thursday
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {getRoutine(level, selectedClass, selectedSection, "thursday").map((period, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="w-full sm:w-1/4 font-medium">{period.time}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0">{period.subject}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0 text-muted-foreground">
+                              {period.teacher && period.teacher}
+                            </div>
+                          </div>
+                        ))}
+                        {getRoutine(level, selectedClass, selectedSection, "thursday").length === 0 && (
+                          <div className="py-4 text-center text-muted-foreground">
+                            No routine found for this selection
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="friday">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg sm:text-xl">
+                        Class {selectedClass} -
+                        {["11", "12"].includes(selectedClass) ? selectedSection : `Section ${selectedSection}`} - Friday
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {getRoutine(level, selectedClass, selectedSection, "friday").map((period, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="w-full sm:w-1/4 font-medium">{period.time}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0">{period.subject}</div>
+                            <div className="w-full sm:w-1/3 mt-1 sm:mt-0 text-muted-foreground">
+                              {period.teacher && period.teacher}
+                            </div>
+                          </div>
+                        ))}
+                        {getRoutine(level, selectedClass, selectedSection, "friday").length === 0 && (
+                          <div className="py-4 text-center text-muted-foreground">
+                            No routine found for this selection
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </div>
           </AnimatedSection>
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Routine;
+export default Routine
+

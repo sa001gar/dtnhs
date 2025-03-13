@@ -29,51 +29,73 @@ const Academics = () => {
 
   const programs = [
     {
-      id: 1,
-      title: "Primary Education",
-      grades: "Grades 1-5",
-      description: "Our primary education program focuses on building a strong foundation in core subjects while encouraging creativity and curiosity."
+        id: 1,
+        title: "Upper Primary Education",
+        grades: "Grades 5-8",
+        description: "Our upper primary program focuses on strengthening fundamental concepts while fostering creativity, problem-solving, and independent learning."
     },
     {
-      id: 2,
-      title: "Middle School",
-      grades: "Grades 6-8",
-      description: "The middle school program bridges primary and secondary education, helping students develop critical thinking and independent study skills."
+        id: 2,
+        title: "Secondary Education",
+        grades: "Grades 9-10",
+        description: "The secondary education program prepares students for board examinations with a balanced curriculum covering core academic subjects."
     },
     {
-      id: 3,
-      title: "Secondary Education",
-      grades: "Grades 9-10",
-      description: "Our secondary program prepares students for board examinations with comprehensive study in all major subjects."
+        id: 3,
+        title: "Higher Secondary Education",
+        grades: "Grades 11-12",
+        description: "Our higher secondary program offers specialized streams in Science, Commerce, and Arts, equipping students with in-depth knowledge for higher studies and professional careers."
     },
     {
-      id: 4,
-      title: "Higher Secondary",
-      grades: "Grades 11-12",
-      description: "The higher secondary program offers specialized streams in Science, Commerce, and Arts to prepare students for college and career paths."
+        id: 4,
+        title: "Vocational Education",
+        grades: "Grades 9-12",
+        description: "Our vocational courses provide skill-based training in various trades, helping students gain practical knowledge and enhancing employment opportunities in different industries. Courses include disciplines like Computer Application, IT Enabled Services, and Maintenance & Repair of Electrical Domestic Appliances."
     }
-  ];
+];
+
 
   const curriculum = [
     {
-      id: "science",
-      title: "Science Stream",
-      subjects: ["Physics", "Chemistry", "Biology", "Mathematics", "Computer Science"],
-      description: "Our science stream prepares students for careers in engineering, medicine, and research."
+        id: "madhyamik",
+        title: "Madhyamik (Secondary) Curriculum",
+        subjects: [
+            "Bengali", "English", "History", "Geography", 
+            "Physical Science", "Life Science", "Mathematics",
+            "Sanskrit (up to Class 8)", "Health Education", 
+            "Work Education", "Paribesh (up to Class 8)"
+        ],
+        description: "The Madhyamik curriculum provides a strong foundation in languages, sciences, and social sciences, ensuring holistic development for students."
     },
     {
-      id: "commerce",
-      title: "Commerce Stream",
-      subjects: ["Accountancy", "Business Studies", "Economics", "Mathematics", "Computer Applications"],
-      description: "The commerce stream prepares students for careers in business, finance, and entrepreneurship."
+        id: "science",
+        title: "Science Stream",
+        subjects: [
+            "Physics", "Chemistry", "Biology", 
+            "Mathematics", "Computer Application", "Environmental Science"
+        ],
+        description: "Our science stream prepares students for careers in engineering, medicine, and research through a strong foundation in analytical and scientific thinking."
     },
     {
-      id: "arts",
-      title: "Arts Stream",
-      subjects: ["History", "Geography", "Political Science", "Psychology", "Sociology"],
-      description: "The arts stream provides a strong foundation in humanities and social sciences."
+        id: "commerce",
+        title: "Commerce Stream",
+        subjects: [
+            "Accountancy", "Business Studies", "Economics", 
+            "Mathematics", "Commercial Law", "Commercial Tax"
+        ],
+        description: "The commerce stream equips students with knowledge in finance, business management, and trade, preparing them for careers in banking, entrepreneurship, and corporate sectors."
+    },
+    {
+        id: "arts",
+        title: "Arts Stream",
+        subjects: [
+            "History", "Geography", "Political Science", 
+            "Philosophy", "Economics", "Environmental Science"
+        ],
+        description: "The arts stream fosters a deep understanding of humanities and social sciences, opening pathways to careers in law, academia, civil services, and social research."
     }
-  ];
+];
+
   
   const activities = [
     {
