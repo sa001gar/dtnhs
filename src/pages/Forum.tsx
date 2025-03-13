@@ -131,7 +131,7 @@ const Forum = () => {
       <PageHeader
         title="Community Forum"
         description="Join discussions with students, parents, and teachers on various school-related topics."
-        pattern="stripes"
+        pattern="grid"
       />
 
       <div className="container py-8 md:py-12">

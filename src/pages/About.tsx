@@ -32,8 +32,8 @@ const About: React.FC = () => {
         <PageHeader
           title="About Our School"
           subtitle="Learn about our history, mission, and vision for the future."
-          backgroundImage="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
-          pattern="noise"
+          // backgroundImage="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
+          // pattern="noise"
         />
         
         <section className="py-16">
