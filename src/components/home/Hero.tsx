@@ -12,7 +12,7 @@ const Hero = () => {
         <img 
           src="/images/home/dtnhs.jpg" 
           alt="School Building" 
-          className="w-full h-full object-cover opacity-20 dark:opacity-10"
+          className="w-full h-full object-cover opacity-30 dark:opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm" />
       </div>
