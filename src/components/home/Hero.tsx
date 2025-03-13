@@ -7,12 +7,12 @@ import AnimatedSection from "../ui/AnimatedSection";
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
           src="https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true" 
           alt="School Building" 
-          className="w-full  object-cover opacity-30 dark:opacity-25"
+          className="w-full h-full object-cover opacity-30 dark:opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm" />
       </div>
