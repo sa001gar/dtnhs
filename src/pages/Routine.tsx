@@ -1,13 +1,25 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Routine = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const routines = {
     primary: {
       monday: [
@@ -48,6 +60,10 @@ const Routine = () => {
       ]
     }
   };
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <Layout>

@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,13 +9,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Contact = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real application, this would submit the form data to a server
     console.log("Form submitted");
   };
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <Layout>

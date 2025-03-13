@@ -1,12 +1,24 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Teachers = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const teachers = [
     {
       id: 1,
@@ -41,6 +53,10 @@ const Teachers = () => {
       email: "robert.wilson@school.edu"
     }
   ];
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <Layout>
