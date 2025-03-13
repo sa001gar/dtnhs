@@ -13,6 +13,7 @@ interface PageHeaderProps {
   className?: string;
   children?: React.ReactNode;
   showBreadcrumbs?: boolean;
+  small?: boolean;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
@@ -24,6 +25,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   className,
   children,
   showBreadcrumbs = true,
+  small = false,
 }) => {
   const patternClasses = {
     dots: "bg-dots",
@@ -36,7 +38,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <div
       className={cn(
-        "relative flex min-h-[240px] w-full items-center justify-center overflow-hidden py-16 md:min-h-[320px]",
+        "relative flex w-full items-center justify-center overflow-hidden py-16",
+        small ? "min-h-[180px] md:min-h-[220px]" : "min-h-[240px] md:min-h-[320px]",
         patternClasses[pattern],
         className
       )}
