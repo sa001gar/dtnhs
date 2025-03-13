@@ -1,6 +1,7 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "@/components/home/Hero";
+import AboutSchool from "@/components/home/AboutSchool";
 import Features from "@/components/home/Features";
 import NewsSection from "@/components/home/NewsSection";
 import { Link } from "react-router-dom";
@@ -8,11 +9,28 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Layout from "@/components/layout/Layout";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Index: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
   return (
     <Layout>
       <Hero />
+      <AboutSchool />
       <Features />
       <NewsSection />
       

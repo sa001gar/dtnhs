@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
-import { GalleryModal } from "@/components/gallery/GalleryModal";
-import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Briefcase, MapPin, Linkedin ,CalendarIcon} from "lucide-react";
-import PageLoader from "@/components/shared/PageLoader";
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Calendar, Search, MapPin, Briefcase, ExternalLink, ChevronRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import PageLoader from "@/components/shared/PageLoader";
 
 const Alumni = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [galleryModalOpen, setGalleryModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -24,82 +26,80 @@ const Alumni = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const alumni = {
-    distinguished: [
-      {
-        id: 1,
-        name: "Dr. Rahul Sharma",
-        batch: "1998",
-        profession: "Neurosurgeon",
-        organization: "Apollo Hospitals",
-        location: "Delhi, India",
-        achievement: "Pioneer in minimally invasive brain surgery",
-        image: "https://randomuser.me/api/portraits/men/32.jpg"
+  const alumniData = [
+    {
+      id: 1,
+      name: "Rajiv Kumar",
+      batch: "Class of 2010",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      location: "New Delhi, India",
+      education: "B.Tech, Computer Science (IIT Delhi)",
+      profession: "Senior Software Engineer at Microsoft",
+      achievements: ["National Merit Scholarship", "Published research on AI algorithms"],
+      socialLinks: {
+        linkedin: "https://linkedin.com/in/",
+        twitter: "https://twitter.com/"
       },
-      {
-        id: 2,
-        name: "Priya Patel",
-        batch: "2005",
-        profession: "Environmental Scientist",
-        organization: "United Nations",
-        location: "Geneva, Switzerland",
-        achievement: "Led climate change initiatives across South Asia",
-        image: "https://randomuser.me/api/portraits/women/44.jpg"
+      description: "Rajiv has been leading technological innovations at Microsoft, focusing on cloud computing solutions. He credits his foundational learning at our school for his analytical thinking skills."
+    },
+    {
+      id: 2,
+      name: "Sneha Sharma",
+      batch: "Class of 2005",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      location: "Bengaluru, India",
+      education: "MBBS, MD (AIIMS)",
+      profession: "Senior Cardiologist at Apollo Hospitals",
+      achievements: ["Gold Medalist in Medical School", "Published 12 research papers"],
+      socialLinks: {
+        linkedin: "https://linkedin.com/in/",
+        twitter: "https://twitter.com/"
       },
-      {
-        id: 3,
-        name: "Vikram Malhotra",
-        batch: "1995",
-        profession: "Tech Entrepreneur",
-        organization: "Innovate Solutions",
-        location: "Bangalore, India",
-        achievement: "Founded three successful tech startups",
-        image: "https://randomuser.me/api/portraits/men/22.jpg"
-      }
-    ],
-    recent: [
-      {
-        id: 4,
-        name: "Anika Singh",
-        batch: "2018",
-        profession: "Software Engineer",
-        organization: "Google",
-        location: "Hyderabad, India",
-        achievement: "Developed AI algorithms for Google Search",
-        image: "https://randomuser.me/api/portraits/women/65.jpg"
+      description: "Dr. Sneha is a respected cardiologist who has pioneered several minimally invasive surgical techniques. She fondly remembers her science classes at our school that sparked her interest in medicine."
+    },
+    {
+      id: 3,
+      name: "Amit Patel",
+      batch: "Class of 2008",
+      image: "https://randomuser.me/api/portraits/men/67.jpg",
+      location: "Mumbai, India",
+      education: "MBA (IIM Ahmedabad)",
+      profession: "Founder & CEO of GreenTech Solutions",
+      achievements: ["Forbes 30 Under 30", "Environmental Conservation Award"],
+      socialLinks: {
+        linkedin: "https://linkedin.com/in/",
+        twitter: "https://twitter.com/"
       },
-      {
-        id: 5,
-        name: "Rohit Kumar",
-        batch: "2020",
-        profession: "Financial Analyst",
-        organization: "Goldman Sachs",
-        location: "Mumbai, India",
-        achievement: "Youngest team leader in the Mumbai office",
-        image: "https://randomuser.me/api/portraits/men/67.jpg"
+      description: "Amit's company has been revolutionizing sustainable energy solutions across India. He attributes his entrepreneurial spirit to the leadership opportunities he received at our school."
+    },
+    {
+      id: 4,
+      name: "Priya Desai",
+      batch: "Class of 2012",
+      image: "https://randomuser.me/api/portraits/women/65.jpg",
+      location: "San Francisco, USA",
+      education: "PhD in Artificial Intelligence (Stanford University)",
+      profession: "Research Scientist at Google AI",
+      achievements: ["Grace Hopper Celebration Scholar", "5 Patents in AI"],
+      socialLinks: {
+        linkedin: "https://linkedin.com/in/",
+        twitter: "https://twitter.com/"
       },
-      {
-        id: 6,
-        name: "Meera Reddy",
-        batch: "2019",
-        profession: "Journalist",
-        organization: "The Times of India",
-        location: "Chennai, India",
-        achievement: "National Award for investigative journalism",
-        image: "https://randomuser.me/api/portraits/women/33.jpg"
-      },
-      {
-        id: 7,
-        name: "Arjun Kapoor",
-        batch: "2017",
-        profession: "Civil Engineer",
-        organization: "Larsen & Toubro",
-        location: "Pune, India",
-        achievement: "Led the design team for Mumbai's new coastal highway",
-        image: "https://randomuser.me/api/portraits/men/54.jpg"
-      }
-    ]
-  };
+      description: "Priya is working on groundbreaking AI research at Google. She remembers how her mathematics teacher at our school encouraged her to pursue her interest in algorithms and computational thinking."
+    }
+  ];
+
+  const notableAlumni = alumniData.slice(0, 2);
+  const allAlumni = alumniData;
+
+  const batches = ["All", "2000-2005", "2006-2010", "2011-2015", "2016-2020"];
+
+  const filteredAlumni = alumniData.filter(alumni => 
+    alumni.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumni.profession.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumni.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumni.education.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (isLoading) {
     return <PageLoader />;
@@ -108,11 +108,9 @@ const Alumni = () => {
   return (
     <Layout>
       <PageHeader
-        title="Our Alumni Network"
-        description="Meet the exceptional graduates who have made their mark in various fields across the globe."
-        pattern="dots"
-        backgroundImage="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&q=80&w=1920"
-        className="bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm"
+        title="Alumni Network"
+        description="Connect with our successful graduates who are making an impact across the globe."
+        pattern="grid"
       />
 
       <div className="container py-8 md:py-12">
@@ -120,119 +118,168 @@ const Alumni = () => {
           <Breadcrumb />
         </div>
 
-        <AnimatedSection animation="fade-in-up">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Alumni Excellence</h2>
-            <p className="text-muted-foreground">
-              Our alumni represent the success of our educational mission. They have gone on to excel in various fields including medicine, technology, arts, business, and public service.
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <Tabs defaultValue="distinguished" className="w-full">
-          <TabsList className="w-full max-w-md mx-auto mb-8 grid grid-cols-2">
-            <TabsTrigger value="distinguished">Distinguished Alumni</TabsTrigger>
-            <TabsTrigger value="recent">Recent Graduates</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="distinguished">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {alumni.distinguished.map((person, index) => (
-                <AnimatedSection key={person.id} animation="fade-in-up" delay={index * 100}>
-                  <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md hover:shadow-lg transition-all duration-300">
-                    <CardHeader className="pb-2 flex flex-col items-center text-center">
-                      <Avatar className="w-24 h-24 mb-4">
-                        <AvatarImage src={person.image} alt={person.name} />
-                        <AvatarFallback>{person.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <CardTitle className="text-xl">{person.name}</CardTitle>
-                      <div className="flex items-center justify-center mt-1 text-muted-foreground">
-                        <CalendarIcon className="w-4 h-4 mr-1" />
-                        <span>Batch of {person.batch}</span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-center">
-                      <Badge variant="secondary" className="mb-2">
-                        {person.profession}
-                      </Badge>
-                      <div className="flex items-center justify-center mt-2 text-sm">
-                        <Briefcase className="w-4 h-4 mr-1 text-muted-foreground" />
-                        <span>{person.organization}</span>
-                      </div>
-                      <div className="flex items-center justify-center mt-2 text-sm">
-                        <MapPin className="w-4 h-4 mr-1 text-muted-foreground" />
-                        <span>{person.location}</span>
-                      </div>
-                      <p className="mt-4 text-sm">{person.achievement}</p>
-                      <a 
-                        href="#" 
-                        className="inline-flex items-center mt-4 text-school-primary hover:underline"
-                      >
-                        <Linkedin className="w-4 h-4 mr-1" />
-                        <span>Connect</span>
-                      </a>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="recent">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {alumni.recent.map((person, index) => (
-                <AnimatedSection key={person.id} animation="fade-in-up" delay={index * 100}>
-                  <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md hover:shadow-lg transition-all duration-300">
-                    <CardHeader className="pb-2 flex flex-col items-center text-center">
-                      <Avatar className="w-20 h-20 mb-3">
-                        <AvatarImage src={person.image} alt={person.name} />
-                        <AvatarFallback>{person.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <CardTitle className="text-lg">{person.name}</CardTitle>
-                      <div className="flex items-center justify-center mt-1 text-sm text-muted-foreground">
-                        <CalendarIcon className="w-3 h-3 mr-1" />
-                        <span>Batch of {person.batch}</span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-center text-sm">
-                      <Badge variant="secondary" className="mb-2 text-xs">
-                        {person.profession}
-                      </Badge>
-                      <div className="flex items-center justify-center mt-2 text-xs">
-                        <Briefcase className="w-3 h-3 mr-1 text-muted-foreground" />
-                        <span>{person.organization}</span>
-                      </div>
-                      <div className="flex items-center justify-center mt-2 text-xs">
-                        <MapPin className="w-3 h-3 mr-1 text-muted-foreground" />
-                        <span>{person.location}</span>
-                      </div>
-                      <p className="mt-3 text-xs">{person.achievement}</p>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        <AnimatedSection animation="fade-in-up" delay={300} className="mt-16">
-          <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md">
-            <CardHeader>
-              <CardTitle className="text-center">Join Our Alumni Network</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="mb-6">Are you an alumnus of our school? Connect with us to stay updated and participate in our alumni events.</p>
-              <div className="flex justify-center gap-4">
-                <a href="#" className="bg-school-primary text-white px-6 py-2 rounded-md hover:bg-school-primary/90 transition-colors">
-                  Register
-                </a>
-                <a href="#" className="bg-muted text-foreground px-6 py-2 rounded-md hover:bg-muted/80 transition-colors">
-                  Alumni Events
-                </a>
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-3/4">
+            <AnimatedSection animation="fade-in-up">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search alumni..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-9 max-w-sm"
+                  />
+                </div>
+                
+                <Tabs defaultValue="All" className="w-full sm:w-auto">
+                  <TabsList className="flex flex-wrap">
+                    {batches.map((batch) => (
+                      <TabsTrigger key={batch} value={batch} className="text-xs sm:text-sm">
+                        {batch}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
               </div>
-            </CardContent>
-          </Card>
-        </AnimatedSection>
+
+              {filteredAlumni.length === 0 ? (
+                <Card className="glass backdrop-blur-sm bg-background/80 border-muted p-8 text-center">
+                  <p>No alumni found matching your search.</p>
+                </Card>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {filteredAlumni.map((alumni, index) => (
+                    <AnimatedSection key={alumni.id} animation="fade-in-up" delay={index * 100}>
+                      <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md h-full hover:shadow-lg transition-all duration-300">
+                        <CardContent className="p-0">
+                          <div className="p-6">
+                            <div className="flex items-center gap-4 mb-4">
+                              <Avatar className="h-16 w-16 border-2 border-border">
+                                <AvatarImage src={alumni.image} alt={alumni.name} />
+                                <AvatarFallback>{alumni.name.charAt(0)}</AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <h3 className="text-xl font-bold">{alumni.name}</h3>
+                                <div className="flex items-center text-sm text-muted-foreground mb-1">
+                                  <Calendar className="h-3 w-3 mr-1" />
+                                  <span>{alumni.batch}</span>
+                                </div>
+                                <div className="flex items-center text-sm text-muted-foreground">
+                                  <MapPin className="h-3 w-3 mr-1" />
+                                  <span>{alumni.location}</span>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="space-y-3 mb-4">
+                              <div className="flex items-start gap-2">
+                                <Briefcase className="h-4 w-4 text-school-primary mt-1 shrink-0" />
+                                <div>
+                                  <p className="font-medium">Current Position</p>
+                                  <p className="text-sm text-muted-foreground">{alumni.profession}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-start gap-2">
+                                <Calendar className="h-4 w-4 text-school-primary mt-1 shrink-0" />
+                                <div>
+                                  <p className="font-medium">Education</p>
+                                  <p className="text-sm text-muted-foreground">{alumni.education}</p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="flex justify-between items-center mt-4">
+                              <div className="flex gap-2">
+                                {alumni.socialLinks.linkedin && (
+                                  <a 
+                                    href={alumni.socialLinks.linkedin} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-muted-foreground hover:text-foreground transition-colors"
+                                  >
+                                    <ExternalLink className="h-4 w-4" />
+                                  </a>
+                                )}
+                              </div>
+                              <Button variant="ghost" className="text-school-primary hover:text-school-primary/90 hover:bg-school-primary/10 p-0">
+                                <span className="mr-1">View Profile</span>
+                                <ChevronRight className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </AnimatedSection>
+                  ))}
+                </div>
+              )}
+            </AnimatedSection>
+          </div>
+
+          <div className="lg:w-1/4">
+            <AnimatedSection animation="fade-in-up" delay={200}>
+              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md mb-6">
+                <CardHeader>
+                  <CardTitle className="text-lg">Alumni Statistics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Total Alumni</span>
+                      <span className="font-medium">2,500+</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Countries</span>
+                      <span className="font-medium">28</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Industries</span>
+                      <span className="font-medium">45+</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md mb-6">
+                <CardHeader>
+                  <CardTitle className="text-lg">Join Alumni Network</CardTitle>
+                  <CardDescription>Stay connected with your school community</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Register to our alumni network to get updates on events, reunions and opportunities to connect with fellow graduates.
+                  </p>
+                  <Button className="w-full bg-school-primary hover:bg-school-primary/90">
+                    Register Now
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg">Upcoming Reunions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="border-l-2 border-school-primary pl-4 py-1">
+                      <p className="font-medium">Class of 2010 Reunion</p>
+                      <p className="text-sm text-muted-foreground">December 15, 2023</p>
+                    </div>
+                    <div className="border-l-2 border-school-primary pl-4 py-1">
+                      <p className="font-medium">Silver Jubilee - Class of 1998</p>
+                      <p className="text-sm text-muted-foreground">January 22, 2024</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full">View All Events</Button>
+                </CardFooter>
+              </Card>
+            </AnimatedSection>
+          </div>
+        </div>
       </div>
     </Layout>
   );

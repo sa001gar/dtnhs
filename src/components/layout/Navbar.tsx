@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { 
   Menu, X, ChevronDown, Book, GraduationCap, 
-  Users, User, Image, Bell, Calendar, 
-  Award, Phone, MessageSquare, FileText 
+  Users, Award, Calendar, FileText, Home,
+  MessageSquare, Phone, Image 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,8 @@ const Navbar = () => {
   const navLinks = [
     { 
       name: "Home", 
-      path: "/" 
+      path: "/",
+      icon: <Home className="h-4 w-4 mr-1" />
     },
     {
       name: "About",
@@ -116,7 +118,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-1">
           <ul className="flex items-center gap-1 mr-2">
             {navLinks.map((link) => (
-              <li key={link.path}>
+              <li key={link.name}>
                 {link.hasDropdown ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -124,7 +126,6 @@ const Navbar = () => {
                         "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
                         "text-muted-foreground hover:text-foreground"
                       )}>
-                        {link.icon}
                         {link.name}
                         <ChevronDown className="h-4 w-4 ml-1" />
                       </button>
@@ -161,7 +162,6 @@ const Navbar = () => {
                       )
                     }
                   >
-                    {link.icon}
                     {link.name}
                   </NavLink>
                 )}
@@ -196,7 +196,7 @@ const Navbar = () => {
           <nav>
             <ul className="space-y-2 py-4">
               {navLinks.map((link) => (
-                <li key={link.path}>
+                <li key={link.name}>
                   {link.hasDropdown ? (
                     <div className="space-y-2">
                       <div className="rounded-lg px-4 py-3 text-base font-medium text-muted-foreground">

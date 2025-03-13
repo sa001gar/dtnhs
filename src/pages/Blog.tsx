@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Tag, ChevronRight, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import PageLoader from "@/components/shared/PageLoader";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -136,13 +137,13 @@ const Blog = () => {
                       <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
                         <div className="grid grid-cols-1 md:grid-cols-3">
                           <div className="md:col-span-1">
-                            <div className="h-full w-full relative">
+                            <Link to={`/blog/${post.id}`} className="block h-full w-full relative">
                               <img 
                                 src={post.image} 
                                 alt={post.title} 
                                 className="h-full w-full object-cover min-h-[200px]"
                               />
-                            </div>
+                            </Link>
                           </div>
                           <div className="md:col-span-2 p-6">
                             <div className="flex flex-wrap gap-2 mb-3">
@@ -153,7 +154,7 @@ const Blog = () => {
                               ))}
                             </div>
                             <h3 className="text-xl font-bold mb-2 hover:text-school-primary transition-colors">
-                              <a href="#">{post.title}</a>
+                              <Link to={`/blog/${post.id}`}>{post.title}</Link>
                             </h3>
                             <p className="text-muted-foreground mb-4">{post.excerpt}</p>
                             <div className="flex items-center gap-3 mb-4">
@@ -177,9 +178,11 @@ const Blog = () => {
                                   <p className="text-xs text-muted-foreground">{post.author.role}</p>
                                 </div>
                               </div>
-                              <Button variant="ghost" className="text-school-primary hover:text-school-primary/90 hover:bg-school-primary/10 p-0">
-                                <span className="mr-1">Read more</span>
-                                <ChevronRight className="h-4 w-4" />
+                              <Button variant="ghost" className="text-school-primary hover:text-school-primary/90 hover:bg-school-primary/10 p-0" asChild>
+                                <Link to={`/blog/${post.id}`} className="flex items-center">
+                                  <span className="mr-1">Read more</span>
+                                  <ChevronRight className="h-4 w-4" />
+                                </Link>
                               </Button>
                             </div>
                           </div>
@@ -202,16 +205,16 @@ const Blog = () => {
                   <div className="space-y-4">
                     {recentPosts.map(post => (
                       <div key={post.id} className="flex items-start gap-3">
-                        <div className="w-16 h-16 shrink-0 rounded-md overflow-hidden">
+                        <Link to={`/blog/${post.id}`} className="w-16 h-16 shrink-0 rounded-md overflow-hidden">
                           <img 
                             src={post.image} 
                             alt={post.title} 
                             className="h-full w-full object-cover"
                           />
-                        </div>
+                        </Link>
                         <div>
                           <h4 className="text-sm font-medium hover:text-school-primary transition-colors">
-                            <a href="#">{post.title}</a>
+                            <Link to={`/blog/${post.id}`}>{post.title}</Link>
                           </h4>
                           <p className="text-xs text-muted-foreground mt-1">{post.date}</p>
                         </div>
