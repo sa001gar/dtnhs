@@ -236,24 +236,26 @@ const Routine = () => {
               </div>
             </div>
             
-            <Tabs defaultValue="monday">
-              <TabsList className="mb-4">
-                <TabsTrigger value="monday">Monday</TabsTrigger>
-                <TabsTrigger value="tuesday">Tuesday</TabsTrigger>
-                {/* Additional days can be added here */}
+            <Tabs defaultValue="monday" className="w-full">
+              <TabsList className="mb-4 w-full flex flex-wrap justify-start overflow-x-auto">
+                <TabsTrigger value="monday" className="flex-shrink-0">Monday</TabsTrigger>
+                <TabsTrigger value="tuesday" className="flex-shrink-0">Tuesday</TabsTrigger>
+                <TabsTrigger value="wednesday" className="flex-shrink-0">Wednesday</TabsTrigger>
+                <TabsTrigger value="thursday" className="flex-shrink-0">Thursday</TabsTrigger>
+                <TabsTrigger value="friday" className="flex-shrink-0">Friday</TabsTrigger>
               </TabsList>
               
               <TabsContent value="monday">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Class {selectedClass} - Section {selectedSection} - Monday</CardTitle>
+                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Monday</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
                       {getRoutine(level, selectedClass, selectedSection, "monday").map((period, index) => (
-                        <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                        <div key={index} className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0">
                           <span className="font-medium">{period.time}</span>
-                          <span>{period.subject}</span>
+                          <span className="mt-1 sm:mt-0">{period.subject}</span>
                         </div>
                       ))}
                       {getRoutine(level, selectedClass, selectedSection, "monday").length === 0 && (
@@ -269,14 +271,14 @@ const Routine = () => {
               <TabsContent value="tuesday">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Class {selectedClass} - Section {selectedSection} - Tuesday</CardTitle>
+                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Tuesday</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
                       {getRoutine(level, selectedClass, selectedSection, "tuesday").map((period, index) => (
-                        <div key={index} className="flex justify-between py-2 border-b border-gray-100 last:border-0">
+                        <div key={index} className="flex flex-col sm:flex-row sm:justify-between py-2 border-b border-gray-100 last:border-0">
                           <span className="font-medium">{period.time}</span>
-                          <span>{period.subject}</span>
+                          <span className="mt-1 sm:mt-0">{period.subject}</span>
                         </div>
                       ))}
                       {getRoutine(level, selectedClass, selectedSection, "tuesday").length === 0 && (
@@ -284,6 +286,45 @@ const Routine = () => {
                           No routine found for this selection
                         </div>
                       )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="wednesday">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Wednesday</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="py-4 text-center text-muted-foreground">
+                      No routine found for this selection
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="thursday">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Thursday</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="py-4 text-center text-muted-foreground">
+                      No routine found for this selection
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="friday">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg sm:text-xl">Class {selectedClass} - Section {selectedSection} - Friday</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="py-4 text-center text-muted-foreground">
+                      No routine found for this selection
                     </div>
                   </CardContent>
                 </Card>
