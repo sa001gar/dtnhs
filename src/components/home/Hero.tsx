@@ -10,7 +10,7 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs.jpg?token=GHSAT0AAAAAAC57QUIPYT36AARAYMJIZ354Z6SZT2Q" 
+          src="https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true" 
           alt="School Building" 
           className="w-full h-full object-cover opacity-30 dark:opacity-25"
         />

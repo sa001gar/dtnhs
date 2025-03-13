@@ -15,12 +15,12 @@ const AboutSchool = () => {
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-12 md:col-span-7">
                     <img
-                      src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs.jpg?token=GHSAT0AAAAAAC57QUIPYT36AARAYMJIZ354Z6SZT2Q"
+                      src="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs.jpg?raw=true"
                       alt="Historical School Building"
                       className="hidden md:block w-full h-full object-cover rounded-xl shadow-lg"
                     />
                     <img
-                      src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif?token=GHSAT0AAAAAAC57QUIO7YGFEVKRKU4M6QRSZ6SZURQ"
+                      src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif"
                       alt="Historical School Building"
                       className="block md:hidden w-full h-full object-cover rounded-xl shadow-lg"
                     />
@@ -28,12 +28,12 @@ const AboutSchool = () => {
                   <div className="col-span-12 md:col-span-5">
                     <div className="grid grid-cols-1 gap-4">
                       <img
-                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_front.jfif?token=GHSAT0AAAAAAC57QUIOSH6EEOJSKMEJPL52Z6SZV3Q"
+                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_front.jfif"
                         alt="School Library"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
                       <img
-                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/classroom.png?token=GHSAT0AAAAAAC57QUIOENDTO6BAMZJSOYUUZ6SZWKA"
+                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/classroom.png"
                         alt="School Playground"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
@@ -42,12 +42,12 @@ const AboutSchool = () => {
                   <div className="col-span-12 md:col-span-5">
                     <div className="grid grid-cols-1 gap-4">
                       <img
-                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif?token=GHSAT0AAAAAAC57QUIPQU23D2FUL5B7QUR6Z6SZW3A"
+                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif"
                         alt="School Playground"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
                       <img
-                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_sports.jpg?token=GHSAT0AAAAAAC57QUIP5USIPJKBVFNFIGIUZ6SZXFQ"
+                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_sports.jpg"
                         alt="School Library"
                         className="w-full object-cover rounded-xl shadow-lg h-40 md:h-auto"
                       />
@@ -56,11 +56,15 @@ const AboutSchool = () => {
 
                   <div className="col-span-12 md:col-span-7">
                     <img
-                      src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/2024-09-13.jpg?token=GHSAT0AAAAAAC57QUIPVD4TDWU4CZ42RLI2Z6SZX2Q"
+                      src="https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true"
                       alt="Historical School Building"
                       className="hidden md:block w-full h-full object-cover rounded-xl shadow-lg"
                     />
-                    
+                    <img
+                      src="https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true"
+                      alt="Historical School Building"
+                      className="block md:hidden w-full h-full object-cover rounded-xl shadow-lg"
+                    />
                   </div>
 
 
