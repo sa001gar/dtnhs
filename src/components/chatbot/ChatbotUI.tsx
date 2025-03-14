@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { MessageSquare, Bot, User, Copy, ThumbsUp, ThumbsDown, X, Maximize2, Minimize2, SendHorizontal, Paperclip, Mic, HelpCircle, Info, Settings } from 'lucide-react';
+import React, { useState } from 'react';
+import { MessageSquare, Bot, User, Copy, ThumbsUp, ThumbsDown, X, Maximize2, Minimize2, SendHorizontal, Mic, MicOff, HelpCircle, Info, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -27,6 +27,8 @@ interface ChatbotUIProps {
   message: string;
   setMessage: (message: string) => void;
   textareaRef: React.RefObject<HTMLTextAreaElement>;
+  isListening: boolean;
+  toggleListening: () => void;
 }
 
 // Quick response suggestions
@@ -44,6 +46,7 @@ const KEYBOARD_SHORTCUTS = [
   { key: "↓", description: "Navigate to next message" },
   { key: "Ctrl + Enter", description: "Send message" },
   { key: "Ctrl + M", description: "Minimize/Maximize chat" },
+  { key: "Ctrl + Space", description: "Toggle voice input" },
 ];
 
 export const ChatbotUI: React.FC<ChatbotUIProps> = ({
@@ -57,6 +60,8 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
   message,
   setMessage,
   textareaRef,
+  isListening,
+  toggleListening,
 }) => {
   // Function to handle copying message text
   const copyMessage = (text: string) => {
@@ -81,7 +86,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
       className={cn(
         "flex flex-col rounded-lg shadow-xl transition-all duration-300 ease-in-out overflow-hidden border border-border",
         isMinimized ? "h-16" : "h-[450px] sm:h-[500px]",
-        "w-full"
+        "w-full bg-background"
       )}
     >
       {/* Header */}
@@ -140,7 +145,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
       {!isMinimized && (
         <>
           <Tabs defaultValue="chat" className="flex flex-col flex-1">
-            <TabsList className="h-10 w-full bg-muted/30 p-0.5 rounded-none">
+            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none">
               <TabsTrigger 
                 value="chat" 
                 className="flex-1 data-[state=active]:bg-background data-[state=active]:shadow-none rounded-sm"
@@ -169,7 +174,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               className="flex-1 flex flex-col p-0 m-0"
             >
               {/* Chat Messages */}
-              <div className="p-3 flex-1 overflow-y-auto bg-muted/5 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
+              <div className="p-3 flex-1 overflow-y-auto bg-muted/20 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
                 {messages.map((msg) => (
                   <div 
                     key={msg.id} 
@@ -179,7 +184,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                       "max-w-[85%] rounded-2xl p-2.5 group relative",
                       msg.sender === 'user' 
                         ? 'bg-school-primary text-white rounded-tr-none shadow-sm' 
-                        : 'bg-muted/20 text-foreground rounded-tl-none shadow-sm'
+                        : 'bg-muted/50 text-foreground rounded-tl-none shadow-sm'
                     )}>
                       <div className="flex items-start gap-2">
                         {msg.sender === 'bot' && (
@@ -280,7 +285,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                 
                 {isLoading && (
                   <div className="mb-3 flex justify-start">
-                    <div className="bg-muted/20 rounded-2xl rounded-tl-none p-2.5 max-w-[85%]">
+                    <div className="bg-muted/50 rounded-2xl rounded-tl-none p-2.5 max-w-[85%]">
                       <div className="flex items-center gap-2">
                         <Avatar className="h-6 w-6">
                           <AvatarFallback className="bg-muted/20 text-foreground">
@@ -301,13 +306,13 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               </div>
               
               {/* Quick Responses */}
-              <div className="px-3 py-2 bg-muted/10 flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
+              <div className="px-3 py-2 bg-muted flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
                 {QUICK_RESPONSES.map((item, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
-                    className="whitespace-nowrap text-xs bg-muted/5 hover:bg-muted/20"
+                    className="whitespace-nowrap text-xs hover:bg-muted/50"
                     onClick={() => selectQuickResponse(item.value)}
                   >
                     {item.text}
@@ -325,53 +330,45 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                     ref={textareaRef}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type your message..."
-                    className="resize-none min-h-[60px] max-h-[150px] py-2 px-3 rounded-lg bg-background border border-muted focus-visible:ring-school-primary/50 w-full pr-10"
+                    placeholder={isListening ? "Listening..." : "Type your message..."}
+                    className={cn(
+                      "resize-none min-h-[60px] max-h-[150px] py-2 px-3 rounded-lg bg-background border border-muted focus-visible:ring-school-primary/50 w-full",
+                      isListening ? "pr-10 border-school-primary" : "pr-10"
+                    )}
                     onKeyDown={(e) => {
                       if ((e.key === 'Enter' && !e.shiftKey) || (e.key === 'Enter' && e.ctrlKey)) {
                         e.preventDefault();
                         handleSendMessage(e);
                       }
+                      if (e.ctrlKey && e.key === ' ') {
+                        e.preventDefault();
+                        toggleListening();
+                      }
                     }}
                   />
-                  <div className="absolute right-2 bottom-2 flex items-center gap-1">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button 
-                            type="button" 
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7 text-muted-foreground hover:text-foreground"
-                          >
-                            <Paperclip className="h-4 w-4" />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">
-                          <p>Attach file (coming soon)</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button 
-                            type="button" 
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7 text-muted-foreground hover:text-foreground"
-                          >
-                            <Mic className="h-4 w-4" />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">
-                          <p>Voice input (coming soon)</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
                 </div>
+                
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        type="button" 
+                        variant="outline"
+                        size="icon"
+                        onClick={toggleListening}
+                        className={cn(
+                          "h-10 w-10 rounded-full transition-colors shrink-0",
+                          isListening ? "bg-school-primary text-white hover:bg-school-primary/90" : "hover:bg-muted/20"
+                        )}
+                      >
+                        {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      <p>{isListening ? "Stop listening" : "Start voice input"} (Ctrl + Space)</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
                 
                 <TooltipProvider>
                   <Tooltip>
@@ -393,7 +390,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               </form>
             </TabsContent>
             
-            <TabsContent value="help" className="p-4 overflow-y-auto flex-1">
+            <TabsContent value="help" className="p-4 overflow-y-auto flex-1 bg-background">
               <h3 className="font-medium text-lg mb-3">How can I help you?</h3>
               <p className="mb-4 text-sm">
                 I'm your School Assistant, designed to help with information about Durgapur Tarak Nath High School. You can ask me about:
@@ -432,7 +429,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               </ul>
             </TabsContent>
             
-            <TabsContent value="shortcuts" className="p-4 overflow-y-auto flex-1">
+            <TabsContent value="shortcuts" className="p-4 overflow-y-auto flex-1 bg-background">
               <h3 className="font-medium text-lg mb-3">Keyboard Shortcuts</h3>
               <div className="grid gap-2">
                 {KEYBOARD_SHORTCUTS.map((shortcut, index) => (

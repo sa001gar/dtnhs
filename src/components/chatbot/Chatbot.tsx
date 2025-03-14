@@ -1,9 +1,10 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ChatbotUI, Message } from './ChatbotUI';
+import { toast } from '@/hooks/use-toast';
 
 const useChatApi = () => {
   const getResponse = async (message: string): Promise<string> => {
@@ -96,6 +97,76 @@ const useChatApi = () => {
   return { getResponse };
 };
 
+// Speech recognition hook
+const useSpeechRecognition = (onResult: (text: string) => void, onError: (error: string) => void) => {
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      onError('Speech recognition is not supported in this browser.');
+      return false;
+    }
+
+    try {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      
+      recognitionRef.current.lang = 'en-US';
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      
+      recognitionRef.current.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        onResult(transcript);
+      };
+      
+      recognitionRef.current.onerror = (event) => {
+        console.error('Speech recognition error', event);
+        onError('Error recognizing speech. Please try again.');
+        stopListening();
+      };
+      
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+      
+      recognitionRef.current.start();
+      setIsListening(true);
+      return true;
+    } catch (error) {
+      console.error('Error initializing speech recognition:', error);
+      onError('Failed to start speech recognition. Please try again.');
+      return false;
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
+
+  const toggleListening = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  return { isListening, toggleListening };
+};
+
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -113,6 +184,20 @@ const Chatbot: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatApi = useChatApi();
   const isMobile = useIsMobile();
+
+  const handleSpeechResult = (transcript: string) => {
+    setMessage(transcript);
+  };
+
+  const handleSpeechError = (error: string) => {
+    toast({
+      title: "Speech Recognition Error",
+      description: error,
+      variant: "destructive",
+    });
+  };
+
+  const { isListening, toggleListening } = useSpeechRecognition(handleSpeechResult, handleSpeechError);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -137,15 +222,24 @@ const Chatbot: React.FC = () => {
         e.preventDefault();
         setIsMinimized(prev => !prev);
       }
+
+      if (e.ctrlKey && e.key === ' ' && isOpen && !isMinimized) {
+        e.preventDefault();
+        toggleListening();
+      }
     };
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, isMinimized, toggleListening]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
+
+    if (isListening) {
+      toggleListening();
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -225,6 +319,8 @@ const Chatbot: React.FC = () => {
             message={message}
             setMessage={setMessage}
             textareaRef={textareaRef}
+            isListening={isListening}
+            toggleListening={toggleListening}
           />
         </div>
       )}
