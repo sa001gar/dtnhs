@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -89,9 +90,9 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
         "w-full bg-background"
       )}
     >
-      {/* Header */}
+      {/* Header - Fixed at top */}
       <div
-        className="flex items-center justify-between p-3 bg-school-primary text-white cursor-pointer"
+        className="flex items-center justify-between p-3 bg-school-primary text-white cursor-pointer sticky top-0 z-10"
         onClick={toggleMinimize}
       >
         <div className="flex items-center">
@@ -145,7 +146,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
       {!isMinimized && (
         <>
           <Tabs defaultValue="chat" className="flex flex-col flex-1">
-            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none">
+            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none sticky top-0 z-10">
               <TabsTrigger 
                 value="chat" 
                 className="flex-1 data-[state=active]:bg-background data-[state=active]:shadow-none rounded-sm"
@@ -171,142 +172,144 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
 
             <TabsContent 
               value="chat" 
-              className="flex-1 flex flex-col p-0 m-0"
+              className="flex-1 flex flex-col p-0 m-0 overflow-hidden"
             >
-              {/* Chat Messages */}
-              <div className="p-3 flex-1 overflow-y-auto bg-muted/20 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
-                {messages.map((msg) => (
-                  <div 
-                    key={msg.id} 
-                    className={`mb-3 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div className={cn(
-                      "max-w-[85%] rounded-2xl p-2.5 group relative",
-                      msg.sender === 'user' 
-                        ? 'bg-school-primary text-white rounded-tr-none shadow-sm' 
-                        : 'bg-muted/50 text-foreground rounded-tl-none shadow-sm'
-                    )}>
-                      <div className="flex items-start gap-2">
+              {/* Chat Messages - Scrollable area */}
+              <ScrollArea className="flex-1 bg-muted/20">
+                <div className="p-3">
+                  {messages.map((msg) => (
+                    <div 
+                      key={msg.id} 
+                      className={`mb-3 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div className={cn(
+                        "max-w-[85%] rounded-2xl p-2.5 group relative",
+                        msg.sender === 'user' 
+                          ? 'bg-school-primary text-white rounded-tr-none shadow-sm' 
+                          : 'bg-muted/50 text-foreground rounded-tl-none shadow-sm'
+                      )}>
+                        <div className="flex items-start gap-2">
+                          {msg.sender === 'bot' && (
+                            <Avatar className="h-6 w-6 shrink-0">
+                              <AvatarFallback className="bg-muted/20 text-foreground">
+                                <Bot className="h-4 w-4" />
+                              </AvatarFallback>
+                            </Avatar>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            {msg.html ? (
+                              <p 
+                                className="text-sm whitespace-pre-wrap break-words"
+                                dangerouslySetInnerHTML={{ __html: msg.text }}
+                              />
+                            ) : (
+                              <p className="text-sm whitespace-pre-wrap break-words">
+                                {msg.text}
+                              </p>
+                            )}
+                            <p className={cn(
+                              "text-xs mt-1", 
+                              msg.sender === 'user' ? 'text-white/70' : 'text-muted-foreground'
+                            )}>
+                              {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                          </div>
+                          {msg.sender === 'user' && (
+                            <Avatar className="h-6 w-6 shrink-0">
+                              <AvatarFallback className="bg-school-primary/80 text-white">
+                                <User className="h-4 w-4" />
+                              </AvatarFallback>
+                            </Avatar>
+                          )}
+                        </div>
+                        
+                        {/* Message actions */}
                         {msg.sender === 'bot' && (
-                          <Avatar className="h-6 w-6 shrink-0">
+                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="flex gap-1">
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-6 w-6 bg-background/80 hover:bg-background"
+                                      onClick={() => copyMessage(msg.text)}
+                                    >
+                                      <Copy className="h-3 w-3" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent side="top">
+                                    <p>Copy</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                              
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-6 w-6 bg-background/80 hover:bg-background"
+                                    >
+                                      <ThumbsUp className="h-3 w-3" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent side="top">
+                                    <p>Helpful</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                              
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-6 w-6 bg-background/80 hover:bg-background"
+                                    >
+                                      <ThumbsDown className="h-3 w-3" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent side="top">
+                                    <p>Not helpful</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {isLoading && (
+                    <div className="mb-3 flex justify-start">
+                      <div className="bg-muted/50 rounded-2xl rounded-tl-none p-2.5 max-w-[85%]">
+                        <div className="flex items-center gap-2">
+                          <Avatar className="h-6 w-6">
                             <AvatarFallback className="bg-muted/20 text-foreground">
                               <Bot className="h-4 w-4" />
                             </AvatarFallback>
                           </Avatar>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          {msg.html ? (
-                            <p 
-                              className="text-sm whitespace-pre-wrap break-words"
-                              dangerouslySetInnerHTML={{ __html: msg.text }}
-                            />
-                          ) : (
-                            <p className="text-sm whitespace-pre-wrap break-words">
-                              {msg.text}
-                            </p>
-                          )}
-                          <p className={cn(
-                            "text-xs mt-1", 
-                            msg.sender === 'user' ? 'text-white/70' : 'text-muted-foreground'
-                          )}>
-                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                          </p>
-                        </div>
-                        {msg.sender === 'user' && (
-                          <Avatar className="h-6 w-6 shrink-0">
-                            <AvatarFallback className="bg-school-primary/80 text-white">
-                              <User className="h-4 w-4" />
-                            </AvatarFallback>
-                          </Avatar>
-                        )}
-                      </div>
-                      
-                      {/* Message actions */}
-                      {msg.sender === 'bot' && (
-                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="flex gap-1">
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-6 w-6 bg-background/80 hover:bg-background"
-                                    onClick={() => copyMessage(msg.text)}
-                                  >
-                                    <Copy className="h-3 w-3" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent side="top">
-                                  <p>Copy</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                            
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-6 w-6 bg-background/80 hover:bg-background"
-                                  >
-                                    <ThumbsUp className="h-3 w-3" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent side="top">
-                                  <p>Helpful</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                            
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-6 w-6 bg-background/80 hover:bg-background"
-                                  >
-                                    <ThumbsDown className="h-3 w-3" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent side="top">
-                                  <p>Not helpful</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                            <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '300ms' }}></div>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                
-                {isLoading && (
-                  <div className="mb-3 flex justify-start">
-                    <div className="bg-muted/50 rounded-2xl rounded-tl-none p-2.5 max-w-[85%]">
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-6 w-6">
-                          <AvatarFallback className="bg-muted/20 text-foreground">
-                            <Bot className="h-4 w-4" />
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex space-x-1">
-                          <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                          <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                          <div className="w-2 h-2 rounded-full bg-school-primary/60 animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-                
-                <div ref={messagesEndRef} />
-              </div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </div>
+              </ScrollArea>
               
-              {/* Quick Responses */}
-              <div className="px-3 py-2 bg-muted flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
+              {/* Quick Responses - Fixed at bottom above input */}
+              <div className="px-3 py-2 bg-muted flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted sticky bottom-[60px] z-10">
                 {QUICK_RESPONSES.map((item, index) => (
                   <Button
                     key={index}
@@ -320,10 +323,10 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                 ))}
               </div>
               
-              {/* Message Input */}
+              {/* Message Input - Fixed at bottom */}
               <form 
                 onSubmit={handleSendMessage} 
-                className="p-3 border-t border-border flex items-end gap-2 bg-background"
+                className="p-3 border-t border-border flex items-end gap-2 bg-background sticky bottom-0 z-10"
               >
                 <div className="relative flex-1">
                   <textarea 
