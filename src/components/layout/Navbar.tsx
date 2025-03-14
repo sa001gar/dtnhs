@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { 
   Menu, X, ChevronDown, Book, GraduationCap, 
   Users, Award, Calendar, FileText, Home,
-  MessageSquare, Phone, Image 
+  MessageSquare, Phone, Image, BookOpenCheck, Clock
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,17 +39,24 @@ const Navbar = () => {
       icon: <GraduationCap className="h-4 w-4 mr-1" />,
       dropdownItems: [
         { name: "Programs", path: "/academics" },
-        { name: "Teachers", path: "/teachers" },
+        { name: "Syllabus", path: "/syllabus" },
+        { name: "Exam Schedule", path: "/exam-schedule" },
+        { name: "Previous Year Papers", path: "/previous-year-papers" },
         { name: "Routine", path: "/routine" },
         { name: "Results", path: "/results" }
       ]
+    },
+    {
+      name: "Faculty",
+      path: "/teachers",
+      icon: <Users className="h-4 w-4 mr-1" />
     },
     {
       name: "Student Life",
       hasDropdown: true,
       icon: <Users className="h-4 w-4 mr-1" />,
       dropdownItems: [
-        { name: "Students", path: "/students" },
+        { name: "Student Portal", path: "/students" },
         { name: "Alumni", path: "/alumni" },
         { name: "Gallery", path: "/gallery" },
       ]

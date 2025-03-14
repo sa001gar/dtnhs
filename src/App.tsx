@@ -22,6 +22,9 @@ import BlogPost from "./pages/BlogPost";
 import Forum from "./pages/Forum";
 import ForumDiscussion from "./pages/ForumDiscussion";
 import Chatbot from "./components/chatbot/Chatbot";
+import Syllabus from "./pages/Syllabus";
+import ExamSchedule from "./pages/ExamSchedule";
+import PreviousYearPapers from "./pages/PreviousYearPapers";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +51,9 @@ const App = () => (
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/forum/:id" element={<ForumDiscussion />} />
+            <Route path="/syllabus" element={<Syllabus />} />
+            <Route path="/exam-schedule" element={<ExamSchedule />} />
+            <Route path="/previous-year-papers" element={<PreviousYearPapers />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
