@@ -155,7 +155,7 @@ const ExamSchedule = () => {
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={examTypes[0].id} className="mb-8">
-            <ScrollArea className="max-w-full pb-4">
+            <div className="overflow-x-auto pb-2">
               <TabsList className="mb-6 inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-auto">
                 {examTypes.map((type) => (
                   <TabsTrigger key={type.id} value={type.id} className="whitespace-nowrap">
@@ -163,13 +163,13 @@ const ExamSchedule = () => {
                   </TabsTrigger>
                 ))}
               </TabsList>
-            </ScrollArea>
+            </div>
             
             {examTypes.map((type) => (
               <TabsContent key={type.id} value={type.id}>
                 <div className="grid gap-6 md:grid-cols-1">
                   {schedules[type.id]?.map((schedule, index) => (
-                    <Card key={index}>
+                    <Card key={index} className="overflow-hidden">
                       <CardHeader>
                         <CardTitle className="flex items-center text-xl">
                           <GraduationCap className="mr-2 h-5 w-5 text-school-primary" />
@@ -181,8 +181,8 @@ const ExamSchedule = () => {
                         </p>
                       </CardHeader>
                       <CardContent>
-                        <ScrollArea className="w-full">
-                          <div className="min-w-[600px]">
+                        <ScrollArea className="w-full" type="always">
+                          <div className="min-w-[600px] pr-4">
                             <table className="w-full border-collapse">
                               <thead>
                                 <tr className="border-b">

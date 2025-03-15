@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -10,8 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Book, 
   Download, 
-  FileText, 
-  GraduationCap, 
   Calendar, 
   Filter
 } from "lucide-react";
@@ -106,7 +103,6 @@ const PreviousYearPapers = () => {
         size: "2.6 MB",
         pages: 11
       },
-      // 2022 papers
       { 
         subject: "Bengali", 
         year: "2022", 
@@ -131,7 +127,6 @@ const PreviousYearPapers = () => {
         size: "3.0 MB",
         pages: 14
       },
-      // 2021 papers
       { 
         subject: "Bengali", 
         year: "2021", 
@@ -190,7 +185,6 @@ const PreviousYearPapers = () => {
         size: "2.5 MB",
         pages: 12
       },
-      // 2022 papers
       { 
         subject: "Physics", 
         year: "2022", 
@@ -207,7 +201,6 @@ const PreviousYearPapers = () => {
         size: "2.9 MB",
         pages: 14
       },
-      // 2021 papers
       { 
         subject: "Physics", 
         year: "2021", 
@@ -258,7 +251,6 @@ const PreviousYearPapers = () => {
         size: "2.5 MB",
         pages: 12
       },
-      // 2022 papers
       { 
         subject: "Accountancy", 
         year: "2022", 
@@ -275,7 +267,6 @@ const PreviousYearPapers = () => {
         size: "2.7 MB",
         pages: 13
       },
-      // 2021 papers
       { 
         subject: "Accountancy", 
         year: "2021", 
@@ -326,7 +317,6 @@ const PreviousYearPapers = () => {
         size: "2.6 MB",
         pages: 12
       },
-      // 2022 papers
       { 
         subject: "Mathematics (Class X)", 
         year: "2022", 
@@ -343,7 +333,6 @@ const PreviousYearPapers = () => {
         size: "2.2 MB",
         pages: 10
       },
-      // 2021 papers
       { 
         subject: "Mathematics (Class X)", 
         year: "2021", 
@@ -404,7 +393,7 @@ const PreviousYearPapers = () => {
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={classes[0].id} className="mb-8">
-            <ScrollArea className="max-w-full pb-4">
+            <div className="overflow-x-auto pb-2">
               <TabsList className="mb-6 inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-auto">
                 {classes.map((cls) => (
                   <TabsTrigger key={cls.id} value={cls.id} className="whitespace-nowrap">
@@ -412,12 +401,12 @@ const PreviousYearPapers = () => {
                   </TabsTrigger>
                 ))}
               </TabsList>
-            </ScrollArea>
+            </div>
             
             {classes.map((cls) => (
               <TabsContent key={cls.id} value={cls.id}>
                 <div className="grid gap-6 md:grid-cols-1">
-                  <Card>
+                  <Card className="overflow-hidden">
                     <CardHeader>
                       <CardTitle className="flex items-center text-xl">
                         <Book className="mr-2 h-5 w-5 text-school-primary" />
@@ -425,8 +414,8 @@ const PreviousYearPapers = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <ScrollArea className="w-full">
-                        <div className="min-w-[700px]">
+                      <ScrollArea className="w-full" type="always">
+                        <div className="min-w-[700px] pr-4">
                           <table className="w-full border-collapse">
                             <thead>
                               <tr className="border-b">
