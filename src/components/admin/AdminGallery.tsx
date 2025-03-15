@@ -118,10 +118,13 @@ const AdminGallery = () => {
         description: "The image has been updated successfully.",
       });
     } else {
-      // Add new image
+      // Fixed: Ensure all required properties are set
       const newImage: GalleryImage = {
         id: images.length > 0 ? Math.max(...images.map((img) => img.id)) + 1 : 1,
-        ...values,
+        title: values.title,
+        description: values.description,
+        category: values.category,
+        imageUrl: values.imageUrl,
         date: new Date().toISOString().split("T")[0],
       };
       setImages([...images, newImage]);

@@ -115,10 +115,13 @@ const AdminNews = () => {
           description: "The news item has been updated successfully.",
         });
       } else {
-        // Add new news
+        // Fixed: Ensure all required properties are set
         const newNewsItem: NewsItem = {
           id: news.length > 0 ? Math.max(...news.map((n) => n.id)) + 1 : 1,
-          ...values,
+          title: values.title,
+          content: values.content,
+          date: values.date,
+          image: values.image,
         };
         setNews([...news, newNewsItem]);
         toast({

@@ -169,7 +169,13 @@ const AdminExams = () => {
       return;
     }
 
-    setExamTypes([...examTypes, data]);
+    // Fixed: Ensure we're adding data with required properties
+    const newExamType: ExamType = {
+      id: data.id,
+      label: data.label,
+    };
+
+    setExamTypes([...examTypes, newExamType]);
     setSchedules({ ...schedules, [data.id]: [] });
     examTypeForm.reset();
     setIsAddingExamType(false);
@@ -191,10 +197,19 @@ const AdminExams = () => {
 
   const handleAddExamSchedule = (data: z.infer<typeof formSchema>) => {
     const examType = data.examType;
+    
+    // Fixed: Ensure all required properties are set in examDetails
+    const examDetails: ExamDetail[] = data.examDetails.map(detail => ({
+      date: detail.date,
+      day: detail.day,
+      subject: detail.subject,
+      time: detail.time,
+    }));
+    
     const newExamClass: ExamClass = {
       class: data.class,
       dates: data.dates,
-      examDetails: data.examDetails,
+      examDetails: examDetails,
     };
 
     if (editingExamClass) {
