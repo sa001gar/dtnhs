@@ -85,14 +85,14 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col rounded-lg shadow-xl transition-all duration-300 ease-in-out overflow-hidden border border-border",
+        "flex flex-col rounded-lg shadow-xl transition-all duration-300 overflow-hidden border border-border",
         isMinimized ? "h-16" : "h-[450px] sm:h-[500px]",
         "w-full bg-background"
       )}
     >
       {/* Header - Fixed at top */}
       <div
-        className="flex items-center justify-between p-3 bg-school-primary text-white cursor-pointer sticky top-0 z-10"
+        className="flex items-center justify-between p-3 bg-school-primary text-white cursor-pointer sticky top-0 z-30"
         onClick={toggleMinimize}
       >
         <div className="flex items-center">
@@ -146,7 +146,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
       {!isMinimized && (
         <>
           <Tabs defaultValue="chat" className="flex flex-col flex-1">
-            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none sticky top-0 z-10">
+            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none sticky top-0 z-20">
               <TabsTrigger 
                 value="chat" 
                 className="flex-1 data-[state=active]:bg-background data-[state=active]:shadow-none rounded-sm"
@@ -175,8 +175,8 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               className="flex-1 flex flex-col p-0 m-0 overflow-hidden"
             >
               {/* Chat Messages - Scrollable area */}
-              <ScrollArea className="flex-1 bg-muted/20">
-                <div className="p-3">
+              <ScrollArea className="flex-1 h-full relative">
+                <div className="p-3 pb-20">
                   {messages.map((msg) => (
                     <div 
                       key={msg.id} 

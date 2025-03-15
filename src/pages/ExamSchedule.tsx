@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, GraduationCap, Info } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const ExamSchedule = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -154,13 +155,15 @@ const ExamSchedule = () => {
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={examTypes[0].id} className="mb-8">
-            <TabsList className="mb-6">
-              {examTypes.map((type) => (
-                <TabsTrigger key={type.id} value={type.id}>
-                  {type.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <ScrollArea className="max-w-full pb-4">
+              <TabsList className="mb-6 inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-auto">
+                {examTypes.map((type) => (
+                  <TabsTrigger key={type.id} value={type.id} className="whitespace-nowrap">
+                    {type.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </ScrollArea>
             
             {examTypes.map((type) => (
               <TabsContent key={type.id} value={type.id}>
@@ -178,31 +181,33 @@ const ExamSchedule = () => {
                         </p>
                       </CardHeader>
                       <CardContent>
-                        <div className="overflow-x-auto">
-                          <table className="w-full border-collapse">
-                            <thead>
-                              <tr className="border-b">
-                                <th className="px-2 py-2 text-left text-sm font-medium">Date</th>
-                                <th className="px-2 py-2 text-left text-sm font-medium">Day</th>
-                                <th className="px-2 py-2 text-left text-sm font-medium">Subject</th>
-                                <th className="px-2 py-2 text-left text-sm font-medium">Time</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {schedule.examDetails.map((exam, idx) => (
-                                <tr key={idx} className="border-b last:border-0">
-                                  <td className="px-2 py-3 text-sm">{exam.date}</td>
-                                  <td className="px-2 py-3 text-sm">{exam.day}</td>
-                                  <td className="px-2 py-3 text-sm font-medium">{exam.subject}</td>
-                                  <td className="px-2 py-3 text-sm flex items-center">
-                                    <Clock className="mr-2 h-3 w-3 text-muted-foreground" />
-                                    {exam.time}
-                                  </td>
+                        <ScrollArea className="w-full">
+                          <div className="min-w-[600px]">
+                            <table className="w-full border-collapse">
+                              <thead>
+                                <tr className="border-b">
+                                  <th className="px-2 py-2 text-left text-sm font-medium">Date</th>
+                                  <th className="px-2 py-2 text-left text-sm font-medium">Day</th>
+                                  <th className="px-2 py-2 text-left text-sm font-medium">Subject</th>
+                                  <th className="px-2 py-2 text-left text-sm font-medium">Time</th>
                                 </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
+                              </thead>
+                              <tbody>
+                                {schedule.examDetails.map((exam, idx) => (
+                                  <tr key={idx} className="border-b last:border-0">
+                                    <td className="px-2 py-3 text-sm">{exam.date}</td>
+                                    <td className="px-2 py-3 text-sm">{exam.day}</td>
+                                    <td className="px-2 py-3 text-sm font-medium">{exam.subject}</td>
+                                    <td className="px-2 py-3 text-sm flex items-center">
+                                      <Clock className="mr-2 h-3 w-3 text-muted-foreground" />
+                                      {exam.time}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </ScrollArea>
                         
                         {type.id === "board-exams" && (
                           <div className="mt-4 flex items-start gap-2 bg-muted p-3 rounded-md">

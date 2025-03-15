@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import PageLoader from "@/components/shared/PageLoader";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const PreviousYearPapers = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -403,13 +404,15 @@ const PreviousYearPapers = () => {
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={classes[0].id} className="mb-8">
-            <TabsList className="mb-6">
-              {classes.map((cls) => (
-                <TabsTrigger key={cls.id} value={cls.id}>
-                  {cls.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <ScrollArea className="max-w-full pb-4">
+              <TabsList className="mb-6 inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-auto">
+                {classes.map((cls) => (
+                  <TabsTrigger key={cls.id} value={cls.id} className="whitespace-nowrap">
+                    {cls.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </ScrollArea>
             
             {classes.map((cls) => (
               <TabsContent key={cls.id} value={cls.id}>
@@ -422,53 +425,55 @@ const PreviousYearPapers = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="border-b">
-                              <th className="px-4 py-2 text-left text-sm font-medium">Subject</th>
-                              <th className="px-4 py-2 text-left text-sm font-medium">Year</th>
-                              <th className="px-4 py-2 text-left text-sm font-medium">Type</th>
-                              <th className="px-4 py-2 text-left text-sm font-medium">Details</th>
-                              <th className="px-4 py-2 text-left text-sm font-medium">Download</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {filterPapersByYear(papers[cls.id] || [], yearFilter).length > 0 ? (
-                              filterPapersByYear(papers[cls.id] || [], yearFilter).map((paper, idx) => (
-                                <tr key={idx} className="border-b last:border-0">
-                                  <td className="px-4 py-3 text-sm font-medium">{paper.subject}</td>
-                                  <td className="px-4 py-3 text-sm">
-                                    <Badge variant="outline" className="bg-muted">
-                                      <Calendar className="mr-1 h-3 w-3" />
-                                      {paper.year}
-                                    </Badge>
-                                  </td>
-                                  <td className="px-4 py-3 text-sm">{paper.paperType}</td>
-                                  <td className="px-4 py-3 text-sm text-muted-foreground">
-                                    <div className="flex items-center gap-3">
-                                      <span>{paper.pages} pages</span>
-                                      <span>{paper.size}</span>
-                                    </div>
-                                  </td>
-                                  <td className="px-4 py-3 text-sm">
-                                    <Button size="sm" className="h-8 gap-1" variant="outline">
-                                      <Download className="h-3 w-3" />
-                                      <span>PDF</span>
-                                    </Button>
+                      <ScrollArea className="w-full">
+                        <div className="min-w-[700px]">
+                          <table className="w-full border-collapse">
+                            <thead>
+                              <tr className="border-b">
+                                <th className="px-4 py-2 text-left text-sm font-medium">Subject</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Year</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Type</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Details</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Download</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {filterPapersByYear(papers[cls.id] || [], yearFilter).length > 0 ? (
+                                filterPapersByYear(papers[cls.id] || [], yearFilter).map((paper, idx) => (
+                                  <tr key={idx} className="border-b last:border-0">
+                                    <td className="px-4 py-3 text-sm font-medium">{paper.subject}</td>
+                                    <td className="px-4 py-3 text-sm">
+                                      <Badge variant="outline" className="bg-muted">
+                                        <Calendar className="mr-1 h-3 w-3" />
+                                        {paper.year}
+                                      </Badge>
+                                    </td>
+                                    <td className="px-4 py-3 text-sm">{paper.paperType}</td>
+                                    <td className="px-4 py-3 text-sm text-muted-foreground">
+                                      <div className="flex items-center gap-3">
+                                        <span>{paper.pages} pages</span>
+                                        <span>{paper.size}</span>
+                                      </div>
+                                    </td>
+                                    <td className="px-4 py-3 text-sm">
+                                      <Button size="sm" className="h-8 gap-1" variant="outline">
+                                        <Download className="h-3 w-3" />
+                                        <span>PDF</span>
+                                      </Button>
+                                    </td>
+                                  </tr>
+                                ))
+                              ) : (
+                                <tr>
+                                  <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                                    No question papers found for the selected year.
                                   </td>
                                 </tr>
-                              ))
-                            ) : (
-                              <tr>
-                                <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
-                                  No question papers found for the selected year.
-                                </td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </ScrollArea>
                     </CardContent>
                   </Card>
                 </div>
