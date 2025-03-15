@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -152,7 +151,6 @@ const AdminForum = () => {
     setIsLoading(true);
     try {
       if (editingThread) {
-        // Update existing thread
         const updatedThreads = threads.map((thread) =>
           thread.id === editingThread.id 
             ? { 
@@ -161,7 +159,10 @@ const AdminForum = () => {
                 preview: values.preview,
                 content: values.content,
                 category: values.category,
-                author: values.author,
+                author: {
+                  name: values.author.name,
+                  avatar: values.author.avatar,
+                },
                 isPopular: values.isPopular
               } 
             : thread
@@ -172,7 +173,6 @@ const AdminForum = () => {
           description: "The discussion thread has been updated successfully.",
         });
       } else {
-        // Add new thread
         const newThread: ForumThread = {
           id: threads.length > 0 ? Math.max(...threads.map((t) => t.id)) + 1 : 1,
           title: values.title,

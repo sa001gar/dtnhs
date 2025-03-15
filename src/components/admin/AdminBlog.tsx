@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -145,9 +144,22 @@ const AdminBlog = () => {
     setIsLoading(true);
     try {
       if (editingPost) {
-        // Update existing post
         const updatedPosts = blogPosts.map((post) =>
-          post.id === editingPost.id ? { ...post, ...values } : post
+          post.id === editingPost.id ? { 
+            ...post, 
+            title: values.title,
+            excerpt: values.excerpt,
+            content: values.content,
+            date: values.date,
+            image: values.image,
+            author: {
+              name: values.author.name,
+              role: values.author.role,
+              avatar: values.author.avatar,
+            },
+            categories: values.categories,
+            readTime: values.readTime,
+          } : post
         );
         setBlogPosts(updatedPosts);
         toast({
@@ -155,7 +167,6 @@ const AdminBlog = () => {
           description: "The blog post has been updated successfully.",
         });
       } else {
-        // Add new post
         const newPost: BlogPost = {
           id: blogPosts.length > 0 ? Math.max(...blogPosts.map((p) => p.id)) + 1 : 1,
           title: values.title,
