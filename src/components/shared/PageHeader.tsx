@@ -43,15 +43,33 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         patternClasses[pattern],
         className
       )}
+      style={{
+        clipPath: "polygon(0 0, 100% 0, 100% 92%, 0 100%)",
+      }}
     >
       {backgroundImage && (
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className="absolute inset-0 bg-school-primary/20 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-school-primary/40 to-school-secondary/30 backdrop-blur-sm"></div>
         </div>
       )}
+
+      {/* Decorative shapes */}
+      <div 
+        className="absolute right-0 top-0 w-64 h-64 bg-gradient-to-bl from-school-primary/20 to-transparent -z-10"
+        style={{
+          clipPath: "polygon(100% 0, 0 0, 100% 100%)",
+        }}
+      />
+      
+      <div 
+        className="absolute left-0 bottom-0 w-64 h-64 bg-gradient-to-tr from-school-secondary/20 to-transparent -z-10"
+        style={{
+          clipPath: "polygon(0 100%, 0 0, 100% 100%)",
+        }}
+      />
 
       <div className="container relative z-10 px-4 text-center">
         {showBreadcrumbs && (
@@ -63,7 +81,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         <AnimatedSection animation="fade-in-up">
           <h1 className={cn(
             "text-3xl font-bold tracking-tighter md:text-5xl",
-            backgroundImage ? "text-white" : "text-foreground"
+            backgroundImage 
+              ? "text-white" 
+              : "bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent"
           )}>
             {title}
           </h1>

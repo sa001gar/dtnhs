@@ -30,37 +30,50 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className={`flex items-center space-x-1 text-sm ${className}`}>
-      <Link
-        to="/"
-        className="flex items-center text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <Home className="h-4 w-4 mr-1" />
-        <span className="sr-only sm:not-sr-only">Home</span>
-      </Link>
+    <div className="relative">
+      {/* Clip path design element */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-r from-school-primary/20 to-school-secondary/20 -z-10"
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 98% 100%, 2% 100%)",
+        }}
+      ></div>
       
-      {pathSegments.map((segment, index) => {
-        const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
-        const isLast = index === pathSegments.length - 1;
+      <nav 
+        aria-label="Breadcrumb" 
+        className={`flex items-center space-x-1 text-sm py-2 px-4 ${className}`}
+      >
+        <Link
+          to="/"
+          className="flex items-center text-school-primary hover:text-school-primary/80 transition-colors font-medium"
+        >
+          <Home className="h-4 w-4 mr-1" />
+          <span className="sr-only sm:not-sr-only">Home</span>
+        </Link>
         
-        return (
-          <div key={path} className="flex items-center">
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            {isLast ? (
-              <span className="font-medium text-foreground ml-1">
-                {routeNames[segment] || segment}
-              </span>
-            ) : (
-              <Link
-                to={path}
-                className="ml-1 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {routeNames[segment] || segment}
-              </Link>
-            )}
-          </div>
-        );
-      })}
-    </nav>
+        {pathSegments.map((segment, index) => {
+          const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
+          const isLast = index === pathSegments.length - 1;
+          
+          return (
+            <div key={path} className="flex items-center">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              {isLast ? (
+                <span className="font-medium bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent ml-1">
+                  {routeNames[segment] || segment}
+                </span>
+              ) : (
+                <Link
+                  to={path}
+                  className="ml-1 text-muted-foreground hover:text-school-primary transition-colors"
+                >
+                  {routeNames[segment] || segment}
+                </Link>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+    </div>
   );
 }
