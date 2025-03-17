@@ -43,7 +43,7 @@ const Index: React.FC = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" 
                   alt="School Building" 
-                  className="h-auto w-full rounded-xl object-cover shadow-lg" 
+                  className="h-auto w-full rounded-xl object-cover shadow-lg dark:shadow-black/20" 
                 />
               </AnimatedSection>
               
@@ -72,7 +72,7 @@ const Index: React.FC = () => {
       
       <StudentAchievements />
       
-      <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-16 text-white md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-16 text-white md:py-24 dark:from-school-primary/90 dark:to-school-secondary/90 dark:text-white">
         <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
         <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
         
@@ -90,10 +90,10 @@ const Index: React.FC = () => {
               Discover how Durgapur Tarak Nath High School can provide your child with a quality education in a nurturing environment.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button asChild variant="secondary" size="lg" className="w-full transform rounded-full transition-transform hover:scale-105 sm:w-auto">
+              <Button asChild variant="secondary" size="lg" className="w-full transform rounded-full transition-transform hover:scale-105 sm:w-auto dark:bg-white/90 dark:text-black dark:hover:bg-white">
                 <Link to="/contact">Contact Us Today</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="w-full rounded-full bg-transparent text-white backdrop-blur-sm hover:bg-white/10 hover:text-white sm:w-auto">
+              <Button asChild variant="outline" size="lg" className="w-full rounded-full bg-transparent text-white backdrop-blur-sm hover:bg-white/10 hover:text-white sm:w-auto dark:border-white/60 dark:hover:border-white">
                 <Link to="/about" className="flex items-center gap-2">
                   <GraduationCap className="h-5 w-5" />
                   Learn More
@@ -102,17 +102,17 @@ const Index: React.FC = () => {
             </div>
             
             <div className="relative mt-16 perspective-1000">
-              <div className="transform-gpu rotate-x-12 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md">
+              <div className="transform-gpu rotate-x-12 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md dark:bg-black/20">
                 <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-3">
-                  <div className="rounded-lg bg-white/10 p-4 text-center">
+                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
                     <h3 className="text-4xl font-bold">1000+</h3>
                     <p className="text-sm text-white/80">Students Enrolled</p>
                   </div>
-                  <div className="rounded-lg bg-white/10 p-4 text-center">
+                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
                     <h3 className="text-4xl font-bold">50+</h3>
                     <p className="text-sm text-white/80">Expert Teachers</p>
                   </div>
-                  <div className="rounded-lg bg-white/10 p-4 text-center">
+                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
                     <h3 className="text-4xl font-bold">95%</h3>
                     <p className="text-sm text-white/80">Success Rate</p>
                   </div>
