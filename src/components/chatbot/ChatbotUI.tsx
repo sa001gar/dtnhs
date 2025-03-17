@@ -86,16 +86,13 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
     <div
       className={cn(
         "flex flex-col rounded-lg shadow-xl transition-all duration-300 overflow-hidden border border-border",
-        isMinimized ? "h-16" : "h-[550px] sm:h-[600px]", // Increased height
+        isMinimized ? "h-16" : "h-[450px] sm:h-[500px]",
         "w-full bg-background"
       )}
-      style={{
-        clipPath: "polygon(0 0, 100% 0, 100% 95%, 97% 100%, 0 100%)",
-      }}
     >
       {/* Header - Fixed at top */}
       <div
-        className="flex items-center justify-between p-3 bg-gradient-to-r from-school-primary to-school-secondary text-white cursor-pointer sticky top-0 z-50"
+        className="flex items-center justify-between p-3 bg-school-primary text-white cursor-pointer sticky top-0 z-50"
         onClick={toggleMinimize}
       >
         <div className="flex items-center">
@@ -179,7 +176,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
             >
               {/* Chat Messages - Scrollable area */}
               <div className="flex-1 overflow-hidden relative">
-                <ScrollArea className="h-[calc(100vh-300px)] max-h-[400px] sm:max-h-[450px]">
+                <ScrollArea className="h-[calc(100vh-200px)] max-h-[300px] sm:max-h-[350px]">
                   <div className="p-3 pb-4">
                     {messages.map((msg) => (
                       <div 
@@ -189,8 +186,8 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                         <div className={cn(
                           "max-w-[85%] rounded-2xl p-2.5 group relative",
                           msg.sender === 'user' 
-                            ? 'bg-gradient-to-r from-school-primary to-school-secondary text-white rounded-tr-none shadow-md' 
-                            : 'bg-muted/70 text-foreground rounded-tl-none shadow-md'
+                            ? 'bg-school-primary text-white rounded-tr-none shadow-sm' 
+                            : 'bg-muted/50 text-foreground rounded-tl-none shadow-sm'
                         )}>
                           <div className="flex items-start gap-2">
                             {msg.sender === 'bot' && (
@@ -314,7 +311,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               </div>
               
               {/* Quick Responses - Fixed at bottom above input */}
-              <div className="px-3 py-2 bg-muted/50 flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted sticky bottom-[76px] z-10">
+              <div className="px-3 py-2 bg-muted flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted sticky bottom-[60px] z-10">
                 {QUICK_RESPONSES.map((item, index) => (
                   <Button
                     key={index}
@@ -340,9 +337,8 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder={isListening ? "Listening..." : "Type your message..."}
                     className={cn(
-                      "resize-none min-h-[40px] max-h-[120px] py-2 px-3 rounded-lg bg-background border border-muted focus-visible:ring-school-primary/50 w-full",
-                      isListening ? "pr-10 border-school-primary" : "pr-10",
-                      "overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent"
+                      "resize-none min-h-[60px] max-h-[150px] py-2 px-3 rounded-lg bg-background border border-muted focus-visible:ring-school-primary/50 w-full",
+                      isListening ? "pr-10 border-school-primary" : "pr-10"
                     )}
                     onKeyDown={(e) => {
                       if ((e.key === 'Enter' && !e.shiftKey) || (e.key === 'Enter' && e.ctrlKey)) {
@@ -354,7 +350,6 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                         toggleListening();
                       }
                     }}
-                    style={{ display: 'block' }} /* Ensure visibility */
                   />
                 </div>
                 
@@ -387,7 +382,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                         type="submit" 
                         size="icon"
                         disabled={isLoading || !message.trim()}
-                        className="h-10 w-10 rounded-full bg-gradient-to-r from-school-primary to-school-secondary hover:opacity-90 transition-opacity shrink-0"
+                        className="h-10 w-10 rounded-full bg-school-primary hover:bg-school-primary/90 transition-colors shrink-0"
                       >
                         <SendHorizontal className="h-4 w-4" />
                       </Button>
