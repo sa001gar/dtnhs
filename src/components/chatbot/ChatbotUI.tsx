@@ -86,7 +86,7 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
     <div
       className={cn(
         "flex flex-col rounded-lg shadow-xl transition-all duration-300 overflow-hidden border border-border",
-        isMinimized ? "h-16" : "h-[450px] sm:h-[500px]",
+        isMinimized ? "h-18" : "h-[600px] sm:h-[600px]",
         "w-full bg-background"
       )}
     >
