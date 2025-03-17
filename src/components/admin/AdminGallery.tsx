@@ -174,6 +174,7 @@ const AdminGallery = () => {
             setCurrentImage(null);
             setIsAddingImage(true);
           }}
+          variant="school"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add Image
@@ -182,7 +183,7 @@ const AdminGallery = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {images.map((image) => (
-          <Card key={image.id} className="overflow-hidden">
+          <Card key={image.id} className="overflow-hidden relative group hover:shadow-md transition-all duration-300">
             <div className="relative h-48 w-full">
               <img
                 src={image.imageUrl}
@@ -360,7 +361,7 @@ const AdminGallery = () => {
                   >
                     Cancel
                   </Button>
-                  <Button type="submit">
+                  <Button type="submit" variant="school">
                     {isEditing ? "Update Image" : "Add Image"}
                   </Button>
                 </div>

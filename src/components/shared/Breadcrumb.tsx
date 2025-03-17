@@ -31,24 +31,19 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
   }
 
   return (
-    <div className="relative overflow-hidden my-4">
-      {/* Simple clip path background with subtle gradient */}
+    <div className="relative my-4 overflow-hidden rounded-md">
+      {/* Simple gradient background */}
       <div 
-        className="absolute inset-0 bg-gradient-to-r from-school-primary/5 to-school-secondary/5 -z-10 rounded-md"
+        className="absolute inset-0 bg-gradient-to-r from-school-primary/10 to-school-secondary/10 -z-10"
       ></div>
       
-      {/* Top decorative line */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-school-primary/30 to-school-secondary/30"
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 98% 100%, 2% 100%)",
-        }}
-      ></div>
+      {/* Decorative element */}
+      <div className="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-school-primary to-school-secondary"></div>
       
       <nav 
         aria-label="Breadcrumb" 
         className={cn(
-          "flex items-center space-x-1 text-sm py-2 px-4 font-medium",
+          "flex items-center space-x-1 py-2 px-6 font-medium",
           className
         )}
       >
@@ -68,7 +63,7 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
             <div key={path} className="flex items-center">
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
               {isLast ? (
-                <span className="font-semibold text-foreground ml-1 px-2 py-1">
+                <span className="font-semibold text-foreground ml-1 px-2 py-1 rounded bg-school-primary/10">
                   {routeNames[segment] || segment}
                 </span>
               ) : (
