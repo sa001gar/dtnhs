@@ -55,6 +55,56 @@
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
+/* New clip path classes */
+.clip-angled-card {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+.clip-angled-card-reverse {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%);
+}
+
+.clip-angled-header {
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+}
+
+.clip-angled-button {
+  clip-path: polygon(5% 0, 95% 0, 100% 100%, 0% 100%);
+}
+
+.clip-angled-image {
+  clip-path: polygon(3% 3%, 97% 0, 100% 97%, 0% 100%);
+}
+
+.clip-corner-tl {
+  clip-path: polygon(0 0, 15px 0, 0 15px);
+}
+
+.clip-corner-tr {
+  clip-path: polygon(calc(100% - 15px) 0, 100% 0, 100% 15px);
+}
+
+.clip-corner-bl {
+  clip-path: polygon(0 calc(100% - 15px), 0 100%, 15px 100%);
+}
+
+.clip-corner-br {
+  clip-path: polygon(calc(100% - 15px) 100%, 100% 100%, 100% calc(100% - 15px));
+}
+
+.clip-all-corners {
+  clip-path: polygon(
+    15px 0, 
+    calc(100% - 15px) 0, 
+    100% 15px, 
+    100% calc(100% - 15px), 
+    calc(100% - 15px) 100%, 
+    15px 100%, 
+    0 calc(100% - 15px), 
+    0 15px
+  );
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(90deg, var(--school-primary), var(--school-secondary));
@@ -84,4 +134,68 @@
   50% {
     opacity: 0.5;
   }
+}
+
+/* Angled container styles */
+.angled-container-top {
+  position: relative;
+  padding-top: 3rem;
+}
+
+.angled-container-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+  z-index: -1;
+}
+
+.angled-container-bottom {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.angled-container-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: inherit;
+  clip-path: polygon(0 100%, 100% 0, 0 0);
+  z-index: -1;
+}
+
+/* Corner accent styles */
+.corner-accent {
+  position: relative;
+}
+
+.corner-accent::before,
+.corner-accent::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: hsl(var(--school-primary));
+  z-index: 10;
+}
+
+.corner-accent::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.corner-accent::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
 }

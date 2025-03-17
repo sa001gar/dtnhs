@@ -70,19 +70,60 @@ const Notices = () => {
           <Breadcrumb />
         </div>
         
-        <div className="space-y-6 mt-8">
+        <div className="space-y-6 mt-8 relative">
+          {/* Background decorative elements */}
+          <div 
+            className="absolute -top-20 right-0 w-96 h-96 bg-gradient-to-bl from-school-primary/5 to-transparent -z-10"
+            style={{
+              clipPath: "polygon(100% 0, 0 0, 100% 100%)",
+            }}
+          ></div>
+          
+          <div 
+            className="absolute -bottom-20 left-0 w-96 h-96 bg-gradient-to-tr from-school-secondary/5 to-transparent -z-10"
+            style={{
+              clipPath: "polygon(0 100%, 0 0, 100% 100%)",
+            }}
+          ></div>
+          
           {notices.map((notice, index) => (
             <AnimatedSection key={notice.id} animation="fade-in-up" delay={index * 100}>
-              <Card className="card-hover">
+              <Card className="card-hover relative overflow-hidden">
+                {/* Decorative border on top */}
+                <div 
+                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-school-primary to-school-secondary"
+                  style={{
+                    clipPath: index % 2 === 0 
+                      ? "polygon(0 0, 100% 0, 90% 100%, 10% 100%)" 
+                      : "polygon(10% 0, 90% 0, 100% 100%, 0% 100%)",
+                  }}
+                ></div>
+                
+                {/* Decorative element in corner */}
+                <div 
+                  className={`absolute w-16 h-16 ${index % 2 === 0 ? 'top-0 right-0 bg-gradient-to-bl' : 'bottom-0 left-0 bg-gradient-to-tr'} from-school-primary/10 to-transparent -z-10`}
+                  style={{
+                    clipPath: index % 2 === 0 
+                      ? "polygon(100% 0, 0 0, 100% 100%)" 
+                      : "polygon(0 100%, 0 0, 100% 100%)",
+                  }}
+                ></div>
+                
                 <CardHeader>
                   <div className="flex items-center text-sm text-muted-foreground mb-2">
-                    <Calendar className="mr-2 h-4 w-4" />
+                    <div className="relative mr-2">
+                      <div className="absolute inset-0 bg-school-primary/10 rounded-full scale-150"></div>
+                      <Calendar className="h-4 w-4 relative z-10" />
+                    </div>
                     {notice.date}
                   </div>
-                  <CardTitle>{notice.title}</CardTitle>
+                  <CardTitle className="text-school-primary">{notice.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>{notice.content}</p>
+                  <p className="relative">
+                    <span className="absolute left-0 top-1/2 w-1 h-10 bg-school-primary/30 -translate-y-1/2 rounded"></span>
+                    <span className="pl-4">{notice.content}</span>
+                  </p>
                 </CardContent>
               </Card>
             </AnimatedSection>
