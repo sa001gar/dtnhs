@@ -4,9 +4,10 @@ import Hero from "@/components/home/Hero";
 import AboutSchool from "@/components/home/AboutSchool";
 import Features from "@/components/home/Features";
 import NewsSection from "@/components/home/NewsSection";
+import StudentAchievements from "@/components/home/StudentAchievements";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarClock } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Layout from "@/components/layout/Layout";
 import PageLoader from "@/components/shared/PageLoader";
@@ -32,6 +33,7 @@ const Index: React.FC = () => {
       <Hero />
       <AboutSchool />
       <Features />
+      <StudentAchievements />
       <NewsSection />
       
       <section className="py-16 md:py-24 relative overflow-hidden">
@@ -97,6 +99,7 @@ const Index: React.FC = () => {
                   <div className="mt-8">
                     <Button asChild className="group rounded-full relative overflow-hidden">
                       <Link to="/about" className="flex items-center relative z-10">
+                        <BookOpen className="mr-2 h-4 w-4" />
                         Learn About Our History
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
@@ -141,12 +144,26 @@ const Index: React.FC = () => {
             <p className="mt-4 text-lg text-white/80">
               Discover how Durgapur Tarak Nath High School can provide your child with a quality education in a nurturing environment.
             </p>
-            <div className="mt-8">
-              <Button asChild variant="secondary" size="lg" className="rounded-full relative overflow-hidden">
-                <Link to="/contact" className="relative z-10">
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Button asChild variant="secondary" size="lg" className="rounded-full relative overflow-hidden group">
+                <Link to="/contact" className="relative z-10 flex items-center">
                   Contact Us Today
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   <span 
-                    className="absolute inset-0 bg-gradient-to-r from-school-primary/20 to-school-secondary/20 opacity-0 hover:opacity-100 transition-opacity"
+                    className="absolute inset-0 bg-gradient-to-r from-school-primary/20 to-school-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      clipPath: "polygon(5% 0, 95% 0, 100% 100%, 0% 100%)",
+                    }}
+                  ></span>
+                </Link>
+              </Button>
+              
+              <Button asChild variant="outline" size="lg" className="bg-white/10 text-white border-white/20 rounded-full relative overflow-hidden group">
+                <Link to="/routine" className="relative z-10 flex items-center">
+                  <CalendarClock className="mr-2 h-4 w-4" />
+                  View Class Schedule
+                  <span 
+                    className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{
                       clipPath: "polygon(5% 0, 95% 0, 100% 100%, 0% 100%)",
                     }}

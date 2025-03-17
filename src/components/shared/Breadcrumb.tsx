@@ -32,34 +32,23 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
 
   return (
     <div className="relative overflow-hidden my-4">
-      {/* Clip path background */}
+      {/* Simple clip path background with subtle gradient */}
       <div 
-        className="absolute inset-0 bg-gradient-to-r from-school-primary/20 to-school-secondary/20 -z-10"
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 97% 100%, 3% 100%)",
-        }}
+        className="absolute inset-0 bg-gradient-to-r from-school-primary/5 to-school-secondary/5 -z-10 rounded-md"
       ></div>
       
       {/* Top decorative line */}
       <div 
-        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-school-primary to-school-secondary"
+        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-school-primary/30 to-school-secondary/30"
         style={{
           clipPath: "polygon(0 0, 100% 0, 98% 100%, 2% 100%)",
-        }}
-      ></div>
-      
-      {/* Bottom decorative line */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-school-secondary to-school-primary"
-        style={{
-          clipPath: "polygon(2% 0, 98% 0, 100% 100%, 0 100%)",
         }}
       ></div>
       
       <nav 
         aria-label="Breadcrumb" 
         className={cn(
-          "flex items-center space-x-1 text-sm py-3 px-6 font-medium",
+          "flex items-center space-x-1 text-sm py-2 px-4 font-medium",
           className
         )}
       >
@@ -67,10 +56,7 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
           to="/"
           className="flex items-center text-school-primary hover:text-school-primary/80 transition-colors"
         >
-          <div className="relative">
-            <div className="absolute inset-0 bg-school-primary/10 rounded-full scale-150"></div>
-            <Home className="h-4 w-4 mr-1" />
-          </div>
+          <Home className="h-4 w-4 mr-1" />
           <span className="sr-only sm:not-sr-only">Home</span>
         </Link>
         
@@ -82,17 +68,8 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
             <div key={path} className="flex items-center">
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
               {isLast ? (
-                <span className="relative ml-1 px-2 py-1 rounded">
-                  {/* Background for current page */}
-                  <span 
-                    className="absolute inset-0 bg-gradient-to-r from-school-primary/10 to-school-secondary/10 rounded"
-                    style={{
-                      clipPath: "polygon(0 0, 100% 0, 95% 100%, 5% 100%)",
-                    }}
-                  ></span>
-                  <span className="relative font-bold gradient-text">
-                    {routeNames[segment] || segment}
-                  </span>
+                <span className="font-semibold text-foreground ml-1 px-2 py-1">
+                  {routeNames[segment] || segment}
                 </span>
               ) : (
                 <Link
