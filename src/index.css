@@ -237,6 +237,45 @@
   .masonry-item-large {
     @apply row-span-3;
   }
+
+  /* Hide scrollbar for mobile devices */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+  
+  /* New class for horizontal scrollable containers */
+  .scroll-container {
+    @apply overflow-x-auto pb-4;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Improved notice card styling */
+  .notice-card {
+    @apply transition-all duration-300 border-l-4 border-school-primary hover:shadow-md;
+  }
+  
+  /* Faculty card styling */
+  .faculty-card {
+    @apply relative overflow-hidden transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .faculty-card-img {
+    @apply h-48 w-full object-cover transition-transform duration-300;
+  }
+  
+  .faculty-card:hover .faculty-card-img {
+    @apply scale-105;
+  }
+  
+  /* Image placeholder gradient */
+  .image-placeholder {
+    @apply bg-gradient-to-br from-school-primary/20 to-school-secondary/20 animate-pulse;
+  }
 }
 
 /* Image loading blur effect */
