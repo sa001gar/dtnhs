@@ -2,16 +2,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Calendar, GraduationCap, Star, Users } from "lucide-react";
+import { 
+  ArrowRight, 
+  BookOpen, 
+  Calendar, 
+  GraduationCap, 
+  Star, 
+  Users,
+  Atom,
+  PiIcon,
+  BookOpen as BookIcon,
+  Globe,
+  Palette
+} from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const subjects = [
-  { name: "Science", color: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200", icon: "🔬" },
-  { name: "Mathematics", color: "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200", icon: "📐" },
-  { name: "English", color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200", icon: "📚" },
-  { name: "Social Studies", color: "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200", icon: "🌍" },
-  { name: "Arts", color: "bg-pink-100 text-pink-800 dark:bg-pink-900/40 dark:text-pink-200", icon: "🎨" }
+  { name: "Science", color: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200", icon: <Atom className="h-4 w-4" /> },
+  { name: "Mathematics", color: "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200", icon: <PiIcon className="h-4 w-4" /> },
+  { name: "English", color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200", icon: <BookIcon className="h-4 w-4" /> },
+  { name: "Social Studies", color: "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200", icon: <Globe className="h-4 w-4" /> },
+  { name: "Arts", color: "bg-pink-100 text-pink-800 dark:bg-pink-900/40 dark:text-pink-200", icon: <Palette className="h-4 w-4" /> }
 ];
 
 const testimonials = [
@@ -56,30 +68,33 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[95vh] py-12 overflow-hidden bg-white dark:bg-gray-900">
-      {/* Animated Background Particles */}
+      {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-school-primary/10 dark:bg-school-primary/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-1/3 -right-20 w-56 h-56 bg-school-secondary/10 dark:bg-school-secondary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: "2s"}}></div>
         <div className="absolute -bottom-20 left-1/4 w-64 h-64 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: "1s"}}></div>
         
-        {/* Animated Circles */}
+        {/* Floating Shapes */}
         <div className="hidden lg:block">
-          {[...Array(6)].map((_, i) => (
-            <div 
-              key={i}
-              className="absolute rounded-full opacity-20 dark:opacity-10"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 8 + 2}rem`,
-                height: `${Math.random() * 8 + 2}rem`,
-                backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`,
-                animation: `float ${Math.random() * 10 + 10}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`,
-                transform: `translateY(${Math.random() * 40 - 20}px)`,
-              }}
-            ></div>
-          ))}
+          {/* Polygons, Circles and Other Shapes */}
+          <div className="absolute top-1/4 left-1/5 w-12 h-12 transform rotate-45 bg-school-primary/10 dark:bg-school-primary/20 animate-float"></div>
+          <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-dashed border-school-secondary/20 dark:border-school-secondary/30 animate-spin-slow"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-10 h-10 transform rotate-12 rounded-md bg-gradient-to-r from-blue-400/10 to-purple-400/10 dark:from-blue-400/20 dark:to-purple-400/20 animate-float-delayed"></div>
+          <div className="absolute top-2/3 right-1/5 w-14 h-14 rounded-lg border border-green-300/20 dark:border-green-300/30 transform -rotate-12 animate-float"></div>
+          
+          {/* Floating Icons */}
+          <div className="absolute top-1/6 left-1/3 text-school-primary/20 dark:text-school-primary/30 animate-float-delayed transform rotate-6">
+            <GraduationCap className="w-8 h-8" />
+          </div>
+          <div className="absolute top-2/3 right-1/6 text-school-secondary/20 dark:text-school-secondary/30 animate-float transform -rotate-12">
+            <BookOpen className="w-10 h-10" />
+          </div>
+          <div className="absolute bottom-1/5 left-1/5 text-blue-400/20 dark:text-blue-400/30 animate-float-delayed transform rotate-12">
+            <Atom className="w-6 h-6" />
+          </div>
+          <div className="absolute top-1/2 right-1/3 text-green-400/20 dark:text-green-400/30 animate-float transform -rotate-6">
+            <Globe className="w-8 h-8" />
+          </div>
         </div>
       </div>
 
@@ -166,7 +181,7 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt="Students at DTNHS" 
-                        className={`w-full h-[350px] md:h-[400px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
+                        className={`w-full h-[350px] sm:h-[420px] md:h-[450px] lg:h-[500px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
                       />
                     </div>
                   ))}
@@ -249,19 +264,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
-      {/* Video Background option (commented out, uncomment to use) */}
-      {/* <div className="absolute inset-0 z-0 opacity-10">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://your-video-url.mp4" type="video/mp4" />
-        </video>
-      </div> */}
     </section>
   );
 };

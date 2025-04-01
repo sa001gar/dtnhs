@@ -62,7 +62,7 @@ const NewsSection: React.FC = () => {
   
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-white to-school-light dark:from-gray-900 dark:to-gray-800 dark:text-white">
-      <div className="container px-4">
+      <div className="container px-4 md:px-6">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center relative">
           {/* Decorative elements */}
           <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-school-primary/10 blur-xl dark:bg-school-primary/20"></div>
@@ -86,28 +86,28 @@ const NewsSection: React.FC = () => {
           <AnimatedSection animation="fade-in-up" delay={100}>
             <Tabs defaultValue="all" className="w-full mb-8" onValueChange={setActiveFilter}>
               <div className="flex justify-center">
-                <TabsList className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-1 rounded-full border border-gray-200 dark:border-gray-700">
+                <TabsList className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-1 rounded-full border border-gray-200 dark:border-gray-700 overflow-x-auto hide-scrollbar">
                   <TabsTrigger 
                     value="all" 
-                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent"
+                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent whitespace-nowrap"
                   >
                     All News
                   </TabsTrigger>
                   <TabsTrigger 
                     value="event" 
-                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent"
+                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent whitespace-nowrap"
                   >
                     Events
                   </TabsTrigger>
                   <TabsTrigger 
                     value="academic" 
-                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent"
+                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent whitespace-nowrap"
                   >
                     Academic
                   </TabsTrigger>
                   <TabsTrigger 
                     value="announcement" 
-                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent"
+                    className="rounded-full data-[state=active]:bg-school-primary data-[state=active]:text-white data-[state=active]:border-transparent whitespace-nowrap"
                   >
                     Announcements
                   </TabsTrigger>
@@ -120,7 +120,7 @@ const NewsSection: React.FC = () => {
             <div className="absolute right-0 top-1/2 z-10 h-12 w-8 -translate-y-1/2 bg-gradient-to-l from-white dark:from-gray-800 to-transparent"></div>
           )}
           
-          <div className={`${isMobile ? 'flex overflow-x-auto pb-6 gap-4 hide-scrollbar' : 'grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'}`}>
+          <div className={`${isMobile ? 'flex overflow-x-auto pb-6 gap-4 hide-scrollbar' : 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'}`}>
             {filteredNews.map((item, index) => (
               <AnimatedSection 
                 key={item.id} 
@@ -155,7 +155,7 @@ const NewsSection: React.FC = () => {
                   </div>
                   
                   <CardHeader className="pt-4 pb-2">
-                    <CardTitle className="line-clamp-2">{item.title}</CardTitle>
+                    <CardTitle className="line-clamp-2 dark:text-white">{item.title}</CardTitle>
                   </CardHeader>
                   
                   <CardContent className="pb-2">
@@ -170,7 +170,7 @@ const NewsSection: React.FC = () => {
                     <Button 
                       asChild 
                       variant="ghost" 
-                      className="group -ml-3 h-8 p-0 text-school-primary dark:text-school-primary dark:hover:text-white hover:bg-transparent"
+                      className="group -ml-3 h-8 p-0 text-school-primary dark:text-school-primary hover:text-school-primary/80 dark:hover:text-school-primary/80 hover:bg-transparent"
                     >
                       <Link to={item.link} className="flex items-center px-4 py-3 space-x-1 transition-all">  
                         Read more
