@@ -44,6 +44,7 @@ const testimonials = [
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const heroImages = [
     "https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true",
@@ -56,13 +57,18 @@ const Hero = () => {
       setIsLoaded(true);
     }, 500);
 
-    const interval = setInterval(() => {
+    const imageInterval = setInterval(() => {
       setCurrentImage((prev) => (prev === heroImages.length - 1 ? 0 : prev + 1));
     }, 5000);
 
+    const testimonialInterval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 6000);
+
     return () => {
       clearTimeout(timer);
-      clearInterval(interval);
+      clearInterval(imageInterval);
+      clearInterval(testimonialInterval);
     };
   }, []);
 
@@ -99,7 +105,7 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-20 px-4 mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12 lg:gap-16">
           {/* Left Side - Content */}
           <div className="w-full lg:w-1/2 pt-8 md:pt-16 pb-8">
             <AnimatedSection animation="fade-in-up" className="relative">
@@ -161,7 +167,7 @@ const Hero = () => {
             </AnimatedSection>
           </div>
           
-          {/* Right Side - Image */}
+          {/* Right Side - Image and Testimonials */}
           <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
             <AnimatedSection animation="fade-in-up" delay={200} className="relative perspective-1000">
               <div className="absolute -right-12 top-1/2 w-24 h-24 text-school-secondary rotate-45 opacity-10 dark:opacity-5">
@@ -170,7 +176,7 @@ const Hero = () => {
               
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Image Carousel - Increased height for desktop */}
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 transform rotate-x-6 hover:rotate-x-0 hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-700 transform rotate-x-6 hover:rotate-x-0 hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900">
                   {heroImages.map((src, index) => (
                     <div 
                       key={index} 
@@ -181,7 +187,7 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt="Students at DTNHS" 
-                        className={`w-full h-[350px] sm:h-[420px] md:h-[500px] lg:h-[600px] xl:h-[650px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
+                        className={`w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[520px] xl:h-[580px] 2xl:h-[650px] object-cover ${isLoaded ? "blur-none" : "blur-sm"}`}
                       />
                     </div>
                   ))}
@@ -201,32 +207,46 @@ const Hero = () => {
                       />
                     ))}
                   </div>
-                  
-                  {/* Testimonials Tab - Improved visibility and style */}
-                  <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl">
-                    <Tabs defaultValue="testimonial-0" className="w-full">
-                      <TabsList className="w-full justify-center mb-3 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-full">
-                        {testimonials.map((_, i) => (
-                          <TabsTrigger 
-                            key={i} 
-                            value={`testimonial-${i}`} 
-                            className="text-xs px-3 py-1.5 data-[state=active]:bg-school-primary data-[state=active]:text-white rounded-full"
-                          >
-                            <span className="sr-only">Testimonial {i+1}</span>
-                            <span aria-hidden="true" className="block w-1.5 h-1.5 rounded-full bg-current"></span>
-                          </TabsTrigger>
-                        ))}
-                      </TabsList>
-                      
-                      {testimonials.map((testimonial, i) => (
-                        <TabsContent key={i} value={`testimonial-${i}`} className="mt-2">
-                          <div className="text-center">
-                            <p className="text-gray-700 dark:text-gray-300 italic mb-3 leading-relaxed text-base">"<span className="font-medium">{testimonial.quote}</span>"</p>
+                </div>
+                
+                {/* Testimonials Section - Improved visibility and style */}
+                <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl shadow-lg">
+                  <div className="relative overflow-hidden">
+                    {testimonials.map((testimonial, i) => (
+                      <div
+                        key={i}
+                        className={`transition-all duration-500 ${
+                          currentTestimonial === i
+                            ? "opacity-100 transform translate-y-0"
+                            : "opacity-0 absolute inset-0 transform translate-y-8"
+                        }`}
+                      >
+                        <div className="flex items-start">
+                          <div className="text-center w-full">
+                            <p className="text-gray-700 dark:text-gray-300 italic mb-3 leading-relaxed text-base">
+                              "{testimonial.quote}"
+                            </p>
                             <p className="text-sm text-school-primary font-medium">— {testimonial.author}</p>
                           </div>
-                        </TabsContent>
-                      ))}
-                    </Tabs>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Testimonial Navigation Dots */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentTestimonial(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          currentTestimonial === index
+                            ? "bg-school-primary scale-125"
+                            : "bg-gray-300 dark:bg-gray-600 hover:bg-school-primary/70"
+                        }`}
+                        aria-label={`View testimonial ${index + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
                 
