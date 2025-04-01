@@ -1,107 +1,147 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import AnimatedSection from "../ui/AnimatedSection";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="relative overflow-hidden border-t border-border">
+      {/* Decorative Background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-background to-background/80"></div>
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-school-primary/5 dark:bg-school-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-school-secondary/5 dark:bg-school-secondary/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-border/50 to-transparent"></div>
+      </div>
+      
+      {/* Newsletter Section */}
+      <div className="container px-4 py-12 md:py-16">
+        <AnimatedSection animation="fade-in-up" className="relative mx-auto max-w-4xl">
+          <div className="bg-gradient-to-br from-school-primary/10 to-school-secondary/10 dark:from-school-primary/20 dark:to-school-secondary/20 rounded-2xl p-8 shadow-lg border border-white/20 dark:border-white/5 backdrop-blur-sm">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h3 className="text-2xl font-bold text-school-primary mb-2">Stay Connected</h3>
+                <p className="text-muted-foreground max-w-md">
+                  Subscribe to our newsletter for the latest updates, events, and announcements.
+                </p>
+              </div>
+              <div className="w-full md:w-auto">
+                <form className="flex flex-col sm:flex-row gap-3">
+                  <input 
+                    type="email" 
+                    placeholder="Your email address" 
+                    className="px-4 py-2.5 rounded-full border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-school-primary"
+                    aria-label="Email for newsletter"
+                  />
+                  <button 
+                    type="submit" 
+                    className="bg-school-primary hover:bg-school-primary/90 text-white px-6 py-2.5 rounded-full font-medium transition-all"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+      
+      {/* Main Footer Content */}
       <div className="container px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <h3 className="text-lg font-semibold">Durgapur Tarak Nath High School</h3>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Providing quality education and shaping the future of our students since 1941.
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {/* School Logo and Info */}
+          <div className="lg:col-span-2">
+            <Link to="/" className="flex items-center mb-6">
+              <div className="w-12 h-12 rounded-xl bg-school-primary flex items-center justify-center font-bold text-white text-xl">DN</div>
+              <div className="ml-3">
+                <h3 className="font-bold text-lg">Durgapur Tarak Nath</h3>
+                <p className="text-sm text-muted-foreground">High School</p>
+              </div>
+            </Link>
+            <p className="text-sm text-muted-foreground mb-6">
+              Providing quality education and shaping the future of our students since 1941. Our mission is to empower young minds and cultivate excellence.
             </p>
-            <div className="mt-6 flex space-x-4">
-              <a href="#" className="text-muted-foreground transition-colors hover:text-school-primary">
-                <span className="sr-only">Facebook</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-muted-foreground transition-colors hover:text-school-primary">
-                <span className="sr-only">Instagram</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-muted-foreground transition-colors hover:text-school-primary">
-                <span className="sr-only">YouTube</span>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
-                </svg>
-              </a>
+            
+            {/* Social Media Links */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                { icon: <Facebook size={18} />, label: "Facebook", href: "#" },
+                { icon: <Instagram size={18} />, label: "Instagram", href: "#" },
+                { icon: <Twitter size={18} />, label: "Twitter", href: "#" },
+                { icon: <Youtube size={18} />, label: "YouTube", href: "#" }
+              ].map((social, i) => (
+                <a 
+                  key={i}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:shadow-md bg-white dark:bg-gray-800 text-muted-foreground hover:text-school-primary dark:hover:text-school-primary border border-border"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
           
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold">Quick Links</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link to="/about" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/academics" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Academics
-                </Link>
-              </li>
-              <li>
-                <Link to="/notices" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Notices
-                </Link>
-              </li>
-              <li>
-                <Link to="/gallery" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Contact Us
-                </Link>
-              </li>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "About Us", to: "/about" },
+                { label: "Academics", to: "/academics" },
+                { label: "Notices", to: "/notices" },
+                { label: "Gallery", to: "/gallery" },
+                { label: "Contact Us", to: "/contact" }
+              ].map((link, i) => (
+                <li key={i}>
+                  <Link 
+                    to={link.to} 
+                    className="text-sm text-muted-foreground transition-all hover:text-school-primary hover:translate-x-1 flex items-center"
+                  >
+                    <span className="mr-2 text-xs">→</span>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           
+          {/* Resources */}
           <div>
-            <h3 className="text-lg font-semibold">Resources</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link to="/students" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Student Portal
-                </Link>
-              </li>
-              <li>
-                <Link to="/routine" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Class Routines
-                </Link>
-              </li>
-              <li>
-                <Link to="/results" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Examination Results
-                </Link>
-              </li>
-              <li>
-                <Link to="/academics" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
-                  Syllabus
-                </Link>
-              </li>
+            <h4 className="text-lg font-semibold mb-4">Resources</h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Student Portal", to: "/students" },
+                { label: "Class Routines", to: "/routine" },
+                { label: "Examination Results", to: "/results" },
+                { label: "Syllabus", to: "/academics" },
+                { label: "Previous Year Papers", to: "/previous-year-papers" }
+              ].map((link, i) => (
+                <li key={i}>
+                  <Link 
+                    to={link.to} 
+                    className="text-sm text-muted-foreground transition-all hover:text-school-primary hover:translate-x-1 flex items-center"
+                  >
+                    <span className="mr-2 text-xs">→</span>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           
-          <div>
-            <h3 className="text-lg font-semibold">Contact</h3>
-            <ul className="mt-4 space-y-4">
+          {/* Contact */}
+          <div className="lg:col-span-2">
+            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <ul className="space-y-4">
               <li className="flex items-start">
-                <MapPin className="mr-2 h-5 w-5 text-school-primary" />
-                <span className="text-sm text-muted-foreground">
+                <MapPin className="mr-2 h-5 w-5 text-school-primary shrink-0 mt-0.5" />
+                <p className="text-sm text-muted-foreground">
                   Station Road, Durgapur, West Bengal, India - 713201
-                </span>
+                </p>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-school-primary" />
@@ -109,20 +149,58 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-school-primary" />
-                <a href="mailto:contact@dtnhs.edu.in" className="text-sm text-muted-foreground transition-colors hover:text-school-primary">
+                <a 
+                  href="mailto:contact@dtnhs.edu.in" 
+                  className="text-sm text-muted-foreground transition-colors hover:text-school-primary"
+                >
                   contact@dtnhs.in
                 </a>
               </li>
             </ul>
+            
+            {/* Map Preview */}
+            <div className="mt-4 rounded-xl overflow-hidden border border-border h-32 bg-muted/30">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.8435935861225!2d87.31387391541647!3d23.535345401869126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7703060585eb5%3A0x5e5acb36de67dfb2!2sDurgapur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1632151233021!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={false} 
+                loading="lazy"
+                title="School Location Map"
+                aria-label="Map showing the location of Durgapur Tarak Nath High School"
+              ></iframe>
+            </div>
           </div>
         </div>
         
-        <div className="mt-8 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">
-            © {currentYear} Durgapur Tarak Nath High School. All rights reserved.
-          </p>
+        {/* Bottom Footer */}
+        <div className="mt-12 pt-8 border-t border-border">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-center text-sm text-muted-foreground">
+              © {currentYear} Durgapur Tarak Nath High School. All rights reserved.
+            </p>
+            
+            <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
+              <Link to="/privacy-policy" className="hover:text-school-primary transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="hover:text-school-primary transition-colors">Terms of Service</Link>
+              <Link to="/sitemap" className="hover:text-school-primary transition-colors">Sitemap</Link>
+            </div>
+          </div>
         </div>
       </div>
+      
+      {/* Back to top button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-6 right-6 z-50 bg-school-primary hover:bg-school-primary/90 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="17 11 12 6 7 11"></polyline>
+          <line x1="12" y1="18" x2="12" y2="6"></line>
+        </svg>
+      </button>
     </footer>
   );
 };
