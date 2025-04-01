@@ -181,11 +181,7 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt="Students at DTNHS" 
-<<<<<<< HEAD
-                        className={`w-full h-[450px] lg:h-[800px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
-=======
                         className={`w-full h-[350px] sm:h-[420px] md:h-[500px] lg:h-[600px] xl:h-[650px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
->>>>>>> d89e213ed0a7dd5e21fc159078e2e8ea71d85b00
                       />
                     </div>
                   ))}
@@ -206,13 +202,8 @@ const Hero = () => {
                     ))}
                   </div>
                   
-<<<<<<< HEAD
-                  {/* Testimonials Tab */}
-                  <div className="bg-black dark:bg-gray-800 p-5 rounded-b-2xl">
-=======
                   {/* Testimonials Tab - Improved visibility and style */}
                   <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl">
->>>>>>> d89e213ed0a7dd5e21fc159078e2e8ea71d85b00
                     <Tabs defaultValue="testimonial-0" className="w-full">
                       <TabsList className="w-full justify-center mb-3 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-full">
                         {testimonials.map((_, i) => (
