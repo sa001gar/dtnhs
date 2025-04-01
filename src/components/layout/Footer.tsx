@@ -160,13 +160,15 @@ const Footer: React.FC = () => {
             
             {/* Map Preview */}
             <div className="mt-4 rounded-xl overflow-hidden border border-border h-32 bg-muted/30">
+
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.8435935861225!2d87.31387391541647!3d23.535345401869126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7703060585eb5%3A0x5e5acb36de67dfb2!2sDurgapur%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1632151233021!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9965264115012!2d87.3213519!3d23.495643100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710cb6d23035%3A0x8e339769f234a1a3!2sDurgapur%20Tarak%20Nath%20High%20School!5e1!3m2!1sen!2sin!4v1743533146590!5m2!1sen!2sin" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
                 allowFullScreen={false} 
                 loading="lazy"
+                className="rounded-xl"
                 title="School Location Map"
                 aria-label="Map showing the location of Durgapur Tarak Nath High School"
               ></iframe>

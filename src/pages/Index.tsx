@@ -67,7 +67,7 @@ const Index: React.FC = () => {
               <AnimatedSection animation="fade-in-up">
                 <div className="relative overflow-hidden rounded-xl shadow-xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" 
+                    src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/2024-09-13.jpg" 
                     alt="School Building" 
                     className="h-auto w-full object-cover transition-all duration-700 hover:scale-105" 
                     loading="lazy"

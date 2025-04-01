@@ -135,7 +135,17 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="bg-muted h-[250px] rounded flex items-center justify-center">
-                    <p className="text-muted-foreground">Map placeholder - Google Maps iframe would go here</p>
+                  <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9965264115012!2d87.3213519!3d23.495643100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710cb6d23035%3A0x8e339769f234a1a3!2sDurgapur%20Tarak%20Nath%20High%20School!5e1!3m2!1sen!2sin!4v1743533146590!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={false} 
+                loading="lazy"
+                className="rounded-xl"
+                title="School Location Map"
+                aria-label="Map showing the location of Durgapur Tarak Nath High School"
+              ></iframe>
                   </div>
                 </CardContent>
               </Card>

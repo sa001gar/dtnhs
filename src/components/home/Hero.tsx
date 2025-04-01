@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -46,13 +45,33 @@ const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+  // Fixed image URLs with placeholder fallbacks
   const heroImages = [
     "https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true",
     "https://github.com/sa001gar/dtnhs/blob/main/images/home/classroom.png?raw=true",
     "https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true"
   ];
 
+  // Preload images
   useEffect(() => {
+    // Load original images if available
+    const originalImages = [
+      "https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true",
+      "https://github.com/sa001gar/dtnhs/blob/main/images/home/classroom.png?raw=true",
+      "https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true"
+    ];
+    
+    // Try to preload original images
+    originalImages.forEach((src, index) => {
+      const img = new Image();
+      img.onload = () => {
+        // If original image loads, use it
+        heroImages[index] = src;
+        setIsLoaded(true);
+      };
+      img.src = src;
+    });
+
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 500);
@@ -80,26 +99,17 @@ const Hero = () => {
         <div className="absolute top-1/3 -right-20 w-56 h-56 bg-school-secondary/10 dark:bg-school-secondary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: "2s"}}></div>
         <div className="absolute -bottom-20 left-1/4 w-64 h-64 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: "1s"}}></div>
         
-        {/* Floating Shapes */}
+        {/* Floating Shapes - Simplified and Reduced */}
         <div className="hidden lg:block">
-          {/* Polygons, Circles and Other Shapes */}
           <div className="absolute top-1/4 left-1/5 w-12 h-12 transform rotate-45 bg-school-primary/10 dark:bg-school-primary/20 animate-float"></div>
           <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-dashed border-school-secondary/20 dark:border-school-secondary/30 animate-spin-slow"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-10 h-10 transform rotate-12 rounded-md bg-gradient-to-r from-blue-400/10 to-purple-400/10 dark:from-blue-400/20 dark:to-purple-400/20 animate-float-delayed"></div>
-          <div className="absolute top-2/3 right-1/5 w-14 h-14 rounded-lg border border-green-300/20 dark:border-green-300/30 transform -rotate-12 animate-float"></div>
           
-          {/* Floating Icons */}
+          {/* Floating Icons - Only kept a few */}
           <div className="absolute top-1/6 left-1/3 text-school-primary/20 dark:text-school-primary/30 animate-float-delayed transform rotate-6">
             <GraduationCap className="w-8 h-8" />
           </div>
           <div className="absolute top-2/3 right-1/6 text-school-secondary/20 dark:text-school-secondary/30 animate-float transform -rotate-12">
             <BookOpen className="w-10 h-10" />
-          </div>
-          <div className="absolute bottom-1/5 left-1/5 text-blue-400/20 dark:text-blue-400/30 animate-float-delayed transform rotate-12">
-            <Atom className="w-6 h-6" />
-          </div>
-          <div className="absolute top-1/2 right-1/3 text-green-400/20 dark:text-green-400/30 animate-float transform -rotate-6">
-            <Globe className="w-8 h-8" />
           </div>
         </div>
       </div>
@@ -122,7 +132,7 @@ const Hero = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
                 <span className="relative inline-block">
                   <span className="relative z-10">Shaping Futures,</span>
-                  <span className="absolute -bottom-1.5 left-0 w-full h-4 bg-school-primary/20 dark:bg-school-primary/30 rounded-lg -z-0"></span>
+                  {/* Removed the underline element */}
                 </span>
                 <span className="block mt-2">Building <span className="text-school-primary">Leaders.</span></span>
               </h1>
@@ -175,19 +185,28 @@ const Hero = () => {
               </div>
               
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Image Carousel - Increased height for desktop */}
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-700 transform rotate-x-6 hover:rotate-x-0 hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900">
+                {/* Image Carousel - Fixed visibility issues */}
+                <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900" style={{height: "320px"}}>
                   {heroImages.map((src, index) => (
                     <div 
                       key={index} 
-                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      className={`transition-opacity duration-1000 ease-in-out ${
                         currentImage === index ? "opacity-100 z-10" : "opacity-0 z-0"
                       }`}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        display: "block"
+                      }}
                     >
                       <img 
                         src={src} 
-                        alt="Students at DTNHS" 
-                        className={`w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[520px] xl:h-[580px] 2xl:h-[650px] object-cover ${isLoaded ? "blur-none" : "blur-sm"}`}
+                        alt={`Students at DTNHS ${index + 1}`} 
+                        className="w-full h-full object-cover transition-all duration-500"
+                        style={{opacity: isLoaded ? 1 : 0.7}}
                       />
                     </div>
                   ))}
@@ -209,9 +228,9 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Testimonials Section - Improved visibility and style */}
-                <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl shadow-lg">
-                  <div className="relative overflow-hidden">
+                {/* Testimonials Section */}
+                <div className="bg-white dark:bg-gray-800 p-5 mt-4 rounded-b-2xl shadow-lg">
+                  <div className="relative overflow-hidden" style={{minHeight: "100px"}}>
                     {testimonials.map((testimonial, i) => (
                       <div
                         key={i}
@@ -251,26 +270,26 @@ const Hero = () => {
                 </div>
                 
                 {/* Floating Elements */}
-                <div className="absolute -bottom-6 -left-6 md:-left-10 bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                <div className="absolute -bottom-6 -left-6 md:-left-10 bg-orange-100 dark:bg-amber-950 rounded-2xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
                   <h3 className="font-bold text-school-primary">Your Journey to Excellence</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300">Begins Here</p>
                 </div>
                 
-                <div className="absolute -top-4 -right-4 md:-right-8 bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                <div className="absolute -top-4 -right-4 md:-right-8 bg-lime-100 dark:bg-green-900 rounded-2xl p-4 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
                   <h3 className="font-bold text-school-primary">Education Beyond</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300">Boundaries</p>
                 </div>
               </div>
               
-              {/* Subject Tags */}
-              <div className="mt-12 grid grid-cols-5 gap-2 max-w-md mx-auto">
+              {/* Subject Tags - Improved styling and responsiveness */}
+              <div className="mt-12 flex flex-wrap justify-center gap-3 max-w-md mx-auto">
                 {subjects.map((subject, index) => (
                   <div 
                     key={index} 
-                    className={`${subject.color} rounded-full px-3 py-1.5 text-xs text-center flex items-center justify-center gap-1 transform hover:scale-110 transition-transform`}
+                    className={`${subject.color} rounded-full px-4 py-2 text-sm flex items-center justify-center gap-2 transform hover:scale-110 transition-transform shadow-sm`}
                   >
-                    <span>{subject.icon}</span>
-                    <span className="hidden sm:inline">{subject.name}</span>
+                    <span className="flex-shrink-0">{subject.icon}</span>
+                    <span className="hidden sm:inline font-medium">{subject.name}</span>
                   </div>
                 ))}
               </div>
