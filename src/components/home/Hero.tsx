@@ -181,7 +181,7 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt="Students at DTNHS" 
-                        className={`w-full h-[350px] sm:h-[420px] md:h-[450px] lg:h-[500px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
+                        className={`w-full h-[450px] lg:h-[800px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
                       />
                     </div>
                   ))}
@@ -203,7 +203,7 @@ const Hero = () => {
                   </div>
                   
                   {/* Testimonials Tab */}
-                  <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl">
+                  <div className="bg-black dark:bg-gray-800 p-5 rounded-b-2xl">
                     <Tabs defaultValue="testimonial-0" className="w-full">
                       <TabsList className="w-full justify-center mb-2">
                         {testimonials.map((_, i) => (
