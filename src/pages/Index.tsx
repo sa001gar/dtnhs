@@ -72,54 +72,60 @@ const Index: React.FC = () => {
       
       <StudentAchievements />
       
+      {/* Updated, more beautiful CTA section without stats */}
       <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-16 text-white md:py-24 dark:from-school-primary/90 dark:to-school-secondary/90 dark:text-white">
         <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
         <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
         
         <div className="container relative px-4">
-          <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="rounded-full bg-white/20 p-3">
-                <Users className="h-8 w-8" />
+          <div className="mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-12 items-center">
+              <div className="lg:col-span-3">
+                <AnimatedSection animation="fade-in-up" className="max-w-xl">
+                  <div className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 mb-6">
+                    <Users className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium">Join Our Community</span>
+                  </div>
+                  
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
+                    Begin Your Educational Journey With Us
+                  </h2>
+                  
+                  <p className="text-lg text-white/90 mb-8">
+                    Discover how Durgapur Tarak Nath High School can provide your child with a quality education in a nurturing environment designed for academic success and personal growth.
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-4">
+                    <Button asChild size="lg" variant="secondary" className="rounded-full shadow-xl hover:shadow-2xl transition-all dark:bg-white dark:text-gray-900">
+                      <Link to="/contact">
+                        Contact Us Today
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="lg" className="rounded-full bg-transparent text-white backdrop-blur-sm border-white/40 hover:bg-white/10 hover:text-white">
+                      <Link to="/about" className="flex items-center gap-2">
+                        <GraduationCap className="h-5 w-5" />
+                        Learn More
+                      </Link>
+                    </Button>
+                  </div>
+                </AnimatedSection>
+              </div>
+              
+              <div className="lg:col-span-2">
+                <AnimatedSection animation="fade-in-up" delay={200}>
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-school-primary/20 to-transparent rounded-2xl transform rotate-3"></div>
+                    <img 
+                      src="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_child.jfif?raw=true" 
+                      alt="Student Success" 
+                      className="relative z-10 w-full h-auto rounded-2xl shadow-xl object-cover"
+                    />
+                  </div>
+                </AnimatedSection>
               </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Join Our School Community
-            </h2>
-            <p className="mt-4 text-lg text-white/80">
-              Discover how Durgapur Tarak Nath High School can provide your child with a quality education in a nurturing environment.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button asChild variant="secondary" size="lg" className="w-full transform rounded-full transition-transform hover:scale-105 sm:w-auto dark:bg-white/90 dark:text-black dark:hover:bg-white">
-                <Link to="/contact">Contact Us Today</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full rounded-full bg-transparent text-white backdrop-blur-sm hover:bg-white/10 hover:text-white sm:w-auto dark:border-white/60 dark:hover:border-white">
-                <Link to="/about" className="flex items-center gap-2">
-                  <GraduationCap className="h-5 w-5" />
-                  Learn More
-                </Link>
-              </Button>
-            </div>
-            
-            <div className="relative mt-16 perspective-1000">
-              <div className="transform-gpu rotate-x-12 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md dark:bg-black/20">
-                <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-3">
-                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
-                    <h3 className="text-4xl font-bold">1000+</h3>
-                    <p className="text-sm text-white/80">Students Enrolled</p>
-                  </div>
-                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
-                    <h3 className="text-4xl font-bold">50+</h3>
-                    <p className="text-sm text-white/80">Expert Teachers</p>
-                  </div>
-                  <div className="rounded-lg bg-white/10 p-4 text-center dark:bg-white/5">
-                    <h3 className="text-4xl font-bold">95%</h3>
-                    <p className="text-sm text-white/80">Success Rate</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
     </Layout>

@@ -327,7 +327,7 @@ const Chatbot: React.FC = () => {
       
       <Button 
         onClick={toggleChat}
-        className="h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-xl bg-school-primary hover:bg-school-primary/90 transition-colors flex items-center justify-center shrink-0"
+        className="h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-xl bg-school-primary hover:bg-school-primary/90 transition-colors flex items-center justify-center shrink-0 dark:text-white"
         aria-label="Open chat assistant"
       >
         <Bot className="h-5 w-5 sm:h-6 sm:w-6" />

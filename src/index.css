@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -276,6 +277,32 @@
   .image-placeholder {
     @apply bg-gradient-to-br from-school-primary/20 to-school-secondary/20 animate-pulse;
   }
+
+  /* Responsive tabs */
+  .responsive-tabs {
+    @apply flex overflow-x-auto gap-2 hide-scrollbar pb-1;
+  }
+
+  .responsive-tab-item {
+    @apply flex-shrink-0 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 transition-colors whitespace-nowrap;
+  }
+
+  .responsive-tab-item.active {
+    @apply bg-school-primary text-white dark:bg-school-primary dark:text-black border-school-primary;
+  }
+
+  /* Perspective effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-gpu {
+    transform: translateZ(0);
+  }
+  
+  .rotate-x-12 {
+    transform: rotateX(12deg);
+  }
 }
 
 /* Image loading blur effect */
@@ -291,4 +318,18 @@
 .blur-load > img {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
+}
+
+/* Dark mode specific overrides */
+.dark .shadow-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.dark .hover-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Subject tag styling */
+.subject-tag {
+  @apply inline-block rounded-full px-3 py-1 text-xs font-medium;
 }

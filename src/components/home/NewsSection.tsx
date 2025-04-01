@@ -42,20 +42,20 @@ const NewsSection: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <section className="bg-school-light py-16 md:py-24 dark:bg-school-dark/30">
+    <section className="bg-gradient-to-br from-white to-school-light py-16 md:py-24 dark:from-gray-900 dark:to-gray-800 dark:text-white">
       <div className="container px-4">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl md:text-5xl">
             Latest News & Events
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-muted-foreground dark:text-gray-300">
             Stay updated with the latest happenings, announcements, and achievements at our school.
           </p>
         </AnimatedSection>
 
         <div className="mt-12 relative">
           {isMobile && (
-            <div className="absolute right-0 top-1/2 z-10 h-12 w-8 -translate-y-1/2 bg-gradient-to-l from-school-light dark:from-school-dark/30"></div>
+            <div className="absolute right-0 top-1/2 z-10 h-12 w-8 -translate-y-1/2 bg-gradient-to-l from-white dark:from-gray-800 to-transparent"></div>
           )}
           
           <div className={`${isMobile ? 'flex overflow-x-auto pb-6 gap-4 hide-scrollbar' : 'grid grid-cols-1 gap-6 md:grid-cols-3'}`}>
@@ -66,28 +66,28 @@ const NewsSection: React.FC = () => {
                 delay={index * 100}
                 className={isMobile ? 'min-w-[300px] w-[85%] flex-shrink-0' : ''}
               >
-                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full">
+                <Card className="transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full dark:border-gray-700 dark:bg-gray-800/50">
                   <CardHeader>
                     <div className="flex justify-between items-start">
-                      <div className="flex items-center text-sm text-muted-foreground">
+                      <div className="flex items-center text-sm text-muted-foreground dark:text-gray-400">
                         <Calendar className="mr-2 h-4 w-4" />
                         {item.date}
                       </div>
-                      <Badge variant="outline" className="bg-school-primary/10 text-school-primary dark:bg-school-primary/20">
+                      <Badge variant="outline" className="bg-school-primary/10 text-school-primary dark:bg-school-primary/20 dark:text-school-primary">
                         {item.category}
                       </Badge>
                     </div>
                     <CardTitle className="mt-2">{item.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-base">{item.excerpt}</CardDescription>
-                    <div className="flex items-center mt-4 text-xs text-muted-foreground">
+                    <CardDescription className="text-base dark:text-gray-300">{item.excerpt}</CardDescription>
+                    <div className="flex items-center mt-4 text-xs text-muted-foreground dark:text-gray-400">
                       <Clock className="mr-1 h-3 w-3" />
                       {item.time}
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button asChild variant="ghost" className="group -ml-3 h-8 p-0 text-school-primary">
+                    <Button asChild variant="ghost" className="group -ml-3 h-8 p-0 text-school-primary dark:text-school-primary dark:hover:text-white">
                       <Link to={item.link} className="flex items-center px-4 py-3 space-x-1 transition-transform">  
                         Read more
                         <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -101,7 +101,7 @@ const NewsSection: React.FC = () => {
         </div>
 
         <AnimatedSection animation="fade-in-up" delay={300} className="mt-10 text-center">
-          <Button asChild variant="outline" className="rounded-full">
+          <Button asChild variant="outline" className="rounded-full dark:text-white dark:border-gray-600 dark:hover:bg-gray-700">
             <Link to="/notices">
               View All News & Notices
               <ArrowRight className="ml-2 h-4 w-4" />
