@@ -169,7 +169,7 @@ const Hero = () => {
               </div>
               
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Image Carousel */}
+                {/* Image Carousel - Increased height for desktop */}
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 transform rotate-x-6 hover:rotate-x-0 hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900">
                   {heroImages.map((src, index) => (
                     <div 
@@ -181,7 +181,11 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt="Students at DTNHS" 
+<<<<<<< HEAD
                         className={`w-full h-[450px] lg:h-[800px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
+=======
+                        className={`w-full h-[350px] sm:h-[420px] md:h-[500px] lg:h-[600px] xl:h-[650px] object-cover rounded-t-2xl ${isLoaded ? "blur-none" : "blur-sm"}`}
+>>>>>>> d89e213ed0a7dd5e21fc159078e2e8ea71d85b00
                       />
                     </div>
                   ))}
@@ -202,22 +206,31 @@ const Hero = () => {
                     ))}
                   </div>
                   
+<<<<<<< HEAD
                   {/* Testimonials Tab */}
                   <div className="bg-black dark:bg-gray-800 p-5 rounded-b-2xl">
+=======
+                  {/* Testimonials Tab - Improved visibility and style */}
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-b-2xl">
+>>>>>>> d89e213ed0a7dd5e21fc159078e2e8ea71d85b00
                     <Tabs defaultValue="testimonial-0" className="w-full">
-                      <TabsList className="w-full justify-center mb-2">
+                      <TabsList className="w-full justify-center mb-3 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-full">
                         {testimonials.map((_, i) => (
-                          <TabsTrigger key={i} value={`testimonial-${i}`} className="text-xs px-2.5 py-1">
+                          <TabsTrigger 
+                            key={i} 
+                            value={`testimonial-${i}`} 
+                            className="text-xs px-3 py-1.5 data-[state=active]:bg-school-primary data-[state=active]:text-white rounded-full"
+                          >
                             <span className="sr-only">Testimonial {i+1}</span>
-                            <span aria-hidden="true">•</span>
+                            <span aria-hidden="true" className="block w-1.5 h-1.5 rounded-full bg-current"></span>
                           </TabsTrigger>
                         ))}
                       </TabsList>
                       
                       {testimonials.map((testimonial, i) => (
-                        <TabsContent key={i} value={`testimonial-${i}`} className="mt-0">
+                        <TabsContent key={i} value={`testimonial-${i}`} className="mt-2">
                           <div className="text-center">
-                            <p className="text-gray-700 dark:text-gray-300 italic mb-2">"{testimonial.quote}"</p>
+                            <p className="text-gray-700 dark:text-gray-300 italic mb-3 leading-relaxed text-base">"<span className="font-medium">{testimonial.quote}</span>"</p>
                             <p className="text-sm text-school-primary font-medium">— {testimonial.author}</p>
                           </div>
                         </TabsContent>
