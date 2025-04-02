@@ -5,7 +5,6 @@ import Layout from "@/components/layout/Layout";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
-import PageHeader from "@/components/shared/PageHeader";
 import { 
   User, Settings, BookOpen, Calendar, FileText,
   Users, GraduationCap, Image, Bell, NewspaperIcon
@@ -49,19 +48,10 @@ const Admin = () => {
 
   return (
     <Layout>
-      <PageHeader 
-        title="Admin Dashboard" 
-        subtitle="Manage your school content and settings"
-        small={true}
-        pattern="hexagons"
-        theme="dark"
-        accentColor="school-secondary"
-        showBreadcrumbs={false}
-      />
-      
       <div className="container py-8">
         <div className="flex flex-col space-y-6">
           <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
             <button 
               onClick={() => {
                 localStorage.removeItem("adminAuth");
