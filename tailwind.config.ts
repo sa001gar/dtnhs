@@ -129,6 +129,20 @@ export default {
 				'zoom-out': {
 					'0%': { transform: 'scale(1.05)' },
 					'100%': { transform: 'scale(1)' }
+				},
+				'float': {
+					'0%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+					'100%': { transform: 'translateY(0)' }
+				},
+				'float-delayed': {
+					'0%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-15px)' },
+					'100%': { transform: 'translateY(0)' }
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
 				}
 			},
 			animation: {
@@ -141,7 +155,10 @@ export default {
 				'scale-in': 'scale-in 0.5s ease-out',
 				'blur-in': 'blur-in 0.6s ease-out',
 				'zoom-in': 'zoom-in 0.3s ease-out',
-				'zoom-out': 'zoom-out 0.3s ease-out'
+				'zoom-out': 'zoom-out 0.3s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'float-delayed': 'float-delayed 7s ease-in-out infinite',
+				'spin-slow': 'spin-slow 15s linear infinite'
 			},
 			transitionTimingFunction: {
 				'spring': 'cubic-bezier(0.22, 1, 0.36, 1)',
