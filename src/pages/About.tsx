@@ -7,6 +7,9 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import PageLoader from "@/components/shared/PageLoader";
+import { School, Users, Clock, Award, GraduationCap, Target, BookOpen, Medal, Trophy } from "lucide-react";
+import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet";
 
 const About: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,227 +28,366 @@ const About: React.FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
+    <Layout>
+      <Helmet>
+        <title>About Us - Durgapur Tarak Nath High School</title>
+        <meta name="description" content="Learn about the history, mission, and vision of Durgapur Tarak Nath High School, one of the leading educational institutions since 1941." />
+      </Helmet>
       
-      <main className="flex-1 pt-16">
-        <PageHeader
-          title="About Our School"
-          subtitle="Learn about our history, mission, and vision for the future."
-          // backgroundImage="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=1920&q=80"
-          // pattern="noise"
-        />
+      <PageHeader
+        title="About Our School"
+        subtitle="Learn about our history, mission, and vision for the future."
+      />
+      
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-opacity-50 -z-10">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-school-primary/5 to-transparent"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-school-primary/5 dark:bg-school-primary/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-school-secondary/5 dark:bg-school-secondary/10 rounded-full blur-3xl"></div>
+        </div>
         
-        <section className="py-16">
-          <div className="container px-4">
-            <div className="mx-auto max-w-6xl">
-              <div className="mb-6">
-                <Breadcrumb />
-              </div>
-              
-              <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-                <div className="lg:col-span-2">
-                  <AnimatedSection animation="fade-in-up">
-                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our History</h2>
-                    <div className="mt-6 space-y-4 text-muted-foreground">
-                      <p>
-                        Durgapur Tarak Nath High School was established in 1965 with a vision to provide quality education to the children of Durgapur. Named after the revered educator Tarak Nath Sen, the school began with just a handful of students and a few dedicated teachers.
-                      </p>
-                      <p>
-                        Over the decades, the school has grown significantly, both in terms of infrastructure and reputation. What started as a small institution has now evolved into one of the most respected schools in the region, known for its academic excellence and commitment to holistic education.
-                      </p>
-                      <p>
-                        Throughout its journey, the school has maintained its core values of discipline, integrity, and academic rigor. These principles have guided generations of students who have gone on to make significant contributions in various fields across the globe.
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in-up" className="mt-12">
-                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Mission</h2>
-                    <div className="mt-6 space-y-4 text-muted-foreground">
-                      <p>
-                        Our mission is to provide a comprehensive education that develops the intellectual, social, emotional, and physical aspects of each student. We strive to:
-                      </p>
-                      <ul className="ml-6 list-disc space-y-2">
-                        <li>Foster a love for learning and intellectual curiosity</li>
-                        <li>Cultivate critical thinking and problem-solving skills</li>
-                        <li>Nurture creativity and innovation</li>
-                        <li>Instill strong moral and ethical values</li>
-                        <li>Prepare students for the challenges of a rapidly changing world</li>
-                        <li>Develop responsible citizens who contribute positively to society</li>
-                      </ul>
-                    </div>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in-up" className="mt-12">
-                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Vision</h2>
-                    <div className="mt-6 space-y-4 text-muted-foreground">
-                      <p>
-                        We envision Durgapur Tarak Nath High School as a center of educational excellence that:
-                      </p>
-                      <ul className="ml-6 list-disc space-y-2">
-                        <li>Provides a stimulating and inclusive learning environment</li>
-                        <li>Empowers students to realize their full potential</li>
-                        <li>Embraces innovation in teaching methodologies</li>
-                        <li>Maintains a harmonious balance between tradition and modernity</li>
-                        <li>Serves as a model for other educational institutions</li>
-                      </ul>
-                    </div>
-                  </AnimatedSection>
-                </div>
-                
-                <div>
-                  <AnimatedSection animation="fade-in-up">
-                    <Card className="card-hover">
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-semibold text-school-primary">School Information</h3>
-                        <div className="mt-4 space-y-4">
-                          <div>
-                            <h4 className="font-medium">Founded</h4>
-                            <p className="text-muted-foreground">1965</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Affiliation</h4>
-                            <p className="text-muted-foreground">West Bengal Board of Secondary Education</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Campus Area</h4>
-                            <p className="text-muted-foreground">5 acres</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Students</h4>
-                            <p className="text-muted-foreground">Approximately 1,500</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Faculty</h4>
-                            <p className="text-muted-foreground">80+ qualified teachers</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Classes</h4>
-                            <p className="text-muted-foreground">From Class V to Class XII</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Medium of Instruction</h4>
-                            <p className="text-muted-foreground">Bengali and English</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in-up" className="mt-6">
-                    <Card className="card-hover">
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-semibold text-school-primary">School Leadership</h3>
-                        <div className="mt-4 space-y-4">
-                          <div>
-                            <h4 className="font-medium">Principal</h4>
-                            <p className="text-muted-foreground">Dr. Rajesh Banerjee</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Vice Principal</h4>
-                            <p className="text-muted-foreground">Mrs. Anjali Chatterjee</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Academic Coordinator</h4>
-                            <p className="text-muted-foreground">Mr. Abhijit Das</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                  
-                  <AnimatedSection animation="fade-in-up" className="mt-6">
-                    <Card className="card-hover">
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-semibold text-school-primary">Awards & Recognition</h3>
-                        <div className="mt-4 space-y-2">
-                          <p className="text-muted-foreground">• Best School Award (2019) - Durgapur Municipal Corporation</p>
-                          <p className="text-muted-foreground">• Excellence in Education Award (2017) - West Bengal Education Department</p>
-                          <p className="text-muted-foreground">• Outstanding Sports School (2020) - District Sports Association</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
-                </div>
-              </div>
+        <div className="container px-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-6">
+              <Breadcrumb />
             </div>
-          </div>
-        </section>
-        
-        <section className="bg-muted py-16">
-          <div className="container px-4">
-            <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Core Values</h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                These values guide everything we do at Durgapur Tarak Nath High School.
-              </p>
-            </AnimatedSection>
             
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <AnimatedSection animation="fade-in-up" delay={100}>
-                <Card className="text-center card-hover">
-                  <CardContent className="p-6">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                      </svg>
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+              <div className="lg:col-span-2">
+                <AnimatedSection animation="fade-in-up">
+                  <div className="flex items-center mb-6">
+                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
+                      <School className="h-6 w-6" />
                     </div>
-                    <h3 className="text-xl font-semibold">Excellence</h3>
-                    <p className="mt-2 text-muted-foreground">We strive for excellence in all aspects of education and encourage our students to do the same.</p>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
+                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our History</h2>
+                  </div>
+                  
+                  <div className="mt-6 space-y-6 text-muted-foreground">
+                    <div className="relative border-l-2 border-school-primary/30 pl-6">
+                      <div className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-school-primary"></div>
+                      <p className="mb-2 font-semibold text-foreground">Foundation Years (1941-1950)</p>
+                      <p className="mb-4 text-muted-foreground leading-relaxed">
+                        Durgapur Tarak Nath High School was established in 1941 with a vision to provide quality education to the children of Durgapur. Named after the revered educator Tarak Nath Sen, the school began with just a handful of students and a few dedicated teachers in a modest building.
+                      </p>
+                    </div>
+                    
+                    <div className="relative border-l-2 border-school-primary/30 pl-6">
+                      <div className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-school-primary"></div>
+                      <p className="mb-2 font-semibold text-foreground">Growth & Development (1950-1980)</p>
+                      <p className="mb-4 text-muted-foreground leading-relaxed">
+                        Over the decades, the school has grown significantly, both in terms of infrastructure and reputation. The 1960s saw the construction of new buildings and the expansion of academic programs. By the 1970s, DTNHS had established itself as one of the premier educational institutions in the region.
+                      </p>
+                    </div>
+                    
+                    <div className="relative border-l-2 border-school-primary/30 pl-6">
+                      <div className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-school-primary"></div>
+                      <p className="mb-2 font-semibold text-foreground">Modern Era (1980-Present)</p>
+                      <p className="mb-4 text-muted-foreground leading-relaxed">
+                        In recent decades, the school has embraced modern educational methodologies while maintaining its core values of discipline, integrity, and academic rigor. The introduction of computer labs, science facilities, and sports infrastructure has enhanced the learning experience for students. Today, DTNHS stands as a testament to educational excellence, nurturing young minds who contribute meaningfully to society across various fields.
+                      </p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in-up" className="mt-12">
+                  <div className="flex items-center mb-6">
+                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
+                      <Target className="h-6 w-6" />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Mission</h2>
+                  </div>
+                  
+                  <div className="mt-6 space-y-4 text-muted-foreground">
+                    <p className="leading-relaxed">
+                      Our mission is to provide a comprehensive education that develops the intellectual, social, emotional, and physical aspects of each student. We strive to:
+                    </p>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <Card className="bg-white/50 hover:bg-white/80 dark:bg-gray-800/50 dark:hover:bg-gray-800/80 transition-colors border-school-primary/20 hover:border-school-primary">
+                        <CardContent className="p-4 flex items-start">
+                          <BookOpen className="h-5 w-5 mt-0.5 mr-3 text-school-primary" />
+                          <div>
+                            <h4 className="font-medium">Foster a love for learning</h4>
+                            <p className="mt-1 text-sm">Instill intellectual curiosity and a lifelong passion for knowledge</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-white/50 hover:bg-white/80 dark:bg-gray-800/50 dark:hover:bg-gray-800/80 transition-colors border-school-primary/20 hover:border-school-primary">
+                        <CardContent className="p-4 flex items-start">
+                          <Users className="h-5 w-5 mt-0.5 mr-3 text-school-primary" />
+                          <div>
+                            <h4 className="font-medium">Cultivate critical thinking</h4>
+                            <p className="mt-1 text-sm">Develop analytical skills and problem-solving abilities</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-white/50 hover:bg-white/80 dark:bg-gray-800/50 dark:hover:bg-gray-800/80 transition-colors border-school-primary/20 hover:border-school-primary">
+                        <CardContent className="p-4 flex items-start">
+                          <GraduationCap className="h-5 w-5 mt-0.5 mr-3 text-school-primary" />
+                          <div>
+                            <h4 className="font-medium">Instill strong values</h4>
+                            <p className="mt-1 text-sm">Build character through moral and ethical education</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-white/50 hover:bg-white/80 dark:bg-gray-800/50 dark:hover:bg-gray-800/80 transition-colors border-school-primary/20 hover:border-school-primary">
+                        <CardContent className="p-4 flex items-start">
+                          <Award className="h-5 w-5 mt-0.5 mr-3 text-school-primary" />
+                          <div>
+                            <h4 className="font-medium">Prepare for the future</h4>
+                            <p className="mt-1 text-sm">Equip students for the challenges of a changing world</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in-up" className="mt-12">
+                  <div className="flex items-center mb-6">
+                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
+                      <Trophy className="h-6 w-6" />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Our Vision</h2>
+                  </div>
+                  
+                  <div className="mt-6 bg-white/60 dark:bg-gray-800/60 border border-border rounded-xl p-6 backdrop-blur-sm shadow-sm">
+                    <p className="text-lg italic text-muted-foreground">"We envision Durgapur Tarak Nath High School as a center of educational excellence that empowers students to become responsible global citizens, innovative thinkers, and compassionate leaders."</p>
+                  </div>
+                  
+                  <div className="mt-6 space-y-4 text-muted-foreground">
+                    <p className="leading-relaxed">
+                      We aspire to create an educational environment that:
+                    </p>
+                    <ul className="ml-6 list-disc space-y-3">
+                      <li className="leading-relaxed">Provides a stimulating and inclusive learning environment where every student feels valued</li>
+                      <li className="leading-relaxed">Empowers students to realize their full potential academically, socially, and physically</li>
+                      <li className="leading-relaxed">Embraces innovation in teaching methodologies and educational technologies</li>
+                      <li className="leading-relaxed">Maintains a harmonious balance between tradition and modernity</li>
+                      <li className="leading-relaxed">Serves as a model for other educational institutions in the region and beyond</li>
+                    </ul>
+                  </div>
+                </AnimatedSection>
+              </div>
               
-              <AnimatedSection animation="fade-in-up" delay={200}>
-                <Card className="text-center card-hover">
-                  <CardContent className="p-6">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold">Integrity</h3>
-                    <p className="mt-2 text-muted-foreground">We uphold the highest standards of honesty, ethics, and moral values in all our actions.</p>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
-              
-              <AnimatedSection animation="fade-in-up" delay={300}>
-                <Card className="text-center card-hover">
-                  <CardContent className="p-6">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold">Respect</h3>
-                    <p className="mt-2 text-muted-foreground">We foster a culture of mutual respect, tolerance, and appreciation for diversity.</p>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
-              
-              <AnimatedSection animation="fade-in-up" delay={400}>
-                <Card className="text-center card-hover">
-                  <CardContent className="p-6">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-school-primary/10">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-8 w-8 text-school-primary">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold">Innovation</h3>
-                    <p className="mt-2 text-muted-foreground">We embrace new ideas and approaches to enhance the learning experience and prepare for the future.</p>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
+              <div>
+                <AnimatedSection animation="fade-in-up">
+                  <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-school-primary/20 hover:border-school-primary transition-colors shadow-md hover:shadow-lg">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        <School className="h-5 w-5 text-school-primary mr-2" />
+                        <h3 className="text-xl font-semibold text-school-primary">School Information</h3>
+                      </div>
+                      <div className="mt-4 space-y-4 divide-y divide-border">
+                        <div className="flex justify-between pb-2">
+                          <h4 className="font-medium">Founded</h4>
+                          <p className="text-muted-foreground font-semibold">1941</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Affiliation</h4>
+                          <p className="text-muted-foreground text-right">West Bengal Board of Secondary Education</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Campus Area</h4>
+                          <p className="text-muted-foreground">5 acres</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Students</h4>
+                          <p className="text-muted-foreground">~1,500</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Faculty</h4>
+                          <p className="text-muted-foreground">80+ teachers</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Classes</h4>
+                          <p className="text-muted-foreground">Class V to XII</p>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <h4 className="font-medium">Medium</h4>
+                          <p className="text-muted-foreground">Bengali & English</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in-up" className="mt-6">
+                  <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-school-primary/20 hover:border-school-primary transition-colors shadow-md hover:shadow-lg">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        <Users className="h-5 w-5 text-school-primary mr-2" />
+                        <h3 className="text-xl font-semibold text-school-primary">School Leadership</h3>
+                      </div>
+                      <div className="mt-4 space-y-4">
+                        <div className="flex items-center p-3 bg-school-primary/5 dark:bg-school-primary/10 rounded-lg border border-school-primary/20">
+                          <div className="h-12 w-12 rounded-full bg-school-primary/20 flex items-center justify-center text-school-primary mr-3">
+                            <span className="font-bold text-lg">RB</span>
+                          </div>
+                          <div>
+                            <h4 className="font-medium">Dr. Rajesh Banerjee</h4>
+                            <p className="text-sm text-muted-foreground">Principal</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center p-3 rounded-lg">
+                          <div className="h-10 w-10 rounded-full bg-school-primary/10 flex items-center justify-center text-school-primary mr-3">
+                            <span className="font-bold text-lg">AC</span>
+                          </div>
+                          <div>
+                            <h4 className="font-medium">Mrs. Anjali Chatterjee</h4>
+                            <p className="text-sm text-muted-foreground">Vice Principal</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center p-3 rounded-lg">
+                          <div className="h-10 w-10 rounded-full bg-school-primary/10 flex items-center justify-center text-school-primary mr-3">
+                            <span className="font-bold text-lg">AD</span>
+                          </div>
+                          <div>
+                            <h4 className="font-medium">Mr. Abhijit Das</h4>
+                            <p className="text-sm text-muted-foreground">Academic Coordinator</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-in-up" className="mt-6">
+                  <Card className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm border-school-primary/20 hover:border-school-primary transition-colors shadow-md hover:shadow-lg">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        <Medal className="h-5 w-5 text-school-primary mr-2" />
+                        <h3 className="text-xl font-semibold text-school-primary">Awards & Recognition</h3>
+                      </div>
+                      
+                      <div className="mt-4 space-y-3">
+                        <div className="flex items-start">
+                          <Award className="h-5 w-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium">Best School Award (2019)</p>
+                            <p className="text-sm text-muted-foreground">Durgapur Municipal Corporation</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <Award className="h-5 w-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium">Excellence in Education (2017)</p>
+                            <p className="text-sm text-muted-foreground">West Bengal Education Department</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <Award className="h-5 w-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium">Outstanding Sports School (2020)</p>
+                            <p className="text-sm text-muted-foreground">District Sports Association</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+              </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
       
-      <Footer />
-    </div>
+      <section className="bg-gradient-to-br from-school-primary/5 to-school-secondary/5 dark:from-gray-800/50 dark:to-gray-900 py-16">
+        <div className="container px-4">
+          <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center mb-12">
+            <div className="inline-flex items-center rounded-full bg-school-primary/10 dark:bg-school-primary/20 px-3 py-1 text-sm text-school-primary mb-4">
+              <Clock className="mr-1 h-4 w-4" />
+              <span>Guiding Principles</span>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl">Our Core Values</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              These values guide everything we do at Durgapur Tarak Nath High School.
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Excellence",
+                description: "We strive for excellence in all aspects of education and encourage our students to do the same.",
+                icon: <Award className="h-8 w-8" />,
+                color: "school-primary"
+              },
+              {
+                title: "Integrity",
+                description: "We uphold the highest standards of honesty, ethics, and moral values in all our actions.",
+                icon: <Shield className="h-8 w-8" />,
+                color: "blue"
+              },
+              {
+                title: "Respect",
+                description: "We foster a culture of mutual respect, tolerance, and appreciation for diversity.",
+                icon: <Users className="h-8 w-8" />,
+                color: "purple"
+              },
+              {
+                title: "Innovation",
+                description: "We embrace new ideas and approaches to enhance the learning experience and prepare for the future.",
+                icon: <Lightbulb className="h-8 w-8" />,
+                color: "amber"
+              }
+            ].map((value, i) => (
+              <AnimatedSection key={i} animation="fade-in-up" delay={(i + 1) * 100} className="flex">
+                <Card className={`text-center border-${value.color}/20 hover:border-${value.color}/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex-1 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm`}>
+                  <CardContent className="p-6">
+                    <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-${value.color}/10 text-${value.color}`}>
+                      {value.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold">{value.title}</h3>
+                    <p className="mt-2 text-muted-foreground">{value.description}</p>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
 };
+
+// Additional components for the About page
+const Shield = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </svg>
+);
+
+const Lightbulb = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+    <path d="M9 18h6" />
+    <path d="M10 22h4" />
+  </svg>
+);
 
 export default About;

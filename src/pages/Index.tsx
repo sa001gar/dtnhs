@@ -56,63 +56,11 @@ const Index: React.FC = () => {
       </Helmet>
       
       <Hero />
+      <PrincipalMessage />
       <AboutSchool />
       <Features />
-      <PrincipalMessage />
-      
-      <section className="py-16 md:py-24">
-        <div className="container px-4">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-              <AnimatedSection animation="fade-in-up">
-                <div className="relative overflow-hidden rounded-xl shadow-xl">
-                  <img 
-                    src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/2024-09-13.jpg" 
-                    alt="School Building" 
-                    className="h-auto w-full object-cover transition-all duration-700 hover:scale-105" 
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-lg">
-                    <p className="text-sm font-medium text-school-primary">Established 1941</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-              
-              <AnimatedSection animation="fade-in-up" delay={100}>
-                <div>
-                  <div className="inline-flex items-center rounded-full bg-school-primary/10 dark:bg-school-primary/20 px-3 py-1 text-sm text-school-primary mb-4">
-                    <GraduationCap className="mr-1 h-4 w-4" />
-                    <span>Our Philosophy</span>
-                  </div>
-                  
-                  <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl">
-                    Commitment to Excellence
-                  </h2>
-                  <p className="mt-4 text-lg text-muted-foreground">
-                    At Durgapur Tarak Nath High School, we strive for excellence in all aspects of education. Our dedicated teachers, comprehensive curriculum, and supportive environment help students reach their full potential.
-                  </p>
-                  <p className="mt-4 text-muted-foreground">
-                    We believe in nurturing not just academic brilliance but also character, creativity, and social responsibility in our students.
-                  </p>
-                  <div className="mt-8">
-                    <Button asChild className="group rounded-full">
-                      <Link to="/about" className="flex items-center">
-                        Learn About Our History
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       <StudentAchievements />
       
-      {/* Updated, more beautiful CTA section without stats */}
       <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-16 text-white md:py-24 dark:from-school-primary/90 dark:to-school-secondary/90 dark:text-white">
         <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
         <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
