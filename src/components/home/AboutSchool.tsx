@@ -169,27 +169,27 @@ const AboutSchool = () => {
                   {/* Timeline */}
                   <div className="mt-8 relative border-l border-school-primary/20 dark:border-school-primary/30 pl-6 py-2 space-y-8">
                     <div className="relative">
-                      <div className="absolute -left-9 flex items-center justify-center w-6 h-6 rounded-full bg-school-primary text-white text-xs">
+                      <div className="absolute -left-9 flex p-2 items-center justify-center w-8 h-8 rounded-full bg-school-primary text-white text-xs">
                         1941
                       </div>
-                      <h4 className="font-semibold">Establishment</h4>
-                      <p className="text-sm text-muted-foreground">Founded with just 50 students and 5 teachers</p>
+                      <h4 className="font-semibold ml-2">Establishment</h4>
+                      <p className="text-sm text-muted-foreground ml-2">Founded with just 50 students and 5 teachers</p>
                     </div>
                     
                     <div className="relative">
-                      <div className="absolute -left-9 flex items-center justify-center w-6 h-6 rounded-full bg-school-primary text-white text-xs">
+                      <div className="absolute -left-9 flex p-2 items-center justify-center w-8 h-8 rounded-full bg-school-primary text-white text-xs">
                         1965
                       </div>
-                      <h4 className="font-semibold">Major Expansion</h4>
-                      <p className="text-sm text-muted-foreground">New building constructed, enrollment reached 500</p>
+                      <h4 className="font-semibold ml-2">Major Expansion</h4>
+                      <p className="text-sm text-muted-foreground ml-2">New building constructed, enrollment reached 500</p>
                     </div>
                     
                     <div className="relative">
-                      <div className="absolute -left-9 flex items-center justify-center w-6 h-6 rounded-full bg-school-primary text-white text-xs">
+                      <div className="absolute -left-9 flex p-2 items-center justify-center w-8 h-8 rounded-full bg-school-primary text-white text-xs">
                         2023
                       </div>
-                      <h4 className="font-semibold">Modern Era</h4>
-                      <p className="text-sm text-muted-foreground">New technology integration, over 1500 students</p>
+                      <h4 className="font-semibold ml-2">Modern Era</h4>
+                      <p className="text-sm text-muted-foreground ml-2">New technology integration, over 1500 students</p>
                     </div>
                   </div>
 
