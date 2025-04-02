@@ -143,6 +143,14 @@ export default {
 				'spin-slow': {
 					'0%': { transform: 'rotate(0deg)' },
 					'100%': { transform: 'rotate(360deg)' }
+				},
+				'beam': {
+					'0%': { transform: 'translateX(-100%) translateY(0%)' },
+					'100%': { transform: 'translateX(250%) translateY(0%)' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-1000px 0' },
+					'100%': { backgroundPosition: '1000px 0' }
 				}
 			},
 			animation: {
@@ -158,7 +166,9 @@ export default {
 				'zoom-out': 'zoom-out 0.3s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'float-delayed': 'float-delayed 7s ease-in-out infinite',
-				'spin-slow': 'spin-slow 15s linear infinite'
+				'spin-slow': 'spin-slow 15s linear infinite',
+				'shimmer': 'shimmer 2s infinite linear',
+				'beam': 'beam 10s infinite linear'
 			},
 			transitionTimingFunction: {
 				'spring': 'cubic-bezier(0.22, 1, 0.36, 1)',
