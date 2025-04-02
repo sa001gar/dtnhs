@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Hero from "@/components/home/Hero";
 import AboutSchool from "@/components/home/AboutSchool";
 import Features from "@/components/home/Features";
-import NewsSection from "@/components/home/NewsSection";
+import PrincipalMessage from "@/components/home/PrincipalMessage";
 import StudentAchievements from "@/components/home/StudentAchievements";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
       <Hero />
       <AboutSchool />
       <Features />
-      <NewsSection />
+      <PrincipalMessage />
       
       <section className="py-16 md:py-24">
         <div className="container px-4">
