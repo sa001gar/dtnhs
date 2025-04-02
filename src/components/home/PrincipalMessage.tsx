@@ -57,7 +57,7 @@ const PrincipalMessage: React.FC = () => {
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 text-white transform translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                     <div className="flex items-center">
                       <div>
-                        <h3 className="font-bold text-xl">Dr. Sunil Kumar</h3>
+                        <h3 className="font-bold text-xl">Mr. Debashis Mukherjee</h3>
                         <p className="text-white/90 text-sm">Principal</p>
                       </div>
                     </div>
@@ -82,7 +82,7 @@ const PrincipalMessage: React.FC = () => {
                 </Card>
                 <Card className="text-center p-4 backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 hover:border-school-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                   <h4 className="font-bold text-xl text-school-primary">Ph.D</h4>
-                  <p className="text-sm text-muted-foreground">in Education</p>
+                  <p className="text-sm text-muted-foreground">in English</p>
                 </Card>
               </div>
             </div>
@@ -114,10 +114,10 @@ const PrincipalMessage: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                   <div className="flex items-center gap-3">
                     <div className="h-12 w-12 rounded-full bg-gradient-to-br from-school-primary to-school-secondary flex items-center justify-center text-white text-lg font-bold">
-                      SK
+                      DM
                     </div>
                     <div>
-                      <p className="font-semibold">Dr. Sunil Kumar</p>
+                      <p className="font-semibold">Mr. Debashis Mukherjee</p>
                       <p className="text-sm text-muted-foreground">Principal, DTNHS</p>
                     </div>
                   </div>

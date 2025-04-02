@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Book, Users, Building, Trophy, BookOpen, HeartPulse } from "lucide-react";
@@ -18,6 +17,92 @@ interface FeatureProps {
 const Feature: React.FC<FeatureProps> = ({ title, description, icon, link, index, color }) => {
   const [isHovered, setIsHovered] = useState(false);
   
+  // Map color prop to tailwind class combinations
+  const getColorClasses = (colorName: string) => {
+    const colorMap: Record<string, {
+      border: string,
+      hoverBorder: string,
+      bg: string,
+      darkBg: string,
+      iconBg: string,
+      iconText: string,
+      iconHoverBg: string,
+      textHover: string,
+      buttonText: string
+    }> = {
+      "school-primary": {
+        border: "border-school-primary/20",
+        hoverBorder: "hover:border-school-primary/50",
+        bg: "from-white to-school-primary/5",
+        darkBg: "dark:from-gray-800 dark:to-school-primary/10",
+        iconBg: "bg-school-primary/10",
+        iconText: "text-school-primary",
+        iconHoverBg: "bg-school-primary",
+        textHover: "text-school-primary",
+        buttonText: "text-school-primary"
+      },
+      "purple": {
+        border: "border-purple-500/20",
+        hoverBorder: "hover:border-purple-500/50",
+        bg: "from-white to-purple-500/5",
+        darkBg: "dark:from-gray-800 dark:to-purple-500/10",
+        iconBg: "bg-purple-500/10",
+        iconText: "text-purple-500",
+        iconHoverBg: "bg-purple-500",
+        textHover: "text-purple-500",
+        buttonText: "text-purple-500"
+      },
+      "blue": {
+        border: "border-blue-500/20",
+        hoverBorder: "hover:border-blue-500/50",
+        bg: "from-white to-blue-500/5",
+        darkBg: "dark:from-gray-800 dark:to-blue-500/10",
+        iconBg: "bg-blue-500/10",
+        iconText: "text-blue-500",
+        iconHoverBg: "bg-blue-500",
+        textHover: "text-blue-500",
+        buttonText: "text-blue-500"
+      },
+      "amber": {
+        border: "border-amber-500/20",
+        hoverBorder: "hover:border-amber-500/50",
+        bg: "from-white to-amber-500/5",
+        darkBg: "dark:from-gray-800 dark:to-amber-500/10",
+        iconBg: "bg-amber-500/10",
+        iconText: "text-amber-500",
+        iconHoverBg: "bg-amber-500",
+        textHover: "text-amber-500",
+        buttonText: "text-amber-500"
+      },
+      "rose": {
+        border: "border-rose-500/20",
+        hoverBorder: "hover:border-rose-500/50",
+        bg: "from-white to-rose-500/5",
+        darkBg: "dark:from-gray-800 dark:to-rose-500/10",
+        iconBg: "bg-rose-500/10",
+        iconText: "text-rose-500",
+        iconHoverBg: "bg-rose-500",
+        textHover: "text-rose-500",
+        buttonText: "text-rose-500"
+      },
+      "emerald": {
+        border: "border-emerald-500/20",
+        hoverBorder: "hover:border-emerald-500/50",
+        bg: "from-white to-emerald-500/5",
+        darkBg: "dark:from-gray-800 dark:to-emerald-500/10",
+        iconBg: "bg-emerald-500/10",
+        iconText: "text-emerald-500",
+        iconHoverBg: "bg-emerald-500",
+        textHover: "text-emerald-500",
+        buttonText: "text-emerald-500"
+      }
+    };
+
+    return colorMap[colorName] || colorMap["school-primary"];
+  };
+
+  const colorClasses = getColorClasses(color);
+  
   return (
     <AnimatedSection
       animation="fade-in-up"
@@ -28,26 +113,35 @@ const Feature: React.FC<FeatureProps> = ({ title, description, icon, link, index
         className={cn(
           "flex flex-col rounded-xl border-2 p-6 transition-all duration-500 h-full",
           isHovered ? "shadow-lg -translate-y-2" : "shadow",
-          `border-${color}/20 hover:border-${color}/50 bg-gradient-to-br from-white to-${color}/5 dark:from-gray-800 dark:to-${color}/10`
+          colorClasses.border,
+          colorClasses.hoverBorder,
+          "bg-gradient-to-br",
+          colorClasses.bg,
+          colorClasses.darkBg
         )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className={cn(
           "mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-500",
-          `bg-${color}/10 text-${color}`,
-          isHovered && `bg-${color} text-white`
+          colorClasses.iconBg,
+          colorClasses.iconText,
+          isHovered && colorClasses.iconHoverBg,
+          isHovered && "text-white"
         )}>
           {icon}
         </div>
-        <h3 className={cn("mb-2 text-xl font-semibold transition-colors duration-500", isHovered && `text-${color}`)}>
+        <h3 className={cn(
+          "mb-2 text-xl font-semibold transition-colors duration-500", 
+          isHovered && colorClasses.textHover
+        )}>
           {title}
         </h3>
         <p className="flex-1 text-muted-foreground mb-4">{description}</p>
         <div className="mt-auto">
           <Button asChild variant="ghost" className={cn(
             "group p-0",
-            `text-${color}`
+            colorClasses.buttonText
           )}>
             <Link to={link} className="flex items-center px-4 py-2 space-x-1">
               Learn more
