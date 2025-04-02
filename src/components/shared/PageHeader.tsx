@@ -11,12 +11,13 @@ interface PageHeaderProps {
   description?: string;
   subtitle?: string;
   backgroundImage?: string;
-  pattern?: "dots" | "grid" | "noise" | "stripes" | "none";
+  pattern?: "dots" | "grid" | "noise" | "stripes" | "waves" | "hexagons" | "none";
   className?: string;
   children?: React.ReactNode;
   showBreadcrumbs?: boolean;
   small?: boolean;
   accentColor?: string;
+  theme?: "default" | "gradient" | "vibrant" | "minimal" | "dark";
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
@@ -30,13 +31,24 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   showBreadcrumbs = true,
   small = false,
   accentColor = "school-primary",
+  theme = "default",
 }) => {
   const patternClasses = {
-    dots: "bg-dots-pattern",
-    grid: "bg-grid-pattern",
+    dots: "bg-dots-pattern bg-[length:20px_20px]",
+    grid: "bg-grid-pattern bg-[length:30px_30px]",
     noise: "bg-noise-pattern",
-    stripes: "bg-stripes-pattern",
+    stripes: "bg-stripes-pattern bg-[length:20px_20px]",
+    waves: "after:content-[''] after:absolute after:inset-0 after:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMTI4MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZmZmZjIwIj48cGF0aCBkPSJNMTI4MCAwTDY0MCA3MCAwIDB2MTQwbDY0MC03MCAxMjQwIDcwVjB6Ii8+PC9nPjwvc3ZnPg==')]",
+    hexagons: "after:content-[''] after:absolute after:inset-0 after:opacity-10 after:bg-[url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"49\" viewBox=\"0 0 28 49\"><g fill-rule=\"evenodd\"><g id=\"hexagons\" fill=\"%239C92AC\" fill-opacity=\"0.4\" fill-rule=\"nonzero\"><path d=\"M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z\"/></g></g></svg>')]",
     none: "",
+  };
+
+  const themeStyles = {
+    default: "",
+    gradient: "bg-gradient-to-br from-school-primary/20 to-school-secondary/20 dark:from-school-primary/30 dark:to-school-secondary/30",
+    vibrant: "bg-gradient-to-r from-school-primary/30 via-school-accent/20 to-school-secondary/30 dark:from-school-primary/40 dark:via-school-accent/30 dark:to-school-secondary/40",
+    minimal: "bg-muted/20",
+    dark: "bg-school-dark/90 text-white",
   };
 
   const [scrolled, setScrolled] = useState(false);
@@ -70,12 +82,51 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     <div
       className={cn(
         "relative flex w-full flex-col items-center justify-center overflow-hidden transition-all duration-700",
-        small ? "py-16 md:py-20" : "py-20 md:py-28 lg:py-32",
+        small ? "py-16 md:py-20" : "py-24 md:py-32 lg:py-36",
         scrolled ? "pt-12" : "",
         patternClasses[pattern],
+        themeStyles[theme],
         className
       )}
     >
+      {/* Fixed geometric shapes and clip-pathed elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Top-right triangle */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-school-accent/10 dark:bg-school-accent/20 rounded-full blur-3xl"></div>
+        
+        {/* Bottom-left blob */}
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-school-primary/10 dark:bg-school-primary/20 rounded-full blur-3xl"></div>
+        
+        {/* Clipped shape (top-left) */}
+        <div className="absolute -top-10 -left-10 w-60 h-60 bg-school-secondary/5 dark:bg-school-secondary/10"
+          style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}>
+        </div>
+        
+        {/* Clipped shape (bottom-right) */}
+        <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-school-primary/5 dark:bg-school-primary/10"
+          style={{ clipPath: "polygon(50% 0, 100% 100%, 0 100%)" }}>
+        </div>
+
+        {/* Animated circle (center-left) */}
+        <motion.div 
+          className="absolute left-10 top-1/2 w-40 h-40 border-2 border-dashed border-school-primary/10 dark:border-school-primary/20 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+
+        {/* Animated circle (center-right) */}
+        <motion.div 
+          className="absolute right-10 top-1/3 w-28 h-28 border border-school-secondary/10 dark:border-school-secondary/20 rounded-full"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        ></motion.div>
+
+        {/* Fixed circles (scattered) */}
+        <div className="absolute left-1/4 bottom-1/4 w-6 h-6 bg-school-primary/20 dark:bg-school-primary/30 rounded-full"></div>
+        <div className="absolute right-1/4 top-1/3 w-4 h-4 bg-school-secondary/20 dark:bg-school-secondary/30 rounded-full"></div>
+        <div className="absolute left-1/3 top-1/4 w-3 h-3 bg-school-accent/20 dark:bg-school-accent/30 rounded-full"></div>
+      </div>
+
       {/* Background elements */}
       {backgroundImage ? (
         <div
@@ -169,8 +220,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center"
+          className="text-center relative"
         >
+          {/* Decorative circles behind title */}
+          <div className="absolute -left-6 -top-6 w-12 h-12 rounded-full bg-school-primary/10 dark:bg-school-primary/20 blur-sm hidden md:block"></div>
+          <div className="absolute -right-4 -bottom-4 w-10 h-10 rounded-full bg-school-secondary/10 dark:bg-school-secondary/20 blur-sm hidden md:block"></div>
+          
           <h1 className={cn(
             "text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center max-w-4xl mx-auto leading-tight",
             backgroundImage ? "text-white" : "text-foreground"
@@ -293,6 +348,14 @@ const PageHeader: React.FC<PageHeaderProps> = ({
             className={`fill-current ${backgroundImage ? 'text-background/20' : 'text-background'}`}
           ></path>
         </svg>
+      </div>
+
+      {/* Clip path decoration at the top */}
+      <div className="absolute top-0 left-0 right-0 h-12 overflow-hidden">
+        <div className="absolute top-0 w-full h-12 bg-school-primary/10 dark:bg-school-primary/15" 
+             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 60%)" }}></div>
+        <div className="absolute top-0 right-0 w-1/3 h-16 bg-school-secondary/10 dark:bg-school-secondary/15" 
+             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 30% 100%)" }}></div>
       </div>
     </div>
   );
