@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -7,16 +6,11 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { 
   Book, 
   Download, 
   Calendar, 
-  Filter,
-  Search,
-  FileText,
-  ChevronDown,
-  PlusCircle
+  Filter
 } from "lucide-react";
 import { 
   Select, 
@@ -26,21 +20,12 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import PageLoader from "@/components/shared/PageLoader";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 
 const PreviousYearPapers = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [yearFilter, setYearFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  const isMobile = useIsMobile();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,39 +45,308 @@ const PreviousYearPapers = () => {
 
   const years = ["all", "2023", "2022", "2021", "2020", "2019"];
 
-  // Paper data (same as original)
   const papers = {
     "class-10": [
-      /* ... keep existing code (all the paper objects in class-10 array) */
+      { 
+        subject: "Bengali", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.4 MB",
+        pages: 12
+      },
+      { 
+        subject: "English", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.2 MB",
+        pages: 10
+      },
+      { 
+        subject: "Mathematics", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.1 MB",
+        pages: 14
+      },
+      { 
+        subject: "Physical Science", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.8 MB",
+        pages: 12
+      },
+      { 
+        subject: "Life Science", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.5 MB",
+        pages: 11
+      },
+      { 
+        subject: "History", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.3 MB",
+        pages: 10
+      },
+      { 
+        subject: "Geography", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.6 MB",
+        pages: 11
+      },
+      { 
+        subject: "Bengali", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.3 MB",
+        pages: 12
+      },
+      { 
+        subject: "English", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.1 MB",
+        pages: 10
+      },
+      { 
+        subject: "Mathematics", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.0 MB",
+        pages: 14
+      },
+      { 
+        subject: "Bengali", 
+        year: "2021", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.2 MB",
+        pages: 12
+      },
+      { 
+        subject: "English", 
+        year: "2021", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.0 MB",
+        pages: 10
+      },
     ],
     "class-12-science": [
-      /* ... keep existing code (all the paper objects in class-12-science array) */
+      { 
+        subject: "Physics", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.2 MB",
+        pages: 15
+      },
+      { 
+        subject: "Chemistry", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.0 MB",
+        pages: 14
+      },
+      { 
+        subject: "Mathematics", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.4 MB",
+        pages: 16
+      },
+      { 
+        subject: "Biology", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.1 MB",
+        pages: 14
+      },
+      { 
+        subject: "English", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.5 MB",
+        pages: 12
+      },
+      { 
+        subject: "Physics", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.1 MB",
+        pages: 15
+      },
+      { 
+        subject: "Chemistry", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.9 MB",
+        pages: 14
+      },
+      { 
+        subject: "Physics", 
+        year: "2021", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.0 MB",
+        pages: 15
+      },
     ],
     "class-12-commerce": [
-      /* ... keep existing code (all the paper objects in class-12-commerce array) */
+      { 
+        subject: "Accountancy", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.1 MB",
+        pages: 14
+      },
+      { 
+        subject: "Business Studies", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.8 MB",
+        pages: 13
+      },
+      { 
+        subject: "Economics", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.9 MB",
+        pages: 13
+      },
+      { 
+        subject: "Computer Applications", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.6 MB",
+        pages: 12
+      },
+      { 
+        subject: "English", 
+        year: "2023", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.5 MB",
+        pages: 12
+      },
+      { 
+        subject: "Accountancy", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "3.0 MB",
+        pages: 14
+      },
+      { 
+        subject: "Business Studies", 
+        year: "2022", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.7 MB",
+        pages: 13
+      },
+      { 
+        subject: "Accountancy", 
+        year: "2021", 
+        paperType: "Board Exam", 
+        downloadUrl: "#",
+        size: "2.9 MB",
+        pages: 14
+      },
     ],
     "practice-papers": [
-      /* ... keep existing code (all the paper objects in practice-papers array) */
+      { 
+        subject: "Mathematics (Class X)", 
+        year: "2023", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.5 MB",
+        pages: 12
+      },
+      { 
+        subject: "Science (Class X)", 
+        year: "2023", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.3 MB",
+        pages: 10
+      },
+      { 
+        subject: "Physics (Class XII)", 
+        year: "2023", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.8 MB",
+        pages: 14
+      },
+      { 
+        subject: "Chemistry (Class XII)", 
+        year: "2023", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.7 MB",
+        pages: 13
+      },
+      { 
+        subject: "Accountancy (Class XII)", 
+        year: "2023", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.6 MB",
+        pages: 12
+      },
+      { 
+        subject: "Mathematics (Class X)", 
+        year: "2022", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.4 MB",
+        pages: 12
+      },
+      { 
+        subject: "Science (Class X)", 
+        year: "2022", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.2 MB",
+        pages: 10
+      },
+      { 
+        subject: "Mathematics (Class X)", 
+        year: "2021", 
+        paperType: "Sample Paper", 
+        downloadUrl: "#",
+        size: "2.3 MB",
+        pages: 12
+      },
     ],
   };
 
   const filterPapersByYear = (paperList, year) => {
     if (year === "all") return paperList;
     return paperList.filter(paper => paper.year === year);
-  };
-
-  const filterPapersBySearch = (paperList, query) => {
-    if (!query) return paperList;
-    const lowerQuery = query.toLowerCase();
-    return paperList.filter(paper => 
-      paper.subject.toLowerCase().includes(lowerQuery) ||
-      paper.paperType.toLowerCase().includes(lowerQuery)
-    );
-  };
-
-  const applyFilters = (paperList) => {
-    let filteredList = filterPapersByYear(paperList, yearFilter);
-    return filterPapersBySearch(filteredList, searchQuery);
   };
 
   if (isLoading) {
@@ -112,84 +366,37 @@ const PreviousYearPapers = () => {
           <Breadcrumb />
         </div>
         
-        <AnimatedSection animation="fade-in-up">
-          <Card className="mb-6 bg-card/80 backdrop-blur-sm border shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center text-xl">
-                <FileText className="mr-2 h-5 w-5 text-school-primary" />
-                Search & Filter Papers
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Collapsible 
-                open={!isMobile || isFilterExpanded} 
-                onOpenChange={setIsFilterExpanded}
-              >
-                {isMobile && (
-                  <CollapsibleTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      className="flex w-full justify-between mb-2"
-                      size="sm"
-                    >
-                      <span>Filter Options</span>
-                      <ChevronDown 
-                        className={`h-4 w-4 transition-transform ${isFilterExpanded ? 'rotate-180' : ''}`} 
-                      />
-                    </Button>
-                  </CollapsibleTrigger>
-                )}
-                
-                <CollapsibleContent className={!isMobile ? "block" : undefined}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Search className="h-4 w-4 text-muted-foreground" />
-                        <label htmlFor="search" className="text-sm font-medium">
-                          Search Papers
-                        </label>
-                      </div>
-                      <Input 
-                        id="search"
-                        placeholder="Search by subject or type..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Filter className="h-4 w-4 text-muted-foreground" />
-                        <label htmlFor="year-filter" className="text-sm font-medium">
-                          Filter by Year
-                        </label>
-                      </div>
-                      <Select value={yearFilter} onValueChange={setYearFilter}>
-                        <SelectTrigger id="year-filter">
-                          <SelectValue placeholder="Filter by Year" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {years.map(year => (
-                            <SelectItem key={year} value={year}>
-                              {year === "all" ? "All Years" : year}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
-            </CardContent>
-          </Card>
-        </AnimatedSection>
+        <div className="mb-6">
+          <div className="flex items-center justify-end">
+            <div className="w-full sm:w-64">
+              <div className="flex items-center gap-2 mb-2">
+                <Filter className="h-4 w-4" />
+                <label htmlFor="year-filter" className="text-sm font-medium">
+                  Filter by Year
+                </label>
+              </div>
+              <Select value={yearFilter} onValueChange={setYearFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Filter by Year" />
+                </SelectTrigger>
+                <SelectContent>
+                  {years.map(year => (
+                    <SelectItem key={year} value={year}>
+                      {year === "all" ? "All Years" : year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
         
-        <AnimatedSection animation="fade-in-up" delay={200}>
+        <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={classes[0].id} className="mb-8">
             <div className="overflow-x-auto pb-2">
-              <TabsList className="mb-6">
+              <TabsList className="mb-6 inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-auto">
                 {classes.map((cls) => (
-                  <TabsTrigger key={cls.id} value={cls.id}>
+                  <TabsTrigger key={cls.id} value={cls.id} className="whitespace-nowrap">
                     {cls.label}
                   </TabsTrigger>
                 ))}
@@ -197,32 +404,32 @@ const PreviousYearPapers = () => {
             </div>
             
             {classes.map((cls) => (
-              <TabsContent key={cls.id} value={cls.id} className="animate-in fade-in-50 duration-300">
+              <TabsContent key={cls.id} value={cls.id}>
                 <div className="grid gap-6 md:grid-cols-1">
-                  <Card className="overflow-hidden border shadow">
-                    <CardHeader className="bg-card/95">
+                  <Card className="overflow-hidden">
+                    <CardHeader>
                       <CardTitle className="flex items-center text-xl">
                         <Book className="mr-2 h-5 w-5 text-school-primary" />
                         {cls.label} Question Papers
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="p-0">
+                    <CardContent>
                       <ScrollArea className="w-full" type="always">
-                        <div className="min-w-[700px]">
+                        <div className="min-w-[700px] pr-4">
                           <table className="w-full border-collapse">
                             <thead>
-                              <tr className="bg-muted/50 border-b">
-                                <th className="px-4 py-3 text-left text-sm font-medium">Subject</th>
-                                <th className="px-4 py-3 text-left text-sm font-medium">Year</th>
-                                <th className="px-4 py-3 text-left text-sm font-medium">Type</th>
-                                <th className="px-4 py-3 text-left text-sm font-medium">Details</th>
-                                <th className="px-4 py-3 text-left text-sm font-medium">Download</th>
+                              <tr className="border-b">
+                                <th className="px-4 py-2 text-left text-sm font-medium">Subject</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Year</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Type</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Details</th>
+                                <th className="px-4 py-2 text-left text-sm font-medium">Download</th>
                               </tr>
                             </thead>
                             <tbody>
-                              {applyFilters(papers[cls.id] || []).length > 0 ? (
-                                applyFilters(papers[cls.id] || []).map((paper, idx) => (
-                                  <tr key={idx} className="border-b last:border-0 hover:bg-accent/5 transition-colors">
+                              {filterPapersByYear(papers[cls.id] || [], yearFilter).length > 0 ? (
+                                filterPapersByYear(papers[cls.id] || [], yearFilter).map((paper, idx) => (
+                                  <tr key={idx} className="border-b last:border-0">
                                     <td className="px-4 py-3 text-sm font-medium">{paper.subject}</td>
                                     <td className="px-4 py-3 text-sm">
                                       <Badge variant="outline" className="bg-muted">
@@ -238,7 +445,7 @@ const PreviousYearPapers = () => {
                                       </div>
                                     </td>
                                     <td className="px-4 py-3 text-sm">
-                                      <Button size="sm" className="h-8 gap-1 bg-green-600 hover:bg-green-700">
+                                      <Button size="sm" className="h-8 gap-1" variant="outline">
                                         <Download className="h-3 w-3" />
                                         <span>PDF</span>
                                       </Button>
@@ -248,7 +455,7 @@ const PreviousYearPapers = () => {
                               ) : (
                                 <tr>
                                   <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
-                                    No question papers found matching your filters.
+                                    No question papers found for the selected year.
                                   </td>
                                 </tr>
                               )}
@@ -256,17 +463,6 @@ const PreviousYearPapers = () => {
                           </table>
                         </div>
                       </ScrollArea>
-                      
-                      {/* Paper count and navigation */}
-                      <div className="p-4 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-3">
-                        <p className="text-sm text-muted-foreground">
-                          Showing <span className="font-medium">{applyFilters(papers[cls.id] || []).length}</span> papers
-                        </p>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
-                          <PlusCircle className="h-4 w-4" />
-                          Request Missing Paper
-                        </Button>
-                      </div>
                     </CardContent>
                   </Card>
                 </div>
