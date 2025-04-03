@@ -5,6 +5,7 @@ import AboutSchool from "@/components/home/AboutSchool";
 import Features from "@/components/home/Features";
 import PrincipalMessage from "@/components/home/PrincipalMessage";
 import StudentAchievements from "@/components/home/StudentAchievements";
+import NotificationSection from "@/components/home/NotificationSection";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GraduationCap } from "lucide-react";
@@ -57,6 +58,7 @@ const Index: React.FC = () => {
       
       <Hero />
       <PrincipalMessage />
+      <NotificationSection />
       <AboutSchool />
       <Features />
       <StudentAchievements />

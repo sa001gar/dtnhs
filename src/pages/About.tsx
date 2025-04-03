@@ -10,6 +10,7 @@ import PageLoader from "@/components/shared/PageLoader";
 import { School, Users, Clock, Award, GraduationCap, Target, BookOpen, Medal, Trophy } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Helmet } from "react-helmet";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const About: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,8 +53,17 @@ const About: React.FC = () => {
               <Breadcrumb />
             </div>
             
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-              <div className="lg:col-span-2">
+            <Tabs defaultValue="history" className="w-full mb-12">
+              <div className="overflow-x-auto pb-2">
+                <TabsList className="border border-border">
+                  <TabsTrigger value="history">Our History</TabsTrigger>
+                  <TabsTrigger value="principal">Principal's Message</TabsTrigger>
+                  <TabsTrigger value="mission">Our Mission</TabsTrigger>
+                  <TabsTrigger value="vision">Our Vision</TabsTrigger>
+                </TabsList>
+              </div>
+              
+              <TabsContent value="history" className="mt-6">
                 <AnimatedSection animation="fade-in-up">
                   <div className="flex items-center mb-6">
                     <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
@@ -88,8 +98,90 @@ const About: React.FC = () => {
                     </div>
                   </div>
                 </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in-up" className="mt-12">
+              </TabsContent>
+              
+              <TabsContent value="principal" className="mt-6">
+                <AnimatedSection animation="fade-in-up">
+                  <div className="flex items-center mb-6">
+                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
+                      <Users className="h-6 w-6" />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tighter text-school-primary">Principal's Message</h2>
+                  </div>
+                  
+                  <div className="flex flex-col md:flex-row gap-8">
+                    <div className="md:w-1/3">
+                      <div className="rounded-lg overflow-hidden shadow-lg bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-5 border border-border">
+                        <div className="flex flex-col items-center mb-4">
+                          <div className="w-32 h-32 rounded-full bg-school-primary/10 flex items-center justify-center mb-3">
+                            <span className="text-4xl font-bold text-school-primary">RB</span>
+                          </div>
+                          <h3 className="text-xl font-semibold">Dr. Rajesh Banerjee</h3>
+                          <p className="text-muted-foreground">Principal</p>
+                        </div>
+                        <div className="space-y-3 text-sm">
+                          <div className="flex items-center">
+                            <div className="font-medium">Qualification:</div>
+                            <div className="ml-2 text-muted-foreground">Ph.D. in Education</div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="font-medium">Experience:</div>
+                            <div className="ml-2 text-muted-foreground">25+ Years</div>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="font-medium">Joined:</div>
+                            <div className="ml-2 text-muted-foreground">2015</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="md:w-2/3">
+                      <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg p-6 border border-border">
+                        <h3 className="text-xl font-semibold mb-4">Message from the Principal</h3>
+                        
+                        <div className="space-y-4 text-muted-foreground">
+                          <p className="leading-relaxed">
+                            Dear Students, Parents, and Visitors,
+                          </p>
+                          <p className="leading-relaxed">
+                            It gives me immense pleasure to welcome you to Durgapur Tarak Nath High School, an institution with a rich legacy spanning over eight decades. As we approach our 82nd year of excellence in education, I am proud to lead a school that continues to uphold its founding principles while embracing the needs of modern education.
+                          </p>
+                          <p className="leading-relaxed">
+                            At DTNHS, we believe that education is not merely about academic achievements but about nurturing well-rounded individuals who will contribute meaningfully to society. Our holistic approach focuses on intellectual, physical, emotional, and social development, preparing students not just for examinations but for the challenges of life.
+                          </p>
+                          <p className="leading-relaxed">
+                            Our dedicated faculty members work tirelessly to create a stimulating learning environment where curiosity is encouraged, and critical thinking skills are developed. We emphasize character building alongside academic excellence, instilling values like integrity, respect, and responsibility that will guide our students throughout their lives.
+                          </p>
+                          <p className="leading-relaxed">
+                            The rapidly changing world demands that we prepare our students with skills beyond traditional academics. To this end, we have integrated technology into our teaching methodologies and offer a wide range of extracurricular activities that expose students to diverse fields and interests.
+                          </p>
+                          <p className="leading-relaxed">
+                            Our school's strength lies in the collaborative partnership between teachers, parents, and the community. I invite all stakeholders to actively participate in our educational journey, offering suggestions and support that will help us continue to evolve and improve.
+                          </p>
+                          <p className="leading-relaxed">
+                            To our students, I say: Embrace every opportunity for learning with enthusiasm and perseverance. Remember that true education empowers you to question, to reason, and to contribute positively to the world around you.
+                          </p>
+                          <p className="leading-relaxed">
+                            As we move forward, we remain committed to our mission of providing quality education that prepares students to face future challenges with confidence and compassion.
+                          </p>
+                          <p className="leading-relaxed">
+                            I look forward to working together with all of you to uphold the prestigious legacy of Durgapur Tarak Nath High School and to take it to greater heights.
+                          </p>
+                          <p className="font-semibold mt-6">
+                            Warm Regards,<br />
+                            Dr. Rajesh Banerjee<br />
+                            Principal, DTNHS
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </TabsContent>
+              
+              <TabsContent value="mission" className="mt-6">
+                <AnimatedSection animation="fade-in-up">
                   <div className="flex items-center mb-6">
                     <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
                       <Target className="h-6 w-6" />
@@ -144,8 +236,10 @@ const About: React.FC = () => {
                     </div>
                   </div>
                 </AnimatedSection>
-                
-                <AnimatedSection animation="fade-in-up" className="mt-12">
+              </TabsContent>
+              
+              <TabsContent value="vision" className="mt-6">
+                <AnimatedSection animation="fade-in-up">
                   <div className="flex items-center mb-6">
                     <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
                       <Trophy className="h-6 w-6" />
@@ -170,6 +264,12 @@ const About: React.FC = () => {
                     </ul>
                   </div>
                 </AnimatedSection>
+              </TabsContent>
+            </Tabs>
+            
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+              <div className="lg:col-span-2">
+                {/* Additional content can be placed here */}
               </div>
               
               <div>
