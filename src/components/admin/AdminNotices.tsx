@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -54,7 +54,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Pencil, Trash2, Calendar, AlertTriangle, Megaphone } from "lucide-react";
+import { Plus, Pencil, Trash2, Calendar, AlertTriangle, Megaphone, Search } from "lucide-react";
 
 const formSchema = z.object({
   title: z.string().min(5, { message: "Title must be at least 5 characters" }),
@@ -77,28 +77,76 @@ type Notice = {
 
 const AdminNotices = () => {
   const { toast } = useToast();
-  const [notices, setNotices] = useState<Notice[]>([
-    {
-      id: 1,
-      title: "Final Examination Schedule Announcement",
-      content: "The final examination for all classes will be held from December 10th to December 20th, 2023. The detailed schedule has been posted on the school notice board and is available for download.",
-      date: "2023-11-25",
-      category: "Examination",
-      attachment: "https://example.com/exam-schedule.pdf",
-      isUrgent: true,
-    },
-    {
-      id: 2,
-      title: "Annual Day Celebration",
-      content: "The Annual Day celebration will be held on December 5th, 2023 at the school auditorium. All parents are cordially invited to attend the function.",
-      date: "2023-11-20",
-      category: "Event",
-      isUrgent: false,
-    },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [notices, setNotices] = useState<Notice[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [editingNotice, setEditingNotice] = useState<Notice | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Initialize or load notices from storage
+  useEffect(() => {
+    const storedNotices = localStorage.getItem("schoolNotifications");
+    
+    if (storedNotices) {
+      try {
+        const parsedNotices = JSON.parse(storedNotices);
+        // Convert to admin notice format if needed
+        const adminNotices = parsedNotices.map(n => ({
+          id: n.id,
+          title: n.title,
+          content: n.content,
+          date: n.date,
+          category: n.category || "General",
+          attachment: n.attachment || "",
+          isUrgent: n.isUrgent || false,
+        }));
+        setNotices(adminNotices);
+      } catch (e) {
+        console.error("Error parsing stored notices:", e);
+        setDefaultNotices();
+      }
+    } else {
+      setDefaultNotices();
+    }
+    
+    setIsLoading(false);
+  }, []);
+  
+  const setDefaultNotices = () => {
+    const defaultNotices = [
+      {
+        id: 1,
+        title: "Final Examination Schedule Announcement",
+        content: "The final examination for all classes will be held from December 10th to December 20th, 2023. The detailed schedule has been posted on the school notice board and is available for download.",
+        date: "2023-11-25",
+        category: "Examination",
+        attachment: "https://example.com/exam-schedule.pdf",
+        isUrgent: true,
+      },
+      {
+        id: 2,
+        title: "Annual Day Celebration",
+        content: "The Annual Day celebration will be held on December 5th, 2023 at the school auditorium. All parents are cordially invited to attend the function.",
+        date: "2023-11-20",
+        category: "Event",
+        isUrgent: false,
+      },
+    ];
+    setNotices(defaultNotices);
+    
+    // Also update localStorage
+    const storageFormat = defaultNotices.map(n => ({
+      id: n.id,
+      title: n.title,
+      content: n.content,
+      date: n.date,
+      category: n.category,
+      attachment: n.attachment || "",
+      isUrgent: n.isUrgent,
+      read: false,
+    }));
+    localStorage.setItem("schoolNotifications", JSON.stringify(storageFormat));
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -121,6 +169,7 @@ const AdminNotices = () => {
           notice.id === editingNotice.id ? { ...notice, ...values } : notice
         );
         setNotices(updatedNotices);
+        updateLocalStorage(updatedNotices);
         toast({
           title: "Notice updated",
           description: "The notice has been updated successfully.",
@@ -136,7 +185,9 @@ const AdminNotices = () => {
           attachment: values.attachment,
           isUrgent: values.isUrgent,
         };
-        setNotices([...notices, newNotice]);
+        const updatedNotices = [...notices, newNotice];
+        setNotices(updatedNotices);
+        updateLocalStorage(updatedNotices);
         toast({
           title: "Notice added",
           description: "The notice has been added successfully.",
@@ -155,6 +206,42 @@ const AdminNotices = () => {
       setIsLoading(false);
     }
   };
+  
+  // Helper to update localStorage with current notices
+  const updateLocalStorage = (updatedNotices: Notice[]) => {
+    // Get existing notifications first to preserve read status
+    const storedNotifications = localStorage.getItem("schoolNotifications");
+    let existingData = [];
+    
+    if (storedNotifications) {
+      try {
+        existingData = JSON.parse(storedNotifications);
+      } catch (e) {
+        console.error("Error parsing stored notifications:", e);
+      }
+    }
+    
+    // Map the ids to easily find existing entries
+    const existingMap = new Map(existingData.map(n => [n.id, n]));
+    
+    // Create format for storage, preserving read status for existing notices
+    const storageFormat = updatedNotices.map(n => {
+      const existing = existingMap.get(n.id);
+      return {
+        id: n.id,
+        title: n.title,
+        content: n.content,
+        date: n.date, 
+        category: n.category,
+        attachment: n.attachment || "",
+        isUrgent: n.isUrgent,
+        read: existing ? existing.read : false,
+      };
+    });
+    
+    // Store in localStorage
+    localStorage.setItem("schoolNotifications", JSON.stringify(storageFormat));
+  };
 
   const handleEdit = (notice: Notice) => {
     setEditingNotice(notice);
@@ -170,7 +257,9 @@ const AdminNotices = () => {
   };
 
   const handleDelete = (id: number) => {
-    setNotices(notices.filter((notice) => notice.id !== id));
+    const updatedNotices = notices.filter((notice) => notice.id !== id);
+    setNotices(updatedNotices);
+    updateLocalStorage(updatedNotices);
     toast({
       title: "Notice deleted",
       description: "The notice has been deleted successfully.",
@@ -190,9 +279,17 @@ const AdminNotices = () => {
     setOpenDialog(true);
   };
 
+  // Filter notices by search term
+  const filteredNotices = notices.filter(
+    notice => 
+      notice.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      notice.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      notice.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const categories = [
     "Examination", "Event", "Holiday", "General", "Academic", 
-    "Sports", "Cultural", "Administrative", "Important"
+    "Sports", "Cultural", "Administrative", "Important", "Meeting", "Announcement"
   ];
 
   return (
@@ -203,6 +300,18 @@ const AdminNotices = () => {
           <Plus className="h-4 w-4" />
           Add Notice
         </Button>
+      </div>
+
+      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-4">
+        <div className="relative w-full sm:max-w-xs">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search notices..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
+        </div>
       </div>
 
       <Card>
@@ -218,14 +327,22 @@ const AdminNotices = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {notices.length === 0 ? (
+                {isLoading ? (
                   <TableRow>
                     <TableCell colSpan={4} className="h-24 text-center">
-                      No notices available
+                      <div className="flex justify-center">
+                        <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : filteredNotices.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="h-24 text-center">
+                      {searchTerm ? "No notices matching your search" : "No notices available"}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  notices.map((notice) => (
+                  filteredNotices.map((notice) => (
                     <TableRow key={notice.id}>
                       <TableCell className="font-medium">
                         <div className="flex items-center gap-2">
@@ -249,7 +366,7 @@ const AdminNotices = () => {
                       <TableCell>
                         <div className="flex items-center">
                           <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
-                          {new Date(notice.date).toLocaleDateString()}
+                          {notice.date}
                         </div>
                       </TableCell>
                       <TableCell>
