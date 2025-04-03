@@ -121,12 +121,12 @@ const Notices = () => {
         pattern="stripes"
       />
 
-      <div className="container py-8 md:py-12">
-        <div className="mb-6">
+      <div className="container py-6 sm:py-8 md:py-12">
+        <div className="mb-4 sm:mb-6">
           <Breadcrumb />
         </div>
         
-        <div className="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="relative w-full sm:max-w-xs">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
@@ -139,10 +139,10 @@ const Notices = () => {
         </div>
         
         <Tabs defaultValue="All" className="w-full">
-          <div className="mb-8 overflow-x-auto pb-2 hide-scrollbar">
-            <TabsList className="inline-flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground w-auto">
+          <div className="mb-6 sm:mb-8 overflow-x-auto pb-2 hide-scrollbar">
+            <TabsList className="inline-flex h-9 sm:h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground w-auto">
               {categories.map((category) => (
-                <TabsTrigger key={category} value={category} className="whitespace-nowrap">
+                <TabsTrigger key={category} value={category} className="text-xs sm:text-sm whitespace-nowrap">
                   {category}
                 </TabsTrigger>
               ))}
@@ -150,7 +150,7 @@ const Notices = () => {
           </div>
           
           <TabsContent value="All" className="mt-0">
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {filteredNotices.length > 0 ? (
                 filteredNotices.map((notice, index) => (
                   <AnimatedSection key={notice.id} animation="fade-in-up" delay={index * 100}>
@@ -158,47 +158,47 @@ const Notices = () => {
                       className={`notice-card border-l-4 ${notice.urgent ? 'border-destructive dark:border-destructive' : 'border-school-primary dark:border-school-primary'} hover:shadow-md dark:bg-card/80 backdrop-blur-sm ${readNotices.includes(notice.id) ? 'bg-muted/30' : ''}`}
                       onClick={() => markAsRead(notice.id)}
                     >
-                      <CardHeader>
+                      <CardHeader className="p-4 sm:p-6">
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <div className="flex items-center text-sm text-muted-foreground gap-4">
+                          <div className="flex flex-wrap items-center text-xs sm:text-sm text-muted-foreground gap-2 sm:gap-4">
                             <div className="flex items-center">
-                              <Calendar className="mr-2 h-4 w-4" />
+                              <Calendar className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                               {notice.date}
                             </div>
                             <div className="flex items-center">
-                              <Clock className="mr-2 h-4 w-4" />
+                              <Clock className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                               {notice.time}
                             </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="bg-school-primary/10 text-school-primary dark:bg-school-primary/20">
+                          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                            <Badge variant="outline" className="text-xs px-1 sm:px-2 py-0.5 bg-school-primary/10 text-school-primary dark:bg-school-primary/20">
                               {notice.category}
                             </Badge>
                             {notice.urgent && (
-                              <Badge variant="destructive" className="flex items-center gap-1">
-                                <AlertCircle className="h-3 w-3" /> Urgent
+                              <Badge variant="destructive" className="text-xs flex items-center gap-0.5 sm:gap-1">
+                                <AlertCircle className="h-2 w-2 sm:h-3 sm:w-3" /> Urgent
                               </Badge>
                             )}
                             {readNotices.includes(notice.id) && (
-                              <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-400 flex items-center gap-1">
-                                <Check className="h-3 w-3" /> Read
+                              <Badge variant="outline" className="text-xs bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-400 flex items-center gap-0.5 sm:gap-1">
+                                <Check className="h-2 w-2 sm:h-3 sm:w-3" /> Read
                               </Badge>
                             )}
                           </div>
                         </div>
-                        <CardTitle className={`${notice.urgent ? 'text-destructive dark:text-destructive' : ''}`}>
+                        <CardTitle className={`text-base sm:text-lg md:text-xl ${notice.urgent ? 'text-destructive dark:text-destructive' : ''}`}>
                           {notice.title}
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground dark:text-muted-foreground/90">{notice.content}</p>
+                      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0">
+                        <p className="text-xs sm:text-sm text-muted-foreground dark:text-muted-foreground/90">{notice.content}</p>
                       </CardContent>
                     </Card>
                   </AnimatedSection>
                 ))
               ) : (
-                <Card className="p-8 text-center">
-                  <p className="text-muted-foreground">No notices found matching your search.</p>
+                <Card className="p-4 sm:p-8 text-center">
+                  <p className="text-sm sm:text-base text-muted-foreground">No notices found matching your search.</p>
                 </Card>
               )}
             </div>
@@ -206,7 +206,7 @@ const Notices = () => {
           
           {categories.filter(cat => cat !== "All").map((category) => (
             <TabsContent key={category} value={category} className="mt-0">
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {filteredNotices
                   .filter(notice => notice.category === category)
                   .map((notice, index) => (
@@ -215,40 +215,40 @@ const Notices = () => {
                         className={`notice-card border-l-4 ${notice.urgent ? 'border-destructive dark:border-destructive' : 'border-school-primary dark:border-school-primary'} hover:shadow-md dark:bg-card/80 backdrop-blur-sm ${readNotices.includes(notice.id) ? 'bg-muted/30' : ''}`}
                         onClick={() => markAsRead(notice.id)}
                       >
-                        <CardHeader>
+                        <CardHeader className="p-4 sm:p-6">
                           <div className="flex flex-wrap items-center justify-between gap-2">
-                            <div className="flex items-center text-sm text-muted-foreground gap-4">
+                            <div className="flex flex-wrap items-center text-xs sm:text-sm text-muted-foreground gap-2 sm:gap-4">
                               <div className="flex items-center">
-                                <Calendar className="mr-2 h-4 w-4" />
+                                <Calendar className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                                 {notice.date}
                               </div>
                               <div className="flex items-center">
-                                <Clock className="mr-2 h-4 w-4" />
+                                <Clock className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                                 {notice.time}
                               </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <Badge variant="outline" className="bg-school-primary/10 text-school-primary dark:bg-school-primary/20">
+                            <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                              <Badge variant="outline" className="text-xs px-1 sm:px-2 py-0.5 bg-school-primary/10 text-school-primary dark:bg-school-primary/20">
                                 {notice.category}
                               </Badge>
                               {notice.urgent && (
-                                <Badge variant="destructive" className="flex items-center gap-1">
-                                  <AlertCircle className="h-3 w-3" /> Urgent
+                                <Badge variant="destructive" className="text-xs flex items-center gap-0.5 sm:gap-1">
+                                  <AlertCircle className="h-2 w-2 sm:h-3 sm:w-3" /> Urgent
                                 </Badge>
                               )}
                               {readNotices.includes(notice.id) && (
-                                <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-400 flex items-center gap-1">
-                                  <Check className="h-3 w-3" /> Read
+                                <Badge variant="outline" className="text-xs bg-green-100 text-green-800 dark:bg-green-800/20 dark:text-green-400 flex items-center gap-0.5 sm:gap-1">
+                                  <Check className="h-2 w-2 sm:h-3 sm:w-3" /> Read
                                 </Badge>
                               )}
                             </div>
                           </div>
-                          <CardTitle className={`${notice.urgent ? 'text-destructive dark:text-destructive' : ''}`}>
+                          <CardTitle className={`text-base sm:text-lg md:text-xl ${notice.urgent ? 'text-destructive dark:text-destructive' : ''}`}>
                             {notice.title}
                           </CardTitle>
                         </CardHeader>
-                        <CardContent>
-                          <p className="text-muted-foreground dark:text-muted-foreground/90">{notice.content}</p>
+                        <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6 pt-0">
+                          <p className="text-xs sm:text-sm text-muted-foreground dark:text-muted-foreground/90">{notice.content}</p>
                         </CardContent>
                       </Card>
                     </AnimatedSection>
