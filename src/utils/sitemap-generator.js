@@ -21,6 +21,7 @@ const routes = [
   '/syllabus',
   '/exam-schedule',
   '/previous-year-papers',
+  '/admin',
 ];
 
 // Build the sitemap
