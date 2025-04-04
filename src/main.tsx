@@ -11,6 +11,9 @@ if (window.location.pathname === '/sitemap.xml') {
       document.open();
       document.write(text);
       document.close();
+    })
+    .catch(error => {
+      console.error('Error loading sitemap:', error);
     });
 } else {
   createRoot(document.getElementById("root")!).render(<App />);

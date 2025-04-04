@@ -29,5 +29,6 @@ const sitemap = sitemapBuilder('https://dtnhs.edu.in', routes);
 // Output path
 const outputPath = path.resolve('./public/sitemap.xml');
 
-// Write sitemap to file
-fs.writeFileSync(outputPath, sitemap.toString());
+// Make sure there's no BOM or whitespace before the XML declaration
+// Write sitemap to file ensuring XML declaration is at the start
+fs.writeFileSync(outputPath, sitemap.toString().trim());
