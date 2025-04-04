@@ -6,6 +6,7 @@ import Features from "@/components/home/Features";
 import PrincipalMessage from "@/components/home/PrincipalMessage";
 import StudentAchievements from "@/components/home/StudentAchievements";
 import NotificationSection from "@/components/home/NotificationSection";
+import NewsSection from "@/components/home/NewsSection";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GraduationCap } from "lucide-react";
@@ -58,7 +59,24 @@ const Index: React.FC = () => {
       
       <Hero />
       <PrincipalMessage />
-      <NotificationSection />
+
+      {/* News and Notification Section - Side by side on larger screens */}
+      <div className="bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50 py-8 sm:py-12">
+        <div className="container px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Notice Board */}
+            <div>
+              <NotificationSection />
+            </div>
+            
+            {/* News Section */}
+            <div>
+              <NewsSection />
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <AboutSchool />
       <Features />
       <StudentAchievements />
