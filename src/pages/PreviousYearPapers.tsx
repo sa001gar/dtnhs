@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import PageLoader from "@/components/shared/PageLoader";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const PreviousYearPapers = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -414,55 +413,53 @@ const PreviousYearPapers = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <ScrollArea className="w-full" type="always">
-                        <div className="min-w-[700px] pr-4">
-                          <table className="w-full border-collapse">
-                            <thead>
-                              <tr className="border-b">
-                                <th className="px-4 py-2 text-left text-sm font-medium">Subject</th>
-                                <th className="px-4 py-2 text-left text-sm font-medium">Year</th>
-                                <th className="px-4 py-2 text-left text-sm font-medium">Type</th>
-                                <th className="px-4 py-2 text-left text-sm font-medium">Details</th>
-                                <th className="px-4 py-2 text-left text-sm font-medium">Download</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {filterPapersByYear(papers[cls.id] || [], yearFilter).length > 0 ? (
-                                filterPapersByYear(papers[cls.id] || [], yearFilter).map((paper, idx) => (
-                                  <tr key={idx} className="border-b last:border-0">
-                                    <td className="px-4 py-3 text-sm font-medium">{paper.subject}</td>
-                                    <td className="px-4 py-3 text-sm">
-                                      <Badge variant="outline" className="bg-muted">
-                                        <Calendar className="mr-1 h-3 w-3" />
-                                        {paper.year}
-                                      </Badge>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">{paper.paperType}</td>
-                                    <td className="px-4 py-3 text-sm text-muted-foreground">
-                                      <div className="flex items-center gap-3">
-                                        <span>{paper.pages} pages</span>
-                                        <span>{paper.size}</span>
-                                      </div>
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                      <Button size="sm" className="h-8 gap-1" variant="outline">
-                                        <Download className="h-3 w-3" />
-                                        <span>PDF</span>
-                                      </Button>
-                                    </td>
-                                  </tr>
-                                ))
-                              ) : (
-                                <tr>
-                                  <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
-                                    No question papers found for the selected year.
+                      <div className="w-full overflow-x-auto">
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b">
+                              <th className="px-4 py-2 text-left text-sm font-medium">Subject</th>
+                              <th className="px-4 py-2 text-left text-sm font-medium">Year</th>
+                              <th className="px-4 py-2 text-left text-sm font-medium">Type</th>
+                              <th className="px-4 py-2 text-left text-sm font-medium">Details</th>
+                              <th className="px-4 py-2 text-left text-sm font-medium">Download</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {filterPapersByYear(papers[cls.id] || [], yearFilter).length > 0 ? (
+                              filterPapersByYear(papers[cls.id] || [], yearFilter).map((paper, idx) => (
+                                <tr key={idx} className="border-b last:border-0">
+                                  <td className="px-4 py-3 text-sm font-medium">{paper.subject}</td>
+                                  <td className="px-4 py-3 text-sm">
+                                    <Badge variant="outline" className="bg-muted">
+                                      <Calendar className="mr-1 h-3 w-3" />
+                                      {paper.year}
+                                    </Badge>
+                                  </td>
+                                  <td className="px-4 py-3 text-sm">{paper.paperType}</td>
+                                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                                    <div className="flex items-center gap-3">
+                                      <span>{paper.pages} pages</span>
+                                      <span>{paper.size}</span>
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-3 text-sm">
+                                    <Button size="sm" className="h-8 gap-1" variant="outline">
+                                      <Download className="h-3 w-3" />
+                                      <span>PDF</span>
+                                    </Button>
                                   </td>
                                 </tr>
-                              )}
-                            </tbody>
-                          </table>
-                        </div>
-                      </ScrollArea>
+                              ))
+                            ) : (
+                              <tr>
+                                <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                                  No question papers found for the selected year.
+                                </td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
