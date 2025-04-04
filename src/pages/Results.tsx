@@ -1,3 +1,4 @@
+
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -7,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Loader2 } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { Helmet } from "react-helmet";
 
 const Results = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -53,7 +55,12 @@ const Results = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Examination Results - Durgapur Tarak Nath High School"
+      description="View and access the latest examination results and academic performance data for students of Durgapur Tarak Nath High School."
+      keywords="DTNHS results, examination results, academic performance, school results, student grades, Durgapur school exams"
+      canonicalUrl="https://dtnhs.edu.in/results"
+    >
       <PageHeader
         title="Examination Results"
         description="View the examination results for different classes and terms."

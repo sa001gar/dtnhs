@@ -34,12 +34,16 @@ const Contact = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Contact Us - Durgapur Tarak Nath High School"
+      description="Contact Durgapur Tarak Nath High School for admissions, inquiries, or to schedule a visit. Our team is here to help you with any questions about our educational programs."
+      keywords="contact DTNHS, school contact, admission inquiry, school address, school phone number, school email"
+      canonicalUrl="https://dtnhs.edu.in/contact"
+    >
       <PageHeader
         title="Contact Us"
         description="Get in touch with us for any queries or information."
         pattern="grid"
-        // backgroundImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920"
         className="bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm"
       />
 
