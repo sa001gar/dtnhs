@@ -25,6 +25,7 @@ import Chatbot from "./components/chatbot/Chatbot";
 import Syllabus from "./pages/Syllabus";
 import ExamSchedule from "./pages/ExamSchedule";
 import PreviousYearPapers from "./pages/PreviousYearPapers";
+import AdmissionPage from "./pages/AdmissionPage";
 import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,8 @@ const App = () => (
             <Route path="/syllabus" element={<Syllabus />} />
             <Route path="/exam-schedule" element={<ExamSchedule />} />
             <Route path="/previous-year-papers" element={<PreviousYearPapers />} />
+            <Route path="/admission" element={<AdmissionPage />} />
+            {/* ADD ALL CUSTOM ROUTES BELOW THIS LINE */}
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -72,6 +72,11 @@ const Navbar = () => {
       ]
     },
     { 
+      name: "Admission", 
+      path: "/admission",
+      icon: <Phone className="h-4 w-4 mr-1" />
+    },
+    { 
       name: "Contact", 
       path: "/contact",
       icon: <Phone className="h-4 w-4 mr-1" />

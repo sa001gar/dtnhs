@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MessageSquare, Bot, User, Copy, ThumbsUp, ThumbsDown, X, Maximize2, Minimize2, SendHorizontal, Mic, MicOff, HelpCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -144,9 +143,9 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
       </div>
 
       {!isMinimized && (
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Tabs defaultValue="chat" className="flex flex-col flex-1">
-            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none sticky top-0 z-40 dark:bg-gray-800">
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Tabs defaultValue="chat" className="w-full h-full flex flex-col">
+            <TabsList className="h-10 w-full bg-muted p-0.5 rounded-none z-40 dark:bg-gray-800">
               <TabsTrigger 
                 value="chat" 
                 className="flex-1 data-[state=active]:bg-background dark:data-[state=active]:bg-gray-900 data-[state=active]:shadow-none rounded-sm"
@@ -170,13 +169,13 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent 
-              value="chat" 
-              className="flex-1 flex flex-col p-0 m-0 overflow-hidden"
-            >
-              {/* Chat Messages - Scrollable area */}
-              <div className="flex-1 overflow-hidden relative">
-                <ScrollArea className="h-[calc(100vh-200px)] max-h-[300px] sm:max-h-[350px]">
+            <div className="flex-1 relative overflow-hidden">
+              <TabsContent 
+                value="chat" 
+                className="absolute inset-0 flex flex-col"
+              >
+                {/* Chat Messages - Scrollable area */}
+                <ScrollArea className="flex-1 h-[calc(100%-110px)]">
                   <div className="p-3 pb-4">
                     {messages.map((msg) => (
                       <div 
@@ -308,145 +307,213 @@ export const ChatbotUI: React.FC<ChatbotUIProps> = ({
                     <div ref={messagesEndRef} />
                   </div>
                 </ScrollArea>
-              </div>
-              
-              {/* Quick Responses - Fixed at bottom above input */}
-              <div className="px-3 py-2 bg-muted dark:bg-gray-800 flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted sticky bottom-[60px] z-10">
-                {QUICK_RESPONSES.map((item, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    size="sm"
-                    className="whitespace-nowrap text-xs hover:bg-muted/50 dark:border-gray-700 dark:hover:bg-gray-700"
-                    onClick={() => selectQuickResponse(item.value)}
-                  >
-                    {item.text}
-                  </Button>
-                ))}
-              </div>
-              
-              {/* Message Input - Fixed at bottom */}
-              <form 
-                onSubmit={handleSendMessage} 
-                className="p-3 border-t border-border dark:border-gray-700 flex items-end gap-2 bg-background dark:bg-gray-900 sticky bottom-0 z-10"
-              >
-                <div className="relative flex-1">
-                  <textarea 
-                    ref={textareaRef}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder={isListening ? "Listening..." : "Type your message..."}
-                    className={cn(
-                      "resize-none min-h-[60px] max-h-[150px] py-2 px-3 rounded-lg bg-background dark:bg-gray-800 border border-muted dark:border-gray-700 focus-visible:ring-school-primary/50 w-full",
-                      isListening ? "pr-10 border-school-primary" : "pr-10"
-                    )}
-                    onKeyDown={(e) => {
-                      if ((e.key === 'Enter' && !e.shiftKey) || (e.key === 'Enter' && e.ctrlKey)) {
-                        e.preventDefault();
-                        handleSendMessage(e);
-                      }
-                      if (e.ctrlKey && e.key === ' ') {
-                        e.preventDefault();
-                        toggleListening();
-                      }
-                    }}
-                  />
+                
+                {/* Quick Responses */}
+                <div className="px-3 py-2 bg-muted dark:bg-gray-800 flex items-center overflow-x-auto gap-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted">
+                  {QUICK_RESPONSES.map((item, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      size="sm"
+                      className="whitespace-nowrap text-xs hover:bg-muted/50 dark:border-gray-700 dark:hover:bg-gray-700"
+                      onClick={() => selectQuickResponse(item.value)}
+                    >
+                      {item.text}
+                    </Button>
+                  ))}
                 </div>
                 
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button 
-                        type="button" 
-                        variant="outline"
-                        size="icon"
-                        onClick={toggleListening}
-                        className={cn(
-                          "h-10 w-10 rounded-full transition-colors shrink-0 dark:border-gray-700",
-                          isListening ? "bg-school-primary text-white hover:bg-school-primary/90" : "hover:bg-muted/20 dark:hover:bg-gray-700"
-                        )}
-                      >
-                        {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">
-                      <p>{isListening ? "Stop listening" : "Start voice input"} (Ctrl + Space)</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button 
-                        type="submit" 
-                        size="icon"
-                        disabled={isLoading || !message.trim()}
-                        className="h-10 w-10 rounded-full bg-school-primary hover:bg-school-primary/90 transition-colors shrink-0 text-white"
-                      >
-                        <SendHorizontal className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">
-                      <p>Send message (Ctrl + Enter)</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </form>
-            </TabsContent>
-            
-            <TabsContent value="help" className="p-4 overflow-y-auto flex-1 bg-background dark:bg-gray-900">
-              <h3 className="font-medium text-lg mb-3">How can I help you?</h3>
-              <p className="mb-4 text-sm">
-                I'm your School Assistant, designed to help with information about Durgapur Tarak Nath High School. You can ask me about:
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start gap-2">
-                  <div className="rounded-full p-1 bg-school-primary/10 dark:bg-school-primary/20 mt-0.5">
-                    <Info className="h-3 w-3 text-school-primary" />
+                {/* Message Input */}
+                <form 
+                  onSubmit={handleSendMessage} 
+                  className="p-3 border-t border-border dark:border-gray-700 flex items-end gap-2 bg-background dark:bg-gray-900"
+                >
+                  <div className="relative flex-1">
+                    <textarea 
+                      ref={textareaRef}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder={isListening ? "Listening..." : "Type your message..."}
+                      className={cn(
+                        "resize-none min-h-[60px] max-h-[150px] py-2 px-3 rounded-lg bg-background dark:bg-gray-800 border border-muted dark:border-gray-700 focus-visible:ring-school-primary/50 w-full",
+                        isListening ? "pr-10 border-school-primary" : "pr-10"
+                      )}
+                      onKeyDown={(e) => {
+                        if ((e.key === 'Enter' && !e.shiftKey) || (e.key === 'Enter' && e.ctrlKey)) {
+                          e.preventDefault();
+                          handleSendMessage(e);
+                        }
+                        if (e.ctrlKey && e.key === ' ') {
+                          e.preventDefault();
+                          toggleListening();
+                        }
+                      }}
+                    />
                   </div>
-                  <span>Admission procedures and requirements</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="rounded-full p-1 bg-school-primary/10 dark:bg-school-primary/20 mt-0.5">
-                    <Info className="h-3 w-3 text-school-primary" />
+                  
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          type="button" 
+                          variant="outline"
+                          size="icon"
+                          onClick={toggleListening}
+                          className={cn(
+                            "h-10 w-10 rounded-full transition-colors shrink-0 dark:border-gray-700",
+                            isListening ? "bg-school-primary text-white hover:bg-school-primary/90" : "hover:bg-muted/20 dark:hover:bg-gray-700"
+                          )}
+                        >
+                          {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        <p>{isListening ? "Stop listening" : "Start voice input"} (Ctrl + Space)</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          type="submit" 
+                          size="icon"
+                          disabled={isLoading || !message.trim()}
+                          className="h-10 w-10 rounded-full bg-school-primary hover:bg-school-primary/90 transition-colors shrink-0 text-white"
+                        >
+                          <SendHorizontal className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        <p>Send message (Ctrl + Enter)</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </form>
+              </TabsContent>
+              
+              {/* HELP TAB - Completely restructured with absolute positioning */}
+              <TabsContent 
+                value="help" 
+                className="absolute inset-0 overflow-hidden bg-background dark:bg-gray-900"
+              >
+                <ScrollArea className="h-full w-full">
+                  <div className="p-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 rounded-full bg-school-primary/10 dark:bg-school-primary/20 flex items-center justify-center">
+                        <HelpCircle className="h-5 w-5 text-school-primary" />
+                      </div>
+                      <h3 className="font-medium text-lg">How can I help you?</h3>
+                    </div>
+                    
+                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground dark:text-gray-300">
+                      I'm your School Assistant, designed to help with information about Durgapur Tarak Nath High School. Feel free to ask me anything about the school!
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-base mb-2">I can help you with:</h4>
+                      
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        <div className="bg-muted/30 dark:bg-gray-800/50 p-3 rounded-lg border border-muted dark:border-gray-700">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="rounded-full p-1.5 bg-school-primary/10 dark:bg-school-primary/20">
+                              <Info className="h-4 w-4 text-school-primary" />
+                            </div>
+                            <h5 className="font-medium">Admission</h5>
+                          </div>
+                          <p className="text-sm text-muted-foreground dark:text-gray-400">
+                            Procedures, requirements, and important dates
+                          </p>
+                        </div>
+                        
+                        <div className="bg-muted/30 dark:bg-gray-800/50 p-3 rounded-lg border border-muted dark:border-gray-700">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="rounded-full p-1.5 bg-school-primary/10 dark:bg-school-primary/20">
+                              <Info className="h-4 w-4 text-school-primary" />
+                            </div>
+                            <h5 className="font-medium">Events & Activities</h5>
+                          </div>
+                          <p className="text-sm text-muted-foreground dark:text-gray-400">
+                            School events, co-curricular activities, and news
+                          </p>
+                        </div>
+                        
+                        <div className="bg-muted/30 dark:bg-gray-800/50 p-3 rounded-lg border border-muted dark:border-gray-700">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="rounded-full p-1.5 bg-school-primary/10 dark:bg-school-primary/20">
+                              <Info className="h-4 w-4 text-school-primary" />
+                            </div>
+                            <h5 className="font-medium">Academics</h5>
+                          </div>
+                          <p className="text-sm text-muted-foreground dark:text-gray-400">
+                            Programs, curriculum, and examination details
+                          </p>
+                        </div>
+                        
+                        <div className="bg-muted/30 dark:bg-gray-800/50 p-3 rounded-lg border border-muted dark:border-gray-700">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="rounded-full p-1.5 bg-school-primary/10 dark:bg-school-primary/20">
+                              <Info className="h-4 w-4 text-school-primary" />
+                            </div>
+                            <h5 className="font-medium">Contact & Directions</h5>
+                          </div>
+                          <p className="text-sm text-muted-foreground dark:text-gray-400">
+                            How to reach us and contact information
+                          </p>
+                        </div>
+                        
+                        <div className="bg-muted/30 dark:bg-gray-800/50 p-3 rounded-lg border border-muted dark:border-gray-700">
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="rounded-full p-1.5 bg-school-primary/10 dark:bg-school-primary/20">
+                              <Info className="h-4 w-4 text-school-primary" />
+                            </div>
+                            <h5 className="font-medium">Policies</h5>
+                          </div>
+                          <p className="text-sm text-muted-foreground dark:text-gray-400">
+                            School policies, rules, and procedures
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <span>School events, activities, and news</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="rounded-full p-1 bg-school-primary/10 dark:bg-school-primary/20 mt-0.5">
-                    <Info className="h-3 w-3 text-school-primary" />
+                </ScrollArea>
+              </TabsContent>
+              
+              {/* SHORTCUTS TAB - Completely restructured with absolute positioning */}
+              <TabsContent 
+                value="shortcuts" 
+                className="absolute inset-0 overflow-hidden bg-background dark:bg-gray-900"
+              >
+                <ScrollArea className="h-full w-full">
+                  <div className="p-4">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-10 w-10 rounded-full bg-school-primary/10 dark:bg-school-primary/20 flex items-center justify-center">
+                        <Info className="h-5 w-5 text-school-primary" />
+                      </div>
+                      <h3 className="font-medium text-lg">Keyboard Shortcuts</h3>
+                    </div>
+                    
+                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground dark:text-gray-300">
+                      Use these keyboard shortcuts to interact with the chatbot more efficiently.
+                    </p>
+                    
+                    <div className="divide-y divide-border dark:divide-gray-700">
+                      {KEYBOARD_SHORTCUTS.map((shortcut, index) => (
+                        <div key={index} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
+                          <div className="flex items-center gap-3">
+                            <div className="rounded-full p-1.5 bg-muted/30 dark:bg-gray-800">
+                              <kbd className="font-mono text-xs font-medium">{shortcut.key}</kbd>
+                            </div>
+                            <span className="text-sm">{shortcut.description}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <span>Academic programs and curriculum</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="rounded-full p-1 bg-school-primary/10 dark:bg-school-primary/20 mt-0.5">
-                    <Info className="h-3 w-3 text-school-primary" />
-                  </div>
-                  <span>Contact information and directions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="rounded-full p-1 bg-school-primary/10 dark:bg-school-primary/20 mt-0.5">
-                    <Info className="h-3 w-3 text-school-primary" />
-                  </div>
-                  <span>School policies and procedures</span>
-                </li>
-              </ul>
-            </TabsContent>
-            
-            <TabsContent value="shortcuts" className="p-4 overflow-y-auto flex-1 bg-background dark:bg-gray-900">
-              <h3 className="font-medium text-lg mb-3">Keyboard Shortcuts</h3>
-              <div className="grid gap-2">
-                {KEYBOARD_SHORTCUTS.map((shortcut, index) => (
-                  <div key={index} className="flex items-center justify-between text-sm">
-                    <span>{shortcut.description}</span>
-                    <kbd className="px-2 py-1 bg-muted dark:bg-gray-800 rounded-md font-mono text-xs">
-                      {shortcut.key}
-                    </kbd>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
+                </ScrollArea>
+              </TabsContent>
+            </div>
           </Tabs>
         </div>
       )}

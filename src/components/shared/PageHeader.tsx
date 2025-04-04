@@ -38,8 +38,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <div
       className={cn(
-        "relative flex w-full items-center justify-center overflow-hidden py-16",
-        small ? "min-h-[180px] md:min-h-[220px]" : "min-h-[240px] md:min-h-[320px]",
+        "relative flex w-full items-center  justify-center overflow-hidden py-16",
+        small ? "min-h-[80px] md:min-h-[120px]" : "min-h-[140px] md:min-h-[220px]",
         patternClasses[pattern],
         className
       )}

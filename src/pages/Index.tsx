@@ -58,6 +58,7 @@ const Index: React.FC = () => {
       </Helmet>
       
       <Hero />
+      <AboutSchool />
       <PrincipalMessage />
 
       {/* News and Notification Section - Side by side on larger screens */}
@@ -77,7 +78,7 @@ const Index: React.FC = () => {
         </div>
       </div>
       
-      <AboutSchool />
+      
       <Features />
       <StudentAchievements />
       

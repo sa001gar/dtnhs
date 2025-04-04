@@ -48,7 +48,7 @@ const PrincipalMessage: React.FC = () => {
                 
                 <div className="relative group rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl transition-all duration-500 hover:shadow-2xl">
                   <img 
-                    src="/lovable-uploads/7aaf29d0-9d50-40ab-a4a1-4cef49f51b82.png" 
+                    src="/lovable-uploads/principal.png" 
                     alt="Principal of Durgapur Tarak Nath High School"
                     className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
                   />
