@@ -73,7 +73,7 @@ const Navbar = () => {
     },
     { 
       name: "Admission", 
-      path: "/admission",
+      path: "/admissions",
       icon: <Phone className="h-4 w-4 mr-1" />
     },
     { 

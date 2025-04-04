@@ -56,7 +56,7 @@ const App = () => (
             <Route path="/syllabus" element={<Syllabus />} />
             <Route path="/exam-schedule" element={<ExamSchedule />} />
             <Route path="/previous-year-papers" element={<PreviousYearPapers />} />
-            <Route path="/admission" element={<AdmissionPage />} />
+            <Route path="/admissions" element={<AdmissionPage />} />
             {/* ADD ALL CUSTOM ROUTES BELOW THIS LINE */}
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
