@@ -193,7 +193,7 @@ const Footer: React.FC = () => {
       </div>
       
       {/* Back to top button */}
-      <button 
+      {/* <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="fixed bottom-6 right-6 z-50 bg-school-primary hover:bg-school-primary/90 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
         aria-label="Back to top"
@@ -202,7 +202,7 @@ const Footer: React.FC = () => {
           <polyline points="17 11 12 6 7 11"></polyline>
           <line x1="12" y1="18" x2="12" y2="6"></line>
         </svg>
-      </button>
+      </button> */}
     </footer>
   );
 };
