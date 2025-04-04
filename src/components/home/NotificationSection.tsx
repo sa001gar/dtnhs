@@ -67,7 +67,7 @@ const NotificationSection = () => {
   };
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50">
+    <section className="  bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50">
       <div className="container px-4">
         <AnimatedSection animation="fade-in-up">
           <div className="flex items-center justify-between mb-6 sm:mb-8">

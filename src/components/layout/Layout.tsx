@@ -3,6 +3,8 @@ import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
+import BackToTopButton from "@/components/BackToTopButton";
+
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -46,6 +48,7 @@ const Layout: React.FC<LayoutProps> = ({
       <Navbar />
       <main className="flex-1 pt-16">{children}</main>
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };

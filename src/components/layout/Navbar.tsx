@@ -238,7 +238,7 @@ const Navbar = () => {
                       to={link.path}
                       className={({ isActive }) =>
                         cn(
-                          "block rounded-lg px-4 py-3 text-base font-medium transition-all duration-200 flex items-center",
+                          "rounded-lg px-4 py-3 text-base font-medium transition-all duration-200 flex items-center",
                           isActive
                             ? "bg-school-primary/10 text-school-primary"
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
