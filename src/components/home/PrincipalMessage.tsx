@@ -123,7 +123,7 @@ const PrincipalMessage: React.FC = () => {
                   </div>
                   
                   <Button asChild variant="outline" className="group border-school-primary text-school-primary hover:bg-school-primary hover:text-white">
-                    <Link to="/about" className="flex items-center">
+                    <Link to="/about#principal" className="flex items-center">
                       Read Full Message
                       <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
