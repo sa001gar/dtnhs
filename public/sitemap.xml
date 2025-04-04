@@ -96,10 +96,5 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://dtnhs.edu.in/admin</loc>
-    <lastmod>2025-04-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  
 </urlset>
