@@ -100,7 +100,12 @@ const Blog = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="School Blog - Durgapur Tarak Nath High School"
+      description="Read the latest news, events, achievements, and educational insights from Durgapur Tarak Nath High School's official blog."
+      keywords="school blog, DTNHS news, school events, student achievements, educational articles, school updates, Durgapur Tarak Nath High School"
+      canonicalUrl="https://dtnhs.edu.in/blog"
+    >
       <PageHeader
         title="School Blog"
         description="Stay updated with the latest news, events, and achievements from our school community."

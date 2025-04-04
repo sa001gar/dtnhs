@@ -93,7 +93,12 @@ const Teachers = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Our Teachers - Durgapur Tarak Nath High School"
+      description="Meet our dedicated faculty members at Durgapur Tarak Nath High School. Learn about our teachers' qualifications, experience, and subject expertise."
+      keywords="DTNHS teachers, school faculty, teaching staff, educators, subject teachers, school professors, Durgapur Tarak Nath High School"
+      canonicalUrl="https://dtnhs.edu.in/teachers"
+    >
       <PageHeader
         title="Our Teachers"
         description="Meet our dedicated and experienced teaching staff who are committed to providing quality education."

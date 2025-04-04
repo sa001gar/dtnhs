@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -77,7 +78,12 @@ const Routine = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Class Routines - Durgapur Tarak Nath High School"
+      description="View comprehensive class routines and timetables for all grades at Durgapur Tarak Nath High School. Find schedules for primary and secondary classes."
+      keywords="class routine, school timetable, class schedule, DTNHS routine, school periods, daily schedule, Durgapur school timetable"
+      canonicalUrl="https://dtnhs.edu.in/routine"
+    >
       <PageHeader
         title="Class Routines"
         description="View the weekly class schedules for different grades."
@@ -313,4 +319,3 @@ const Routine = () => {
 }
 
 export default Routine
-

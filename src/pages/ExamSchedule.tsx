@@ -141,7 +141,12 @@ const ExamSchedule = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Examination Schedule - Durgapur Tarak Nath High School"
+      description="View the complete examination schedule for all classes at Durgapur Tarak Nath High School, including mid-term, final exams, unit tests, and board examinations."
+      keywords="exam schedule, test dates, school exams, DTNHS examination, board exams, mid-term exams, final exams, Durgapur Tarak Nath High School"
+      canonicalUrl="https://dtnhs.edu.in/exam-schedule"
+    >
       <PageHeader
         title="Examination Schedule"
         description="Upcoming examination dates and timetables for all classes."

@@ -127,7 +127,12 @@ const Forum = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title="Community Forum - Durgapur Tarak Nath High School"
+      description="Join our school community forum to discuss academic topics, share ideas, and connect with students, parents, and teachers at Durgapur Tarak Nath High School."
+      keywords="school forum, community discussion, DTNHS forum, student discussions, school community, academic forum, parent-teacher discussions"
+      canonicalUrl="https://dtnhs.edu.in/forum"
+    >
       <PageHeader
         title="Community Forum"
         description="Join discussions with students, parents, and teachers on various school-related topics."
