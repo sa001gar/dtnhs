@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -53,7 +52,6 @@ const Academics = () => {
         description: "Our vocational courses provide skill-based training in various trades, helping students gain practical knowledge and enhancing employment opportunities in different industries. Courses include disciplines like Computer Application, IT Enabled Services, and Maintenance & Repair of Electrical Domestic Appliances."
     }
 ];
-
 
   const curriculum = [
     {
@@ -130,8 +128,7 @@ const Academics = () => {
         title="Academic Programs"
         description="Our comprehensive academic programs are designed to provide quality education at all levels."
         pattern="grid"
-        // backgroundImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920"
-        className="bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm"
+        className="relative bg-gradient-to-b from-school-primary via-school-secondary to-school-primary/80"
       />
 
       <div className="container py-8 md:py-12">

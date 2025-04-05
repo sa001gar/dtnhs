@@ -84,12 +84,36 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 
         <div className="hidden md:block">
           <div className="relative h-32 w-32 animate-float">
-            <div className="absolute inset-0 rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm"></div>
-            <div className="absolute inset-0 flex items-center justify-center text-white">
-              <SquareCode className="h-16 w-16 stroke-white" />
+            <div className="absolute inset-0 rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm shadow-lg overflow-hidden">
+              <img 
+                src="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true" 
+                alt="School Building" 
+                className="h-full w-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
+              />
             </div>
+            <div className="absolute -inset-1 border-2 border-dashed border-white/40 rounded-lg animate-pulse-slow"></div>
           </div>
         </div>
+      </div>
+
+      {/* Curvy shape at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none h-16 w-full">
+        <svg
+          className="absolute bottom-0 overflow-hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          version="1.1"
+          viewBox="0 0 2560 100"
+          x="0"
+          y="0"
+          width="100%"
+          height="100"
+        >
+          <path
+            className="fill-background dark:fill-background"
+            d="M0,0 C0,0 0,30 0,30 C120,36 240,42 360,42 C480,42 600,36 720,30 C840,24 960,18 1080,18 C1200,18 1320,24 1440,30 C1560,36 1680,42 1800,42 C1920,42 2040,36 2160,30 C2280,24 2400,18 2520,18 C2640,18 2760,24 2880,30 L2880,100 L0,100 Z"
+          ></path>
+        </svg>
       </div>
     </div>
   );

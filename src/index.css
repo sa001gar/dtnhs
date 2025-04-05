@@ -310,13 +310,13 @@
   /* New floating animations */
   @keyframes float {
     0% {
-      transform: translateY(0px) rotate(0deg);
+      transform: translateY(0px);
     }
     50% {
-      transform: translateY(-15px) rotate(5deg);
+      transform: translateY(-10px);
     }
     100% {
-      transform: translateY(0px) rotate(0deg);
+      transform: translateY(0px);
     }
   }
   
@@ -391,4 +391,20 @@
   }
 }
 
-
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
