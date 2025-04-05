@@ -18,6 +18,13 @@ const routeNames: Record<string, string> = {
   contact: "Contact",
   students: "Students",
   teachers: "Teachers",
+  admissions: "Admissions",
+  syllabus: "Syllabus",
+  "exam-schedule": "Exam Schedule",
+  "previous-year-papers": "Previous Year Papers",
+  alumni: "Alumni",
+  blog: "Blog",
+  forum: "Forum",
 };
 
 export function Breadcrumb({ className = "" }: BreadcrumbProps) {
@@ -33,7 +40,7 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
     <nav aria-label="Breadcrumb" className={`flex items-center space-x-1 text-sm ${className}`}>
       <Link
         to="/"
-        className="flex items-center text-muted-foreground hover:text-foreground transition-colors"
+        className="flex items-center text-white/80 hover:text-white transition-colors"
       >
         <Home className="h-4 w-4 mr-1" />
         <span className="sr-only sm:not-sr-only">Home</span>
@@ -45,15 +52,15 @@ export function Breadcrumb({ className = "" }: BreadcrumbProps) {
         
         return (
           <div key={path} className="flex items-center">
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            <ChevronRight className="h-4 w-4 text-white/60" />
             {isLast ? (
-              <span className="font-medium text-foreground ml-1">
+              <span className="font-medium text-white ml-1">
                 {routeNames[segment] || segment}
               </span>
             ) : (
               <Link
                 to={path}
-                className="ml-1 text-muted-foreground hover:text-foreground transition-colors"
+                className="ml-1 text-white/80 hover:text-white transition-colors"
               >
                 {routeNames[segment] || segment}
               </Link>
