@@ -43,7 +43,7 @@ const Contact = () => {
       <PageHeader
         title="Contact Us"
         description="Get in touch with us for any queries or information."
-        pattern="grid"
+        pattern="grid" // This is now a valid prop
         className="bg-gradient-to-b from-background/80 to-background/20 backdrop-blur-sm"
       />
 

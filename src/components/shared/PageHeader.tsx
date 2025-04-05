@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import AnimatedSection from "../ui/AnimatedSection";
 import { Breadcrumb } from "./Breadcrumb";
-import { SquareRounded } from "lucide-react";
+import { SquareCode } from "lucide-react";
 
 interface PageHeaderProps {
   title: string;
@@ -14,6 +14,7 @@ interface PageHeaderProps {
   children?: React.ReactNode;
   showBreadcrumbs?: boolean;
   small?: boolean;
+  pattern?: string; // Added pattern prop to fix TypeScript errors
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({
@@ -25,6 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   children,
   showBreadcrumbs = true,
   small = false,
+  pattern,
 }) => {
   return (
     <div
@@ -84,7 +86,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           <div className="relative h-32 w-32 animate-float">
             <div className="absolute inset-0 rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm"></div>
             <div className="absolute inset-0 flex items-center justify-center text-white">
-              <SquareRounded className="h-16 w-16 stroke-white" />
+              <SquareCode className="h-16 w-16 stroke-white" />
             </div>
           </div>
         </div>
