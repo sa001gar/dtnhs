@@ -1,159 +1,91 @@
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { Breadcrumb } from "@/components/shared/Breadcrumb";
-import AnimatedSection from "@/components/ui/AnimatedSection";
-import PageLoader from "@/components/shared/PageLoader";
+import ContactForm from "@/components/contact/ContactForm";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    
-    window.scrollTo(0, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real application, this would submit the form data to a server
-    console.log("Form submitted");
-  };
-
-  if (isLoading) {
-    return <PageLoader />;
-  }
-
   return (
-    <Layout
-      title="Contact Us - Durgapur Tarak Nath High School"
-      description="Contact Durgapur Tarak Nath High School for admissions, inquiries, or to schedule a visit. Our team is here to help you with any questions about our educational programs."
-      keywords="contact DTNHS, school contact, admission inquiry, school address, school phone number, school email"
-      canonicalUrl="https://dtnhs.edu.in/contact"
-    >
+    <Layout>
       <PageHeader
         title="Contact Us"
-        description="Get in touch with us for any queries or information."
-        pattern="grid" // This is now a valid prop
-        className="relative bg-gradient-to-b from-school-primary via-school-secondary to-school-primary/80"
+        description="Get in touch with us for any queries or feedback"
       />
-
-      <div className="container py-8 md:py-12">
-        <div className="mb-6">
-          <Breadcrumb />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          <AnimatedSection animation="fade-in-up">
-            <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
-              <CardHeader>
-                <CardTitle>Send us a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">Full Name</label>
-                      <Input id="name" placeholder="Your name" required />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">Email Address</label>
-                      <Input id="email" type="email" placeholder="Your email" required />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-                    <Input id="subject" placeholder="Message subject" required />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">Message</label>
-                    <Textarea id="message" placeholder="Your message" rows={5} required />
-                  </div>
-                  
-                  <Button type="submit" className="w-full md:w-auto bg-school-primary hover:bg-school-primary/90">Send Message</Button>
-                </form>
-              </CardContent>
-            </Card>
-          </AnimatedSection>
-
+      
+      <div className="container py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+            <ContactForm />
+          </div>
+          
           <div className="space-y-6">
-            <AnimatedSection animation="fade-in-up" delay={100}>
-              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
-                <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start">
-                    <MapPin className="h-5 w-5 mr-3 text-school-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Address</p>
-                      <p className="text-muted-foreground">123 School Avenue, Education City, State 12345</p>
-                    </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <MapPin className="h-5 w-5 text-school-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold">Address</h3>
+                    <address className="not-italic text-muted-foreground">
+                      DTNHS, School Road, District Town<br />
+                      Zip Code: 123456
+                    </address>
                   </div>
-                  
-                  <div className="flex items-start">
-                    <Phone className="h-5 w-5 mr-3 text-school-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <p className="text-muted-foreground">+1 (123) 456-7890</p>
-                      <p className="text-muted-foreground">+1 (123) 456-7891</p>
-                    </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <Phone className="h-5 w-5 text-school-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold">Phone</h3>
+                    <p className="text-muted-foreground">
+                      <a href="tel:+1234567890" className="hover:text-school-primary">
+                        +1 (234) 567-890
+                      </a>
+                    </p>
                   </div>
-                  
-                  <div className="flex items-start">
-                    <Mail className="h-5 w-5 mr-3 text-school-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <p className="text-muted-foreground">info@school.edu</p>
-                      <p className="text-muted-foreground">admissions@school.edu</p>
-                    </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <Mail className="h-5 w-5 text-school-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold">Email</h3>
+                    <p className="text-muted-foreground">
+                      <a href="mailto:info@dtnhs.edu" className="hover:text-school-primary">
+                        info@dtnhs.edu
+                      </a>
+                    </p>
                   </div>
-                  
-                  <div className="flex items-start">
-                    <Clock className="h-5 w-5 mr-3 text-school-primary shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium">Office Hours</p>
-                      <p className="text-muted-foreground">Monday to Friday: 8:00 AM - 4:00 PM</p>
-                      <p className="text-muted-foreground">Saturday: 9:00 AM - 12:00 PM</p>
-                    </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <Clock className="h-5 w-5 text-school-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold">Office Hours</h3>
+                    <p className="text-muted-foreground">
+                      Monday - Friday: 8:00 AM - 4:00 PM<br />
+                      Closed on Weekends and Public Holidays
+                    </p>
                   </div>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
+                </div>
+              </div>
+            </div>
             
-            <AnimatedSection animation="fade-in-up" delay={200}>
-              <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-lg">
-                <CardHeader>
-                  <CardTitle>Location Map</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="bg-muted h-[250px] rounded flex items-center justify-center">
-                  <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9965264115012!2d87.3213519!3d23.495643100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710cb6d23035%3A0x8e339769f234a1a3!2sDurgapur%20Tarak%20Nath%20High%20School!5e1!3m2!1sen!2sin!4v1743533146590!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={false} 
-                loading="lazy"
-                className="rounded-xl"
-                title="School Location Map"
-                aria-label="Map showing the location of Durgapur Tarak Nath High School"
-              ></iframe>
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Find Us</h2>
+              <div className="aspect-video bg-gray-200 rounded-md overflow-hidden">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373631531902!3d-37.81720797975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sHer%20Majesty%E2%80%99s%20Theatre!5e0!3m2!1sen!2sus!4v1679083949353!5m2!1sen!2sus"
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>

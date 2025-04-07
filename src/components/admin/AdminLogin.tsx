@@ -15,8 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Lock, LogIn } from "lucide-react";
+import { Lock, LogIn, AlertCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -31,6 +32,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isSupabaseInitialized, setIsSupabaseInitialized] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if Supabase client is properly initialized
@@ -49,6 +51,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setError(null);
     setIsLoading(true);
     
     try {
@@ -58,12 +61,12 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       }
       
       // Sign in with Supabase auth
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
       
-      if (error) throw error;
+      if (authError) throw authError;
       
       if (!data || !data.user) {
         throw new Error("Authentication failed");
@@ -95,6 +98,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       onLoginSuccess();
     } catch (error: any) {
       console.error("Login error:", error);
+      setError(error.message || "Invalid email or password, or you do not have admin access");
       toast({
         title: "Login failed",
         description: error.message || "Invalid email or password, or you do not have admin access",
@@ -138,7 +142,15 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
             Enter your credentials to access the admin dashboard
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
+          {error && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+          
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField

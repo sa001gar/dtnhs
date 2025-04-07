@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { 
   User, Settings, BookOpen, Calendar, FileText,
   Users, GraduationCap, Image, Bell, NewspaperIcon,
-  LogOut, UserPlus
+  LogOut, UserPlus, MessageSquare, Mail
 } from "lucide-react";
 
 import AdminNews from "@/components/admin/AdminNews";
@@ -20,8 +20,11 @@ import AdminPapers from "@/components/admin/AdminPapers";
 import AdminLogin from "@/components/admin/AdminLogin";
 import AdminAlumni from "@/components/admin/AdminAlumni";
 import AdminUsers from "@/components/admin/AdminUsers";
+import AdminBlog from "@/components/admin/AdminBlog";
+import AdminForum from "@/components/admin/AdminForum";
+import AdminContact from "@/components/admin/AdminContact";
 import PageLoader from "@/components/shared/PageLoader";
-import { supabase } from "@/lib/supabase";
+import { supabase, logoutAdmin } from "@/lib/supabase";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 const Admin = () => {
@@ -100,14 +103,11 @@ const Admin = () => {
 
   const handleLogout = async () => {
     try {
-      if (!supabase) {
-        throw new Error('Supabase client is not initialized');
-      }
+      const { success, error } = await logoutAdmin();
       
-      await supabase.auth.signOut();
-      localStorage.removeItem("adminAuth");
-      localStorage.removeItem("adminName");
-      localStorage.removeItem("adminRole");
+      if (!success) {
+        throw error;
+      }
       
       setIsAuthenticated(false);
       
@@ -183,7 +183,7 @@ const Admin = () => {
           <Separator />
           
           <Tabs defaultValue="news" className="space-y-6">
-            <TabsList className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 h-auto gap-2">
+            <TabsList className="grid grid-cols-2 md:grid-cols-7 lg:grid-cols-14 h-auto gap-2">
               <TabsTrigger value="news" className="flex gap-2 items-center">
                 <NewspaperIcon className="h-4 w-4" />
                 <span className="hidden md:inline">News</span>
@@ -199,6 +199,18 @@ const Admin = () => {
               <TabsTrigger value="papers" className="flex gap-2 items-center">
                 <FileText className="h-4 w-4" />
                 <span className="hidden md:inline">Papers</span>
+              </TabsTrigger>
+              <TabsTrigger value="blog" className="flex gap-2 items-center">
+                <BookOpen className="h-4 w-4" />
+                <span className="hidden md:inline">Blog</span>
+              </TabsTrigger>
+              <TabsTrigger value="forum" className="flex gap-2 items-center">
+                <MessageSquare className="h-4 w-4" />
+                <span className="hidden md:inline">Forum</span>
+              </TabsTrigger>
+              <TabsTrigger value="contact" className="flex gap-2 items-center">
+                <Mail className="h-4 w-4" />
+                <span className="hidden md:inline">Contact</span>
               </TabsTrigger>
               <TabsTrigger value="teachers" className="flex gap-2 items-center">
                 <Users className="h-4 w-4" />
@@ -240,6 +252,18 @@ const Admin = () => {
             
             <TabsContent value="papers" className="space-y-4">
               <AdminPapers />
+            </TabsContent>
+            
+            <TabsContent value="blog" className="space-y-4">
+              <AdminBlog />
+            </TabsContent>
+            
+            <TabsContent value="forum" className="space-y-4">
+              <AdminForum />
+            </TabsContent>
+            
+            <TabsContent value="contact" className="space-y-4">
+              <AdminContact />
             </TabsContent>
             
             <TabsContent value="teachers" className="space-y-4">

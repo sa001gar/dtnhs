@@ -9,7 +9,302 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      admin_users: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          role?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      blog_posts: {
+        Row: {
+          author_avatar: string | null
+          author_name: string
+          author_role: string | null
+          categories: string[] | null
+          content: string
+          created_at: string
+          excerpt: string
+          id: string
+          image_url: string | null
+          published: boolean | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_avatar?: string | null
+          author_name: string
+          author_role?: string | null
+          categories?: string[] | null
+          content: string
+          created_at?: string
+          excerpt: string
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_avatar?: string | null
+          author_name?: string
+          author_role?: string | null
+          categories?: string[] | null
+          content?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string | null
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string | null
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string | null
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      exam_schedules: {
+        Row: {
+          class_name: string
+          created_at: string
+          date_range: string
+          details: Json
+          exam_type: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          class_name: string
+          created_at?: string
+          date_range: string
+          details: Json
+          exam_type: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          class_name?: string
+          created_at?: string
+          date_range?: string
+          details?: Json
+          exam_type?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      forum_replies: {
+        Row: {
+          author_avatar: string | null
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+          likes_count: number | null
+          thread_id: string
+          updated_at: string
+        }
+        Insert: {
+          author_avatar?: string | null
+          author_name: string
+          content: string
+          created_at?: string
+          id?: string
+          likes_count?: number | null
+          thread_id: string
+          updated_at?: string
+        }
+        Update: {
+          author_avatar?: string | null
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          likes_count?: number | null
+          thread_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_replies_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "forum_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_threads: {
+        Row: {
+          author_avatar: string | null
+          author_name: string
+          category: string
+          content: string
+          created_at: string
+          id: string
+          is_popular: boolean | null
+          likes_count: number | null
+          preview: string
+          replies_count: number | null
+          title: string
+          updated_at: string
+          views_count: number | null
+        }
+        Insert: {
+          author_avatar?: string | null
+          author_name: string
+          category: string
+          content: string
+          created_at?: string
+          id?: string
+          is_popular?: boolean | null
+          likes_count?: number | null
+          preview: string
+          replies_count?: number | null
+          title: string
+          updated_at?: string
+          views_count?: number | null
+        }
+        Update: {
+          author_avatar?: string | null
+          author_name?: string
+          category?: string
+          content?: string
+          created_at?: string
+          id?: string
+          is_popular?: boolean | null
+          likes_count?: number | null
+          preview?: string
+          replies_count?: number | null
+          title?: string
+          updated_at?: string
+          views_count?: number | null
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          event_date: string | null
+          id: string
+          image_url: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          image_url?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notices: {
+        Row: {
+          category: string | null
+          content: string
+          created_at: string
+          expiry_date: string | null
+          file_url: string | null
+          id: string
+          important: boolean | null
+          publish_date: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          content: string
+          created_at?: string
+          expiry_date?: string | null
+          file_url?: string | null
+          id?: string
+          important?: boolean | null
+          publish_date?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          content?: string
+          created_at?: string
+          expiry_date?: string | null
+          file_url?: string | null
+          id?: string
+          important?: boolean | null
+          publish_date?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
