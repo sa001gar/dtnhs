@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -58,6 +57,27 @@ const AlumniRegistration: React.FC = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      
+      // Check file size (2MB limit)
+      if (file.size > 2 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Image must be smaller than 2MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: "Invalid file type",
+          description: "Only image files are allowed",
+          variant: "destructive",
+        });
+        return;
+      }
+      
       setImageFile(file);
       
       // Create a preview
@@ -71,17 +91,29 @@ const AlumniRegistration: React.FC = () => {
 
   const uploadImageToCloudinary = async (file: File) => {
     try {
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+      
+      if (!cloudName || !uploadPreset) {
+        console.error('Missing Cloudinary configuration');
+        throw new Error('Missing Cloudinary configuration');
+      }
+      
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'school_alumni');
+      formData.append('upload_preset', uploadPreset);
       
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
           method: 'POST',
           body: formData,
         }
       );
+      
+      if (!response.ok) {
+        throw new Error('Failed to upload image');
+      }
       
       const data = await response.json();
       return data.secure_url;
@@ -102,11 +134,23 @@ const AlumniRegistration: React.FC = () => {
         imageUrl = await uploadImageToCloudinary(imageFile);
       }
       
+      // Check if Supabase connection is available
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+      
       // Prepare alumni data
       const alumniData = {
-        ...values,
-        image: imageUrl,
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        batch: values.batch,
+        location: values.location,
+        education: values.education,
+        profession: values.profession,
         achievements: values.achievements ? values.achievements.split(',').map(item => item.trim()) : [],
+        bio: values.bio,
+        image: imageUrl,
         status: 'pending', // All alumni start as pending until approved by admin
         created_at: new Date().toISOString(),
       };
@@ -332,7 +376,7 @@ const AlumniRegistration: React.FC = () => {
               )}
             />
             
-            <Button type="submit" className="w-full bg-school-primary hover:bg-school-primary/90" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isLoading}>
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />

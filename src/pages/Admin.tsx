@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { 
   User, Settings, BookOpen, Calendar, FileText,
   Users, GraduationCap, Image, Bell, NewspaperIcon,
@@ -38,8 +37,17 @@ const Admin = () => {
     setIsLoading(true);
     
     try {
+      // Check if Supabase client is initialized
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+      
       // Check if user is logged in with Supabase
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError) {
+        throw sessionError;
+      }
       
       if (!session) {
         setIsAuthenticated(false);
@@ -81,6 +89,10 @@ const Admin = () => {
 
   const handleLogout = async () => {
     try {
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+      
       await supabase.auth.signOut();
       localStorage.removeItem("adminAuth");
       localStorage.removeItem("adminName");

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -43,6 +43,11 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
     setIsLoading(true);
     
     try {
+      // Check if Supabase client is initialized
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+      
       // Sign in with Supabase auth
       const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,
@@ -50,6 +55,10 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       });
       
       if (error) throw error;
+      
+      if (!data || !data.user) {
+        throw new Error("Authentication failed");
+      }
       
       // Check if user is an admin in the admin_users table
       const { data: adminData, error: adminError } = await supabase
@@ -75,11 +84,11 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       });
       
       onLoginSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
       toast({
         title: "Login failed",
-        description: "Invalid email or password, or you do not have admin access",
+        description: error.message || "Invalid email or password, or you do not have admin access",
         variant: "destructive",
       });
       // Sign out in case of any errors to be safe
