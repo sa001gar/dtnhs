@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,9 +14,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { supabase } from "@/lib/supabase";
-import { Upload, Calendar, MapPin, GraduationCap, Briefcase, Mail, Phone } from "lucide-react";
+import { Upload, Calendar, MapPin, GraduationCap, Briefcase, Mail, Phone, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -38,6 +39,23 @@ const AlumniRegistration: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [supabaseError, setSupabaseError] = useState<string | null>(null);
+  const [cloudinaryError, setCloudinaryError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check if Supabase is properly initialized
+    if (!supabase) {
+      setSupabaseError("Supabase client is not initialized. Please check your environment settings.");
+    }
+
+    // Check if Cloudinary settings are available
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+    
+    if (!cloudName || !uploadPreset) {
+      setCloudinaryError("Cloudinary configuration is missing. Image uploads will not work.");
+    }
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -131,7 +149,15 @@ const AlumniRegistration: React.FC = () => {
       
       // Upload image to Cloudinary if exists
       if (imageFile) {
-        imageUrl = await uploadImageToCloudinary(imageFile);
+        try {
+          imageUrl = await uploadImageToCloudinary(imageFile);
+        } catch (error) {
+          toast({
+            title: "Image upload failed",
+            description: "Your form was submitted without an image. You can update your profile later.",
+            variant: "warning",
+          });
+        }
       }
       
       // Check if Supabase connection is available
@@ -171,11 +197,11 @@ const AlumniRegistration: React.FC = () => {
       form.reset();
       setImageFile(null);
       setImagePreview(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting alumni registration:', error);
       toast({
         title: "Registration failed",
-        description: "There was an error submitting your registration. Please try again.",
+        description: error.message || "There was an error submitting your registration. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -192,6 +218,20 @@ const AlumniRegistration: React.FC = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        {supabaseError && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{supabaseError}</AlertDescription>
+          </Alert>
+        )}
+        
+        {cloudinaryError && (
+          <Alert variant="warning" className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{cloudinaryError}</AlertDescription>
+          </Alert>
+        )}
+        
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex flex-col md:flex-row gap-6">
@@ -376,7 +416,7 @@ const AlumniRegistration: React.FC = () => {
               )}
             />
             
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isLoading || !!supabaseError}>
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
@@ -389,6 +429,11 @@ const AlumniRegistration: React.FC = () => {
           </form>
         </Form>
       </CardContent>
+      {!supabaseError && (
+        <CardFooter className="text-center text-sm text-muted-foreground">
+          <p className="w-full">Your information will be reviewed by administrators before being published.</p>
+        </CardFooter>
+      )}
     </Card>
   );
 };

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +30,15 @@ type AdminLoginProps = {
 const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSupabaseInitialized, setIsSupabaseInitialized] = useState(true);
+
+  useEffect(() => {
+    // Check if Supabase client is properly initialized
+    if (!supabase) {
+      setIsSupabaseInitialized(false);
+      console.error("Supabase client is not initialized. Check your .env file and Supabase configuration.");
+    }
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -92,11 +101,33 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
         variant: "destructive",
       });
       // Sign out in case of any errors to be safe
-      await supabase.auth.signOut();
+      if (supabase) {
+        await supabase.auth.signOut();
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (!isSupabaseInitialized) {
+    return (
+      <div className="container flex items-center justify-center min-h-screen">
+        <Card className="w-full max-w-md">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl font-bold">Configuration Error</CardTitle>
+            <CardDescription>
+              Supabase client is not initialized. Please check your environment variables and Supabase configuration.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-destructive">
+              Make sure your .env file includes VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY with correct values.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="container flex items-center justify-center min-h-screen">

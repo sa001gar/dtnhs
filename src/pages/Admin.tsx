@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +22,7 @@ import AdminAlumni from "@/components/admin/AdminAlumni";
 import AdminUsers from "@/components/admin/AdminUsers";
 import PageLoader from "@/components/shared/PageLoader";
 import { supabase } from "@/lib/supabase";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 const Admin = () => {
   const { toast } = useToast();
@@ -28,8 +30,16 @@ const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [adminName, setAdminName] = useState("");
   const [adminRole, setAdminRole] = useState("");
+  const [supabaseError, setSupabaseError] = useState<string | null>(null);
   
   useEffect(() => {
+    // First check if Supabase is initialized
+    if (!supabase) {
+      setSupabaseError("Supabase client is not initialized. Please check your environment variables.");
+      setIsLoading(false);
+      return;
+    }
+    
     checkAdminSession();
   }, []);
   
@@ -79,9 +89,10 @@ const Admin = () => {
         localStorage.setItem("adminName", adminData.name);
         localStorage.setItem("adminRole", adminData.role);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error checking admin session:", error);
       setIsAuthenticated(false);
+      setSupabaseError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -104,7 +115,7 @@ const Admin = () => {
         title: "Logged out",
         description: "You have been logged out successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error logging out:", error);
       toast({
         title: "Error",
@@ -116,6 +127,27 @@ const Admin = () => {
 
   if (isLoading) {
     return <PageLoader />;
+  }
+
+  if (supabaseError) {
+    return (
+      <Layout>
+        <div className="container py-8">
+          <Card className="w-full max-w-md mx-auto">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-destructive">Configuration Error</CardTitle>
+              <CardDescription>
+                There was a problem with your Supabase configuration.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-destructive mb-4">{supabaseError}</p>
+              <p>Please check your environment variables and make sure Supabase is properly configured.</p>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    );
   }
 
   if (!isAuthenticated) {
