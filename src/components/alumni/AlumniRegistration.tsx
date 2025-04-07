@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -155,7 +156,7 @@ const AlumniRegistration: React.FC = () => {
           toast({
             title: "Image upload failed",
             description: "Your form was submitted without an image. You can update your profile later.",
-            variant: "warning",
+            variant: "destructive",
           });
         }
       }
@@ -226,7 +227,7 @@ const AlumniRegistration: React.FC = () => {
         )}
         
         {cloudinaryError && (
-          <Alert variant="warning" className="mb-6">
+          <Alert variant="default" className="mb-6">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{cloudinaryError}</AlertDescription>
           </Alert>
