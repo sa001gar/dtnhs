@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
@@ -9,96 +10,97 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Search, MapPin, Briefcase, ExternalLink, ChevronRight } from "lucide-react";
+import { Calendar, Search, MapPin, Briefcase, ExternalLink, ChevronRight, UserPlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import PageLoader from "@/components/shared/PageLoader";
+import { supabase } from "@/lib/supabase";
+
+type AlumniType = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  batch: string;
+  location: string;
+  education: string;
+  profession: string;
+  achievements: string[];
+  bio: string;
+  image: string | null;
+  status: "pending" | "approved" | "rejected";
+  created_at: string;
+};
 
 const Alumni = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [alumni, setAlumni] = useState<AlumniType[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    
+    fetchAlumni();
     window.scrollTo(0, 0);
-    return () => clearTimeout(timer);
   }, []);
 
-  const alumniData = [
-    {
-      id: 1,
-      name: "Rajiv Kumar",
-      batch: "Class of 2010",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      location: "New Delhi, India",
-      education: "B.Tech, Computer Science (IIT Delhi)",
-      profession: "Senior Software Engineer at Microsoft",
-      achievements: ["National Merit Scholarship", "Published research on AI algorithms"],
-      socialLinks: {
-        linkedin: "https://linkedin.com/in/",
-        twitter: "https://twitter.com/"
-      },
-      description: "Rajiv has been leading technological innovations at Microsoft, focusing on cloud computing solutions. He credits his foundational learning at our school for his analytical thinking skills."
-    },
-    {
-      id: 2,
-      name: "Sneha Sharma",
-      batch: "Class of 2005",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      location: "Bengaluru, India",
-      education: "MBBS, MD (AIIMS)",
-      profession: "Senior Cardiologist at Apollo Hospitals",
-      achievements: ["Gold Medalist in Medical School", "Published 12 research papers"],
-      socialLinks: {
-        linkedin: "https://linkedin.com/in/",
-        twitter: "https://twitter.com/"
-      },
-      description: "Dr. Sneha is a respected cardiologist who has pioneered several minimally invasive surgical techniques. She fondly remembers her science classes at our school that sparked her interest in medicine."
-    },
-    {
-      id: 3,
-      name: "Amit Patel",
-      batch: "Class of 2008",
-      image: "https://randomuser.me/api/portraits/men/67.jpg",
-      location: "Mumbai, India",
-      education: "MBA (IIM Ahmedabad)",
-      profession: "Founder & CEO of GreenTech Solutions",
-      achievements: ["Forbes 30 Under 30", "Environmental Conservation Award"],
-      socialLinks: {
-        linkedin: "https://linkedin.com/in/",
-        twitter: "https://twitter.com/"
-      },
-      description: "Amit's company has been revolutionizing sustainable energy solutions across India. He attributes his entrepreneurial spirit to the leadership opportunities he received at our school."
-    },
-    {
-      id: 4,
-      name: "Priya Desai",
-      batch: "Class of 2012",
-      image: "https://randomuser.me/api/portraits/women/65.jpg",
-      location: "San Francisco, USA",
-      education: "PhD in Artificial Intelligence (Stanford University)",
-      profession: "Research Scientist at Google AI",
-      achievements: ["Grace Hopper Celebration Scholar", "5 Patents in AI"],
-      socialLinks: {
-        linkedin: "https://linkedin.com/in/",
-        twitter: "https://twitter.com/"
-      },
-      description: "Priya is working on groundbreaking AI research at Google. She remembers how her mathematics teacher at our school encouraged her to pursue her interest in algorithms and computational thinking."
+  const fetchAlumni = async () => {
+    setIsLoading(true);
+    try {
+      // Fetch only approved alumni
+      const { data, error } = await supabase
+        .from("alumni")
+        .select("*")
+        .eq("status", "approved")
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      
+      setAlumni(data as AlumniType[]);
+    } catch (error) {
+      console.error("Error fetching alumni:", error);
+      // Fallback to some sample data if fetching fails
+      setAlumni([
+        {
+          id: "1",
+          name: "Rajiv Kumar",
+          batch: "Class of 2010",
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          location: "New Delhi, India",
+          education: "B.Tech, Computer Science (IIT Delhi)",
+          profession: "Senior Software Engineer at Microsoft",
+          achievements: ["National Merit Scholarship", "Published research on AI algorithms"],
+          email: "rajiv@example.com",
+          phone: "+91 9876543210",
+          bio: "Rajiv has been leading technological innovations at Microsoft, focusing on cloud computing solutions. He credits his foundational learning at our school for his analytical thinking skills.",
+          status: "approved",
+          created_at: "2023-01-01T00:00:00Z"
+        },
+        {
+          id: "2",
+          name: "Sneha Sharma",
+          batch: "Class of 2005",
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          location: "Bengaluru, India",
+          education: "MBBS, MD (AIIMS)",
+          profession: "Senior Cardiologist at Apollo Hospitals",
+          achievements: ["Gold Medalist in Medical School", "Published 12 research papers"],
+          email: "sneha@example.com",
+          phone: "+91 9876543211",
+          bio: "Dr. Sneha is a respected cardiologist who has pioneered several minimally invasive surgical techniques. She fondly remembers her science classes at our school that sparked her interest in medicine.",
+          status: "approved",
+          created_at: "2023-01-02T00:00:00Z"
+        }
+      ]);
+    } finally {
+      setIsLoading(false);
     }
-  ];
-
-  const notableAlumni = alumniData.slice(0, 2);
-  const allAlumni = alumniData;
+  };
 
   const batches = ["All", "2000-2005", "2006-2010", "2011-2015", "2016-2020"];
 
-  const filteredAlumni = alumniData.filter(alumni => 
-    alumni.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    alumni.profession.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    alumni.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    alumni.education.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredAlumni = alumni.filter(alumnus => 
+    alumnus.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumnus.profession.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumnus.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumnus.education.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isLoading) {
@@ -150,25 +152,25 @@ const Alumni = () => {
                 </Card>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {filteredAlumni.map((alumni, index) => (
-                    <AnimatedSection key={alumni.id} animation="fade-in-up" delay={index * 100}>
+                  {filteredAlumni.map((alumnus, index) => (
+                    <AnimatedSection key={alumnus.id} animation="fade-in-up" delay={index * 100}>
                       <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md h-full hover:shadow-lg transition-all duration-300">
                         <CardContent className="p-0">
                           <div className="p-6">
                             <div className="flex items-center gap-4 mb-4">
                               <Avatar className="h-16 w-16 border-2 border-border">
-                                <AvatarImage src={alumni.image} alt={alumni.name} />
-                                <AvatarFallback>{alumni.name.charAt(0)}</AvatarFallback>
+                                <AvatarImage src={alumnus.image || ""} alt={alumnus.name} />
+                                <AvatarFallback>{alumnus.name.charAt(0)}</AvatarFallback>
                               </Avatar>
                               <div>
-                                <h3 className="text-xl font-bold">{alumni.name}</h3>
+                                <h3 className="text-xl font-bold">{alumnus.name}</h3>
                                 <div className="flex items-center text-sm text-muted-foreground mb-1">
                                   <Calendar className="h-3 w-3 mr-1" />
-                                  <span>{alumni.batch}</span>
+                                  <span>{alumnus.batch}</span>
                                 </div>
                                 <div className="flex items-center text-sm text-muted-foreground">
                                   <MapPin className="h-3 w-3 mr-1" />
-                                  <span>{alumni.location}</span>
+                                  <span>{alumnus.location}</span>
                                 </div>
                               </div>
                             </div>
@@ -178,30 +180,22 @@ const Alumni = () => {
                                 <Briefcase className="h-4 w-4 text-school-primary mt-1 shrink-0" />
                                 <div>
                                   <p className="font-medium">Current Position</p>
-                                  <p className="text-sm text-muted-foreground">{alumni.profession}</p>
+                                  <p className="text-sm text-muted-foreground">{alumnus.profession}</p>
                                 </div>
                               </div>
                               <div className="flex items-start gap-2">
                                 <Calendar className="h-4 w-4 text-school-primary mt-1 shrink-0" />
                                 <div>
                                   <p className="font-medium">Education</p>
-                                  <p className="text-sm text-muted-foreground">{alumni.education}</p>
+                                  <p className="text-sm text-muted-foreground">{alumnus.education}</p>
                                 </div>
                               </div>
                             </div>
                             
                             <div className="flex justify-between items-center mt-4">
                               <div className="flex gap-2">
-                                {alumni.socialLinks.linkedin && (
-                                  <a 
-                                    href={alumni.socialLinks.linkedin} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-muted-foreground hover:text-foreground transition-colors"
-                                  >
-                                    <ExternalLink className="h-4 w-4" />
-                                  </a>
-                                )}
+                                {/* Social links would go here */}
+                                <ExternalLink className="h-4 w-4 text-muted-foreground" />
                               </div>
                               <Button variant="ghost" className="text-school-primary hover:text-school-primary/90 hover:bg-school-primary/10 p-0">
                                 <span className="mr-1">View Profile</span>
@@ -228,7 +222,7 @@ const Alumni = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Total Alumni</span>
-                      <span className="font-medium">2,500+</span>
+                      <span className="font-medium">{alumni.length}+</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Countries</span>
@@ -251,9 +245,12 @@ const Alumni = () => {
                   <p className="text-sm text-muted-foreground">
                     Register to our alumni network to get updates on events, reunions and opportunities to connect with fellow graduates.
                   </p>
-                  <Button className="w-full bg-school-primary hover:bg-school-primary/90">
-                    Register Now
-                  </Button>
+                  <Link to="/alumni/register">
+                    <Button className="w-full bg-school-primary hover:bg-school-primary/90">
+                      <UserPlus className="mr-2 h-4 w-4" />
+                      Register Now
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
 

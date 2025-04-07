@@ -17,6 +17,7 @@ import Routine from "./pages/Routine";
 import Results from "./pages/Results";
 import Contact from "./pages/Contact";
 import Alumni from "./pages/Alumni";
+import AlumniRegistration from "./pages/AlumniRegistration";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Forum from "./pages/Forum";
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/results" element={<Results />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/alumni" element={<Alumni />} />
+            <Route path="/alumni/register" element={<AlumniRegistration />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/forum" element={<Forum />} />
@@ -57,9 +59,7 @@ const App = () => (
             <Route path="/exam-schedule" element={<ExamSchedule />} />
             <Route path="/previous-year-papers" element={<PreviousYearPapers />} />
             <Route path="/admissions" element={<AdmissionPage />} />
-            {/* ADD ALL CUSTOM ROUTES BELOW THIS LINE */}
             <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Chatbot />

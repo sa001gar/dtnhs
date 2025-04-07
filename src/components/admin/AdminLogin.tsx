@@ -16,9 +16,10 @@ import {
 } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Lock, LogIn } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 const formSchema = z.object({
-  username: z.string().min(1, { message: "Username is required" }),
+  email: z.string().email({ message: "Please enter a valid email" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 });
 
@@ -33,7 +34,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -42,28 +43,47 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
     setIsLoading(true);
     
     try {
-      // Here you would handle actual authentication with your backend
-      // For now, we'll use a simple check for demo purposes
-      if (values.username === "admin" && values.password === "password123") {
-        localStorage.setItem("adminAuth", "true");
-        toast({
-          title: "Login successful",
-          description: "Welcome to the admin dashboard",
-        });
-        onLoginSuccess();
-      } else {
-        toast({
-          title: "Login failed",
-          description: "Invalid username or password",
-          variant: "destructive",
-        });
+      // Sign in with Supabase auth
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
+      
+      if (error) throw error;
+      
+      // Check if user is an admin in the admin_users table
+      const { data: adminData, error: adminError } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('user_id', data.user.id)
+        .single();
+      
+      if (adminError || !adminData) {
+        // If user is not in admin_users table, sign them out
+        await supabase.auth.signOut();
+        throw new Error("User is not authorized as admin");
       }
-    } catch (error) {
+      
+      // Store admin info in localStorage
+      localStorage.setItem("adminAuth", "true");
+      localStorage.setItem("adminName", adminData.name);
+      localStorage.setItem("adminRole", adminData.role);
+      
       toast({
-        title: "Login error",
-        description: "An unexpected error occurred",
+        title: "Login successful",
+        description: `Welcome back, ${adminData.name}`,
+      });
+      
+      onLoginSuccess();
+    } catch (error) {
+      console.error("Login error:", error);
+      toast({
+        title: "Login failed",
+        description: "Invalid email or password, or you do not have admin access",
         variant: "destructive",
       });
+      // Sign out in case of any errors to be safe
+      await supabase.auth.signOut();
     } finally {
       setIsLoading(false);
     }
@@ -83,12 +103,12 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter username" {...field} />
+                      <Input type="email" placeholder="Enter your email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
