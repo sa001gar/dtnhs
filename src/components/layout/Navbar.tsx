@@ -159,7 +159,7 @@ const Navbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className={cn(
-                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
+                        "px-3 py-2 text-md font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         "text-muted-foreground hover:text-foreground"
                       )}>
                         {link.name}
