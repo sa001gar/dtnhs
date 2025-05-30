@@ -41,20 +41,20 @@ const Index: React.FC = () => {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dtnhs.edu.in/" />
+        <meta property="og:url" content="https://dtnhs.in/" />
         <meta property="og:title" content="Durgapur Tarak Nath High School - Excellence in Education" />
         <meta property="og:description" content="Join Durgapur Tarak Nath High School for quality education and holistic development since 1941." />
         <meta property="og:image" content="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://dtnhs.edu.in/" />
+        <meta property="twitter:url" content="https://dtnhs.in/" />
         <meta property="twitter:title" content="Durgapur Tarak Nath High School - Excellence in Education" />
         <meta property="twitter:description" content="Join Durgapur Tarak Nath High School for quality education and holistic development since 1941." />
         <meta property="twitter:image" content="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://dtnhs.edu.in/" />
+        <link rel="canonical" href="https://dtnhs.in/" />
       </Helmet>
       
       <Hero />
@@ -62,21 +62,21 @@ const Index: React.FC = () => {
       <PrincipalMessage />
 
       {/* News and Notification Section - Side by side on larger screens */}
-      <div className="bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50 py-8 sm:py-12">
+      {/* <div className="bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50 py-8 sm:py-12">
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Notice Board */}
+            Notice Board
             <div>
               <NotificationSection />
             </div>
             
-            {/* News Section */}
+            News Section
             <div>
               <NewsSection />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       
       
       <Features />

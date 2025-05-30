@@ -282,7 +282,7 @@ const Navbar = () => {
                         )
                       }
                     >
-                      <div className="h-5 w-5 flex items-center justify-center">
+                      <div className="h-5 flex items-center justify-center">
                         {link.icon}
                       </div>
                       <span className="text-xs font-medium truncate max-w-12">
