@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -99,15 +100,48 @@
 
   html {
     scroll-behavior: smooth;
+    font-size: 18px; /* Increased base font size */
   }
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 1rem; /* This will now be 18px */
+    line-height: 1.6; /* Improved line height for readability */
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-medium tracking-tight;
+    line-height: 1.4; /* Better line height for headings */
+  }
+
+  h1 {
+    font-size: 2.5rem; /* Increased from default */
+  }
+
+  h2 {
+    font-size: 2rem; /* Increased from default */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* Increased from default */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* Increased from default */
+  }
+
+  h5 {
+    font-size: 1.25rem; /* Increased from default */
+  }
+
+  h6 {
+    font-size: 1.125rem; /* Increased from default */
+  }
+
+  p {
+    font-size: 1.1rem; /* Slightly larger paragraphs */
+    line-height: 1.7;
   }
 
   /* Custom scrollbar */
@@ -390,13 +424,33 @@
 
 /* Subject tag styling */
 .subject-tag {
-  @apply inline-block rounded-full px-3 py-1 text-xs font-medium;
+  @apply inline-block rounded-full px-3 py-1 text-sm font-medium;
 }
 
 /* Additional responsive utilities */
 @media (max-width: 640px) {
   .sm-hidden {
     display: none !important;
+  }
+  
+  html {
+    font-size: 16px; /* Slightly smaller base font for mobile */
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    font-size: 1rem;
   }
 }
 

@@ -136,47 +136,50 @@ const Navbar = () => {
       )}
       style={{ width: 'calc(100% - 2rem)', maxWidth: '1200px' }}
     >
-      <div className="flex h-14 items-center justify-between px-6">
+      <div className="flex h-16 items-center justify-between px-6">
         <div className="flex items-center">
           <NavLink
             to="/"
-            className="flex items-center gap-3 text-lg font-bold text-school-primary transition-opacity hover:opacity-90"
+            className="flex items-center gap-3 text-xl font-bold text-school-primary transition-opacity hover:opacity-90"
           >
             <img 
               src="/logo.jfif" 
               alt="DTNHS Logo" 
-              className="h-8 w-8 rounded-full object-cover"
+              className="h-10 w-10 rounded-full object-cover"
             />
             <span>DTNHS</span>
           </NavLink>
         </div>
 
-        <nav className="flex items-center gap-1">
-          <ul className="flex items-center gap-1 mr-2">
+        <nav className="flex items-center justify-center flex-1">
+          <ul className="flex items-center justify-center gap-1">
             {navLinks.map((link) => (
               <li key={link.name}>
                 {link.hasDropdown ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className={cn(
-                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
+                        "px-4 py-3 text-base font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         "text-muted-foreground hover:text-foreground"
                       )}>
                         {link.name}
-                        <ChevronDown className="h-4 w-4 ml-1" />
+                        <ChevronDown className="h-4 w-4 ml-2" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="bg-background border-border shadow-lg">
+                    <DropdownMenuContent 
+                      align="center" 
+                      className="bg-background/95 backdrop-blur-lg border-border shadow-xl min-w-[200px]"
+                    >
                       {link.dropdownItems?.map((item) => (
                         <DropdownMenuItem key={item.path} asChild>
                           <NavLink
                             to={item.path}
                             className={({ isActive }) =>
                               cn(
-                                "w-full px-2 py-1 text-sm transition-all duration-200",
+                                "w-full px-3 py-2 text-base transition-all duration-200",
                                 isActive
-                                  ? "text-school-primary"
-                                  : "text-muted-foreground hover:text-foreground"
+                                  ? "text-school-primary bg-school-primary/10"
+                                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
                               )
                             }
                           >
@@ -191,7 +194,7 @@ const Navbar = () => {
                     to={link.path}
                     className={({ isActive }) =>
                       cn(
-                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
+                        "px-4 py-3 text-base font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         isActive
                           ? "text-school-primary bg-school-primary/10"
                           : "text-muted-foreground hover:text-foreground"
@@ -204,8 +207,11 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <ThemeToggle />
         </nav>
+
+        <div className="flex items-center">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
@@ -215,15 +221,15 @@ const Navbar = () => {
     <TooltipProvider>
       {/* Top bar for mobile */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border md:hidden">
-        <div className="flex h-14 items-center justify-between px-4">
+        <div className="flex h-16 items-center justify-between px-4">
           <NavLink
             to="/"
-            className="flex items-center gap-2 text-lg font-bold text-school-primary"
+            className="flex items-center gap-2 text-xl font-bold text-school-primary"
           >
             <img 
               src="/logo.jfif" 
               alt="DTNHS Logo" 
-              className="h-8 w-8 rounded-full object-cover"
+              className="h-10 w-10 rounded-full object-cover"
             />
             <span>DTNHS</span>
           </NavLink>
@@ -237,29 +243,30 @@ const Navbar = () => {
       <nav className="fixed bottom-4 left-4 right-4 z-50 bg-background/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-xl md:hidden">
         <div className="flex items-center justify-around px-2 py-4">
           {bottomNavLinks.map((link) => (
-            <div key={link.name} className="relative">
+            <div key={link.name} className="relative flex justify-center">
               {link.hasDropdown ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button className="flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0 text-muted-foreground hover:text-foreground hover:bg-accent">
-                      <div className="h-5 w-5 flex items-center justify-center">
+                      <div className="h-6 w-6 flex items-center justify-center">
                         {link.icon}
                       </div>
-                      <span className="text-xs font-medium truncate max-w-12">
+                      <span className="text-sm font-medium truncate max-w-16 text-center">
                         {link.name === "Student Life" ? "Students" : link.name}
                       </span>
+                      <ChevronDown className="h-3 w-3" />
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
                     side="top" 
                     align="center" 
-                    className="bg-background border-border shadow-xl mb-2"
+                    className="bg-background/95 backdrop-blur-lg border-border shadow-xl mb-2 min-w-[180px]"
                   >
                     {link.dropdownItems?.map((item) => (
                       <DropdownMenuItem key={item.path} asChild>
                         <NavLink
                           to={item.path}
-                          className="w-full px-3 py-2 text-sm transition-all duration-200 text-muted-foreground hover:text-foreground"
+                          className="w-full px-3 py-2 text-base transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-accent"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {item.name}
@@ -282,16 +289,16 @@ const Navbar = () => {
                         )
                       }
                     >
-                      <div className="h-5 w-5 flex items-center justify-center">
+                      <div className="h-6 w-6 flex items-center justify-center">
                         {link.icon}
                       </div>
-                      <span className="text-xs font-medium truncate max-w-12">
+                      <span className="text-sm font-medium truncate max-w-16 text-center">
                         {link.name}
                       </span>
                     </NavLink>
                   </TooltipTrigger>
                   <TooltipContent side="top">
-                    <p>{link.name}</p>
+                    <p className="text-sm">{link.name}</p>
                   </TooltipContent>
                 </Tooltip>
               )}
@@ -307,16 +314,17 @@ const Navbar = () => {
                   ? "text-school-primary bg-school-primary/10"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               )}>
-                <div className="h-5 w-5 flex items-center justify-center">
-                  <MoreHorizontal className="h-5 w-5" />
+                <div className="h-6 w-6 flex items-center justify-center">
+                  <MoreHorizontal className="h-6 w-6" />
                 </div>
-                <span className="text-xs font-medium">Menu</span>
+                <span className="text-sm font-medium">Menu</span>
+                <ChevronDown className="h-3 w-3" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent 
               side="top" 
               align="center" 
-              className="bg-background border-border shadow-xl mb-2 w-56"
+              className="bg-background/95 backdrop-blur-lg border-border shadow-xl mb-2 w-64"
             >
               <div className="p-2">
                 {menuLinks.map((link) => (
@@ -324,7 +332,7 @@ const Navbar = () => {
                     {link.hasDropdown ? (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg">
+                          <button className="w-full flex items-center justify-between px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg">
                             <div className="flex items-center gap-2">
                               {link.icon}
                               {link.name}
@@ -332,12 +340,12 @@ const Navbar = () => {
                             <ChevronDown className="h-4 w-4" />
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent side="left" className="bg-background border-border shadow-xl">
+                        <DropdownMenuContent side="left" className="bg-background/95 backdrop-blur-lg border-border shadow-xl">
                           {link.dropdownItems?.map((item) => (
                             <DropdownMenuItem key={item.path} asChild>
                               <NavLink
                                 to={item.path}
-                                className="w-full px-3 py-2 text-sm transition-all duration-200 text-muted-foreground hover:text-foreground"
+                                className="w-full px-3 py-2 text-base transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-accent"
                                 onClick={() => setIsMenuOpen(false)}
                               >
                                 {item.name}
@@ -351,7 +359,7 @@ const Navbar = () => {
                         to={link.path}
                         className={({ isActive }) =>
                           cn(
-                            "w-full rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center gap-2",
+                            "w-full rounded-lg px-3 py-2 text-base font-medium transition-all duration-200 flex items-center gap-2",
                             isActive
                               ? "bg-school-primary/10 text-school-primary"
                               : "text-muted-foreground hover:bg-accent hover:text-foreground"

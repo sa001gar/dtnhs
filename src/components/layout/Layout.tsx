@@ -58,7 +58,7 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className={`flex-1 ${isMobile ? 'pt-14 pb-32' : 'pt-24'}`}>
+      <main className={`flex-1 ${isMobile ? 'pt-16 pb-32' : 'pt-28'}`}>
         {children}
       </main>
       <Footer />
