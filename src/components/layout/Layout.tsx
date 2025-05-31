@@ -58,20 +58,10 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className={`flex-1 ${isMobile ? 'pt-20 pb-28' : 'pt-32'}`}>
+      <main className={`flex-1 ${isMobile ? 'pt-14 pb-32' : 'pt-24'}`}>
         {children}
       </main>
       <Footer />
-      
-      {/* Chatbot positioning - higher on mobile */}
-      <style jsx>{`
-        .chatbot-container {
-          position: fixed !important;
-          ${isMobile ? 'bottom: 140px !important;' : 'bottom: 24px !important;'}
-          right: 24px !important;
-          z-index: 40 !important;
-        }
-      `}</style>
     </div>
   );
 };
