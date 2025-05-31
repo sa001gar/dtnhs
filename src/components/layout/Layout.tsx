@@ -1,9 +1,9 @@
+
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
-import BackToTopButton from "@/components/BackToTopButton";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LayoutProps {
@@ -58,11 +58,10 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className={`flex-1 ${isMobile ? 'pt-14 pb-28' : 'pt-24'}`}>
+      <main className={`flex-1 ${isMobile ? 'pt-14 pb-32' : 'pt-24'}`}>
         {children}
       </main>
       <Footer />
-      <BackToTopButton />
     </div>
   );
 };
