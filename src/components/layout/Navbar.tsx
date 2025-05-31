@@ -107,27 +107,28 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobile, isMenuOpen]);
 
-  return (
+  // Desktop header
+  const DesktopNavbar = () => (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
+        "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 rounded-2xl shadow-lg backdrop-blur-xl border hidden md:block",
         scrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-sm border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/90 border-border/50 shadow-xl"
+          : "bg-background/70 border-border/30"
       )}
+      style={{ width: 'calc(100% - 2rem)', maxWidth: '1200px' }}
     >
-      <div className="container flex h-16 items-center justify-between px-4">
+      <div className="flex h-14 items-center justify-between px-6">
         <div className="flex items-center">
           <NavLink
             to="/"
-            className="flex items-center gap-2 text-xl font-bold text-school-primary transition-opacity hover:opacity-90"
+            className="flex items-center gap-2 text-lg font-bold text-school-primary transition-opacity hover:opacity-90"
           >
-            <span className="hidden md:inline">Durgapur Tarak Nath High School</span>
-            <span className="md:hidden">DTNHS</span>
+            <span>DTNHS</span>
           </NavLink>
         </div>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="flex items-center gap-1">
           <ul className="flex items-center gap-1 mr-2">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -135,14 +136,14 @@ const Navbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className={cn(
-                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
+                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         "text-muted-foreground hover:text-foreground"
                       )}>
                         {link.name}
                         <ChevronDown className="h-4 w-4 ml-1" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="bg-background/90 backdrop-blur-md">
+                    <DropdownMenuContent align="center" className="bg-background/95 backdrop-blur-md border-border/50">
                       {link.dropdownItems?.map((item) => (
                         <DropdownMenuItem key={item.path} asChild>
                           <NavLink
@@ -167,9 +168,9 @@ const Navbar = () => {
                     to={link.path}
                     className={({ isActive }) =>
                       cn(
-                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
+                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         isActive
-                          ? "text-school-primary"
+                          ? "text-school-primary bg-school-primary/10"
                           : "text-muted-foreground hover:text-foreground"
                       )
                     }
@@ -182,71 +183,130 @@ const Navbar = () => {
           </ul>
           <ThemeToggle />
         </nav>
+      </div>
+    </header>
+  );
 
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+  // Mobile bottom navigation
+  const MobileNavbar = () => (
+    <>
+      {/* Top bar for mobile */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border md:hidden">
+        <div className="flex h-14 items-center justify-between px-4">
+          <NavLink
+            to="/"
+            className="flex items-center gap-2 text-lg font-bold text-school-primary"
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
+            <span>DTNHS</span>
+          </NavLink>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="rounded-full"
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
+      </header>
 
+      {/* Bottom navigation */}
+      <nav className="fixed bottom-4 left-4 right-4 z-50 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl md:hidden">
+        <div className="flex items-center justify-around px-2 py-3">
+          {navLinks.slice(0, 5).map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path || "#"}
+              className={({ isActive }) =>
+                cn(
+                  "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0",
+                  isActive
+                    ? "text-school-primary bg-school-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                )
+              }
+              onClick={() => {
+                if (link.hasDropdown) {
+                  setIsMenuOpen(true);
+                }
+              }}
+            >
+              <div className="h-5 w-5 flex items-center justify-center">
+                {React.cloneElement(link.icon as React.ReactElement, {
+                  className: "h-4 w-4"
+                })}
+              </div>
+              <span className="text-xs font-medium truncate max-w-12">
+                {link.name}
+              </span>
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+
+      {/* Mobile menu overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-background/80 backdrop-blur-sm transition-opacity duration-300 md:hidden",
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setIsMenuOpen(false)}
+      >
         <div
           className={cn(
-            "fixed inset-x-0 top-16 z-50 h-[calc(100vh-4rem)] transform overflow-y-auto bg-background p-4 transition-transform duration-300 ease-in-out md:hidden border-t border-border",
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+            "fixed bottom-24 left-4 right-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl transition-transform duration-300 max-h-96 overflow-y-auto",
+            isMenuOpen ? "translate-y-0" : "translate-y-full"
           )}
+          onClick={(e) => e.stopPropagation()}
         >
-          <nav>
-            <ul className="space-y-2 py-4">
+          <div className="p-4">
+            <div className="space-y-2">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <div key={link.name}>
                   {link.hasDropdown ? (
                     <div className="space-y-2">
-                      <div className="rounded-lg px-4 py-3 text-base font-medium text-muted-foreground">
+                      <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
                         <div className="flex items-center">
                           {link.icon}
                           {link.name}
                         </div>
                       </div>
-                      <ul className="ml-6 space-y-2 border-l border-border pl-4">
+                      <div className="ml-4 space-y-1">
                         {link.dropdownItems?.map((item) => (
-                          <li key={item.path}>
-                            <NavLink
-                              to={item.path}
-                              className={({ isActive }) =>
-                                cn(
-                                  "block rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200",
-                                  isActive
-                                    ? "bg-school-primary/10 text-school-primary"
-                                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                                )
-                              }
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {item.name}
-                            </NavLink>
-                          </li>
+                          <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) =>
+                              cn(
+                                "block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+                                isActive
+                                  ? "bg-school-primary/10 text-school-primary"
+                                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                              )
+                            }
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {item.name}
+                          </NavLink>
                         ))}
-                      </ul>
+                      </div>
                     </div>
                   ) : (
                     <NavLink
                       to={link.path}
                       className={({ isActive }) =>
                         cn(
-                          "rounded-lg px-4 py-3 text-base font-medium transition-all duration-200 flex items-center",
+                          "rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
                           isActive
                             ? "bg-school-primary/10 text-school-primary"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            : "text-muted-foreground hover:bg-accent hover:text-foreground"
                         )
                       }
                       onClick={() => setIsMenuOpen(false)}
@@ -255,13 +315,20 @@ const Navbar = () => {
                       {link.name}
                     </NavLink>
                   )}
-                </li>
+                </div>
               ))}
-            </ul>
-          </nav>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </>
+  );
+
+  return (
+    <>
+      <DesktopNavbar />
+      <MobileNavbar />
+    </>
   );
 };
 

@@ -1,10 +1,11 @@
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import BackToTopButton from "@/components/BackToTopButton";
-
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,6 +22,18 @@ const Layout: React.FC<LayoutProps> = ({
   keywords = "Durgapur Tarak Nath High School, DTNHS, education, school, Durgapur, West Bengal, best school, admission",
   canonicalUrl = "https://dtnhs.edu.in",
 }) => {
+  const location = useLocation();
+  const isMobile = useIsMobile();
+
+  // Auto scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname]);
+
   return (
     <div className="flex min-h-screen flex-col">
       <Helmet>
@@ -46,7 +59,9 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className="flex-1 pt-16">{children}</main>
+      <main className={`flex-1 ${isMobile ? 'pt-14 pb-24' : 'pt-24'}`}>
+        {children}
+      </main>
       <Footer />
       <BackToTopButton />
     </div>
