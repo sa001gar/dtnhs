@@ -22,7 +22,7 @@ const Hero = () => {
         <div className="absolute bottom-1/3 right-1/4 w-1 h-1 bg-school-secondary rounded-full animate-pulse delay-1000"></div>
       </div>
 
-      <div className="container relative z-10 px-6 sm:px-8 lg:px-12 xl:px-16">
+      <div className="container relative z-10 px-8 sm:px-12 lg:px-16 xl:px-20">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left content */}
@@ -91,7 +91,7 @@ const Hero = () => {
 
             {/* Right content - Image */}
             <div className="relative">
-              <AnimatedSection animation="fade-in-right" delay={200}>
+              <AnimatedSection animation="slide-in-right" delay={200}>
                 <div className="relative perspective-1000">
                   {/* Main image */}
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-700">
