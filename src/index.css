@@ -170,6 +170,24 @@
   .dark ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground/50;
   }
+
+  /* Chatbot positioning for mobile */
+  @media (max-width: 768px) {
+    .chatbot-container,
+    [class*="chatbot"],
+    [id*="chatbot"] {
+      bottom: 140px !important;
+      right: 16px !important;
+      z-index: 40 !important;
+    }
+    
+    /* Target common chatbot selectors */
+    iframe[src*="chatbot"],
+    div[data-chatbot],
+    .chatbot-widget {
+      bottom: 140px !important;
+    }
+  }
 }
 
 @layer components {
@@ -395,6 +413,23 @@
   
   .animate-spin-slow {
     animation: spin-slow 20s linear infinite;
+  }
+
+  /* Mobile navbar optimizations */
+  .mobile-nav-item {
+    @apply flex flex-col items-center gap-2 p-3 rounded-2xl transition-all duration-300 active:scale-95;
+    min-width: 64px;
+    max-width: 80px;
+  }
+
+  .mobile-nav-icon {
+    @apply h-7 w-7 flex items-center justify-center;
+  }
+
+  .mobile-nav-label {
+    @apply text-xs font-medium text-center leading-tight;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }
 
