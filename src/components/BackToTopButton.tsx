@@ -1,12 +1,7 @@
-
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const BackToTopButton = () => {
-  // Component disabled - returning null to hide it
-  return null;
-
-  /*
   const [isVisible, setIsVisible] = useState(false);
 
   const handleScroll = () => {
@@ -59,7 +54,6 @@ const BackToTopButton = () => {
       </Tooltip>
     </TooltipProvider>
   );
-  */
 };
 
 export default BackToTopButton;

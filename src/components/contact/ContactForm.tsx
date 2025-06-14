@@ -84,7 +84,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <Card className="w-full min-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold">Contact Us</CardTitle>
         <CardDescription>

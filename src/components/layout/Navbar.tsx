@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { 
@@ -33,19 +32,19 @@ const Navbar = () => {
     { 
       name: "Home", 
       path: "/",
-      icon: <Home className="h-5 w-5" />,
+      icon: <Home className="h-4 w-4" />,
       showInBottomNav: true
     },
     {
       name: "About",
       path: "/about",
-      icon: <Book className="h-5 w-5" />,
+      icon: <Book className="h-4 w-4" />,
       showInBottomNav: false
     },
     {
       name: "Academics",
       hasDropdown: true,
-      icon: <GraduationCap className="h-5 w-5" />,
+      icon: <GraduationCap className="h-4 w-4" />,
       showInBottomNav: true,
       dropdownItems: [
         { name: "Programs", path: "/academics" },
@@ -59,13 +58,13 @@ const Navbar = () => {
     {
       name: "Faculty",
       path: "/teachers",
-      icon: <Users className="h-5 w-5" />,
+      icon: <Users className="h-4 w-4" />,
       showInBottomNav: false
     },
     {
       name: "Student Life",
       hasDropdown: true,
-      icon: <Users className="h-5 w-5" />,
+      icon: <Users className="h-4 w-4" />,
       showInBottomNav: true,
       dropdownItems: [
         { name: "Student Portal", path: "/students" },
@@ -76,7 +75,7 @@ const Navbar = () => {
     {
       name: "Resources",
       hasDropdown: true,
-      icon: <FileText className="h-5 w-5" />,
+      icon: <FileText className="h-4 w-4" />,
       showInBottomNav: false,
       dropdownItems: [
         { name: "Notices", path: "/notices" },
@@ -87,13 +86,13 @@ const Navbar = () => {
     { 
       name: "Admission", 
       path: "/admissions",
-      icon: <Award className="h-5 w-5" />,
+      icon: <Award className="h-4 w-4" />,
       showInBottomNav: false
     },
     { 
       name: "Contact", 
       path: "/contact",
-      icon: <Phone className="h-5 w-5" />,
+      icon: <Phone className="h-4 w-4" />,
       showInBottomNav: true
     },
   ];
@@ -131,8 +130,8 @@ const Navbar = () => {
       className={cn(
         "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 rounded-2xl shadow-lg backdrop-blur-xl border hidden md:block",
         scrolled
-          ? "bg-background/95 border-border/80 shadow-xl"
-          : "bg-background/90 border-border/50"
+          ? "bg-background/90 border-border/50 shadow-xl"
+          : "bg-background/70 border-border/30"
       )}
       style={{ width: 'calc(100% - 2rem)', maxWidth: '1200px' }}
     >
@@ -159,14 +158,14 @@ const Navbar = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className={cn(
-                        "px-3 py-2 text-md font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
+                        "px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg hover:bg-accent",
                         "text-muted-foreground hover:text-foreground"
                       )}>
                         {link.name}
                         <ChevronDown className="h-4 w-4 ml-1" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="bg-background border-border shadow-lg">
+                    <DropdownMenuContent align="center" className="bg-background/95 backdrop-blur-md border-border/50">
                       {link.dropdownItems?.map((item) => (
                         <DropdownMenuItem key={item.path} asChild>
                           <NavLink
@@ -214,7 +213,7 @@ const Navbar = () => {
   const MobileNavbar = () => (
     <TooltipProvider>
       {/* Top bar for mobile */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border md:hidden">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border md:hidden">
         <div className="flex h-14 items-center justify-between px-4">
           <NavLink
             to="/"
@@ -234,124 +233,102 @@ const Navbar = () => {
       </header>
 
       {/* Bottom navigation */}
-      <nav className="fixed bottom-4 left-4 right-4 z-50 bg-background/95 backdrop-blur-xl border border-border/80 rounded-2xl shadow-xl md:hidden">
-        <div className="flex items-center justify-around px-2 py-4">
+      <nav className="fixed bottom-4 left-4 right-4 z-50 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl md:hidden">
+        <div className="flex items-center justify-around px-2 py-3">
           {bottomNavLinks.map((link) => (
-            <div key={link.name} className="relative">
-              {link.hasDropdown ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0 text-muted-foreground hover:text-foreground hover:bg-accent">
-                      <div className="h-5 w-5 flex items-center justify-center">
-                        {link.icon}
-                      </div>
-                      <span className="text-xs font-medium truncate max-w-12">
-                        {link.name === "Student Life" ? "Students" : link.name}
-                      </span>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent 
-                    side="top" 
-                    align="center" 
-                    className="bg-background border-border shadow-xl mb-2"
-                  >
-                    {link.dropdownItems?.map((item) => (
-                      <DropdownMenuItem key={item.path} asChild>
-                        <NavLink
-                          to={item.path}
-                          className="w-full px-3 py-2 text-sm transition-all duration-200 text-muted-foreground hover:text-foreground"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {item.name}
-                        </NavLink>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <NavLink
-                      to={link.path || "#"}
-                      className={({ isActive }) =>
-                        cn(
-                          "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0",
-                          isActive
-                            ? "text-school-primary bg-school-primary/10"
-                            : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                        )
-                      }
-                    >
-                      <div className="h-5 flex items-center justify-center">
-                        {link.icon}
-                      </div>
-                      <span className="text-xs font-medium truncate max-w-12">
-                        {link.name}
-                      </span>
-                    </NavLink>
-                  </TooltipTrigger>
-                  <TooltipContent side="top">
-                    <p>{link.name}</p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
-            </div>
+            <Tooltip key={link.name}>
+              <TooltipTrigger asChild>
+                <NavLink
+                  to={link.path || "#"}
+                  className={({ isActive }) =>
+                    cn(
+                      "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0",
+                      isActive
+                        ? "text-school-primary bg-school-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    )
+                  }
+                  onClick={() => {
+                    if (link.hasDropdown) {
+                      setIsMenuOpen(true);
+                    }
+                  }}
+                >
+                  <div className="h-5 w-5 flex items-center justify-center">
+                    {link.icon}
+                  </div>
+                  <span className="text-xs font-medium truncate max-w-12">
+                    {link.name === "Student Life" ? "Students" : link.name}
+                  </span>
+                </NavLink>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{link.name}</p>
+              </TooltipContent>
+            </Tooltip>
           ))}
           
           {/* Menu button */}
-          <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-            <DropdownMenuTrigger asChild>
-              <button className={cn(
-                "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 h-auto",
-                isMenuOpen
-                  ? "text-school-primary bg-school-primary/10"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              )}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className={cn(
+                  "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 h-auto",
+                  isMenuOpen
+                    ? "text-school-primary bg-school-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                )}
+              >
                 <div className="h-5 w-5 flex items-center justify-center">
-                  <MoreHorizontal className="h-5 w-5" />
+                  <MoreHorizontal className="h-4 w-4" />
                 </div>
                 <span className="text-xs font-medium">Menu</span>
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              side="top" 
-              align="center" 
-              className="bg-background border-border shadow-xl mb-2 w-56"
-            >
-              <div className="p-2">
-                {menuLinks.map((link) => (
-                  <div key={link.name} className="mb-2">
-                    {link.hasDropdown ? (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <button className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg">
-                            <div className="flex items-center gap-2">
-                              {link.icon}
-                              {link.name}
-                            </div>
-                            <ChevronDown className="h-4 w-4" />
-                          </button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent side="left" className="bg-background border-border shadow-xl">
-                          {link.dropdownItems?.map((item) => (
-                            <DropdownMenuItem key={item.path} asChild>
-                              <NavLink
-                                to={item.path}
-                                className="w-full px-3 py-2 text-sm transition-all duration-200 text-muted-foreground hover:text-foreground"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                {item.name}
-                              </NavLink>
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    ) : (
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>More Options</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </nav>
+
+      {/* Mobile menu overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-background/80 backdrop-blur-sm transition-opacity duration-300 md:hidden",
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setIsMenuOpen(false)}
+      >
+        <div
+          className={cn(
+            "fixed bottom-24 left-4 right-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl transition-transform duration-300 max-h-96 overflow-y-auto",
+            isMenuOpen ? "translate-y-0" : "translate-y-full"
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-4">
+            <div className="space-y-2">
+              {/* Menu items from bottom nav with dropdowns */}
+              {bottomNavLinks.filter(link => link.hasDropdown).map((link) => (
+                <div key={link.name} className="space-y-2">
+                  <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      {link.icon}
+                      {link.name}
+                    </div>
+                  </div>
+                  <div className="ml-4 space-y-1">
+                    {link.dropdownItems?.map((item) => (
                       <NavLink
-                        to={link.path}
+                        key={item.path}
+                        to={item.path}
                         className={({ isActive }) =>
                           cn(
-                            "w-full rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center gap-2",
+                            "block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
                             isActive
                               ? "bg-school-primary/10 text-school-primary"
                               : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -359,17 +336,67 @@ const Navbar = () => {
                         }
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        {link.icon}
-                        {link.name}
+                        {item.name}
                       </NavLink>
-                    )}
+                    ))}
                   </div>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                </div>
+              ))}
+              
+              {/* Additional menu items */}
+              {menuLinks.map((link) => (
+                <div key={link.name}>
+                  {link.hasDropdown ? (
+                    <div className="space-y-2">
+                      <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          {link.icon}
+                          {link.name}
+                        </div>
+                      </div>
+                      <div className="ml-4 space-y-1">
+                        {link.dropdownItems?.map((item) => (
+                          <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) =>
+                              cn(
+                                "block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
+                                isActive
+                                  ? "bg-school-primary/10 text-school-primary"
+                                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                              )
+                            }
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {item.name}
+                          </NavLink>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <NavLink
+                      to={link.path}
+                      className={({ isActive }) =>
+                        cn(
+                          "rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center gap-2",
+                          isActive
+                            ? "bg-school-primary/10 text-school-primary"
+                            : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                        )
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.icon}
+                      {link.name}
+                    </NavLink>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </nav>
+      </div>
     </TooltipProvider>
   );
 
