@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -58,7 +59,7 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className={`flex-1 ${isMobile ? 'pt-14 pb-28' : 'pt-24'}`}>
+      <main className={`flex-1 ${isMobile ? 'pt-14 pb-24' : 'pt-24'}`}>
         {children}
       </main>
       <Footer />
