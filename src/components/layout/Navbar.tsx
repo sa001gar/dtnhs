@@ -26,17 +26,17 @@ const Navbar = () => {
     { 
       name: "Home", 
       path: "/",
-      icon: <Home className="h-4 w-4 mr-1" />
+      icon: <Home className="h-5 w-5" />
     },
     {
       name: "About",
       path: "/about",
-      icon: <Book className="h-4 w-4 mr-1" />,
+      icon: <Book className="h-5 w-5" />,
     },
     {
       name: "Academics",
       hasDropdown: true,
-      icon: <GraduationCap className="h-4 w-4 mr-1" />,
+      icon: <GraduationCap className="h-5 w-5" />,
       dropdownItems: [
         { name: "Programs", path: "/academics" },
         { name: "Syllabus", path: "/syllabus" },
@@ -49,12 +49,12 @@ const Navbar = () => {
     {
       name: "Faculty",
       path: "/teachers",
-      icon: <Users className="h-4 w-4 mr-1" />
+      icon: <Users className="h-5 w-5" />
     },
     {
       name: "Student Life",
       hasDropdown: true,
-      icon: <Users className="h-4 w-4 mr-1" />,
+      icon: <Users className="h-5 w-5" />,
       dropdownItems: [
         { name: "Student Portal", path: "/students" },
         { name: "Alumni", path: "/alumni" },
@@ -64,7 +64,7 @@ const Navbar = () => {
     {
       name: "Resources",
       hasDropdown: true,
-      icon: <FileText className="h-4 w-4 mr-1" />,
+      icon: <FileText className="h-5 w-5" />,
       dropdownItems: [
         { name: "Notices", path: "/notices" },
         { name: "Blog", path: "/blog" },
@@ -74,13 +74,21 @@ const Navbar = () => {
     { 
       name: "Admission", 
       path: "/admissions",
-      icon: <Phone className="h-4 w-4 mr-1" />
+      icon: <Phone className="h-5 w-5" />
     },
     { 
       name: "Contact", 
       path: "/contact",
-      icon: <Phone className="h-4 w-4 mr-1" />
+      icon: <Phone className="h-5 w-5" />
     },
+  ];
+
+  // Main mobile navigation links for bottom bar
+  const mobileNavLinks = [
+    { name: "Home", path: "/", icon: <Home className="h-5 w-5" /> },
+    { name: "About", path: "/about", icon: <Book className="h-5 w-5" /> },
+    { name: "Teachers", path: "/teachers", icon: <Users className="h-5 w-5" /> },
+    { name: "Contact", path: "/contact", icon: <Phone className="h-5 w-5" /> },
   ];
 
   useEffect(() => {
@@ -187,10 +195,10 @@ const Navbar = () => {
     </header>
   );
 
-  // Mobile bottom navigation
+  // Mobile navbar - simple bottom bar
   const MobileNavbar = () => (
     <>
-      {/* Top bar for mobile */}
+      {/* Top header for mobile */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border md:hidden">
         <div className="flex h-14 items-center justify-between px-4">
           <NavLink
@@ -199,128 +207,36 @@ const Navbar = () => {
           >
             <span>DTNHS</span>
           </NavLink>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="rounded-full"
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
+          <ThemeToggle />
         </div>
       </header>
 
-      {/* Bottom navigation */}
-      <nav className="fixed bottom-4 left-4 right-4 z-50 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl md:hidden">
+      {/* Simple bottom navigation bar */}
+      <nav className="fixed bottom-6 left-6 right-6 z-50 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl md:hidden">
         <div className="flex items-center justify-around px-2 py-3">
-          {navLinks.slice(0, 5).map((link) => (
+          {mobileNavLinks.map((link) => (
             <NavLink
               key={link.name}
-              to={link.path || "#"}
+              to={link.path}
               className={({ isActive }) =>
                 cn(
-                  "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 min-w-0",
+                  "flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-200 flex-1",
                   isActive
                     ? "text-school-primary bg-school-primary/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 )
               }
-              onClick={() => {
-                if (link.hasDropdown) {
-                  setIsMenuOpen(true);
-                }
-              }}
             >
               <div className="h-5 w-5 flex items-center justify-center">
-                {React.cloneElement(link.icon as React.ReactElement, {
-                  className: "h-4 w-4"
-                })}
+                {link.icon}
               </div>
-              <span className="text-xs font-medium truncate max-w-12">
+              <span className="text-xs font-medium text-center">
                 {link.name}
               </span>
             </NavLink>
           ))}
         </div>
       </nav>
-
-      {/* Mobile menu overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 bg-background/80 backdrop-blur-sm transition-opacity duration-300 md:hidden",
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}
-        onClick={() => setIsMenuOpen(false)}
-      >
-        <div
-          className={cn(
-            "fixed bottom-24 left-4 right-4 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl transition-transform duration-300 max-h-96 overflow-y-auto",
-            isMenuOpen ? "translate-y-0" : "translate-y-full"
-          )}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="p-4">
-            <div className="space-y-2">
-              {navLinks.map((link) => (
-                <div key={link.name}>
-                  {link.hasDropdown ? (
-                    <div className="space-y-2">
-                      <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
-                        <div className="flex items-center">
-                          {link.icon}
-                          {link.name}
-                        </div>
-                      </div>
-                      <div className="ml-4 space-y-1">
-                        {link.dropdownItems?.map((item) => (
-                          <NavLink
-                            key={item.path}
-                            to={item.path}
-                            className={({ isActive }) =>
-                              cn(
-                                "block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200",
-                                isActive
-                                  ? "bg-school-primary/10 text-school-primary"
-                                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                              )
-                            }
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            {item.name}
-                          </NavLink>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <NavLink
-                      to={link.path}
-                      className={({ isActive }) =>
-                        cn(
-                          "rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 flex items-center",
-                          isActive
-                            ? "bg-school-primary/10 text-school-primary"
-                            : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                        )
-                      }
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {link.icon}
-                      {link.name}
-                    </NavLink>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 
