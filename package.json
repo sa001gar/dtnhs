@@ -61,8 +61,10 @@
     "recharts": "^2.12.7",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
+    "tailwindcss": "^4.1.10",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.3",
+    "vite": "^6.3.5",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -79,9 +81,7 @@
     "globals": "^15.9.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "typescript-eslint": "^8.0.1"
   }
 }
