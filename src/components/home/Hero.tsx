@@ -114,7 +114,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container relative z-20 px-16 mx-auto">
+      <div className="container relative z-20 px-4 mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12 lg:gap-16">
           {/* Left Side - Content */}
           <div className="w-full lg:w-1/2 pt-8 md:pt-16 pb-8">
