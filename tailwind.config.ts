@@ -30,11 +30,20 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				school: {
-					primary: 'hsl(var(--school-primary) / <alpha-value>)',
-					secondary: 'hsl(var(--school-secondary) / <alpha-value>)',
-					accent: 'hsl(var(--school-accent) / <alpha-value>)',
-					light: 'hsl(var(--school-light) / <alpha-value>)',
-					dark: 'hsl(var(--school-dark) / <alpha-value>)',
+					primary: {
+						DEFAULT: 'hsl(var(--school-primary))',
+						foreground: 'hsl(var(--school-primary-foreground))'
+					},
+					secondary: {
+						DEFAULT: 'hsl(var(--school-secondary))',
+						foreground: 'hsl(var(--school-secondary-foreground))'
+					},
+					accent: {
+						DEFAULT: 'hsl(var(--school-accent))',
+						foreground: 'hsl(var(--school-accent-foreground))'
+					},
+					light: 'hsl(var(--school-light))',
+					dark: 'hsl(var(--school-dark))',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
