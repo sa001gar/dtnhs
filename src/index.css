@@ -36,15 +36,15 @@
     
     --radius: 0.75rem;
 
-    /* Custom school colors - Orange/Red for light mode */
-    --school-primary: 16 85% 55%;
-    --school-primary-foreground: 0 0% 100%;
-    --school-secondary: 25 95% 53%;
-    --school-secondary-foreground: 0 0% 100%;
-    --school-accent: 16 90% 65%;
-    --school-accent-foreground: 0 0% 100%;
-    --school-light: 210 40% 98%;
-    --school-dark: 215 25% 27%;
+    /* Custom school colors - RGB values for opacity support */
+    --school-primary: 215 69 45;
+    --school-primary-foreground: 255 255 255;
+    --school-secondary: 255 107 53;
+    --school-secondary-foreground: 255 255 255;
+    --school-accent: 255 114 85;
+    --school-accent-foreground: 255 255 255;
+    --school-light: 248 250 252;
+    --school-dark: 51 65 85;
   }
 
   .dark {
@@ -76,15 +76,15 @@
     --input: 12 6.5% 15.1%;
     --ring: 24 5.7% 82.9%;
 
-    /* Custom school colors - Yellow for dark mode */
-    --school-primary: 45 100% 60%;
-    --school-primary-foreground: 0 0% 0%;
-    --school-secondary: 45 100% 50%;
-    --school-secondary-foreground: 0 0% 0%;
-    --school-accent: 45 100% 70%;
-    --school-accent-foreground: 0 0% 0%;
-    --school-light: 0 0% 9.6%;
-    --school-dark: 210 40% 98%;
+    /* Custom school colors - RGB values for dark mode */
+    --school-primary: 251 191 36;
+    --school-primary-foreground: 0 0 0;
+    --school-secondary: 245 158 11;
+    --school-secondary-foreground: 0 0 0;
+    --school-accent: 252 211 77;
+    --school-accent-foreground: 0 0 0;
+    --school-light: 24 24 27;
+    --school-dark: 248 250 252;
   }
 
   * {
