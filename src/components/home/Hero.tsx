@@ -92,7 +92,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[95vh] py-12 overflow-hidden bg-white dark:bg-gray-900">
+    <section className="relative min-h-[95vh] py-12 px-2 lg:px-4 overflow-hidden bg-white dark:bg-gray-900">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-school-primary/10 dark:bg-school-primary/5 rounded-full blur-3xl animate-pulse"></div>

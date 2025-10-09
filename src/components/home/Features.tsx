@@ -204,7 +204,7 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-white to-school-light/20 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <section className="py-16 md:py-24 px-2 lg:px-4 bg-gradient-to-br from-white to-school-light/20 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-school-primary/5 dark:bg-school-primary/10 rounded-full blur-3xl"></div>
