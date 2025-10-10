@@ -29,3 +29,4 @@ dist-ssr
 *.tmp
 *.temp
 *.orig
+.env
