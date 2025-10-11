@@ -85,31 +85,52 @@ export interface Database {
           id: string
           name: string
           email: string
+          phone: string
+          inquiry_type: string
           subject: string
           message: string
+          student_class: string | null
+          preferred_contact: string
           status: string
           created_at: string
           updated_at: string
+          admin_notes: string | null
+          replied_at: string | null
+          replied_by: string | null
         }
         Insert: {
           id?: string
           name: string
           email: string
+          phone: string
+          inquiry_type: string
           subject: string
           message: string
+          student_class?: string | null
+          preferred_contact: string
           status?: string
           created_at?: string
           updated_at?: string
+          admin_notes?: string | null
+          replied_at?: string | null
+          replied_by?: string | null
         }
         Update: {
           id?: string
           name?: string
           email?: string
+          phone?: string
+          inquiry_type?: string
           subject?: string
           message?: string
+          student_class?: string | null
+          preferred_contact?: string
           status?: string
           created_at?: string
           updated_at?: string
+          admin_notes?: string | null
+          replied_at?: string | null
+          replied_by?: string | null
         }
       }
       exam_schedules: {

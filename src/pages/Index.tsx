@@ -63,7 +63,7 @@ const Index: React.FC = () => {
 
       {/* News and Notification Section - Side by side on larger screens */}
       <div className="bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50 py-8 sm:py-12">
-        <div className="container px-4">
+        <div className="max-w-7xl px-4 lg:px-1 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Notice Board */}
             <div>

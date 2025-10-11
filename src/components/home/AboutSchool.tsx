@@ -23,7 +23,7 @@ const AboutSchool = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-muted/30 to-muted/10 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <section className="py-16  bg-gradient-to-br from-muted/30 to-muted/10 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Enhanced decorative elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-school-primary/5 dark:bg-school-primary/10 blur-3xl animate-pulse"></div>
@@ -31,8 +31,8 @@ const AboutSchool = () => {
         <div className="absolute top-1/2 left-1/3 w-48 h-48 rounded-full bg-school-primary/3 dark:bg-school-primary/5 blur-2xl"></div>
       </div>
       
-      <div className="container px-4 mx-auto">
-        <div className="mx-auto max-w-6xl">
+      <div className="max-w-7xl px-4 lg:px-1 mx-auto">
+        <div className="lg:px-4">
           <AnimatedSection animation="fade-in-up">
             <div className="text-center mb-12">
               <div className="inline-flex items-center rounded-full bg-school-primary/10 px-3 py-1 text-sm text-school-primary dark:bg-school-primary/20 mb-4 transition-all duration-300 hover:bg-school-primary/20 dark:hover:bg-school-primary/30">

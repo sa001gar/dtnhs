@@ -92,7 +92,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[95vh] py-12 px-2 lg:px-4 overflow-hidden bg-white dark:bg-gray-900">
+    <section className="relative max-sm:min-h-screen lg:max-h-screen py-12 px-2 lg:px-4 overflow-hidden bg-white dark:bg-gray-900">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-school-primary/10 dark:bg-school-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -105,19 +105,19 @@ const Hero = () => {
           <div className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-dashed border-school-secondary/20 dark:border-school-secondary/30 animate-spin-slow"></div>
           
           {/* Floating Icons - Only kept a few */}
-          <div className="absolute top-1/6 left-1/3 text-school-primary/20 dark:text-school-primary/30 animate-float-delayed transform rotate-6">
+          {/* <div className="absolute top-1/6 left-1/3 text-school-primary/20 dark:text-school-primary/30 animate-float-delayed transform rotate-6">
             <GraduationCap className="w-8 h-8" />
-          </div>
-          <div className="absolute top-2/3 right-1/6 text-school-secondary/20 dark:text-school-secondary/30 animate-float transform -rotate-12">
+          </div> */}
+          {/* <div className="absolute top-2/3 right-1/6 text-school-secondary/20 dark:text-school-secondary/30 animate-float transform -rotate-12">
             <BookOpen className="w-10 h-10" />
-          </div>
+          </div> */}
         </div>
       </div>
 
-      <div className="container relative z-20 px-4 mx-auto">
+      <div className="max-w-7xl px-4 lg:px-1 mx-auto relative z-20">
         <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12 lg:gap-16">
           {/* Left Side - Content */}
-          <div className="w-full lg:w-1/2 pt-8 md:pt-16 pb-8">
+          <div className="w-full lg:w-1/2  pb-8">
             <AnimatedSection animation="fade-in-up" className="relative">
               <div className="absolute -left-12 -top-12 w-24 h-24 text-school-primary rotate-12 opacity-10 dark:opacity-5">
                 <Star className="w-full h-full" strokeWidth={1} />
@@ -155,9 +155,19 @@ const Hero = () => {
                   </Link>
                 </Button>
               </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex -space-x-2 shrink-0">
+                  <img src="/images/pages/home/hero_section/trusted_1.png" alt="Student 1" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                  <img src="/images/pages/home/hero_section/trusted_2.png" alt="Student 2" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                  <img src="/images/pages/home/hero_section/trusted_3.png" alt="Student 3" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                </div>
+                <p className="line-clamp-2 leading-relaxed">Trusted by 50,000+ Students and their parents</p>
+              </div>
+              
               
               {/* Stats Section */}
-              <div className="flex flex-wrap gap-6 mt-8">
+              {/* <div className="flex flex-wrap gap-6 mt-8">
                 {[
                   { icon: <Users className="h-5 w-5 text-school-primary" />, value: "50+", label: "Expert Teachers" },
                   { icon: <GraduationCap className="h-5 w-5 text-school-primary" />, value: "1000+", label: "Successful Students" },
@@ -173,12 +183,12 @@ const Hero = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </AnimatedSection>
           </div>
           
           {/* Right Side - Image and Testimonials */}
-          <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+          <div className="w-full lg:w-1/2 ">
             <AnimatedSection animation="fade-in-up" delay={200} className="relative perspective-1000">
               <div className="absolute -right-12 top-1/2 w-24 h-24 text-school-secondary rotate-45 opacity-10 dark:opacity-5">
                 <Star className="w-full h-full" strokeWidth={1} />
@@ -229,7 +239,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Testimonials Section */}
-                <div className="bg-white dark:bg-gray-800 p-5 mt-4 rounded-b-2xl shadow-lg">
+                {/* <div className="bg-white dark:bg-gray-800 p-5 mt-4 rounded-b-2xl shadow-lg">
                   <div className="relative overflow-hidden" style={{minHeight: "100px"}}>
                     {testimonials.map((testimonial, i) => (
                       <div
@@ -250,10 +260,10 @@ const Hero = () => {
                         </div>
                       </div>
                     ))}
-                  </div>
+                  </div> */}
 
                   {/* Testimonial Navigation Dots */}
-                  <div className="flex justify-center gap-2 mt-4">
+                  {/* <div className="flex justify-center gap-2 mt-4">
                     {testimonials.map((_, index) => (
                       <button
                         key={index}
@@ -267,7 +277,7 @@ const Hero = () => {
                       />
                     ))}
                   </div>
-                </div>
+                </div> */}
                 
                 {/* Floating Elements */}
                 <div className="absolute -bottom-6 -left-6 md:-left-10 bg-orange-100 dark:bg-amber-950 rounded-2xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">

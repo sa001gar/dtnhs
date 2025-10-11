@@ -22,7 +22,7 @@ const PrincipalMessage: React.FC = () => {
         </div>
       </div>
       
-      <div className="container px-4 relative z-10">
+      <div className="max-w-7xl px-4 lg:px-1 mx-auto relative z-10">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center mb-12">
           <div className="inline-flex items-center justify-center rounded-full bg-school-primary/10 px-3 py-1 text-sm text-school-primary dark:bg-school-primary/20 mb-4">
             <Quote className="mr-1 h-4 w-4" />
@@ -42,7 +42,7 @@ const PrincipalMessage: React.FC = () => {
           <AnimatedSection animation="fade-in-up" delay={100} className="lg:col-span-5 order-2 lg:order-1">
             <div className="relative">
               {/* Profile Image With Decorative Elements */}
-              <div className="relative mx-auto max-w-sm">
+              <div className="relative ">
                 <div className="absolute -top-4 -left-4 w-24 h-24 rounded-full bg-gradient-to-br from-school-primary/20 to-school-secondary/20 dark:from-school-primary/30 dark:to-school-secondary/30 blur-xl"></div>
                 <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-gradient-to-br from-school-secondary/20 to-school-primary/20 dark:from-school-secondary/30 dark:to-school-primary/30 blur-xl"></div>
                 
@@ -65,13 +65,13 @@ const PrincipalMessage: React.FC = () => {
                 </div>
                 
                 {/* Floating Badges */}
-                <div className="absolute -top-2 -right-2 bg-white dark:bg-gray-800 rounded-full shadow-lg p-2 border border-gray-200 dark:border-gray-700 animate-pulse">
+                {/* <div className="absolute -top-2 -right-2 bg-white dark:bg-gray-800 rounded-full shadow-lg p-2 border border-gray-200 dark:border-gray-700 animate-pulse">
                   <Medal className="h-6 w-6 text-amber-500" />
-                </div>
+                </div> */}
                 
-                <div className="absolute -bottom-2 -left-2 bg-gradient-to-br from-school-primary to-school-secondary text-white rounded-full shadow-lg p-2 flex items-center justify-center animate-float">
+                {/* <div className="absolute -bottom-2 -left-2 bg-gradient-to-br from-school-primary to-school-secondary text-white rounded-full shadow-lg p-2 flex items-center justify-center animate-float">
                   <Star className="h-5 w-5" />
-                </div>
+                </div> */}
               </div>
               
               {/* Additional Info Cards */}

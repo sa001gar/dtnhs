@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <Navbar />
-      <main className="flex-1 pt-16">{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
       <BackToTopButton />
     </div>

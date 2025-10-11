@@ -77,11 +77,11 @@ const StudentAchievements: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24 px-2 lg:px-4 dark:bg-background">
+    <section className="relative overflow-hidden py-16  px-2 lg:px-4 dark:bg-background">
       <div className="absolute -right-32 top-0 h-64 w-64 rounded-full bg-school-primary/5 blur-3xl dark:bg-school-primary/10"></div>
       <div className="absolute -left-32 bottom-0 h-64 w-64 rounded-full bg-school-secondary/5 blur-3xl dark:bg-school-secondary/10"></div>
-      
-      <div className="container relative px-4">
+
+      <div className="max-w-7xl px-4 lg:px-1 mx-auto relative ">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl md:text-5xl">
             Our Students Are Working At

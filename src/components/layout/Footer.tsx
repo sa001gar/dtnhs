@@ -6,7 +6,7 @@ import AnimatedSection from "../ui/AnimatedSection";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="relative overflow-hidden border-t border-border">
       {/* Decorative Background */}
@@ -16,9 +16,9 @@ const Footer: React.FC = () => {
         <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-school-secondary/5 dark:bg-school-secondary/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-border/50 to-transparent"></div>
       </div>
-      
+
       {/* Newsletter Section */}
-      <div className="container px-4 py-12 md:py-16">
+      <div className="max-w-7xl  px-4 lg:px-1   mx-auto  py-12 md:py-16">
         <AnimatedSection animation="fade-in-up" className="relative mx-auto max-w-4xl">
           <div className="bg-gradient-to-br from-school-primary/10 to-school-secondary/10 dark:from-school-primary/20 dark:to-school-secondary/20 rounded-2xl p-8 shadow-lg border border-white/20 dark:border-white/5 backdrop-blur-sm">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -30,14 +30,14 @@ const Footer: React.FC = () => {
               </div>
               <div className="w-full md:w-auto">
                 <form className="flex flex-col sm:flex-row gap-3">
-                  <input 
-                    type="email" 
-                    placeholder="Your email address" 
+                  <input
+                    type="email"
+                    placeholder="Your email address"
                     className="px-4 py-2.5 rounded-full border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-school-primary"
                     aria-label="Email for newsletter"
                   />
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="bg-school-primary hover:bg-school-primary/90 text-white px-6 py-2.5 rounded-full font-medium transition-all"
                   >
                     Subscribe
@@ -48,9 +48,9 @@ const Footer: React.FC = () => {
           </div>
         </AnimatedSection>
       </div>
-      
+
       {/* Main Footer Content */}
-      <div className="container px-4 py-12">
+      <div className="max-w-7xl px-4 lg:px-1 mx-auto py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {/* School Logo and Info */}
           <div className="lg:col-span-2">
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             <p className="text-sm text-muted-foreground mb-6">
               Providing quality education and shaping the future of our students since 1941. Our mission is to empower young minds and cultivate excellence.
             </p>
-            
+
             {/* Social Media Links */}
             <div className="flex flex-wrap gap-3">
               {[
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                 { icon: <Twitter size={18} />, label: "Twitter", href: "#" },
                 { icon: <Youtube size={18} />, label: "YouTube", href: "#" }
               ].map((social, i) => (
-                <a 
+                <a
                   key={i}
                   href={social.href}
                   aria-label={social.label}
@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -97,8 +97,8 @@ const Footer: React.FC = () => {
                 { label: "Contact Us", to: "/contact" }
               ].map((link, i) => (
                 <li key={i}>
-                  <Link 
-                    to={link.to} 
+                  <Link
+                    to={link.to}
                     className="text-sm text-muted-foreground transition-all hover:text-school-primary hover:translate-x-1 flex items-center"
                   >
                     <span className="mr-2 text-xs">→</span>
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
-          
+
           {/* Resources */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Resources</h4>
@@ -121,8 +121,8 @@ const Footer: React.FC = () => {
                 { label: "Previous Year Papers", to: "/previous-year-papers" }
               ].map((link, i) => (
                 <li key={i}>
-                  <Link 
-                    to={link.to} 
+                  <Link
+                    to={link.to}
                     className="text-sm text-muted-foreground transition-all hover:text-school-primary hover:translate-x-1 flex items-center"
                   >
                     <span className="mr-2 text-xs">→</span>
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
-          
+
           {/* Contact */}
           <div className="lg:col-span-2">
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
@@ -149,24 +149,24 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-school-primary" />
-                <a 
-                  href="mailto:contact@dtnhs.edu.in" 
+                <a
+                  href="mailto:contact@dtnhs.edu.in"
                   className="text-sm text-muted-foreground transition-colors hover:text-school-primary"
                 >
                   contact@dtnhs.in
                 </a>
               </li>
             </ul>
-            
+
             {/* Map Preview */}
             <div className="mt-4 rounded-xl overflow-hidden border border-border h-32 bg-muted/30">
 
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9965264115012!2d87.3213519!3d23.495643100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710cb6d23035%3A0x8e339769f234a1a3!2sDurgapur%20Tarak%20Nath%20High%20School!5e1!3m2!1sen!2sin!4v1743533146590!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={false} 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.9965264115012!2d87.3213519!3d23.495643100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f7710cb6d23035%3A0x8e339769f234a1a3!2sDurgapur%20Tarak%20Nath%20High%20School!5e1!3m2!1sen!2sin!4v1743533146590!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
                 loading="lazy"
                 className="rounded-xl"
                 title="School Location Map"
@@ -175,14 +175,14 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Bottom Footer */}
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-center text-sm text-muted-foreground">
               © {currentYear} Durgapur Tarak Nath High School. All rights reserved.
             </p>
-            
+
             <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
               <Link to="/privacy-policy" className="hover:text-school-primary transition-colors">Privacy Policy</Link>
               <Link to="/terms-of-service" className="hover:text-school-primary transition-colors">Terms of Service</Link>
@@ -191,7 +191,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Back to top button */}
       {/* <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
