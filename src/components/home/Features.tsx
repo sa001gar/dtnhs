@@ -185,7 +185,7 @@ const Features: React.FC = () => {
       description: "We offer a wide range of clubs, sports, and activities to help students develop their talents and interests.",
       icon: <Trophy className="h-6 w-6"/>,
       link: "/students",
-      color: "amber"
+      color: "amber-800"
     },
     {
       title: "Student Support",

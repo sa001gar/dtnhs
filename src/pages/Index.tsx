@@ -86,9 +86,9 @@ const Index: React.FC = () => {
         <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
         <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
         
-        <div className="container relative px-4">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-12 items-center">
+        <div className="max-w-7xl lg:px-1 mx-auto relative px-4">
+          <div className="mx-auto ">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 lg:gap-12 items-center">
               <div className="lg:col-span-3">
                 <AnimatedSection animation="fade-in-up" className="max-w-xl">
                   <div className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 mb-6">
@@ -126,12 +126,12 @@ const Index: React.FC = () => {
                 </AnimatedSection>
               </div>
               
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-3">
                 <AnimatedSection animation="fade-in-up" delay={200}>
                   <div className="relative perspective-1000">
                     <div className="absolute inset-0 bg-gradient-to-tr from-school-primary/20 to-transparent rounded-2xl transform rotate-3"></div>
                     <img 
-                      src="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_child.jfif?raw=true" 
+                      src="/images/pages/home/cta/cta_image.avif" 
                       alt="Student Success" 
                       className="relative z-10 w-full h-auto rounded-2xl shadow-xl object-cover transform rotate-x-12 hover:rotate-x-0 transition-transform duration-700"
                       loading="lazy"

@@ -61,7 +61,7 @@ const AboutSchool = () => {
                         </div>
                       )}
                       <img
-                        src="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs.jpg?raw=true"
+                        src="/images/pages/about/dtnhs.avif"
                         alt="Historical School Building"
                         className={cn(
                           "hidden md:block w-full h-full object-cover rounded-xl transition-transform duration-1000 group-hover:scale-110",
@@ -70,7 +70,7 @@ const AboutSchool = () => {
                         onLoad={() => handleImageLoad('main')}
                       />
                       <img
-                        src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif"
+                        src="/images/pages/about/dtnhs_child.avif"
                         alt="Historical School Building"
                         className={cn(
                           "block md:hidden w-full h-full object-cover rounded-xl transition-transform duration-1000 group-hover:scale-110",
@@ -94,7 +94,7 @@ const AboutSchool = () => {
                           </div>
                         )}
                         <img
-                          src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_front.jfif"
+                          src="/images/pages/about/dtnhs_front.avif"
                           alt="School Library"
                           className={cn(
                             "w-full object-cover rounded-xl h-40 md:h-36 lg:h-44 transition-transform duration-1000 group-hover:scale-110",
@@ -114,7 +114,7 @@ const AboutSchool = () => {
                           </div>
                         )}
                         <img
-                          src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/classroom.png"
+                          src="/images/pages/about/classroom.avif"
                           alt="School Classroom"
                           className={cn(
                             "w-full object-cover rounded-xl h-40 md:h-36 lg:h-44 transition-transform duration-1000 group-hover:scale-110",
@@ -138,7 +138,7 @@ const AboutSchool = () => {
                           </div>
                         )}
                         <img
-                          src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_child.jfif"
+                          src="/images/pages/about/dtnhs_child.avif"
                           alt="Student Life"
                           className={cn(
                             "w-full object-cover rounded-xl h-40 md:h-36 lg:h-44 transition-transform duration-1000 group-hover:scale-110",
@@ -158,7 +158,8 @@ const AboutSchool = () => {
                           </div>
                         )}
                         <img
-                          src="https://raw.githubusercontent.com/sa001gar/dtnhs/refs/heads/main/images/home/dtnhs_sports.jpg"
+                          src="/images/pages/about/dtnhs_sports.avif"
+                          loading="lazy"
                           alt="Sports Facilities"
                           className={cn(
                             "w-full object-cover rounded-xl h-40 md:h-36 lg:h-44 transition-transform duration-1000 group-hover:scale-110",
@@ -182,7 +183,7 @@ const AboutSchool = () => {
                         </div>
                       )}
                       <img
-                        src="https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true"
+                        src="/images/pages/about/2024-09-13.avif"
                         alt="School Events"
                         className={cn(
                           "w-full h-full object-cover rounded-xl transition-transform duration-1000 group-hover:scale-110",

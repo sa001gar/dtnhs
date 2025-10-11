@@ -47,18 +47,18 @@ const Hero = () => {
 
   // Fixed image URLs with placeholder fallbacks
   const heroImages = [
-    "https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true",
-    "https://github.com/sa001gar/dtnhs/blob/main/images/home/classroom.png?raw=true",
-    "https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true"
+    "/images/pages/about/2024-09-13.avif",
+    "/images/pages/about/classroom.avif",
+    "/images/pages/about/dtnhs_front.avif"
   ];
 
   // Preload images
   useEffect(() => {
     // Load original images if available
     const originalImages = [
-      "https://github.com/sa001gar/dtnhs/blob/main/images/home/2024-09-13.jpg?raw=true",
-      "https://github.com/sa001gar/dtnhs/blob/main/images/home/classroom.png?raw=true",
-      "https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true"
+      "/images/pages/about/2024-09-13.avif",
+      "/images/pages/about/classroom.avif",
+      "/images/pages/about/dtnhs_front.avif"
     ];
     
     // Try to preload original images
