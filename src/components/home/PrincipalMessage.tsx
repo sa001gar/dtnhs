@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/CustomCard";
 
 const PrincipalMessage: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-white to-school-primary/5 dark:from-gray-900 dark:to-gray-800/90 dark:text-white relative overflow-hidden">
+    <section className="py-16 bg-gradient-to-br from-white to-school-primary/5 dark:from-gray-900 dark:to-gray-800/90 dark:text-white relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-school-primary/5 dark:bg-school-primary/10 rounded-full blur-3xl"></div>

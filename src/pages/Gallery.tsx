@@ -261,9 +261,7 @@ const Gallery = () => {
       />
 
       <div className="container py-8 md:py-12">
-        <div className="mb-6">
-          <Breadcrumb />
-        </div>
+        
         
         <AnimatedSection animation="fade-in-up">
           <Tabs defaultValue={categories[0].id} className="mb-8">

@@ -47,7 +47,7 @@ const StudentAchievements: React.FC = () => {
       title: "Corporate Leaders",
       description: "Our alumni work at leading corporations like TCS, Infosys, and Wipro in various technical and managerial roles.",
       count: "200+",
-      color: "bg-gradient-to-br from-white to-blue-50 dark:from-transparent dark:to-blue-950/20",
+      color: "bg-gradient-to-br from-white to-blue-200 dark:from-transparent dark:to-blue-950/20",
       delay: 0
     },
     {
@@ -55,7 +55,7 @@ const StudentAchievements: React.FC = () => {
       title: "Government Services",
       description: "Many of our students have secured prestigious positions in government services including IAS, IPS, and other civil services.",
       count: "150+",
-      color: "bg-gradient-to-br from-white to-orange-50 dark:from-transparent dark:to-orange-950/20",
+      color: "bg-gradient-to-br from-white to-orange-200 dark:from-transparent dark:to-orange-950/20",
       delay: 100
     },
     {
@@ -63,7 +63,7 @@ const StudentAchievements: React.FC = () => {
       title: "Scientists & Researchers",
       description: "Our former students contribute to scientific advancements at institutions like ISRO, DRDO, and various research facilities.",
       count: "75+",
-      color: "bg-gradient-to-br from-white to-green-50 dark:from-transparent dark:to-green-950/20",
+      color: "bg-gradient-to-br from-white to-green-200 dark:from-transparent dark:to-green-950/20",
       delay: 200
     },
     {
@@ -71,7 +71,7 @@ const StudentAchievements: React.FC = () => {
       title: "Higher Education",
       description: "Our alumni have pursued higher education at prestigious institutions including IITs, NITs, and renowned universities abroad.",
       count: "300+",
-      color: "bg-gradient-to-br from-white to-purple-50 dark:from-transparent dark:to-purple-950/20",
+      color: "bg-gradient-to-br from-white to-purple-200 dark:from-transparent dark:to-purple-950/20",
       delay: 300
     }
   ];

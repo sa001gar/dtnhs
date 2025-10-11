@@ -1,13 +1,16 @@
 
 import React, { useState, useEffect } from "react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
-import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, Calendar, Award, Clock, Users, FileText } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { 
+  BookOpen, Calendar, Award, Clock, Users, FileText, 
+  GraduationCap, Trophy, Heart, Star, Target, MapPin,
+  Phone, Mail, Building, Shield, Lightbulb, Bell
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import PageLoader from "@/components/shared/PageLoader";
 
@@ -23,342 +26,605 @@ const Students: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const upcomingEvents = [
+    { title: "Mid-Term Exams", date: "March 15-25, 2025", type: "exam" },
+    { title: "Annual Sports Day", date: "April 10, 2025", type: "sports" },
+    { title: "Science Exhibition", date: "April 20, 2025", type: "academic" },
+    { title: "Annual Cultural Day", date: "December 15, 2025", type: "cultural" },
+  ];
+
+  const quickLinks = [
+    { title: "Syllabus & Curriculum", href: "/syllabus", icon: <BookOpen className="h-4 w-4" /> },
+    { title: "Class Routines", href: "/routine", icon: <Clock className="h-4 w-4" /> },
+    { title: "Exam Schedule", href: "/exam-schedule", icon: <Calendar className="h-4 w-4" /> },
+    { title: "Previous Papers", href: "/previous-year-papers", icon: <FileText className="h-4 w-4" /> },
+    { title: "Results", href: "/results", icon: <Award className="h-4 w-4" /> },
+    { title: "Notices", href: "/notices", icon: <Bell className="h-4 w-4" /> },
+  ];
+
   if (isLoading) {
     return <PageLoader />;
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
+    <Layout>
+      <PageHeader
+        title="Student Portal"
+        description="Your gateway to academic resources, activities, and student support services at DTNHS"
+      />
       
-      <main className="flex-1 pt-16">
-        <PageHeader
-          title="Student Portal"
-          subtitle="Resources, information, and support for our students."
-        />
-        
-        <section className="py-16">
-          <div className="container px-4">
-            <Tabs defaultValue="resources" className="mx-auto max-w-5xl">
-              <AnimatedSection animation="fade-in-up">
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
-                  <TabsTrigger value="resources">Resources</TabsTrigger>
-                  <TabsTrigger value="activities">Activities</TabsTrigger>
-                  <TabsTrigger value="support">Support</TabsTrigger>
-                  <TabsTrigger value="achievements">Achievements</TabsTrigger>
-                </TabsList>
-              </AnimatedSection>
-              
-              <TabsContent value="resources" className="mt-6">
-                <AnimatedSection animation="fade-in-up">
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center gap-2">
-                          <BookOpen className="h-5 w-5 text-school-primary" />
-                          <CardTitle>Academic Resources</CardTitle>
+      {/* Quick Stats Section */}
+      <section className="py-8 bg-gradient-to-br from-school-primary/5 to-school-secondary/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="text-center">
+              <CardContent className="pt-4 pb-4">
+                <Users className="h-8 w-8 mx-auto text-school-primary mb-2" />
+                <div className="text-2xl font-bold text-school-primary">1200+</div>
+                <div className="text-sm text-muted-foreground">Students</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="pt-4 pb-4">
+                <GraduationCap className="h-8 w-8 mx-auto text-school-secondary mb-2" />
+                <div className="text-2xl font-bold text-school-secondary">60+</div>
+                <div className="text-sm text-muted-foreground">Teachers</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="pt-4 pb-4">
+                <Award className="h-8 w-8 mx-auto text-school-primary mb-2" />
+                <div className="text-2xl font-bold text-school-primary">98%</div>
+                <div className="text-sm text-muted-foreground">Pass Rate</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="pt-4 pb-4">
+                <Trophy className="h-8 w-8 mx-auto text-school-secondary mb-2" />
+                <div className="text-2xl font-bold text-school-secondary">50+</div>
+                <div className="text-sm text-muted-foreground">Awards</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+      
+      {/* Main Content */}
+      <section className="py-8 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Tabs defaultValue="resources" className="w-full">
+            {/* Mobile-friendly tabs with horizontal scroll */}
+            <div className="w-full overflow-x-auto">
+              <TabsList className="grid grid-cols-4 w-full min-w-[400px] h-auto p-1">
+                <TabsTrigger 
+                  value="resources" 
+                  className="flex flex-col items-center gap-1 py-2 px-2 text-xs sm:text-sm"
+                >
+                  <BookOpen className="h-4 w-4" />
+                  <span className="hidden sm:inline">Resources</span>
+                  <span className="sm:hidden">Study</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="activities" 
+                  className="flex flex-col items-center gap-1 py-2 px-2 text-xs sm:text-sm"
+                >
+                  <Trophy className="h-4 w-4" />
+                  <span className="hidden sm:inline">Activities</span>
+                  <span className="sm:hidden">Sports</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="support" 
+                  className="flex flex-col items-center gap-1 py-2 px-2 text-xs sm:text-sm"
+                >
+                  <Heart className="h-4 w-4" />
+                  <span className="hidden sm:inline">Support</span>
+                  <span className="sm:hidden">Help</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="achievements" 
+                  className="flex flex-col items-center gap-1 py-2 px-2 text-xs sm:text-sm"
+                >
+                  <Star className="h-4 w-4" />
+                  <span className="hidden sm:inline">Achievements</span>
+                  <span className="sm:hidden">Awards</span>
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            
+            {/* Resources Tab */}
+            <TabsContent value="resources" className="mt-6 space-y-6">
+              {/* Quick Links Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
+                {quickLinks.map((link, index) => (
+                  <Card key={index} className="hover:shadow-md transition-shadow">
+                    <CardContent className="p-3 lg:p-4 text-center">
+                      <Link to={link.href} className="block">
+                        <div className="text-school-primary mb-2">{link.icon}</div>
+                        <div className="text-xs lg:text-sm font-medium leading-tight">
+                          {link.title}
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-3">
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Academic Resources */}
+                <Card className="lg:col-span-2">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <BookOpen className="h-5 w-5 text-school-primary" />
+                      Academic Resources
+                    </CardTitle>
+                    <CardDescription>
+                      Everything you need for your academic success
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-school-primary">Study Materials</h4>
+                        <ul className="space-y-2 text-sm">
                           <li className="flex items-center gap-2">
-                            <FileText className="h-4 w-4 text-muted-foreground" />
-                            <Link to="/academics" className="text-sm text-muted-foreground hover:text-school-primary">
-                              Syllabus & Curriculum
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <Link to="/syllabus" className="hover:text-school-primary">
+                              Subject-wise Syllabus
                             </Link>
                           </li>
                           <li className="flex items-center gap-2">
-                            <Clock className="h-4 w-4 text-muted-foreground" />
-                            <Link to="/routine" className="text-sm text-muted-foreground hover:text-school-primary">
-                              Class Routines
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <Link to="/previous-year-papers" className="hover:text-school-primary">
+                              Previous Question Papers
                             </Link>
                           </li>
                           <li className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-muted-foreground" />
-                            <Link to="/academics" className="text-sm text-muted-foreground hover:text-school-primary">
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <Link to="/routine" className="hover:text-school-primary">
+                              Study Materials & Notes
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-school-primary">Examination</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <Link to="/exam-schedule" className="hover:text-school-primary">
                               Exam Schedule
                             </Link>
                           </li>
                           <li className="flex items-center gap-2">
-                            <Award className="h-4 w-4 text-muted-foreground" />
-                            <Link to="/results" className="text-sm text-muted-foreground hover:text-school-primary">
-                              Previous Year Question Papers
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <Link to="/results" className="hover:text-school-primary">
+                              Results & Report Cards
                             </Link>
                           </li>
+                          <li className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                            <span className="text-muted-foreground">Hall Tickets</span>
+                          </li>
                         </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                {/* Important Dates */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Calendar className="h-5 w-5 text-school-primary" />
+                      Upcoming Events
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {upcomingEvents.map((event, index) => (
+                        <div key={index} className="flex flex-col space-y-1 p-3 bg-school-primary/5 rounded-lg">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium">{event.title}</span>
+                            <Badge variant="secondary" className="text-xs">
+                              {event.type}
+                            </Badge>
+                          </div>
+                          <span className="text-xs text-muted-foreground">{event.date}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <Button asChild variant="outline" size="sm" className="w-full mt-4">
+                      <Link to="/notices">View All Events</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Student Guidelines */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-school-primary" />
+                    Student Guidelines & Code of Conduct
+                  </CardTitle>
+                  <CardDescription>
+                    Important guidelines for all DTNHS students
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-school-primary mb-3">Dress Code</h4>
+                      <ul className="space-y-1 text-sm text-muted-foreground">
+                        <li>• White shirt with school tie</li>
+                        <li>• Navy blue trousers/skirt</li>
+                        <li>• Black shoes, white socks</li>
+                        <li>• School blazer in winter</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-school-primary mb-3">Attendance</h4>
+                      <ul className="space-y-1 text-sm text-muted-foreground">
+                        <li>• Minimum 75% required</li>
+                        <li>• Leave applications mandatory</li>
+                        <li>• Medical certificates needed</li>
+                        <li>• Parent notification system</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-school-primary mb-3">Discipline</h4>
+                      <ul className="space-y-1 text-sm text-muted-foreground">
+                        <li>• Respect for all community</li>
+                        <li>• Maintain classroom order</li>
+                        <li>• No mobile phones</li>
+                        <li>• Care for school property</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold text-school-primary mb-3">Assessment</h4>
+                      <ul className="space-y-1 text-sm text-muted-foreground">
+                        <li>• Regular class tests</li>
+                        <li>• Mid-term & final exams</li>
+                        <li>• Project work</li>
+                        <li>• Parent-teacher meetings</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            {/* Activities Tab */}
+            <TabsContent value="activities" className="mt-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Trophy className="h-5 w-5 text-school-primary" />
+                      Sports Activities
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Participate in various sports including cricket, football, badminton, 
+                      basketball, table tennis, and athletics competitions.
+                    </p>
+                    <div className="space-y-2">
+                      <Badge variant="outline">Cricket Team</Badge>
+                      <Badge variant="outline">Football Team</Badge>
+                      <Badge variant="outline">Athletics</Badge>
+                    </div>
+                    <Button asChild variant="outline" size="sm" className="w-full">
+                      <Link to="/gallery">View Sports Gallery</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Star className="h-5 w-5 text-school-primary" />
+                      Cultural Programs
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Express your creativity through music, dance, drama, and art. 
+                      Join our cultural events and competitions.
+                    </p>
+                    <div className="space-y-2">
+                      <Badge variant="outline">Annual Day</Badge>
+                      <Badge variant="outline">Drama Club</Badge>
+                      <Badge variant="outline">Music Choir</Badge>
+                    </div>
+                    <Button asChild variant="outline" size="sm" className="w-full">
+                      <Link to="/gallery">View Cultural Events</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Lightbulb className="h-5 w-5 text-school-primary" />
+                      Clubs & Societies
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Join various clubs to explore your interests and develop new skills 
+                      in science, technology, and arts.
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="text-xs">
+                        <div className="font-medium">Science Club</div>
+                        <div className="text-muted-foreground">Mondays 4:00 PM</div>
+                      </div>
+                      <div className="text-xs">
+                        <div className="font-medium">Literary Club</div>
+                        <div className="text-muted-foreground">Wed 4:00 PM</div>
+                      </div>
+                      <div className="text-xs">
+                        <div className="font-medium">Eco Club</div>
+                        <div className="text-muted-foreground">Fridays 3:30 PM</div>
+                      </div>
+                      <div className="text-xs">
+                        <div className="font-medium">Robotics Club</div>
+                        <div className="text-muted-foreground">Saturdays 2:00 PM</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+            
+            {/* Support Tab */}
+            <TabsContent value="support" className="mt-6 space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Heart className="h-5 w-5 text-school-primary" />
+                    Student Support Services
+                  </CardTitle>
+                  <CardDescription>
+                    Comprehensive support system to help you succeed academically and personally
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="border-l-4 border-l-school-primary">
+                      <CardContent className="pt-4">
+                        <h4 className="font-semibold text-school-primary mb-2">Academic Counseling</h4>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Get guidance on study strategies, time management, career planning, 
+                          and subject selection from our experienced counselors.
+                        </p>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-3 w-3" />
+                            <span className="font-medium">Mrs. Suchitra Roy</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Mail className="h-3 w-3" />
+                            <span>academic.counselor@dtnhs.edu.in</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-3 w-3" />
+                            <span>Mon-Fri: 10:00 AM - 3:00 PM</span>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                     
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-5 w-5 text-school-primary" />
-                          <CardTitle>Important Dates</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-3">
-                          <li className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Mid-Term Exams</span>
-                            <span className="text-sm font-medium">August 15-25, 2023</span>
-                          </li>
-                          <li className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Sports Day</span>
-                            <span className="text-sm font-medium">September 10, 2023</span>
-                          </li>
-                          <li className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Annual Day</span>
-                            <span className="text-sm font-medium">December 15, 2023</span>
-                          </li>
-                          <li className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Final Exams</span>
-                            <span className="text-sm font-medium">February 10-25, 2024</span>
-                          </li>
-                        </ul>
-                        <div className="mt-4">
-                          <Button asChild variant="outline" size="sm">
-                            <Link to="/notices">View Full Calendar</Link>
-                          </Button>
+                    <Card className="border-l-4 border-l-school-secondary">
+                      <CardContent className="pt-4">
+                        <h4 className="font-semibold text-school-secondary mb-2">Personal Counseling</h4>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Confidential support for personal, emotional, or social issues. 
+                          Schedule appointments or visit during open hours.
+                        </p>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-3 w-3" />
+                            <span className="font-medium">Mr. Debashish Ghosh</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Mail className="h-3 w-3" />
+                            <span>counselor@dtnhs.edu.in</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Phone className="h-3 w-3" />
+                            <span>+91 9830 456 789</span>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
                     
-                    <Card className="md:col-span-2">
-                      <CardHeader>
-                        <div className="flex items-center gap-2">
-                          <Users className="h-5 w-5 text-school-primary" />
-                          <CardTitle>Student Guidelines</CardTitle>
+                    <Card className="border-l-4 border-l-school-primary">
+                      <CardContent className="pt-4">
+                        <h4 className="font-semibold text-school-primary mb-2">Health Services</h4>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          On-campus infirmary with qualified nurse, first aid, basic medical care, 
+                          and regular health check-ups for all students.
+                        </p>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-3 w-3" />
+                            <span className="font-medium">Mrs. Anjali Das (Nurse)</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="h-3 w-3" />
+                            <span>Ground Floor, Main Building</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-3 w-3" />
+                            <span>8:00 AM - 4:00 PM (Mon-Fri)</span>
+                          </div>
                         </div>
-                        <CardDescription>
-                          Important rules and guidelines for all students
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="grid gap-6 md:grid-cols-2">
-                          <div>
-                            <h4 className="font-medium text-school-primary">Dress Code</h4>
-                            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                              <li>• Boys: White shirt, navy blue trousers, school tie</li>
-                              <li>• Girls: White shirt, navy blue skirt/trousers, school tie</li>
-                              <li>• Black shoes and white socks for all students</li>
-                              <li>• School blazer during winter season</li>
-                            </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="border-l-4 border-l-school-secondary">
+                      <CardContent className="pt-4">
+                        <h4 className="font-semibold text-school-secondary mb-2">Library Services</h4>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Well-stocked library with books, journals, digital resources, 
+                          reading rooms, and computer access for research.
+                        </p>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-3 w-3" />
+                            <span className="font-medium">Mr. Amit Sen (Librarian)</span>
                           </div>
-                          
-                          <div>
-                            <h4 className="font-medium text-school-primary">Attendance</h4>
-                            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                              <li>• Minimum 75% attendance is mandatory</li>
-                              <li>• Leave application must be submitted for absence</li>
-                              <li>• Medical certificate required for extended absence</li>
-                              <li>• Parents will be notified for frequent absences</li>
-                            </ul>
+                          <div className="flex items-center gap-2">
+                            <Building className="h-3 w-3" />
+                            <span>First Floor, Academic Block</span>
                           </div>
-                          
-                          <div>
-                            <h4 className="font-medium text-school-primary">Conduct</h4>
-                            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                              <li>• Respectful behavior towards teachers and peers</li>
-                              <li>• Maintain discipline in classrooms and corridors</li>
-                              <li>• No use of mobile phones during school hours</li>
-                              <li>• Care for school property and environment</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-medium text-school-primary">Evaluation</h4>
-                            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                              <li>• Regular class tests and assignments</li>
-                              <li>• Mid-term and final examinations</li>
-                              <li>• Project work and practical assessments</li>
-                              <li>• Parent-teacher meetings to discuss progress</li>
-                            </ul>
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-3 w-3" />
+                            <span>8:30 AM - 4:30 PM (Mon-Sat)</span>
                           </div>
                         </div>
                       </CardContent>
                     </Card>
                   </div>
-                </AnimatedSection>
-              </TabsContent>
-              
-              <TabsContent value="activities" className="mt-6">
-                <AnimatedSection animation="fade-in-up">
-                  <div className="grid gap-6 md:grid-cols-3">
-                    <Card>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            {/* Achievements Tab */}
+            <TabsContent value="achievements" className="mt-6 space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Award className="h-5 w-5 text-school-primary" />
+                    Student Achievements & Recognition
+                  </CardTitle>
+                  <CardDescription>
+                    Celebrating the outstanding accomplishments of our DTNHS students
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="bg-gradient-to-br from-school-primary/5 to-school-primary/10">
                       <CardHeader>
-                        <CardTitle>Sports</CardTitle>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <GraduationCap className="h-5 w-5 text-school-primary" />
+                          Academic Excellence
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          Our school offers various sports activities including cricket, football, badminton, basketball, table tennis, and athletics. Students can participate in inter-class and inter-school competitions.
-                        </p>
-                        <div className="mt-4">
-                          <Button asChild variant="outline" size="sm">
-                            <Link to="/gallery">View Sports Gallery</Link>
-                          </Button>
+                      <CardContent className="space-y-3">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                            <span><strong>Ananya Chatterjee (Class XII)</strong> - 3rd Rank in WBBSE 2023</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                            <span><strong>Rahul Das (Class X)</strong> - National Science Olympiad Qualifier</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Star className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                            <span><strong>Priya Sharma (Class XI)</strong> - State Math Competition Winner</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Trophy className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>School Achievement:</strong> 98% Board Exam Pass Rate 2023</span>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
                     
-                    <Card>
+                    <Card className="bg-gradient-to-br from-school-secondary/5 to-school-secondary/10">
                       <CardHeader>
-                        <CardTitle>Cultural Activities</CardTitle>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Trophy className="h-5 w-5 text-school-secondary" />
+                          Sports Champions
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          Students can showcase their talents in singing, dancing, drama, and music. We organize annual cultural events, competitions, and celebration of various festivals.
-                        </p>
-                        <div className="mt-4">
-                          <Button asChild variant="outline" size="sm">
-                            <Link to="/gallery">View Cultural Gallery</Link>
-                          </Button>
+                      <CardContent className="space-y-3">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-secondary mt-0.5 flex-shrink-0" />
+                            <span><strong>Cricket Team</strong> - District Champions 2023</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-secondary mt-0.5 flex-shrink-0" />
+                            <span><strong>Vishal Singh (Class IX)</strong> - State Athletics Gold Medal</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-secondary mt-0.5 flex-shrink-0" />
+                            <span><strong>Girls Basketball</strong> - Zonal Tournament Runners-up</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Trophy className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>Overall Champions</strong> - Inter-School Sports Meet 2023</span>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
                     
-                    <Card>
+                    <Card className="bg-gradient-to-br from-school-primary/5 to-school-secondary/5">
                       <CardHeader>
-                        <CardTitle>Clubs & Societies</CardTitle>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Star className="h-5 w-5 text-school-primary" />
+                          Cultural Arts
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">
-                          Join our various clubs including Science Club, Literary Club, Eco Club, Robotics Club, Art & Craft Club, and more to explore your interests.
-                        </p>
-                        <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                          <li>• Science Club - Every Monday (4:00 PM)</li>
-                          <li>• Literary Club - Every Wednesday (4:00 PM)</li>
-                          <li>• Eco Club - Every Friday (3:30 PM)</li>
-                        </ul>
+                      <CardContent className="space-y-3">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>Drama Team</strong> - State Level Competition Winners</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>Tanisha Roy (Class IX)</strong> - National Painting Competition</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>School Choir</strong> - District Music Competition Winners</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="bg-gradient-to-br from-school-secondary/5 to-school-primary/5">
+                      <CardHeader>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Lightbulb className="h-5 w-5 text-school-secondary" />
+                          Innovation & Others
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-secondary mt-0.5 flex-shrink-0" />
+                            <span><strong>Eco Club</strong> - Green School Award 2023</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Award className="h-4 w-4 text-school-secondary mt-0.5 flex-shrink-0" />
+                            <span><strong>Robotics Team</strong> - State Level 2nd Prize</span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Trophy className="h-4 w-4 text-school-primary mt-0.5 flex-shrink-0" />
+                            <span><strong>Science Exhibition</strong> - National Level Recognition</span>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                   </div>
-                </AnimatedSection>
-              </TabsContent>
-              
-              <TabsContent value="support" className="mt-6">
-                <AnimatedSection animation="fade-in-up">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Student Support Services</CardTitle>
-                      <CardDescription>
-                        We offer various support services to help students succeed academically and personally.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid gap-6 md:grid-cols-2">
-                        <div>
-                          <h4 className="font-medium text-school-primary">Academic Counseling</h4>
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            Our academic counselors help students with study strategies, time management, and career guidance. They also assist with subject selection and examination preparation.
-                          </p>
-                          <div className="mt-4">
-                            <p className="text-sm font-medium">Contact: Mrs. Suchitra Roy</p>
-                            <p className="text-sm text-muted-foreground">Email: academic.counselor@dtnhs.edu.in</p>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Personal Counseling</h4>
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            Our school counselor provides confidential support for students dealing with personal, emotional, or social issues. Students can schedule appointments or drop in during designated hours.
-                          </p>
-                          <div className="mt-4">
-                            <p className="text-sm font-medium">Contact: Mr. Debashish Ghosh</p>
-                            <p className="text-sm text-muted-foreground">Email: counselor@dtnhs.edu.in</p>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Health Services</h4>
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            Our school infirmary provides first aid and basic medical care. Regular health check-ups are conducted for all students. We also organize health awareness programs.
-                          </p>
-                          <div className="mt-4">
-                            <p className="text-sm font-medium">School Nurse: Mrs. Anjali Das</p>
-                            <p className="text-sm text-muted-foreground">Infirmary Hours: 8:00 AM - 4:00 PM (Monday to Friday)</p>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Library Services</h4>
-                          <p className="mt-2 text-sm text-muted-foreground">
-                            Our well-stocked library has a wide collection of books, journals, and digital resources. Students can borrow books and use the reading room for studying.
-                          </p>
-                          <div className="mt-4">
-                            <p className="text-sm font-medium">Librarian: Mr. Amit Sen</p>
-                            <p className="text-sm text-muted-foreground">Library Hours: 8:30 AM - 4:30 PM (Monday to Saturday)</p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              </TabsContent>
-              
-              <TabsContent value="achievements" className="mt-6">
-                <AnimatedSection animation="fade-in-up">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Student Achievements</CardTitle>
-                      <CardDescription>
-                        Celebrating the success of our students in various fields.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid gap-6 md:grid-cols-2">
-                        <div>
-                          <h4 className="font-medium text-school-primary">Academic Achievements</h4>
-                          <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                            <li>• Ananya Chatterjee (Class XII) - 3rd Rank in WBBSE Examination 2023</li>
-                            <li>• Rahul Das (Class X) - Selected for National Science Olympiad 2023</li>
-                            <li>• Priya Sharma (Class XI) - 1st Prize in State Level Math Competition</li>
-                            <li>• School secured 95% pass rate in Class X Board Exams 2023</li>
-                            <li>• 15 students qualified for JEE Mains in 2023</li>
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Sports Achievements</h4>
-                          <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                            <li>• School Cricket Team - Champions, District Tournament 2023</li>
-                            <li>• Vishal Singh (Class IX) - Gold Medal, State Athletics Meet 2023</li>
-                            <li>• Girls Basketball Team - Runners-up, Zonal Tournament 2023</li>
-                            <li>• Arjun Dey (Class XII) - Selected for State Swimming Team</li>
-                            <li>• School secured Overall Champions Trophy in Inter-School Sports Meet 2023</li>
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Cultural Achievements</h4>
-                          <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                            <li>• School Drama Team - 1st Prize, State Level Drama Competition</li>
-                            <li>• Tanisha Roy (Class IX) - 2nd Prize, National Level Painting Competition</li>
-                            <li>• School Choir - 1st Prize, District Level Music Competition</li>
-                            <li>• Rohit Banerjee (Class XI) - Selected for National Youth Festival 2023</li>
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-medium text-school-primary">Other Achievements</h4>
-                          <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                            <li>• School Eco Club - Green School Award 2023</li>
-                            <li>• Robotics Team - 2nd Prize, State Level Robotics Competition</li>
-                            <li>• School secured Best Discipline Award in Youth Festival 2023</li>
-                            <li>• Science Exhibition Team - Special Appreciation Award at National Level</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
-    </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+    </Layout>
   );
 };
 

@@ -2,8 +2,8 @@ import React from "react";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Breadcrumb } from "@/components/shared/Breadcrumb";
-import AnimatedSection from "@/components/ui/AnimatedSection";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Accordion,
@@ -11,7 +11,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { GraduationCap, BookOpen, FileText, Calendar } from "lucide-react";
+import { 
+  GraduationCap, BookOpen, FileText, Calendar, Users, Award,
+  Microscope, Calculator, Globe, Palette, Trophy, Music,
+  Beaker, Computer, Building, Target, Star, Clock,
+  ChevronRight, Download, ExternalLink
+} from "lucide-react";
+import { Link } from "react-router-dom";
 import PageLoader from "@/components/shared/PageLoader";
 
 const Academics = () => {
@@ -26,95 +32,157 @@ const Academics = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const academicStats = [
+    { label: "Academic Programs", value: "4", icon: <GraduationCap className="h-6 w-6" /> },
+    { label: "Subject Streams", value: "3", icon: <BookOpen className="h-6 w-6" /> },
+    { label: "Qualified Teachers", value: "60+", icon: <Users className="h-6 w-6" /> },
+    { label: "Pass Rate", value: "98%", icon: <Award className="h-6 w-6" /> },
+  ];
+
   const programs = [
     {
-        id: 1,
-        title: "Upper Primary Education",
-        grades: "Grades 5-8",
-        description: "Our upper primary program focuses on strengthening fundamental concepts while fostering creativity, problem-solving, and independent learning."
+      id: 1,
+      title: "Upper Primary Education",
+      grades: "Grades 5-8",
+      description: "Building strong foundations in core subjects with interactive learning methods and creative exploration.",
+      image: "/images/home/classroom.png",
+      icon: <BookOpen className="h-8 w-8" />,
+      features: ["Interactive Learning", "Creative Methods", "Strong Foundation", "Holistic Development"],
+      bgGradient: "from-blue-50 to-indigo-50"
     },
     {
-        id: 2,
-        title: "Secondary Education",
-        grades: "Grades 9-10",
-        description: "The secondary education program prepares students for board examinations with a balanced curriculum covering core academic subjects."
+      id: 2,
+      title: "Secondary Education",
+      grades: "Grades 9-10 (Madhyamik)",
+      description: "Comprehensive preparation for board examinations with balanced curriculum and practical learning.",
+      image: "/images/home/dtnhs_child.jfif",
+      icon: <Target className="h-8 w-8" />,
+      features: ["Board Exam Prep", "Balanced Curriculum", "Practical Learning", "Academic Excellence"],
+      bgGradient: "from-green-50 to-emerald-50"
     },
     {
-        id: 3,
-        title: "Higher Secondary Education",
-        grades: "Grades 11-12",
-        description: "Our higher secondary program offers specialized streams in Science, Commerce, and Arts, equipping students with in-depth knowledge for higher studies and professional careers."
+      id: 3,
+      title: "Higher Secondary Education",
+      grades: "Grades 11-12",
+      description: "Specialized streams in Science, Commerce, and Arts for higher studies and career preparation.",
+      image: "/images/home/dtnhs_sports.jpg",
+      icon: <Star className="h-8 w-8" />,
+      features: ["Stream Specialization", "Career Focused", "Higher Studies Prep", "Professional Growth"],
+      bgGradient: "from-purple-50 to-violet-50"
     },
     {
-        id: 4,
-        title: "Vocational Education",
-        grades: "Grades 9-12",
-        description: "Our vocational courses provide skill-based training in various trades, helping students gain practical knowledge and enhancing employment opportunities in different industries. Courses include disciplines like Computer Application, IT Enabled Services, and Maintenance & Repair of Electrical Domestic Appliances."
+      id: 4,
+      title: "Vocational Education",
+      grades: "Grades 9-12",
+      description: "Skill-based training programs for practical knowledge and enhanced employment opportunities.",
+      image: "/images/home/dtnhs_whole.jfif",
+      icon: <Building className="h-8 w-8" />,
+      features: ["Skill Development", "Practical Training", "Employment Ready", "Industry Relevant"],
+      bgGradient: "from-orange-50 to-amber-50"
     }
-];
+  ];
 
-  const curriculum = [
+  const streamDetails = [
     {
-        id: "madhyamik",
-        title: "Madhyamik (Secondary) Curriculum",
-        subjects: [
-            "Bengali", "English", "History", "Geography", 
-            "Physical Science", "Life Science", "Mathematics",
-            "Sanskrit (up to Class 8)", "Health Education", 
-            "Work Education", "Paribesh (up to Class 8)"
-        ],
-        description: "The Madhyamik curriculum provides a strong foundation in languages, sciences, and social sciences, ensuring holistic development for students."
+      id: "madhyamik",
+      title: "Madhyamik (Secondary) Curriculum",
+      description: "Comprehensive foundation curriculum preparing students for higher secondary education",
+      icon: <GraduationCap className="h-6 w-6" />,
+      color: "school-primary",
+      subjects: [
+        { name: "Bengali", icon: <BookOpen className="h-4 w-4" /> },
+        { name: "English", icon: <Globe className="h-4 w-4" /> },
+        { name: "Mathematics", icon: <Calculator className="h-4 w-4" /> },
+        { name: "Physical Science", icon: <Beaker className="h-4 w-4" /> },
+        { name: "Life Science", icon: <Microscope className="h-4 w-4" /> },
+        { name: "History", icon: <BookOpen className="h-4 w-4" /> },
+        { name: "Geography", icon: <Globe className="h-4 w-4" /> },
+        { name: "Health Education", icon: <Award className="h-4 w-4" /> }
+      ]
     },
     {
-        id: "science",
-        title: "Science Stream",
-        subjects: [
-            "Physics", "Chemistry", "Biology", 
-            "Mathematics", "Computer Application", "Environmental Science"
-        ],
-        description: "Our science stream prepares students for careers in engineering, medicine, and research through a strong foundation in analytical and scientific thinking."
+      id: "science",
+      title: "Science Stream (Higher Secondary)",
+      description: "Advanced scientific education for careers in engineering, medicine, and research",
+      icon: <Microscope className="h-6 w-6" />,
+      color: "school-secondary",
+      subjects: [
+        { name: "Physics", icon: <Beaker className="h-4 w-4" /> },
+        { name: "Chemistry", icon: <Microscope className="h-4 w-4" /> },
+        { name: "Biology", icon: <Award className="h-4 w-4" /> },
+        { name: "Mathematics", icon: <Calculator className="h-4 w-4" /> },
+        { name: "Computer Application", icon: <Computer className="h-4 w-4" /> },
+        { name: "Environmental Science", icon: <Globe className="h-4 w-4" /> }
+      ]
     },
     {
-        id: "commerce",
-        title: "Commerce Stream",
-        subjects: [
-            "Accountancy", "Business Studies", "Economics", 
-            "Mathematics", "Commercial Law", "Commercial Tax"
-        ],
-        description: "The commerce stream equips students with knowledge in finance, business management, and trade, preparing them for careers in banking, entrepreneurship, and corporate sectors."
+      id: "commerce",
+      title: "Commerce Stream (Higher Secondary)",
+      description: "Business and finance education for careers in banking, entrepreneurship, and management",
+      icon: <Calculator className="h-6 w-6" />,
+      color: "school-primary",
+      subjects: [
+        { name: "Accountancy", icon: <Calculator className="h-4 w-4" /> },
+        { name: "Business Studies", icon: <Building className="h-4 w-4" /> },
+        { name: "Economics", icon: <Globe className="h-4 w-4" /> },
+        { name: "Mathematics", icon: <Calculator className="h-4 w-4" /> },
+        { name: "Commercial Law", icon: <BookOpen className="h-4 w-4" /> },
+        { name: "Commercial Tax", icon: <FileText className="h-4 w-4" /> }
+      ]
     },
     {
-        id: "arts",
-        title: "Arts Stream",
-        subjects: [
-            "History", "Geography", "Political Science", 
-            "Philosophy", "Economics", "Environmental Science"
-        ],
-        description: "The arts stream fosters a deep understanding of humanities and social sciences, opening pathways to careers in law, academia, civil services, and social research."
+      id: "arts",
+      title: "Arts Stream (Higher Secondary)",
+      description: "Humanities and social sciences for careers in law, academia, and social research",
+      icon: <Palette className="h-6 w-6" />,
+      color: "school-secondary",
+      subjects: [
+        { name: "History", icon: <BookOpen className="h-4 w-4" /> },
+        { name: "Geography", icon: <Globe className="h-4 w-4" /> },
+        { name: "Political Science", icon: <Award className="h-4 w-4" /> },
+        { name: "Philosophy", icon: <BookOpen className="h-4 w-4" /> },
+        { name: "Economics", icon: <Calculator className="h-4 w-4" /> },
+        { name: "Environmental Science", icon: <Microscope className="h-4 w-4" /> }
+      ]
     }
-];
+  ];
 
-  
-  const activities = [
+  const coActivities = [
     {
       id: 1,
       title: "Science Club",
-      description: "Students explore scientific concepts through hands-on experiments and projects."
+      description: "Hands-on experiments, research projects, and scientific exploration beyond the classroom.",
+      icon: <Microscope className="h-8 w-8" />,
+      image: "/images/home/classroom.png",
+      schedule: "Every Monday, 4:00 PM",
+      activities: ["Lab Experiments", "Science Fair", "Research Projects", "Field Trips"]
     },
     {
       id: 2,
       title: "Literary Society",
-      description: "Focuses on developing reading, writing, and public speaking skills."
+      description: "Developing language skills through creative writing, debates, and literary discussions.",
+      icon: <BookOpen className="h-8 w-8" />,
+      image: "/images/home/dtnhs_child.jfif",
+      schedule: "Every Wednesday, 4:00 PM",
+      activities: ["Creative Writing", "Debates", "Poetry Recitation", "Drama Club"]
     },
     {
       id: 3,
       title: "Sports Programs",
-      description: "Includes cricket, basketball, football, and athletics."
+      description: "Comprehensive sports training and competitive events for physical fitness and teamwork.",
+      icon: <Trophy className="h-8 w-8" />,
+      image: "/images/home/dtnhs_sports.jpg",
+      schedule: "Daily, 3:30-5:00 PM",
+      activities: ["Cricket", "Football", "Basketball", "Athletics"]
     },
     {
       id: 4,
       title: "Cultural Events",
-      description: "Annual cultural festivals with music, dance, and drama performances."
+      description: "Artistic expression through music, dance, drama, and cultural festival celebrations.",
+      icon: <Music className="h-8 w-8" />,
+      image: "/images/home/dtnhs_whole.jfif",
+      schedule: "Every Friday, 3:30 PM",
+      activities: ["Annual Day", "Cultural Fest", "Music Competition", "Dance Performance"]
     }
   ];
 
@@ -125,103 +193,282 @@ const Academics = () => {
   return (
     <Layout>
       <PageHeader
-        title="Academic Programs"
-        description="Our comprehensive academic programs are designed to provide quality education at all levels."
-        pattern="grid"
-        className="relative bg-gradient-to-b from-school-primary via-school-secondary to-school-primary/80"
+        title="Academic Excellence"
+        description="Comprehensive education programs designed to nurture young minds and build future leaders"
       />
 
-      <div className="container py-8 md:py-12">
-        <div className="mb-6">
-          <Breadcrumb />
+      {/* Academic Stats Section */}
+      <section className="py-8 bg-gradient-to-br from-school-primary/5 to-school-secondary/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {academicStats.map((stat, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="pt-4 pb-4">
+                  <div className="text-school-primary mb-2">{stat.icon}</div>
+                  <div className="text-2xl font-bold text-school-primary">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-        
-        <Tabs defaultValue="programs" className="w-full">
-          <TabsList className="w-full max-w-md mx-auto mb-8 grid grid-cols-3">
-            <TabsTrigger value="programs" className="flex items-center gap-2">
-              <GraduationCap className="size-4" />
-              <span className="hidden sm:inline">Programs</span>
-            </TabsTrigger>
-            <TabsTrigger value="curriculum" className="flex items-center gap-2">
-              <BookOpen className="size-4" />
-              <span className="hidden sm:inline">Curriculum</span>
-            </TabsTrigger>
-            <TabsTrigger value="activities" className="flex items-center gap-2">
-              <Calendar className="size-4" />
-              <span className="hidden sm:inline">Activities</span>
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="programs">
-            <AnimatedSection animation="fade-in-up">
-              <h2 className="text-2xl font-bold mb-6 text-center">Educational Programs</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      </section>
+
+      {/* Main Content */}
+      <section className="py-8 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Tabs defaultValue="programs" className="w-full">
+            {/* Enhanced Tab Navigation */}
+            <div className="w-full overflow-x-auto">
+              <TabsList className="grid grid-cols-3 w-full min-w-[400px] h-auto p-1">
+                <TabsTrigger 
+                  value="programs" 
+                  className="flex flex-col items-center gap-1 py-3 px-4 text-sm"
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  <span>Programs</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="curriculum" 
+                  className="flex flex-col items-center gap-1 py-3 px-4 text-sm"
+                >
+                  <BookOpen className="h-5 w-5" />
+                  <span>Curriculum</span>
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="activities" 
+                  className="flex flex-col items-center gap-1 py-3 px-4 text-sm"
+                >
+                  <Trophy className="h-5 w-5" />
+                  <span>Activities</span>
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Programs Tab */}
+            <TabsContent value="programs" className="mt-8 space-y-8">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">Educational Programs</h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  From foundational learning to specialized education, our programs cater to every stage of academic growth
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {programs.map((program, index) => (
-                  <AnimatedSection key={program.id} animation="fade-in-up" delay={index * 100}>
-                    <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md transition-all duration-300 hover:shadow-lg">
-                      <CardHeader>
-                        <CardTitle>{program.title}</CardTitle>
-                        <p className="text-school-primary font-medium">{program.grades}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <p>{program.description}</p>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
+                  <Card key={program.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={program.image} 
+                        alt={program.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm mb-2">
+                          {program.icon}
+                        </div>
+                        <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                          {program.grades}
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold mb-3">{program.title}</h3>
+                      <p className="text-muted-foreground mb-4">{program.description}</p>
+                      
+                      <div className="grid grid-cols-2 gap-2 mb-4">
+                        {program.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center gap-2 text-sm">
+                            <div className="w-2 h-2 bg-school-primary rounded-full" />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <Button variant="outline" className="w-full group">
+                        Learn More
+                        <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
-            </AnimatedSection>
-          </TabsContent>
-          
-          <TabsContent value="curriculum">
-            <AnimatedSection animation="fade-in-up">
-              <h2 className="text-2xl font-bold mb-6 text-center">Our Curriculum</h2>
+            </TabsContent>
+
+            {/* Curriculum Tab */}
+            <TabsContent value="curriculum" className="mt-8 space-y-8">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">Academic Curriculum</h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Structured learning paths designed to build comprehensive knowledge and critical thinking skills
+                </p>
+              </div>
+
               <div className="space-y-6">
-                <Accordion type="single" collapsible className="w-full">
-                  {curriculum.map((stream, index) => (
-                    <AccordionItem key={stream.id} value={stream.id} className="border border-muted rounded-lg mb-4 bg-background/80 backdrop-blur-sm overflow-hidden">
-                      <AccordionTrigger className="px-4 py-3 hover:bg-muted/50">
-                        <span className="text-xl font-semibold">{stream.title}</span>
+                <Accordion type="single" collapsible className="w-full space-y-4">
+                  {streamDetails.map((stream) => (
+                    <AccordionItem 
+                      key={stream.id} 
+                      value={stream.id} 
+                      className="border border-muted rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <AccordionTrigger className="px-6 py-4 hover:bg-school-primary/5 text-left">
+                        <div className="flex items-center gap-4 w-full">
+                          <div className={`p-3 rounded-full bg-${stream.color}/10 text-${stream.color}`}>
+                            {stream.icon}
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-semibold text-left">{stream.title}</h3>
+                            <p className="text-sm text-muted-foreground text-left mt-1">{stream.description}</p>
+                          </div>
+                        </div>
                       </AccordionTrigger>
-                      <AccordionContent className="px-4 pb-4 pt-2">
-                        <p className="mb-4">{stream.description}</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-3">
-                          {stream.subjects.map((subject) => (
-                            <div key={subject} className="bg-muted/30 rounded-md p-3 flex items-center">
-                              <FileText className="w-5 h-5 text-school-primary mr-2" />
-                              <span>{subject}</span>
-                            </div>
+                      
+                      <AccordionContent className="px-6 pb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
+                          {stream.subjects.map((subject, idx) => (
+                            <Card key={idx} className="p-3 bg-school-primary/5 border-school-primary/20 hover:bg-school-primary/10 transition-colors">
+                              <div className="flex items-center gap-3">
+                                <div className="text-school-primary">{subject.icon}</div>
+                                <span className="font-medium">{subject.name}</span>
+                              </div>
+                            </Card>
                           ))}
+                        </div>
+                        
+                        <div className="flex gap-3 mt-6">
+                          <Button variant="outline" size="sm" className="flex items-center gap-2">
+                            <Download className="w-4 h-4" />
+                            Download Syllabus
+                          </Button>
+                          <Button variant="outline" size="sm" className="flex items-center gap-2">
+                            <ExternalLink className="w-4 h-4" />
+                            View Sample Papers
+                          </Button>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
               </div>
-            </AnimatedSection>
-          </TabsContent>
-          
-          <TabsContent value="activities">
-            <AnimatedSection animation="fade-in-up">
-              <h2 className="text-2xl font-bold mb-6 text-center">Co-curricular Activities</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                {activities.map((activity, index) => (
-                  <AnimatedSection key={activity.id} animation="fade-in-up" delay={index * 100}>
-                    <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md hover:shadow-lg transition-all duration-300">
-                      <CardHeader>
-                        <CardTitle>{activity.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p>{activity.description}</p>
-                      </CardContent>
-                    </Card>
-                  </AnimatedSection>
+
+              {/* Quick Links */}
+              <Card className="bg-gradient-to-r from-school-primary/10 to-school-secondary/10 border-school-primary/20">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4 text-center">Academic Resources</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <Link to="/syllabus">
+                      <Button variant="outline" className="w-full h-16 flex flex-col gap-1">
+                        <FileText className="w-5 h-5" />
+                        <span className="text-xs">Syllabus</span>
+                      </Button>
+                    </Link>
+                    <Link to="/exam-schedule">
+                      <Button variant="outline" className="w-full h-16 flex flex-col gap-1">
+                        <Calendar className="w-5 h-5" />
+                        <span className="text-xs">Exam Schedule</span>
+                      </Button>
+                    </Link>
+                    <Link to="/previous-year-papers">
+                      <Button variant="outline" className="w-full h-16 flex flex-col gap-1">
+                        <BookOpen className="w-5 h-5" />
+                        <span className="text-xs">Previous Papers</span>
+                      </Button>
+                    </Link>
+                    <Link to="/results">
+                      <Button variant="outline" className="w-full h-16 flex flex-col gap-1">
+                        <Award className="w-5 h-5" />
+                        <span className="text-xs">Results</span>
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Activities Tab */}
+            <TabsContent value="activities" className="mt-8 space-y-8">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">Co-curricular Activities</h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Beyond academics, we foster creativity, leadership, and personal growth through diverse activities
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {coActivities.map((activity) => (
+                  <Card key={activity.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={activity.image} 
+                        alt={activity.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm text-white">
+                          {activity.icon}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-bold">{activity.title}</h3>
+                        <Badge variant="outline" className="text-xs">
+                          <Clock className="w-3 h-3 mr-1" />
+                          {activity.schedule}
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4">{activity.description}</p>
+                      
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-sm text-school-primary">Key Activities:</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {activity.activities.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-sm">
+                              <div className="w-2 h-2 bg-school-secondary rounded-full" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
-            </AnimatedSection>
-          </TabsContent>
-        </Tabs>
-      </div>
+
+              {/* Activity Schedule */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-school-primary" />
+                    Weekly Activity Schedule
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
+                    {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                      <div key={day} className="text-center p-3 bg-school-primary/5 rounded-lg">
+                        <div className="font-semibold text-sm mb-2">{day}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {index === 0 && "Science Club"}
+                          {index === 2 && "Literary Society"}
+                          {index === 4 && "Cultural Events"}
+                          {index === 5 && "Sports Training"}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
     </Layout>
   );
 };

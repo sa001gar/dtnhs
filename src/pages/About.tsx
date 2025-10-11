@@ -29,7 +29,7 @@ const About: React.FC = () => {
       setIsLoading(false);
     }, 1000);
     
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     return () => clearTimeout(timer);
   }, []);
 
@@ -62,9 +62,7 @@ const About: React.FC = () => {
         
         <div className="container px-4 max-w-7xl mx-auto">
           <div className="mx-auto">
-            <div className="mb-6">
-              <Breadcrumb />
-            </div>
+            
             
             {/* Quick Navigation - moved to top for better UX */}
             <div className="mb-12">
@@ -150,7 +148,7 @@ const About: React.FC = () => {
             </div>
             
             {/* Principal's Message Section - Improved layout */}
-            <div id="principal" className="scroll-mt-20 mb-12 md:mb-16">
+            {/* <div id="principal" className="scroll-mt-20 mb-12 md:mb-16">
               <AnimatedSection animation="fade-in-up">
                 <div className="flex items-center mb-6">
                   <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-full bg-school-primary/10 text-school-primary">
@@ -217,7 +215,7 @@ const About: React.FC = () => {
                   </div>
                 </div>
               </AnimatedSection>
-            </div>
+            </div> */}
             
             {/* Our Mission Section - Improved card design */}
             <div id="mission" className="scroll-mt-20 mb-12 md:mb-16">

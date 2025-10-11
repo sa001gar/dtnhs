@@ -122,9 +122,6 @@ const Notices = () => {
       />
 
       <div className="container py-6 sm:py-8 md:py-12">
-        <div className="mb-4 sm:mb-6">
-          <Breadcrumb />
-        </div>
         
         <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="relative w-full sm:max-w-xs">

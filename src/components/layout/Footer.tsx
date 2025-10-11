@@ -68,9 +68,8 @@ const Footer: React.FC = () => {
             {/* Social Media Links */}
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: <Facebook size={18} />, label: "Facebook", href: "#" },
-                { icon: <Instagram size={18} />, label: "Instagram", href: "#" },
-                { icon: <Twitter size={18} />, label: "Twitter", href: "#" },
+                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/durgapurTNhighschool/" },
+                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/explore/locations/1042850749064160/durgapur-tarak-nath-high-school/" },
                 { icon: <Youtube size={18} />, label: "YouTube", href: "#" }
               ].map((social, i) => (
                 <a

@@ -23,21 +23,21 @@ const NewsSection = () => {
       title: "Students win regional science competition",
       date: "May 15, 2023",
       category: "Achievement",
-      imageUrl: "https://images.unsplash.com/photo-1564066636936-5e8c7a472487?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/images/pages/home/news/news_3.webp"
     },
     {
       id: 2,
       title: "New sports facilities inaugurated",
       date: "April 10, 2023",
       category: "Infrastructure",
-      imageUrl: "https://images.unsplash.com/photo-1519758965398-9970d90bbda4?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/images/pages/home/news/news_2.jpg"
     },
     {
       id: 3,
       title: "Cultural festival showcases student talent",
       date: "March 20, 2023",
       category: "Event",
-      imageUrl: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&w=800&q=80"
+      imageUrl: "/images/pages/home/news/news_1.jpg"
     }
   ];
 
