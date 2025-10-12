@@ -19,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			maxWidth: {
+				'7xl': '1536px', // Override Tailwind’s default value
+			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				serif: ['Georgia', 'serif'],

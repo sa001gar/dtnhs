@@ -81,7 +81,7 @@ const StudentAchievements: React.FC = () => {
       <div className="absolute -right-32 top-0 h-64 w-64 rounded-full bg-school-primary/5 blur-3xl dark:bg-school-primary/10"></div>
       <div className="absolute -left-32 bottom-0 h-64 w-64 rounded-full bg-school-secondary/5 blur-3xl dark:bg-school-secondary/10"></div>
 
-      <div className="max-w-7xl px-4 lg:px-1 mx-auto relative ">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto relative ">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter text-school-primary sm:text-4xl md:text-5xl">
             Our Students Are Working At

@@ -216,7 +216,7 @@ const Features: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl lg:px-1 mx-auto px-4 relative z-10">
+      <div className="max-w-7xl lg:px-8 mx-auto px-4 relative z-10">
         <AnimatedSection animation="fade-in-up" className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center rounded-full bg-school-primary/10 px-3 py-1 text-sm text-school-primary dark:bg-school-primary/20 mb-4">
             <Trophy className="mr-1 h-4 w-4" />

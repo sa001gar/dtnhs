@@ -31,7 +31,7 @@ const AboutSchool = () => {
         <div className="absolute top-1/2 left-1/3 w-48 h-48 rounded-full bg-school-primary/3 dark:bg-school-primary/5 blur-2xl"></div>
       </div>
       
-      <div className="max-w-7xl px-4 lg:px-1 mx-auto">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto">
         <div className="lg:px-4">
           <AnimatedSection animation="fade-in-up">
             <div className="text-center mb-12">

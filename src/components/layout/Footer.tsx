@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Newsletter Section */}
-      <div className="max-w-7xl  px-4 lg:px-1   mx-auto  py-12 md:py-16">
+      <div className="max-w-7xl  px-4 lg:px-8   mx-auto  py-12 md:py-16">
         <AnimatedSection animation="fade-in-up" className="relative mx-auto max-w-4xl">
           <div className="bg-gradient-to-br from-school-primary/10 to-school-secondary/10 dark:from-school-primary/20 dark:to-school-secondary/20 rounded-2xl p-8 shadow-lg border border-white/20 dark:border-white/5 backdrop-blur-sm">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl px-4 lg:px-1 mx-auto py-12">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {/* School Logo and Info */}
           <div className="lg:col-span-2">

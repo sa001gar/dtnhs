@@ -127,7 +127,7 @@ const Navbar = () => {
     <>
       {/* Top Info Bar - Mobile Optimized */}
       <div className="bg-school-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-1">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           {/* Mobile Layout */}
           <div className="block sm:hidden py-3">
             <div className="flex items-center justify-between">
@@ -223,7 +223,7 @@ const Navbar = () => {
         }`}
         ref={dropdownRef}
       >
-        <div className="max-w-7xl px-4 lg:px-1 mx-auto ">
+        <div className="max-w-7xl px-4 lg:px-8 mx-auto ">
           <div className="flex justify-between items-center">
             {/* Logo - Responsive */}
             <NavLink to="/" className="flex items-center gap-2 sm:gap-3 min-w-0" onClick={closeAllDropdowns}>
