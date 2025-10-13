@@ -10,8 +10,26 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import PageLoader from "@/components/shared/PageLoader";
+
+
 
 const Contact = () => {
+
+  const [isLoading, setIsLoading] = React.useState(true);
+    
+    React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    window.scrollTo(0, 500);
+    return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+      return <PageLoader />;
+    }
   const transportFeatures = [
     {
       icon: <Train className="h-6 w-6" />,
