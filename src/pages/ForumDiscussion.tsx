@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import PageHeader from "@/components/shared/PageHeader";
@@ -23,7 +23,6 @@ const ForumDiscussion = () => {
   const [replyText, setReplyText] = useState("");
   const { id } = useParams();
   const [discussion, setDiscussion] = useState<any>(null);
-  const currentDiscussion = discussion || forumData;
 
   // Mock forum discussion data
   const forumData = {
@@ -147,6 +146,8 @@ const ForumDiscussion = () => {
       }
     ]
   };
+
+  const currentDiscussion = discussion || forumData;
 
   useEffect(() => {
     // Simulate loading forum discussion data
