@@ -155,7 +155,7 @@ const Navbar = () => {
     <div ref={headerRef}>
       {/* Top Info Bar - Mobile Optimized */}
       <div className="bg-school-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           {/* Mobile Layout */}
           <div className="block sm:hidden py-2">
             <div className="flex items-center justify-between">
@@ -202,11 +202,11 @@ const Navbar = () => {
           <div className="hidden sm:block ">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2 text-xs xl:text-xs">
+                <div className="flex items-center space-x-2 text-[11px] md:text-xs lg:text-sm">
                   <Phone size={16} />
                   <span>+91 9830123456</span>
                 </div>
-                <div className="flex items-center space-x-2 text-xs xl:text-xs">
+                <div className="flex items-center space-x-2 text-[11px] md:text-xs lg:text-sm">
                   <Mail size={16} />
                   <span>contact@dtnhs.edu.in</span>
                 </div>
@@ -225,7 +225,7 @@ const Navbar = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className="flex gap-1 font-mono text-xs font-bold">
+                  <div className="flex gap-1 font-mono text-[11px] md:text-xs font-bold">
                     {formatCount(visitorCount)
                       .split("")
                       .map((digit, index) => (
@@ -251,7 +251,7 @@ const Navbar = () => {
         }`}
         ref={dropdownRef}
       >
-        <div className="max-w-7xl px-4 lg:px-8 mx-auto">
+        <div className="max-w-7xl px-4 md:px-6 lg:px-8 mx-auto">
           <div className="flex justify-between items-center">
             {/* Logo - Responsive */}
             <NavLink to="/" className="flex items-center gap-2 sm:gap-3 min-w-0" onClick={closeAllDropdowns}>
@@ -267,11 +267,11 @@ const Navbar = () => {
                 />
               </div>
               <div className="min-w-0">
-                <h1 className="text-sm md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent truncate">
+                <h1 className="text-sm md:text-base lg:text-lg xl:text-lg 2xl:text-xl font-bold bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent truncate">
                   <span className="hidden sm:inline">Durgapur Tarak Nath High School</span>
                   <span className="sm:hidden">DTNHS</span>
                 </h1>
-                <p className="text-[11px] md:text-[11px] lg:text-xs xl:text-sm 2xl:text-sm text-gray-600 font-medium truncate">Excellence in Education</p>
+                <p className="text-[11px] md:text-xs lg:text-xs xl:text-sm 2xl:text-sm text-gray-600 font-medium truncate">Excellence in Education</p>
               </div>
             </NavLink>
 
@@ -282,7 +282,7 @@ const Navbar = () => {
                   {item.hasDropdown ? (
                     <button
                       onClick={(e) => handleNavItemClick(item, e)}
-                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-[13px] md:text-sm lg:text-sm xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                     >
                       {item.name}
                       <ChevronDown
@@ -295,7 +295,7 @@ const Navbar = () => {
                   ) : (
                     <NavLink
                       to={item.href}
-                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-[13px] md:text-sm lg:text-sm xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                       onClick={closeAllDropdowns}
                     >
                       {item.name}
@@ -309,7 +309,7 @@ const Navbar = () => {
                           <NavLink
                             key={dropdownItem.name}
                             to={dropdownItem.href}
-                            className="block px-4 py-2 text-sm md:text-sm lg:text-[15px] xl:text-base text-school-primary hover:bg-school-primary/5 hover:text-school-secondary rounded-lg mx-2 transition-colors duration-200"
+                            className="block px-4 py-2 text-[13px] md:text-sm lg:text-sm xl:text-base text-school-primary hover:bg-school-primary/5 hover:text-school-secondary rounded-lg mx-2 transition-colors duration-200"
                             onClick={closeAllDropdowns}
                           >
                             {dropdownItem.name}
@@ -325,7 +325,7 @@ const Navbar = () => {
             {/* Desktop CTA */}
             <div className="hidden lg:block">
               <NavLink to="/admissions" onClick={closeAllDropdowns}>
-                <Button className="px-5 py-1.5 md:px-5 md:py-2 lg:px-6 lg:py-2.5 xl:px-7 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
+                <Button className="px-5 py-1.5 md:px-5 md:py-2 lg:px-6 lg:py-2.5 xl:px-7 xl:py-3 text-[13px] md:text-sm lg:text-sm xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
                   Admission
                 </Button>
               </NavLink>
