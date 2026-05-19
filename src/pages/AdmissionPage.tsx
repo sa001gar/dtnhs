@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { createSiteUrl } from "@/lib/site";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,7 +27,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 const AdmissionPage = () => {
   const [activeTab, setActiveTab] = useState("process");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
     
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,7 +57,7 @@ const AdmissionPage = () => {
       title="Admissions - Durgapur Tarak Nath High School"
       description="Apply for admission to Durgapur Tarak Nath High School. Learn about our admission process, eligibility criteria, required documents, and important dates."
       keywords="admission DTNHS, school admission, application form, admission criteria, eligibility, documents, admission dates"
-      canonicalUrl="https://dtnhs.edu.in/admission"
+      canonicalUrl={createSiteUrl("/admission")}
     >
       <div className="min-h-screen bg-muted/20">
         {/* Page Header */}

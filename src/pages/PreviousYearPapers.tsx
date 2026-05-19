@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import PageLoader from "@/components/shared/PageLoader";
 
 const PreviousYearPapers = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [yearFilter, setYearFilter] = useState("all");
   
   useEffect(() => {

@@ -14,9 +14,10 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import Layout from "@/components/layout/Layout";
 import PageLoader from "@/components/shared/PageLoader";
 import { Helmet } from "react-helmet";
+import { createSiteUrl } from "@/lib/site";
 
 const Index: React.FC = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,20 +42,20 @@ const Index: React.FC = () => {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dtnhs.edu.in/" />
+        <meta property="og:url" content={createSiteUrl("/")} />
         <meta property="og:title" content="Durgapur Tarak Nath High School - Excellence in Education" />
         <meta property="og:description" content="Join Durgapur Tarak Nath High School for quality education and holistic development since 1941." />
         <meta property="og:image" content="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://dtnhs.edu.in/" />
+        <meta property="twitter:url" content={createSiteUrl("/")} />
         <meta property="twitter:title" content="Durgapur Tarak Nath High School - Excellence in Education" />
         <meta property="twitter:description" content="Join Durgapur Tarak Nath High School for quality education and holistic development since 1941." />
         <meta property="twitter:image" content="https://github.com/sa001gar/dtnhs/blob/main/images/home/dtnhs_front.jfif?raw=true" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://dtnhs.edu.in/" />
+        <link rel="canonical" href={createSiteUrl("/")} />
       </Helmet>
       
       <Hero />

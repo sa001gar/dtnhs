@@ -11,9 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Tag, ArrowLeft, Share2, ThumbsUp, Bookmark, MessageSquare } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
+import { createSiteUrl } from "@/lib/site";
 
 const BlogPost = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const [post, setPost] = useState<any>(null);
 
@@ -96,7 +97,10 @@ const BlogPost = () => {
     return <PageLoader />;
   }
 
-  if (!post) {
+  const currentPost = post || blogPostData;
+  const isKnownPost = id === blogPostData.id;
+
+  if (!isKnownPost) {
     return (
       <Layout>
         <div className="container py-16">
@@ -110,10 +114,14 @@ const BlogPost = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={`${currentPost.title} | Durgapur Tarak Nath High School`}
+      description={`Published on ${currentPost.date} · ${currentPost.readTime}`}
+      canonicalUrl={createSiteUrl(`/blog/${currentPost.id}`)}
+    >
       <PageHeader
-        title={post.title}
-        description={`Published on ${post.date} · ${post.readTime}`}
+        title={currentPost.title}
+        description={`Published on ${currentPost.date} · ${currentPost.readTime}`}
         pattern="dots"
         small
       />
@@ -129,15 +137,15 @@ const BlogPost = () => {
               <Card className="glass backdrop-blur-sm bg-background/80 border-muted shadow-md overflow-hidden">
                 <div className="aspect-video w-full overflow-hidden">
                   <img 
-                    src={post.image} 
-                    alt={post.title} 
+                    src={currentPost.image} 
+                    alt={currentPost.title} 
                     className="h-full w-full object-cover"
                   />
                 </div>
                 
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {post.categories.map((category: string) => (
+                    {currentPost.categories.map((category: string) => (
                       <Badge key={category} variant="secondary" className="text-xs">
                         <Tag className="h-3 w-3 mr-1" />
                         {category}
@@ -148,27 +156,27 @@ const BlogPost = () => {
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center">
                       <Avatar className="h-10 w-10 mr-3">
-                        <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                        <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={currentPost.author.avatar} alt={currentPost.author.name} />
+                        <AvatarFallback>{currentPost.author.name.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-medium">{post.author.name}</p>
-                        <p className="text-sm text-muted-foreground">{post.author.role}</p>
+                        <p className="font-medium">{currentPost.author.name}</p>
+                        <p className="text-sm text-muted-foreground">{currentPost.author.role}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Calendar className="w-4 h-4 mr-1" />
-                        <span>{post.date}</span>
+                        <span>{currentPost.date}</span>
                       </div>
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Clock className="w-4 h-4 mr-1" />
-                        <span>{post.readTime}</span>
+                        <span>{currentPost.readTime}</span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="prose prose-sm sm:prose max-w-none" dangerouslySetInnerHTML={{ __html: post.fullContent }}>
+                  <div className="prose prose-sm sm:prose max-w-none" dangerouslySetInnerHTML={{ __html: currentPost.fullContent }}>
                   </div>
                   
                   <div className="border-t border-border mt-8 pt-8">
@@ -292,7 +300,7 @@ const BlogPost = () => {
                   <h3 className="text-lg font-bold mb-4">Related Articles</h3>
                   
                   <div className="space-y-6">
-                    {post.relatedPosts.map((relatedPost: any) => (
+                    {currentPost.relatedPosts.map((relatedPost: any) => (
                       <div key={relatedPost.id} className="flex flex-col gap-3">
                         <Link to={`/blog/${relatedPost.id}`} className="block overflow-hidden rounded-lg">
                           <img 

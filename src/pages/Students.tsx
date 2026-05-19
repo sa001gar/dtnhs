@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import PageLoader from "@/components/shared/PageLoader";
 
 const Students: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {

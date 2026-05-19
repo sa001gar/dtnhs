@@ -9,6 +9,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   // Visitor Counter Logic (placeholder - adjust API endpoint as needed)
   const apiUrl = "https://visitor-count.clustrix.tech/api/visitor-count/dtnhs";
@@ -62,6 +63,33 @@ const Navbar = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const updateHeaderHeight = () => {
+      const height = headerRef.current?.offsetHeight ?? 0;
+      document.documentElement.style.setProperty("--site-header-height", `${height}px`);
+    };
+
+    updateHeaderHeight();
+
+    if (!headerRef.current || typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateHeaderHeight);
+      return () => window.removeEventListener("resize", updateHeaderHeight);
+    }
+
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(headerRef.current);
+    window.addEventListener("resize", updateHeaderHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeaderHeight);
+    };
   }, []);
 
   // Visitor count tracking
@@ -124,25 +152,25 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <div ref={headerRef}>
       {/* Top Info Bar - Mobile Optimized */}
       <div className="bg-school-primary text-white">
-        <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           {/* Mobile Layout */}
-          <div className="block sm:hidden py-3">
+          <div className="block sm:hidden py-2">
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-2 text-[11px]">
                   <Phone size={12}  />
                   <span>+91 9830123456</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-2 text-[11px]">
                   <Mail size={12} />
                   <span className="truncate">contact@dtnhs.edu.in</span>
                 </div>
               </div>
               {/* Mobile Visitor Counter */}
-              <div className="flex items-center gap-2 bg-school-primary/70 px-3 py-2 rounded-lg">
+              <div className="flex items-center gap-2 bg-school-primary/70 px-2.5 py-1.5 rounded-lg">
                 <Eye size={14}  />
                 <div className="flex items-center gap-1">
                   {loading ? (
@@ -152,13 +180,13 @@ const Navbar = () => {
                       ))}
                     </div>
                   ) : (
-                    <div className="flex gap-1 font-mono text-sm font-bold">
+                    <div className="flex gap-1 font-mono text-xs font-bold">
                       {formatCount(visitorCount)
                         .split("")
                         .map((digit, index) => (
                           <span
                             key={index}
-                            className="bg-school-dark text-school-secondary px-1 py-0.5 rounded text-xs min-w-[16px] text-center"
+                            className="bg-school-dark text-school-secondary px-1 py-0.5 rounded text-[11px] min-w-[16px] text-center"
                           >
                             {digit}
                           </span>
@@ -174,18 +202,18 @@ const Navbar = () => {
           <div className="hidden sm:block ">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2 text-sm xl:text-base">
+                <div className="flex items-center space-x-2 text-xs xl:text-xs">
                   <Phone size={16} />
                   <span>+91 9830123456</span>
                 </div>
-                <div className="flex items-center space-x-2 text-sm xl:text-base">
+                <div className="flex items-center space-x-2 text-xs xl:text-xs">
                   <Mail size={16} />
                   <span>contact@dtnhs.edu.in</span>
                 </div>
               </div>
 
               {/* Desktop Visitor Counter */}
-              <div className="flex items-center gap-3 bg-school-primary/70 px-4 py-2 rounded-lg">
+              <div className="flex items-center gap-3 bg-school-primary/70 px-3 py-1.5 rounded-lg">
                 <div className="flex items-center gap-2">
                   <Eye size={16} />
                   <span className="text-xs font-medium">Visitors:</span>
@@ -197,13 +225,13 @@ const Navbar = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className="flex gap-1 font-mono text-base font-bold">
+                  <div className="flex gap-1 font-mono text-xs font-bold">
                     {formatCount(visitorCount)
                       .split("")
                       .map((digit, index) => (
                         <span
                           key={index}
-                          className="bg-school-dark text-white px-2 py-1 rounded min-w-[24px] text-center shadow-inner"
+                          className="bg-school-dark text-white px-1.5 py-0.5 rounded min-w-[20px] text-center shadow-inner"
                         >
                           {digit}
                         </span>
@@ -219,27 +247,31 @@ const Navbar = () => {
       {/* Main Navigation */}
       <nav
         className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-school-primary/20 transition-all duration-300 ${
-          isScrolled ? "py-2" : "py-3"
+          isScrolled ? "py-1.5" : "py-2.5"
         }`}
         ref={dropdownRef}
       >
-        <div className="max-w-[90rem] px-4 lg:px-8 mx-auto ">
+        <div className="max-w-7xl px-4 lg:px-8 mx-auto">
           <div className="flex justify-between items-center">
             {/* Logo - Responsive */}
             <NavLink to="/" className="flex items-center gap-2 sm:gap-3 min-w-0" onClick={closeAllDropdowns}>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-school-primary to-school-secondary rounded-full shadow-md flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-school-primary to-school-secondary rounded-full shadow-md flex items-center justify-center flex-shrink-0 overflow-hidden">
                 <img
                   src="/logo.jfif"
                   alt="DTNHS Logo"
-                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-full"
+                  loading="eager"
+                  decoding="async"
+                  width={40}
+                  height={40}
+                  className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-full"
                 />
               </div>
               <div className="min-w-0">
-                <h1 className="text-base sm:text-lg xl:text-xl font-bold bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent truncate">
+                <h1 className="text-sm md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold bg-gradient-to-r from-school-primary to-school-secondary bg-clip-text text-transparent truncate">
                   <span className="hidden sm:inline">Durgapur Tarak Nath High School</span>
                   <span className="sm:hidden">DTNHS</span>
                 </h1>
-                <p className="text-xs sm:text-sm text-gray-600 font-medium truncate">Excellence in Education</p>
+                <p className="text-[11px] md:text-[11px] lg:text-xs xl:text-sm 2xl:text-sm text-gray-600 font-medium truncate">Excellence in Education</p>
               </div>
             </NavLink>
 
@@ -250,7 +282,7 @@ const Navbar = () => {
                   {item.hasDropdown ? (
                     <button
                       onClick={(e) => handleNavItemClick(item, e)}
-                      className="flex items-center px-3 py-2 xl:px-3 xl:py-2.5 text-sm font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                     >
                       {item.name}
                       <ChevronDown
@@ -263,7 +295,7 @@ const Navbar = () => {
                   ) : (
                     <NavLink
                       to={item.href}
-                      className="flex items-center px-3 py-2 xl:px-3 xl:py-2.5 text-sm font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                      className="flex items-center px-2.5 py-1.5 md:px-3 md:py-2 lg:px-3.5 lg:py-2.5 xl:px-4 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                       onClick={closeAllDropdowns}
                     >
                       {item.name}
@@ -277,7 +309,7 @@ const Navbar = () => {
                           <NavLink
                             key={dropdownItem.name}
                             to={dropdownItem.href}
-                            className="block px-4 py-2 text-sm text-school-primary hover:bg-school-primary/5 hover:text-school-secondary rounded-lg mx-2 transition-colors duration-200"
+                            className="block px-4 py-2 text-sm md:text-sm lg:text-[15px] xl:text-base text-school-primary hover:bg-school-primary/5 hover:text-school-secondary rounded-lg mx-2 transition-colors duration-200"
                             onClick={closeAllDropdowns}
                           >
                             {dropdownItem.name}
@@ -293,7 +325,7 @@ const Navbar = () => {
             {/* Desktop CTA */}
             <div className="hidden lg:block">
               <NavLink to="/admissions" onClick={closeAllDropdowns}>
-                <Button className="px-6 py-2 xl:px-6 xl:py-2.5 bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
+                <Button className="px-5 py-1.5 md:px-5 md:py-2 lg:px-6 lg:py-2.5 xl:px-7 xl:py-3 text-sm md:text-sm lg:text-[15px] xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
                   Admission
                 </Button>
               </NavLink>
@@ -318,14 +350,14 @@ const Navbar = () => {
                       {item.hasDropdown ? (
                         <button
                           onClick={() => toggleDropdown(item.name)}
-                          className="flex-1 text-left px-3 py-3 text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                          className="flex-1 text-left px-3 py-2.5 text-sm font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                         >
                           {item.name}
                         </button>
                       ) : (
                         <NavLink
                           to={item.href}
-                          className="flex-1 px-3 py-3 text-base font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                          className="flex-1 px-3 py-2.5 text-sm font-medium text-school-primary hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                           onClick={closeAllDropdowns}
                         >
                           {item.name}
@@ -352,7 +384,7 @@ const Navbar = () => {
                           <NavLink
                             key={dropdownItem.name}
                             to={dropdownItem.href}
-                            className="block px-3 py-2 text-sm text-school-primary/80 hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
+                            className="block px-3 py-2 text-[13px] text-school-primary/80 hover:text-school-secondary hover:bg-school-primary/5 rounded-lg transition-colors duration-200"
                             onClick={closeAllDropdowns}
                           >
                             {dropdownItem.name}
@@ -364,7 +396,7 @@ const Navbar = () => {
                 ))}
                 <div className="pt-4 border-t border-school-primary/20">
                   <NavLink to="/admissions" onClick={closeAllDropdowns}>
-                    <Button className="w-full py-3 bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
+                    <Button className="w-full py-2.5 text-sm bg-gradient-to-r from-school-primary to-school-secondary hover:from-school-primary/90 hover:to-school-secondary/90 text-white border-none rounded-lg font-medium transition-all duration-200">
                       Admission
                     </Button>
                   </NavLink>
@@ -374,7 +406,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 

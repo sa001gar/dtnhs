@@ -19,4 +19,37 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return undefined;
+          }
+
+          if (id.includes("react-router")) {
+            return "router";
+          }
+
+          if (id.includes("react-dom") || id.includes("react")) {
+            return "react";
+          }
+
+          if (id.includes("@tanstack")) {
+            return "tanstack";
+          }
+
+          if (id.includes("lucide-react")) {
+            return "icons";
+          }
+
+          if (id.includes("supabase")) {
+            return "supabase";
+          }
+
+          return "vendor";
+        },
+      },
+    },
+  },
 }));

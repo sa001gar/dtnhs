@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Notices = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [notices, setNotices] = useState([]);
   const [readNotices, setReadNotices] = useState<number[]>([]);

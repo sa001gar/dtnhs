@@ -21,9 +21,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Filter, Mail, GraduationCap, Clock, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { createSiteUrl } from "@/lib/site";
 
 const Teachers = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [subjectFilter, setSubjectFilter] = useState("all");
   const isMobile = useIsMobile();
   
@@ -97,7 +98,7 @@ const Teachers = () => {
       title="Our Teachers - Durgapur Tarak Nath High School"
       description="Meet our dedicated faculty members at Durgapur Tarak Nath High School. Learn about our teachers' qualifications, experience, and subject expertise."
       keywords="DTNHS teachers, school faculty, teaching staff, educators, subject teachers, school professors, Durgapur Tarak Nath High School"
-      canonicalUrl="https://dtnhs.edu.in/teachers"
+      canonicalUrl={createSiteUrl("/teachers")}
     >
       <PageHeader
         title="Our Teachers"

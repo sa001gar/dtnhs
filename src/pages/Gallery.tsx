@@ -10,7 +10,7 @@ import { CalendarIcon, Camera, Image, School, Trophy } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
 
 const Gallery = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<{
     src: string;
     alt: string;

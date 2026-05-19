@@ -12,9 +12,10 @@ import { Calendar, Clock, Tag, ChevronRight, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import PageLoader from "@/components/shared/PageLoader";
 import { Link } from "react-router-dom";
+import { createSiteUrl } from "@/lib/site";
 
 const Blog = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
 
   React.useEffect(() => {
@@ -104,7 +105,7 @@ const Blog = () => {
       title="School Blog - Durgapur Tarak Nath High School"
       description="Read the latest news, events, achievements, and educational insights from Durgapur Tarak Nath High School's official blog."
       keywords="school blog, DTNHS news, school events, student achievements, educational articles, school updates, Durgapur Tarak Nath High School"
-      canonicalUrl="https://dtnhs.edu.in/blog"
+      canonicalUrl={createSiteUrl("/blog")}
     >
       <PageHeader
         title="School Blog"

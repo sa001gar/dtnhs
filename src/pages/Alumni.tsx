@@ -32,7 +32,7 @@ type AlumniType = {
 };
 
 const Alumni = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [alumni, setAlumni] = useState<AlumniType[]>([]);
 

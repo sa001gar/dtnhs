@@ -8,9 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, GraduationCap, Info } from "lucide-react";
 import PageLoader from "@/components/shared/PageLoader";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { createSiteUrl } from "@/lib/site";
 
 const ExamSchedule = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -144,7 +145,7 @@ const ExamSchedule = () => {
       title="Examination Schedule - Durgapur Tarak Nath High School"
       description="View the complete examination schedule for all classes at Durgapur Tarak Nath High School, including mid-term, final exams, unit tests, and board examinations."
       keywords="exam schedule, test dates, school exams, DTNHS examination, board exams, mid-term exams, final exams, Durgapur Tarak Nath High School"
-      canonicalUrl="https://dtnhs.edu.in/exam-schedule"
+      canonicalUrl={createSiteUrl("/exam-schedule")}
     >
       <PageHeader
         title="Examination Schedule"

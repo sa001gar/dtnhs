@@ -12,9 +12,10 @@ import PageLoader from "@/components/shared/PageLoader"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 import {routineData} from "@/data/routines.ts"
+import { createSiteUrl } from "@/lib/site"
 
 const Routine = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedClass, setSelectedClass] = useState("5")
   const [selectedSection, setSelectedSection] = useState("A")
   const [sectionOptions, setSectionOptions] = useState(["A", "B", "C"])
@@ -82,7 +83,7 @@ const Routine = () => {
       title="Class Routines - Durgapur Tarak Nath High School"
       description="View comprehensive class routines and timetables for all grades at Durgapur Tarak Nath High School. Find schedules for primary and secondary classes."
       keywords="class routine, school timetable, class schedule, DTNHS routine, school periods, daily schedule, Durgapur school timetable"
-      canonicalUrl="https://dtnhs.edu.in/routine"
+      canonicalUrl={createSiteUrl("/routine")}
     >
       <PageHeader
         title="Class Routines"

@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const Syllabus = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {

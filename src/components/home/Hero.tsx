@@ -92,7 +92,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative max-sm:min-h-screen lg:max-h-screen pt-10 pb-14 lg:pt-12 lg:pb-20 xl:pt-14 xl:pb-24 px-4 lg:px-6 overflow-hidden bg-white dark:bg-gray-900">
+    <section className="relative max-sm:min-h-screen sm:min-h-[calc(100vh-var(--site-header-height,0px))] lg:max-h-screen pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14 xl:pt-12 xl:pb-16 2xl:pt-11 2xl:pb-14 px-0 overflow-hidden bg-white dark:bg-gray-900">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-school-primary/10 dark:bg-school-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -114,22 +114,22 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="max-w-[90rem] px-4 lg:px-8 mx-auto relative z-20">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-10 md:gap-14 lg:gap-18 xl:gap-24">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto relative z-20">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-9 md:gap-12 lg:gap-14 xl:gap-18 2xl:gap-12">
           {/* Left Side - Content */}
-          <div className="w-full lg:w-[46%]  pb-8">
+          <div className="w-full lg:w-[46%] pb-6">
             <AnimatedSection animation="fade-in-up" className="relative">
               <div className="absolute -left-12 -top-12 w-24 h-24 text-school-primary rotate-12 opacity-10 dark:opacity-5">
                 <Star className="w-full h-full" strokeWidth={1} />
               </div>
               
               {/* Badge */}
-              <div className="mb-6 inline-flex items-center rounded-full bg-gradient-to-r from-school-primary/20 to-school-secondary/20 dark:from-school-primary/30 dark:to-school-secondary/30 backdrop-blur-sm px-4 py-1.5 text-sm">
+              <div className="mb-6 inline-flex items-center rounded-full bg-gradient-to-r from-school-primary/20 to-school-secondary/20 dark:from-school-primary/30 dark:to-school-secondary/30 backdrop-blur-sm px-4 py-1.5 text-[13px] md:text-sm">
                 <Star className="mr-2 h-4 w-4 text-school-primary" />
                 <span className="text-school-primary font-medium">Excellence in Education Since 1941</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 leading-[0.98] xl:leading-[0.95]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl 2xl:text-7xl font-bold tracking-[-0.02em] text-gray-900 dark:text-white mb-6 2xl:mb-7 leading-[1.05] xl:leading-[1.02]">
                 <span className="relative inline-block">
                   <span className="relative z-10">Shaping Futures,</span>
                   {/* Removed the underline element */}
@@ -137,18 +137,18 @@ const Hero = () => {
                 <span className="block mt-2 xl:mt-2.5">Building <span className="text-school-primary">Leaders.</span></span>
               </h1>
               
-              <p className="text-lg md:text-xl xl:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl xl:text-xl 2xl:text-2xl text-gray-700 dark:text-gray-300 mb-8 2xl:mb-8 max-w-xl leading-relaxed">
                 Nurturing minds, building character, and creating a brighter future through quality education at Durgapur Tarak Nath High School.
               </p>
               
-              <div className="flex flex-wrap gap-4 sm:gap-5 mb-10">
-                <Button asChild size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 text-sm sm:text-base xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:shadow-lg hover:shadow-school-primary/20 transition-all duration-300">
+              <div className="flex flex-wrap gap-4 md:gap-5 mb-10 2xl:mb-10">
+                <Button asChild size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 2xl:px-8 2xl:py-6 text-sm sm:text-base xl:text-base 2xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:shadow-lg hover:shadow-school-primary/20 transition-all duration-300">
                   <Link to="/academics">
                     Start Learning
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 text-sm sm:text-base xl:text-base border-2 hover:bg-background/5 hover:border-school-primary transition-all duration-300">
+                <Button asChild variant="outline" size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 2xl:px-8 2xl:py-6 text-sm sm:text-base xl:text-base 2xl:text-base border-2 hover:bg-background/5 hover:border-school-primary transition-all duration-300">
                   <Link to="/about">
                     <BookOpen className="mr-2 h-4 w-4" />
                     About Us
@@ -156,11 +156,11 @@ const Hero = () => {
                 </Button>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm md:text-base text-gray-600 dark:text-gray-400">
                 <div className="flex -space-x-2 shrink-0">
-                  <img src="/images/pages/home/hero_section/trusted_1.png" alt="Student 1" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
-                  <img src="/images/pages/home/hero_section/trusted_2.png" alt="Student 2" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
-                  <img src="/images/pages/home/hero_section/trusted_3.png" alt="Student 3" className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                  <img src="/images/pages/home/hero_section/trusted_1.png" alt="Student 1" loading="lazy" decoding="async" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                  <img src="/images/pages/home/hero_section/trusted_2.png" alt="Student 2" loading="lazy" decoding="async" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
+                  <img src="/images/pages/home/hero_section/trusted_3.png" alt="Student 3" loading="lazy" decoding="async" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-900 object-cover" />
                 </div>
                 <p className="line-clamp-2 leading-relaxed">Trusted by 50,000+ Students and their parents</p>
               </div>
@@ -194,9 +194,9 @@ const Hero = () => {
                 <Star className="w-full h-full" strokeWidth={1} />
               </div>
               
-              <div className="relative mx-auto max-w-lg xl:max-w-3xl">
+              <div className="relative mx-auto max-w-lg xl:max-w-3xl 2xl:max-w-3xl">
                 {/* Image Carousel - Fixed visibility issues */}
-                <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform hover:scale-[1.01] bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900" style={{height: "330px"}}>
+                <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform hover:scale-[1.01] bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900 h-[330px] 2xl:h-[380px]">
                   {heroImages.map((src, index) => (
                     <div 
                       key={index} 
@@ -215,6 +215,8 @@ const Hero = () => {
                       <img 
                         src={src} 
                         alt={`Students at DTNHS ${index + 1}`} 
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
                         className="w-full h-full object-cover transition-all duration-500"
                         style={{opacity: isLoaded ? 1 : 0.7}}
                       />

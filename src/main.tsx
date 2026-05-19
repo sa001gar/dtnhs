@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 
 // Serve sitemap.xml from public folder
-if (window.location.pathname === '/sitemap.xml') {
+if (typeof window !== 'undefined' && window.location.pathname === '/sitemap.xml') {
   fetch('/sitemap.xml')
     .then(response => response.text())
     .then(text => {
@@ -15,6 +15,6 @@ if (window.location.pathname === '/sitemap.xml') {
     .catch(error => {
       console.error('Error loading sitemap:', error);
     });
-} else {
+} else if (typeof document !== 'undefined') {
   createRoot(document.getElementById("root")!).render(<App />);
 }

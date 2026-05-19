@@ -1,4 +1,4 @@
 
-// Import the sitemap generator
-require('./src/utils/sitemap-generator');
+import './src/utils/sitemap-generator.js';
+
 console.log('Sitemap generated successfully!');

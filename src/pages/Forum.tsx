@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Users, Bookmark, Clock, Eye, ThumbsUp, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { createSiteUrl } from "@/lib/site";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +23,7 @@ import {
 import PageLoader from "@/components/shared/PageLoader";
 
 const Forum = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
 
   React.useEffect(() => {
@@ -131,7 +132,7 @@ const Forum = () => {
       title="Community Forum - Durgapur Tarak Nath High School"
       description="Join our school community forum to discuss academic topics, share ideas, and connect with students, parents, and teachers at Durgapur Tarak Nath High School."
       keywords="school forum, community discussion, DTNHS forum, student discussions, school community, academic forum, parent-teacher discussions"
-      canonicalUrl="https://dtnhs.edu.in/forum"
+      canonicalUrl={createSiteUrl("/forum")}
     >
       <PageHeader
         title="Community Forum"

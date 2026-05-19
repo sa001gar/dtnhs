@@ -1,5 +1,4 @@
-
 User-agent: *
 Allow: /
 
-Sitemap: https://dtnhs.edu.in/sitemap.xml
+Sitemap: https://dtnhs.netlify.app/sitemap.xml

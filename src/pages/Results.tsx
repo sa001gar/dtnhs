@@ -9,9 +9,10 @@ import { Loader2 } from "lucide-react";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Helmet } from "react-helmet";
+import { createSiteUrl } from "@/lib/site";
 
 const Results = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,7 +60,7 @@ const Results = () => {
       title="Examination Results - Durgapur Tarak Nath High School"
       description="View and access the latest examination results and academic performance data for students of Durgapur Tarak Nath High School."
       keywords="DTNHS results, examination results, academic performance, school results, student grades, Durgapur school exams"
-      canonicalUrl="https://dtnhs.edu.in/results"
+      canonicalUrl={createSiteUrl("/results")}
     >
       <PageHeader
         title="Examination Results"

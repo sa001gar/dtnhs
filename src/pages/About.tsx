@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const About: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const isMobile = useIsMobile();
   
   useEffect(() => {

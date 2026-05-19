@@ -16,12 +16,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import PageLoader from "@/components/shared/PageLoader";
+import { createSiteUrl } from "@/lib/site";
 
 const ForumDiscussion = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [replyText, setReplyText] = useState("");
   const { id } = useParams();
   const [discussion, setDiscussion] = useState<any>(null);
+  const currentDiscussion = discussion || forumData;
 
   // Mock forum discussion data
   const forumData = {
@@ -153,7 +155,9 @@ const ForumDiscussion = () => {
       setIsLoading(false);
     }, 1000);
     
-    window.scrollTo(0, 0);
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
     return () => clearTimeout(timer);
   }, [id]);
 
@@ -175,10 +179,14 @@ const ForumDiscussion = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={`${currentDiscussion.title} | Durgapur Tarak Nath High School`}
+      description={`Join the discussion in ${currentDiscussion.category} on the DTNHS community forum.`}
+      canonicalUrl={createSiteUrl(`/forum/${id || currentDiscussion.id}`)}
+    >
       <PageHeader
-        title={discussion.title}
-        description={`Discussion in ${discussion.category} category · Started by ${discussion.author.name}`}
+        title={currentDiscussion.title}
+        description={`Discussion in ${currentDiscussion.category} category · Started by ${currentDiscussion.author.name}`}
         pattern="stripes"
         small
       />
@@ -197,33 +205,33 @@ const ForumDiscussion = () => {
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-6">
                       <Badge variant="outline" className="mb-2">
-                        {discussion.category}
+                        {currentDiscussion.category}
                       </Badge>
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Clock className="h-3 w-3 mr-1" />
-                        <span>Posted {discussion.created}</span>
+                        <span>Posted {currentDiscussion.created}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-start gap-4 mb-6">
                       <div className="hidden sm:block">
                         <Avatar className="h-12 w-12">
-                          <AvatarImage src={discussion.author.avatar} alt={discussion.author.name} />
-                          <AvatarFallback>{discussion.author.name.charAt(0)}</AvatarFallback>
+                          <AvatarImage src={currentDiscussion.author.avatar} alt={currentDiscussion.author.name} />
+                          <AvatarFallback>{currentDiscussion.author.name.charAt(0)}</AvatarFallback>
                         </Avatar>
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-2 mb-2">
                           <div className="sm:hidden mr-2">
                             <Avatar className="h-8 w-8">
-                              <AvatarImage src={discussion.author.avatar} alt={discussion.author.name} />
-                              <AvatarFallback>{discussion.author.name.charAt(0)}</AvatarFallback>
+                              <AvatarImage src={currentDiscussion.author.avatar} alt={currentDiscussion.author.name} />
+                              <AvatarFallback>{currentDiscussion.author.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                           </div>
-                          <h3 className="font-medium text-lg">{discussion.author.name}</h3>
-                          <Badge variant="secondary" className="text-xs">{discussion.author.role}</Badge>
+                          <h3 className="font-medium text-lg">{currentDiscussion.author.name}</h3>
+                          <Badge variant="secondary" className="text-xs">{currentDiscussion.author.role}</Badge>
                         </div>
-                        <div className="prose prose-sm sm:prose max-w-none" dangerouslySetInnerHTML={{ __html: discussion.content }}>
+                        <div className="prose prose-sm sm:prose max-w-none" dangerouslySetInnerHTML={{ __html: currentDiscussion.content }}>
                         </div>
                       </div>
                     </div>
@@ -232,7 +240,7 @@ const ForumDiscussion = () => {
                       <div className="flex items-center gap-3">
                         <Button variant="outline" size="sm">
                           <ThumbsUp className="h-4 w-4 mr-1" />
-                          Like ({discussion.stats.likes})
+                          Like ({currentDiscussion.stats.likes})
                         </Button>
                         <Button variant="outline" size="sm">
                           <Share2 className="h-4 w-4 mr-1" />
@@ -246,11 +254,11 @@ const ForumDiscussion = () => {
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <div className="flex items-center">
                           <Eye className="h-3 w-3 mr-1" />
-                          <span>{discussion.stats.views} views</span>
+                          <span>{currentDiscussion.stats.views} views</span>
                         </div>
                         <div className="flex items-center">
                           <MessageSquare className="h-3 w-3 mr-1" />
-                          <span>{discussion.stats.replies} replies</span>
+                          <span>{currentDiscussion.stats.replies} replies</span>
                         </div>
                         <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive/90">
                           <Flag className="h-3 w-3 mr-1" />
@@ -263,10 +271,10 @@ const ForumDiscussion = () => {
               </Card>
               
               {/* Replies */}
-              <h3 className="text-xl font-bold mb-4">Replies ({discussion.replies.length})</h3>
+              <h3 className="text-xl font-bold mb-4">Replies ({currentDiscussion.replies.length})</h3>
               
               <div className="space-y-6">
-                {discussion.replies.map((reply: any) => (
+                {currentDiscussion.replies.map((reply: any) => (
                   <AnimatedSection key={reply.id} animation="fade-in-up">
                     <Card className={cn(
                       "glass backdrop-blur-sm bg-background/80 border-muted shadow-md",
@@ -350,12 +358,12 @@ const ForumDiscussion = () => {
                 <CardContent>
                   <div className="flex items-center gap-3 mb-4">
                     <Avatar className="h-14 w-14">
-                      <AvatarImage src={discussion.author.avatar} alt={discussion.author.name} />
-                      <AvatarFallback>{discussion.author.name.charAt(0)}</AvatarFallback>
+                      <AvatarImage src={currentDiscussion.author.avatar} alt={currentDiscussion.author.name} />
+                      <AvatarFallback>{currentDiscussion.author.name.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium">{discussion.author.name}</p>
-                      <p className="text-sm text-muted-foreground">{discussion.author.role}</p>
+                      <p className="font-medium">{currentDiscussion.author.name}</p>
+                      <p className="text-sm text-muted-foreground">{currentDiscussion.author.role}</p>
                     </div>
                   </div>
                   
@@ -364,7 +372,7 @@ const ForumDiscussion = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Member since</span>
-                      <span>{discussion.author.joinedDate}</span>
+                      <span>{currentDiscussion.author.joinedDate}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Total posts</span>

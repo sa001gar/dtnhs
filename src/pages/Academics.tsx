@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import PageLoader from "@/components/shared/PageLoader";
 
 const Academics = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {

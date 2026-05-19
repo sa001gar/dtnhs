@@ -1,9 +1,7 @@
 
-const { sitemapBuilder } = require('react-router-sitemap');
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
-// Define the routes
 const routes = [
   '/',
   '/about',
@@ -24,12 +22,22 @@ const routes = [
   '/admissions',
 ];
 
-// Build the sitemap
-const sitemap = sitemapBuilder('https://dtnhs.edu.in', routes);
+const baseUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://dtnhs.netlify.app').replace(/\/+$/, '');
 
-// Output path
+const buildUrl = (route) => `${baseUrl}${route === '/' ? '/' : route}`;
+
+const sitemapEntries = routes
+  .map((route) => `  <url>\n    <loc>${buildUrl(route)}</loc>\n  </url>`)
+  .join('\n');
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries}\n</urlset>\n`;
+
+const robots = `User-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`;
+
 const outputPath = path.resolve('./public/sitemap.xml');
+const robotsPath = path.resolve('./public/robots.txt');
 
-// Make sure there's no BOM or whitespace before the XML declaration
-// Write sitemap to file ensuring XML declaration is at the start
-fs.writeFileSync(outputPath, sitemap.toString().trim());
+fs.writeFileSync(outputPath, sitemap);
+fs.writeFileSync(robotsPath, robots);
+
+console.log('Sitemap and robots generated successfully!');
