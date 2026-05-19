@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { Camera, Globe, Mail, MapPin, Phone, PlayCircle } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
 
 const Footer: React.FC = () => {
@@ -68,9 +68,9 @@ const Footer: React.FC = () => {
             {/* Social Media Links */}
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/durgapurTNhighschool/" },
-                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/explore/locations/1042850749064160/durgapur-tarak-nath-high-school/" },
-                { icon: <Youtube size={18} />, label: "YouTube", href: "#" }
+                { icon: <Globe size={18} />, label: "Facebook", href: "https://www.facebook.com/durgapurTNhighschool/" },
+                { icon: <Camera size={18} />, label: "Instagram", href: "https://www.instagram.com/explore/locations/1042850749064160/durgapur-tarak-nath-high-school/" },
+                { icon: <PlayCircle size={18} />, label: "YouTube", href: "#" }
               ].map((social, i) => (
                 <a
                   key={i}

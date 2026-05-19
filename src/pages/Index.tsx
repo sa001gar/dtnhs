@@ -63,8 +63,8 @@ const Index: React.FC = () => {
 
       {/* News and Notification Section - Side by side on larger screens */}
       <div className="bg-gradient-to-r from-slate-50 to-white dark:from-gray-900/50 dark:to-gray-800/50 py-8 sm:py-12">
-        <div className="max-w-7xl px-4 lg:px-8 mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="max-w-[90rem] px-4 lg:px-8 mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20">
             {/* Notice Board */}
             <div>
               <NotificationSection />
@@ -82,13 +82,13 @@ const Index: React.FC = () => {
       <Features />
       <StudentAchievements />
       
-      <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-16 text-white md:py-24 dark:from-school-primary/90 dark:to-school-secondary/90 dark:text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-school-primary to-school-secondary py-20 text-white md:py-24 xl:py-28 dark:from-school-primary/90 dark:to-school-secondary/90 dark:text-white">
         <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
         <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
         
-        <div className="max-w-7xl lg:px-8 mx-auto relative px-4">
+        <div className="max-w-[90rem] lg:px-8 mx-auto relative px-4">
           <div className="mx-auto ">
-            <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 lg:gap-16 xl:gap-20 items-center">
               <div className="lg:col-span-3">
                 <AnimatedSection animation="fade-in-up" className="max-w-xl">
                   <div className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 mb-6">
@@ -101,11 +101,11 @@ const Index: React.FC = () => {
                     <span className="text-sm font-medium">Join Our Community</span>
                   </div>
                   
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl mb-6">
                     Begin Your Educational Journey With Us
                   </h2>
                   
-                  <p className="text-lg text-white/90 mb-8">
+                  <p className="text-lg xl:text-xl text-white/90 mb-8 leading-relaxed max-w-xl">
                     Discover how Durgapur Tarak Nath High School can provide your child with a quality education in a nurturing environment designed for academic success and personal growth.
                   </p>
                   

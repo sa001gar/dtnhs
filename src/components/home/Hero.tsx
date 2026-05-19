@@ -92,7 +92,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative max-sm:min-h-screen lg:max-h-screen py-12 px-2 lg:px-4 overflow-hidden bg-white dark:bg-gray-900">
+    <section className="relative max-sm:min-h-screen lg:max-h-screen pt-10 pb-14 lg:pt-12 lg:pb-20 xl:pt-14 xl:pb-24 px-4 lg:px-6 overflow-hidden bg-white dark:bg-gray-900">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-school-primary/10 dark:bg-school-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -114,10 +114,10 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl px-4 lg:px-8 mx-auto relative z-20">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-8 md:gap-12 lg:gap-16">
+      <div className="max-w-[90rem] px-4 lg:px-8 mx-auto relative z-20">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-10 md:gap-14 lg:gap-18 xl:gap-24">
           {/* Left Side - Content */}
-          <div className="w-full lg:w-1/2  pb-8">
+          <div className="w-full lg:w-[46%]  pb-8">
             <AnimatedSection animation="fade-in-up" className="relative">
               <div className="absolute -left-12 -top-12 w-24 h-24 text-school-primary rotate-12 opacity-10 dark:opacity-5">
                 <Star className="w-full h-full" strokeWidth={1} />
@@ -129,26 +129,26 @@ const Hero = () => {
                 <span className="text-school-primary font-medium">Excellence in Education Since 1941</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 leading-[0.98] xl:leading-[0.95]">
                 <span className="relative inline-block">
                   <span className="relative z-10">Shaping Futures,</span>
                   {/* Removed the underline element */}
                 </span>
-                <span className="block mt-2">Building <span className="text-school-primary">Leaders.</span></span>
+                <span className="block mt-2 xl:mt-2.5">Building <span className="text-school-primary">Leaders.</span></span>
               </h1>
               
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
+              <p className="text-lg md:text-xl xl:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl leading-relaxed">
                 Nurturing minds, building character, and creating a brighter future through quality education at Durgapur Tarak Nath High School.
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-10">
-                <Button asChild size="lg" className="rounded-full px-8 bg-gradient-to-r from-school-primary to-school-secondary hover:shadow-lg hover:shadow-school-primary/20 transition-all duration-300">
+              <div className="flex flex-wrap gap-4 sm:gap-5 mb-10">
+                <Button asChild size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 text-sm sm:text-base xl:text-base bg-gradient-to-r from-school-primary to-school-secondary hover:shadow-lg hover:shadow-school-primary/20 transition-all duration-300">
                   <Link to="/academics">
                     Start Learning
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-full px-8 border-2 hover:bg-background/5 hover:border-school-primary transition-all duration-300">
+                <Button asChild variant="outline" size="lg" className="rounded-full px-7 py-5 xl:px-8 xl:py-6 text-sm sm:text-base xl:text-base border-2 hover:bg-background/5 hover:border-school-primary transition-all duration-300">
                   <Link to="/about">
                     <BookOpen className="mr-2 h-4 w-4" />
                     About Us
@@ -188,15 +188,15 @@ const Hero = () => {
           </div>
           
           {/* Right Side - Image and Testimonials */}
-          <div className="w-full lg:w-1/2 ">
+          <div className="w-full lg:w-[54%] ">
             <AnimatedSection animation="fade-in-up" delay={200} className="relative perspective-1000">
               <div className="absolute -right-12 top-1/2 w-24 h-24 text-school-secondary rotate-45 opacity-10 dark:opacity-5">
                 <Star className="w-full h-full" strokeWidth={1} />
               </div>
               
-              <div className="relative mx-auto max-w-md lg:max-w-none">
+              <div className="relative mx-auto max-w-lg xl:max-w-3xl">
                 {/* Image Carousel - Fixed visibility issues */}
-                <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform hover:scale-105 bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900" style={{height: "320px"}}>
+                <div className="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-700 transform hover:scale-[1.01] bg-gradient-to-br from-school-light to-white dark:from-gray-800 dark:to-gray-900" style={{height: "330px"}}>
                   {heroImages.map((src, index) => (
                     <div 
                       key={index} 
@@ -280,19 +280,19 @@ const Hero = () => {
                 </div> */}
                 
                 {/* Floating Elements */}
-                <div className="absolute -bottom-6 -left-6 md:-left-10 bg-orange-100 dark:bg-amber-950 rounded-2xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                  <h3 className="font-bold text-school-primary">Your Journey to Excellence</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Begins Here</p>
+                <div className="absolute -bottom-5 -left-5 md:-left-8 bg-orange-100 dark:bg-amber-950 rounded-2xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <h3 className="font-bold text-school-primary text-sm sm:text-base">Your Journey to Excellence</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Begins Here</p>
                 </div>
                 
-                <div className="absolute -top-4 -right-4 md:-right-8 bg-lime-100 dark:bg-green-900 rounded-2xl p-4 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
-                  <h3 className="font-bold text-school-primary">Education Beyond</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Boundaries</p>
+                <div className="absolute -top-4 -right-4 md:-right-7 bg-lime-100 dark:bg-green-900 rounded-2xl p-4 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <h3 className="font-bold text-school-primary text-sm sm:text-base">Education Beyond</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Boundaries</p>
                 </div>
               </div>
               
               {/* Subject Tags - Improved styling and responsiveness */}
-              <div className="mt-12 flex flex-wrap justify-center gap-3 max-w-md mx-auto">
+              <div className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl mx-auto">
                 {subjects.map((subject, index) => (
                   <div 
                     key={index} 
